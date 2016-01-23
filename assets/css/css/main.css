@@ -1,0 +1,86 @@
+/* Import all scss files  */
+/* Colour Variables */
+.small-size {
+  font-size: 0.8em; }
+
+.normal-size {
+  font-size: 1.0em; }
+
+.large-size {
+  font-size: 1.2em; }
+
+.xlarge-size {
+  font-size: 1.4em; }
+
+.padded-10 {
+  padding: 10px; }
+
+.padded-15 {
+  padding: 15px; }
+
+.padded-20 {
+  padding: 20px; }
+
+.padded-25 {
+  padding: 25px; }
+
+.center-align {
+  text-align: center; }
+
+.center-left {
+  text-align: left; }
+
+.center-right {
+  text-align: right; }
+
+.clear {
+  clear: both; }
+
+.r-float {
+  float: right; }
+
+.l-float {
+  float: left; }
+
+.hidden {
+  display: none; }
+
+.shown {
+  display: block; }
+
+.shown-inline {
+  display: inline-block; }
+
+/* 	BORDER RADIUS 	*/
+/* OPACITY */
+/* CENTER BLOCK ELEMENTS */
+/* ANIMATION */
+/* VERTICAL ALIGN */
+/* CSS Document */
+/* For Tablet Only */
+/* For Desktop Only */
+/*						*/
+/* NEW ELEMENTS CREATED */
+/* 						*/
+/* Top Bar */
+@media (min-width: 320px) {
+  .res-padding {
+    padding-left: 2%;
+    padding-right: 2%; }
+
+  .res-margin {
+    margin-left: 2%;
+    margin-right: 2%; } }
+body {
+  background-color: red; }
+
+/*@import "base/typography"; 
+@import "base/base";
+// .. Components 
+@import "components/forms";
+@import "components/plugins";
+@import "components/sliders";
+@import "components/ui-elements";
+// .. Layout 
+@import "layout/header";
+@import "layout/footer";*/

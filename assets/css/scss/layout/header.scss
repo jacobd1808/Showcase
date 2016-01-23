@@ -1,0 +1,53 @@
+
+header { 
+	text-align: center;
+	font-size: 300;
+	z-index: 10;
+	top: 0;
+	.title-left, .title-right { 
+		padding: 13px 9px 9px 9px;
+		font-size: 1.1em;
+		display: inline-block;
+		color: white;
+		text-decoration: none;
+		text-align: center;
+		position: relative;
+		z-index: 1000;
+	} 
+	.title-center { 
+		color: white;
+		display: inline-block;
+		font-size: 1.1em;
+		padding-top: 15px;
+		z-index: 1000;
+		position: relative;
+	}
+	.title-left { 
+		float: left;
+	}
+	.title-right { 
+		float: right;
+		padding: 0;
+	}
+} 
+.sub-header { 
+	text-align: center;
+	padding: 10px;
+	color: white;
+	width: 100%;
+	font-size: 0.9em; 
+	position: relative;
+}
+
+	.logo-panda { 
+		background-image:url('../img/boy.png');
+		width: 45px;
+		height: 45px;
+		margin: 3px 2px 0 0;
+		background-size: 100%;
+		display: block;
+	}
+
+
+
+

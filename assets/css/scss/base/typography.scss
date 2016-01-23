@@ -1,0 +1,20 @@
+
+// .. Font Family 
+
+a:link, a:active, a:visited { 
+	@include animate(100ms);
+} 
+
+.uc { text-transform: uppercase } 
+
+.bold { font-weight: 600 }
+.thin { font-weight: 300 } 
+
+.bold-link { 
+	color: white;
+	font-weight: 400;
+	text-decoration: none; 
+	display: inline-block;
+	color: white;
+}
+
