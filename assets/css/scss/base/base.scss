@@ -1,35 +1,32 @@
 
-
-// SLATE BLUE - ADOBE COLOR
-
-$app-alpha: 	#4CA5FF;
-$app-beta: 		#00407F;
-$app-charlie:	#007FFF;
-$app-delta: 	#26537F;
-$app-echo: 		#0066CC;
-
-$light-grey: 	#ccc;
-
-$error-red: 	#ce2a0d;
-$valid-green: 	#71c100;
-
 $base-font: 	'Roboto', sans-serif;
 
 * { @include border-box;}
 
-.small-size { font-size: 0.8em; } 
-.normal-size { font-size: 1.0em; }
-.large-size { font-size: 1.2em; }
-.xlarge-size { font-size: 1.4em; }   
+.s-size { font-size: 0.8em; } 
+.n-size { font-size: 1.0em; }
+.l-size { font-size: 1.2em; }
+.xl-size { font-size: 1.4em; } 
 
-.padded-10 { padding: 10px; }
-.padded-15 { padding: 15px; }
-.padded-20 { padding: 20px; }
-.padded-25 { padding: 25px; }
+.uc { text-transform: uppercase } 
+.lc { text-transform: lowercase }
 
-.center-align { text-align: center; }  
-.left-align { text-align: left; }  
-.right-align { text-align: right; }  
+.bold { font-weight: 600 }
+.thin { font-weight: 300 }   
+
+.p-10 { padding: 10px; }
+.p-15 { padding: 15px; }
+.p-20 { padding: 20px; }
+.p-25 { padding: 25px; }
+
+.m-10 { margin: 10px; }
+.m-15 { margin: 15px; }
+.m-20 { margin: 20px; }
+.m-25 { margin: 25px; }
+
+.c-align { text-align: center; }  
+.l-align { text-align: left; }  
+.r-align { text-align: right; }  
 
 .clear { clear: both; } 
 .r-float { float: right; }
@@ -41,7 +38,9 @@ $base-font: 	'Roboto', sans-serif;
 
 .invisible { visibility: hidden; }
 
-.theme-colour-main { color: white; }
+a:link, a:active, a:visited { 
+	@include animate(100ms);
+} 
 
 html, body { 
 	font-family: $base-font;
@@ -52,9 +51,4 @@ html, body {
 	font-size: 100%;
 	height: 100%;
 	font-weight: 300;
-}
-
-.view { 
-	padding: 15px 10px;
-	margin-bottom: 10px;
 }

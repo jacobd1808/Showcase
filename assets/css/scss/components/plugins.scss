@@ -12,7 +12,6 @@
 	overflow-x:none;
 	overflow-y:auto;
 	font-size:15px;
-	background: $app-charlie;
 	color:#fff;
 }
 .sidr .sidr-inner{padding:0 0 15px}
@@ -48,12 +47,11 @@
 	margin:0;
 	line-height:47px;
 	font-weight: 400;
-	border-bottom:1px solid $app-echo;
 		a.active { 
-			background-color: darken($app-echo, 1%);
+			background-color: red;
 		}
 	}
-.sidr ul li.active,.sidr ul li.sidr-class-active{ background-color: $app-charlie}
+.sidr ul li.active,.sidr ul li.sidr-class-active{ background-color: red}
 
 .sidr ul li:hover>a,.sidr ul li:hover>span,.sidr ul li.active>a,.sidr ul li.active>span,
 .sidr ul li.sidr-class-active>a,.sidr ul li.sidr-class-active>span{ }

@@ -1,44 +1,42 @@
-.custom-form { 
-	text-align: center;;
-	input[type=text], input[type=number], input[type=password], input[type=email], textarea, select { 
-		outline: 0;
-		border: 0;
-		font-weight: 300;
-		box-shadow: none;
-		font-size: 1.0em;
-		padding: 10px;
-		@include rounded(5px);
-		border: 1px solid $light-grey;
-		//@include shadow;
-		width: 90%;
-		margin: auto;
-		-webkit-appearance: none;
-		font-family: $base-font;
-	} 
-	input[type=submit], .custom-btn { 
-		@include rounded(30px);
-		border: 0;
-		color: white;
-		text-align: center;
-		width: 90%;
-		margin: 5px auto 0 auto;
-		padding: 15px 0;
-		//@include shadow;
-		text-decoration: none;
-		display: inline-block;
-		-webkit-appearance: none;
-		font-family: $base-font;
-	}
-	select {
-		display: inline;
-		width: auto; 
-		font-size: 0.8em;
-		padding: 10px 30px 10px 10px;
-		background-image: url("../img/_jquery_ui/down_arrow.png");
-    	background-repeat: no-repeat;
-    	background-position: 96% 50%;
-	}
+
+input[type=text], input[type=number], input[type=password], input[type=email], textarea, select { 
+	outline: 0;
+	border: 0;
+	font-weight: 300;
+	box-shadow: none;
+	font-size: 1.0em;
+	padding: 10px;
+	@include rounded(5px);
+	//@include shadow;
+	width: 90%;
+	margin: auto;
+	-webkit-appearance: none;
+} 
+
+input[type=submit], .custom-btn { 
+	@include rounded(30px);
+	border: 0;
+	color: white;
+	text-align: center;
+	width: 90%;
+	margin: 5px auto 0 auto;
+	padding: 15px 0;
+	//@include shadow;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-appearance: none;
 }
+
+select {
+	display: inline;
+	width: auto; 
+	font-size: 0.8em;
+	padding: 10px 30px 10px 10px;
+	background-image: url("../img/_jquery_ui/down_arrow.png");
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+}
+
 textarea { 
 	padding: 10px;
 	width: 90%;
@@ -51,7 +49,6 @@ textarea {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }

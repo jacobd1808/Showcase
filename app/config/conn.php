@@ -12,15 +12,14 @@ define( "DB_PASSWORD", "" );
 
 function __autoload($class) {
 	// rename $folder to where ever your working folder is 
-	$folder = '/teamProj';
+	$folder = '/Showcase';
 	require_once($_SERVER['DOCUMENT_ROOT'].$folder."/app/models/$class.php");
 }
 
 include_once "functions.php";
 $conn = ConnectionFactory::connect();
 
-$profiles = new User($conn); 
-
+/*
 if(isset($_SESSION['username'])) {
 	$userData = $profiles->checkProfiles($_SESSION['username']);
 	if($userData['active_profile'] != NULL) {
@@ -28,4 +27,5 @@ if(isset($_SESSION['username'])) {
 	} 
 	$_SESSION['id'] = $userData['id'];
 }
+*/
 ?>

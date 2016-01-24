@@ -8,7 +8,7 @@
 
 		/* 
 			FOR FETCHING ALL ROWS IN A DATABASE 
-		*/ 
+		
 		public function fetchAllProfiles($id){
 			$query = "SELECT * FROM profiles WHERE user_id = $id";
 			$stmt = $this->conn->query($query);
@@ -18,7 +18,7 @@
 
 		/* 
 			FOR FETCHING SINGLE ROW FROM DATABASE 
-		*/ 	
+			
 		public function fetchProfile($profile_id) {
 			$query = "SELECT * FROM profiles WHERE profile_id = $profile_id";
 			$stmt = $this->conn->query($query);
@@ -71,24 +71,18 @@
 
 		// FOR DELETING A ROW 
 
-		public function deleteProfile($id, $user_id){
+		public function deleteProfile($id){
 			$sql = "DELETE FROM profiles WHERE profile_id = :id";
 			$stmt = $this->conn->prepare($sql);  
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			if ( $stmt->execute()){
-				$sql = "UPDATE users
-					SET active_profile = NULL
-					WHERE id = $user_id";
-				$stmt = $this->conn->prepare($sql); 
-				if ($stmt->execute()) { 
-					return true;
-				}
+				return true;
 			}
 		}
 		
 		/* 
 			Log User In 
-		*/ 
+		
 		public function validateUser($username, $password) {
 			
 			$stmt = $this->conn->prepare("SELECT * FROM users WHERE user = :username && pass = :password");
@@ -101,52 +95,6 @@
 				return true;
         	}
 		}
-
-		public function fetchUser($username){
-			$query = "SELECT * FROM users 
-					  INNER JOIN profiles
-					  ON users.active_profile = profiles.profile_id
-					  WHERE users.user = '$username' ";
-			$stmt = $this->conn->query($query);
-			$getData = $stmt->fetch(PDO::FETCH_ASSOC);
-			return $getData;
-		}
-
-		public function checkProfiles($username){
-			$query = "SELECT * FROM users 
-					  WHERE user = '$username' ";
-			$stmt = $this->conn->query($query);
-			$getData = $stmt->fetch(PDO::FETCH_ASSOC);
-			return $getData;
-		}
-
-		public function createUser($data) { 	
-
-			$sql = "INSERT INTO users (user, pass, email, name) 
-					VALUES (:user, :pass, :email, :name)";
-			$stmt = $this->conn->prepare($sql);  
-			
-			$stmt->bindParam(':user', $data['username'], PDO::PARAM_STR);     
-			$stmt->bindParam(':pass', $data['password'], PDO::PARAM_STR);			
-			$stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
-			$stmt->bindParam(':name', $data['name'], PDO::PARAM_INT); 
-			
-			if ($stmt->execute()) { 
-				return true;	
-			}  
-		} 
-
-		public function updateActiveProfile($user_id, $profile_id) { 	
-			$sql = "UPDATE users
-					SET active_profile = $profile_id
-					WHERE id = $user_id";
-			$stmt = $this->conn->prepare($sql);    
-			$stmt->execute();
-
-			if ($stmt->execute()) {
-				return true;
-			}			
-		} 	
 	} 
 		
 ?> 
