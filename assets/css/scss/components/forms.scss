@@ -4,34 +4,37 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
 	border: 0;
 	font-weight: 300;
 	box-shadow: none;
-	font-size: 1.0em;
-	padding: 10px;
-	@include rounded(5px);
+	font-size: 0.9em;
+	padding: 15px;
 	//@include shadow;
-	width: 90%;
-	margin: auto;
 	-webkit-appearance: none;
+	font-family: $condensed-font;
+	font-weight: 400;
+	margin: 10px 0;
+	width: 100%;
 } 
 
 input[type=submit], .custom-btn { 
-	@include rounded(30px);
 	border: 0;
 	color: white;
 	text-align: center;
-	width: 90%;
 	margin: 5px auto 0 auto;
 	padding: 15px 0;
+	font-weight: 700;
+	width: 100%;
 	//@include shadow;
 	text-decoration: none;
 	display: inline-block;
 	-webkit-appearance: none;
+	background-color: $brand-dark-col;
+	font-family: $condensed-font;
+	text-transform: uppercase;
 }
 
 select {
-	display: inline;
-	width: auto; 
+	display: inline-block;
 	font-size: 0.8em;
-	padding: 10px 30px 10px 10px;
+	padding: 15px 30px 15px 15px;
 	background-image: url("../img/_jquery_ui/down_arrow.png");
 	background-repeat: no-repeat;
 	background-position: 96% 50%;
@@ -51,4 +54,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+fieldset { 
+	border: 0;
+}
+label { 
+	color: white;
+	text-transform: uppercase;
+	font-family: $condensed-font;	
 }

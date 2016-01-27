@@ -69,17 +69,26 @@
 
 			QUESTIONS NEED ANSWERING:
 			Can two matching people favorite each other?	
-			Will the user have access to friendlist?
-			Will users list their hobbies?
-			How will the whole "fitness" part of this app work? ( I DON'T WORK OUT I'M IGNORANT)
+				- Yeah, there will be an add freind feature
+			Will the user have access to friendlist?		
+				- Yeah
+			Will users list their hobbies?					
+				- There will be a full profile for each user, this will need a seperate database (or more)
+			How will the whole "fitness" part of this app work? ( I DON'T WORK OUT I'M IGNORANT) 
+				- Focus more on a social platform right now. Ill write a list of stuff that needs doing in order in another file 
 
 			CONFIRM: (Y/N)
 			If chats are saved and have their own dedicated page, it's a smart idea to make a Chat model.
+				Y
 			I will expand Friends and Chat log as their own database table.
+				Y - Needs to have a date feild for when matched 
 			Should register log you in right away after a few seconds of confirmation message showing.
+				N - Redirect to login with confirmation message saying you may now log in
 			Do users need to activate their account ? ( This is not common practice anymore)
+				N - 
 			Should Lost Password send you back your current password or re-assign you a new one and advice to remake a new password
-
+				- Reassign a new one, no email confirmation (it's only a prototype)
+				
 		// FOR EDITING A ROW 
 		
 		public function editProfile($data, $id) { 

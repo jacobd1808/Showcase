@@ -1,0 +1,325 @@
+/* Import all scss files  */
+/* 	BORDER RADIUS 	*/
+/* OPACITY */
+/* CENTER BLOCK ELEMENTS */
+/* ANIMATION */
+/* VERTICAL ALIGN */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.s-size {
+  font-size: 0.8em; }
+
+.n-size {
+  font-size: 1.0em; }
+
+.l-size {
+  font-size: 1.2em; }
+
+.xl-size {
+  font-size: 1.4em; }
+
+.uc {
+  text-transform: uppercase; }
+
+.lc {
+  text-transform: lowercase; }
+
+.bold {
+  font-weight: 600; }
+
+.thin {
+  font-weight: 300; }
+
+.p-10 {
+  padding: 10px; }
+
+.p-15 {
+  padding: 15px; }
+
+.p-20 {
+  padding: 20px; }
+
+.p-25 {
+  padding: 25px; }
+
+.m-10 {
+  margin: 10px; }
+
+.m-15 {
+  margin: 15px; }
+
+.m-20 {
+  margin: 20px; }
+
+.m-25 {
+  margin: 25px; }
+
+.c-align {
+  text-align: center; }
+
+.l-align {
+  text-align: left; }
+
+.r-align {
+  text-align: right; }
+
+.clear {
+  clear: both; }
+
+.r-float {
+  float: right; }
+
+.l-float {
+  float: left; }
+
+.hidden {
+  display: none; }
+
+.shown {
+  display: block; }
+
+.shown-inline {
+  display: inline-block; }
+
+.invisible {
+  visibility: hidden; }
+
+a:link, a:active, a:visited {
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase; }
+
+h1 {
+  background-color: #EB1C00;
+  padding: 15px;
+  color: white;
+  font-size: 1.3em; }
+
+html, body {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: #00092D;
+  font-size: 100%;
+  height: 100%;
+  font-weight: 300; }
+
+/* For Tablet Only */
+/* For Desktop Only */
+/*						*/
+/* NEW ELEMENTS CREATED */
+/* 						*/
+/* Top Bar */
+@media (min-width: 320px) {
+  .res-padding {
+    padding-left: 2%;
+    padding-right: 2%; }
+
+  .res-margin {
+    margin-left: 2%;
+    margin-right: 2%; } }
+input[type=text], input[type=number], input[type=password], input[type=email], textarea, select {
+  outline: 0;
+  border: 0;
+  font-weight: 300;
+  box-shadow: none;
+  font-size: 0.9em;
+  padding: 15px;
+  -webkit-appearance: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 400;
+  margin: 10px 0;
+  width: 100%; }
+
+input[type=submit], .custom-btn {
+  border: 0;
+  color: white;
+  text-align: center;
+  margin: 5px auto 0 auto;
+  padding: 15px 0;
+  font-weight: 700;
+  width: 100%;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  background-color: #EB1C00;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase; }
+
+select {
+  display: inline-block;
+  font-size: 0.8em;
+  padding: 15px 30px 15px 15px;
+  background-image: url("../img/_jquery_ui/down_arrow.png");
+  background-repeat: no-repeat;
+  background-position: 96% 50%; }
+
+textarea {
+  padding: 10px;
+  width: 90%;
+  margin: 10px auto;
+  font-size: 0.9em;
+  font-weight: 400;
+  height: 150px;
+  outline: 0; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+fieldset {
+  border: 0; }
+
+label {
+  color: white;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif; }
+
+/* SIDR [ RESPONSIVE NAV ] */
+.sidr {
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+  width: 260px;
+  overflow-x: none;
+  overflow-y: auto;
+  font-size: 15px;
+  color: #fff; }
+
+.sidr .sidr-inner {
+  padding: 0 0 15px; }
+
+.sidr .sidr-inner > p {
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.sidr.right {
+  left: auto;
+  right: -260px; }
+
+.sidr.left {
+  left: -260px;
+  right: auto; }
+
+.sidr h1, .sidr h2, .sidr h3, .sidr h4, .sidr h5, .sidr h6 {
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0 15px;
+  margin: 0 0 5px;
+  color: #333;
+  line-height: 24px; }
+
+.sidr p {
+  font-size: 13px;
+  margin: 0 0 12px; }
+
+.sidr p a {
+  color: #fff; }
+
+.sidr > p {
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.sidr ul {
+  display: block;
+  margin: 0 0 15px;
+  padding: 0; }
+
+.sidr ul li {
+  display: block;
+  margin: 0;
+  line-height: 47px;
+  font-weight: 400; }
+  .sidr ul li a.active {
+    background-color: red; }
+
+.sidr ul li.active, .sidr ul li.sidr-class-active {
+  background-color: red; }
+
+.sidr ul li a, .sidr ul li span {
+  padding: 0 15px;
+  display: block;
+  text-decoration: none;
+  color: #fff; }
+
+.sidr ul li ul {
+  border-bottom: none;
+  margin: 0; }
+
+.sidr ul li ul li {
+  line-height: 40px;
+  font-size: 13px; }
+
+.sidr ul li ul li:last-child {
+  border-bottom: none; }
+
+.sidr ul li ul li:hover, .sidr ul li ul li.active, .sidr ul li ul li.sidr-class-active {
+  border-top: none;
+  line-height: 41px; }
+
+.sidr ul li ul li:hover > a, .sidr ul li ul li:hover > span, .sidr ul li ul li.active > a, .sidr ul li ul li.active > span, .sidr ul li ul li.sidr-class-active > a, .sidr ul li ul li.sidr-class-active > span {
+  -webkit-box-shadow: inset 0 0 15px 3px #ebebeb;
+  -moz-box-shadow: inset 0 0 15px 3px #ebebeb;
+  box-shadow: inset 0 0 15px 3px #ebebeb; }
+
+.sidr ul li ul li a, .sidr ul li ul li span {
+  color: rgba(51, 51, 51, 0.8);
+  padding-left: 30px; }
+
+.sidr form {
+  margin: 0 15px; }
+
+.sidr label {
+  font-size: 13px; }
+
+.sidr input[type="text"], .sidr input[type="password"], .sidr input[type="date"], .sidr input[type="datetime"], .sidr input[type="email"], .sidr input[type="number"], .sidr input[type="search"], .sidr input[type="tel"], .sidr input[type="time"], .sidr input[type="url"], .sidr textarea, .sidr select {
+  width: 100%;
+  font-size: 13px;
+  padding: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 0 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(51, 51, 51, 0.6);
+  display: block;
+  clear: both; }
+
+.sidr input[type=checkbox] {
+  width: auto;
+  display: inline;
+  clear: none; }
+
+.sidr input[type=button], .sidr input[type=submit] {
+  color: #f8f8f8;
+  background: #333; }
+
+.sidr input[type=button]:hover, .sidr input[type=submit]:hover {
+  background: rgba(51, 51, 51, 0.9); }
+
+.modulated-box {
+  background-color: #001360;
+  border: 0; }
+
+#register-form {
+  width: 500px;
+  margin: 20px auto; }

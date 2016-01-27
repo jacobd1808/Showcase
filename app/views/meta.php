@@ -13,3 +13,4 @@
         <link rel="stylesheet" href="assets/css/main.css?<?php echo  time(); ?>">
         <!-- --> 
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100,200,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
