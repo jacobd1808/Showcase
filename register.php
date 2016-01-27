@@ -1,6 +1,7 @@
 <?php
   session_start();
   include_once "app/config/conn.php";
+  include "app/controller/registerController.php";
 
   if(isset($_SESSION['username'])) { 
     header("Location: index.php");
@@ -13,33 +14,6 @@
 		"jsIncludes"	 	=>	"",
 	);
 
-  if (isset($_POST["register"])) { 
-    // Store all Data in array to pass to Model
-    $data = array(
-      'username' => $_POST["username"], 
-      'name' => $_POST["name"],
-      'email' => $_POST["email"],
-      'password' => md5($_POST["password"]),
-      'gender' => $_POST["email"],
-    );
-
-    // Validation 
-    if (!isset($data['username']) || !isset($data['name']) || !isset($data['email']) || !isset($data['password'])) { 
-      $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must fill in all the fields</em>' ); 
-    } else { 
-      // If Validation passes, send data to controller
-      $newUser = $profiles->createUser($data);
-      if (!$newUser) { 
-        // If Something goes wrong 
-        $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>Something went wrong</em>' ); 
-      } else { 
-        // In Works (Need icon changing)
-        $feedback = array( "type" => 'confirm', "message" => '<i class="material-icons">error</i><em>Successfully Registered, <a href="login.php"> Log in</a></em>' );  
-      }
-    }
-    
-  } 
-
 ?>
 <!DOCTYPE html>
     <head>
@@ -47,6 +21,45 @@
     </head>
     <body id='pre-login'>
       <div class='view'> 
+        <form action='' method='post' name='register'> 
+        <table style='border: 1px black solid;'> 
+          <tr>
+            <td colspan='2' >Tables are the shiz</td>
+          </tr>
+          <tr>
+            <td>First Name</td>
+            <td><input type='text' name='u_name' id='u_name' /></td>
+          </tr>
+          <tr>
+            <td>Surname</td>
+            <td><input type='text' name='u_surname' id='u_surname' /></td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td><select name="u_gender" id="u_gender">
+                  <option value="0">Male</option>
+                  <option value="1">Female</option>
+                  <option value="2">Other</option>
+                  <!-- It's better to have Other aswell. I don't know why but all the websites do it lol -->
+                </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td><input type='text' name='u_username' id='u_username' /></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><input type='pass' name='u_password' id='u_password' /></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><input type='text' name='u_email' id='u_email' /></td>
+          </tr>
+          <tr>
+            <td colspan='2'><input type='submit' name='register' id='register' /></td>
+          </tr>
+        </table>
         <!-- 
           Username, Email, Password, First Name, Surname, Gender 
           Validation for everything
