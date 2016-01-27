@@ -6,6 +6,7 @@
 			$this->conn = $conn;
 		}
 
+		// Function to register the user.
 		public function registerUser($data){
 			// Write the SQL Insert Query
 			$sql = "INSERT INTO db_user (username, name, surname, password, email, gender, register_date)
@@ -34,5 +35,45 @@
 				return false;
 			}
 		}
+
+		// Function to delete user
+		public function deleteUser($id){
+			// SQL Statement
+			$sql = "DELETE FROM db_user WHERE id = $id";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Execute SQL
+			if ( $stmt->execute()){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Function to login will be there
+		public function loginUser($data){
+			// SQL Statement
+			$sql = "SELECT * FROM db_user WHERE username = :username && password = :password";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(":username", $data['username'], PDO::PARAM_STR);
+			$stmt->bindParam(":password", $data['password'], PDO::PARAM_STR);
+			// Execute SQL
+			if ($stmt->execute()){
+				// User has logged in
+				$_SESSION['id'] = $data['id'];
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Lost Password Function
+		public function recoverPass($data){
+				// Fill
+		}
+
+
 	}
 ?>

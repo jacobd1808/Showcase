@@ -6,50 +6,79 @@
 			$this->conn = $conn;
 		}
 
-		/* 
-			FOR FETCHING ALL ROWS IN A DATABASE 
-		
-		public function fetchAllProfiles($id){
-			$query = "SELECT * FROM profiles WHERE user_id = $id";
+		$id = 1;
+
+		// Fetch ALL information on the user
+		public function fetchAllRows($id){
+			// SQL Statement
+			$query = "SELECT * FROM db_user WHERE id = $id";
+			// Prepare Query
 			$stmt = $this->conn->query($query);
-			$getData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			return $getData;
+			// Fetch Query
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
 		}
 
-		/* 
-			FOR FETCHING SINGLE ROW FROM DATABASE 
-			
-		public function fetchProfile($profile_id) {
-			$query = "SELECT * FROM profiles WHERE profile_id = $profile_id";
+		// Fetch SPECIFIC information on the user
+		public function fetchOneRow($id, $row){
+			// SQL Statement
+			$query = "SELECT $row FROM db_user WHERE id = $id";
+			// Prepare Query
 			$stmt = $this->conn->query($query);
-			$getData = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-		 return $getData;
+			//Fetch Query
+			$result = $stmt->fetchColumn();
+			// Return value
+			return $result;
 		}
 
-		// FOR CREATING A NEW ROW 
-		
-		public function createProfile($data, $id) { 	
-
-			$sql = "INSERT INTO profiles (profile_name, gender, dob, colour_theme, user_id) 
-					VALUES (:name, :gender, :dob, :theme, $id)";
-			$stmt = $this->conn->prepare($sql);  
-			
-			$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);   
-			$stmt->bindParam(':gender', $data['gender'], PDO::PARAM_INT);   
-			$stmt->bindParam(':dob', $data['dob'], PDO::PARAM_STR);			
-			$stmt->bindParam(':theme', $data['theme'], PDO::PARAM_STR);
-			
-			if ($stmt->execute()) { 
-				$profile_id = $this->conn->lastInsertId();	
-				$sql = "UPDATE users
-					SET active_profile = $profile_id
+		// Update profile information
+		public function updateProfile($id, $data){
+			// Write SQL Statement
+			$sql = "UPDATE db_user
+					SET name = :name, surname = :surname, gender = :gender, email = :email 
 					WHERE id = $id";
-				$stmt = $this->conn->prepare($sql); 
-				$stmt->execute();
+
+			// Prepare SQL Update
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
+			$stmt->bindParam(':surname', $data['surname'], PDO::PARAM_STR);
+			$stmt->bindParam(':gender', $data['gender'], PDO::PARAM_STR);
+			$stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
+
+			// Execute Update
+			if ($stmt->execute()){
 				return true;
-			}  
-		} 
+			} else {
+				return false;
+			}
+		}
+
+		// Fetch friend list ( IS FRIEND LIST AN IDEA? )
+		public function fetchFriends($id){
+			// Fill
+		}
+
+		// FETCH INFO FOR A CHAT
+		public function fetchChatLog($id, $friend_id){
+			// Fill
+		}
+
+		/* I'M RESERVING THIS SECTION FOR DEV COMMUNICATION
+
+			QUESTIONS NEED ANSWERING:
+			Can two matching people favorite each other?	
+			Will the user have access to friendlist?
+			Will users list their hobbies?
+			How will the whole "fitness" part of this app work? ( I DON'T WORK OUT I'M IGNORANT)
+
+			CONFIRM: (Y/N)
+			If chats are saved and have their own dedicated page, it's a smart idea to make a Chat model.
+			I will expand Friends and Chat log as their own database table.
+			Should register log you in right away after a few seconds of confirmation message showing.
+			Do users need to activate their account ? ( This is not common practice anymore)
+			Should Lost Password send you back your current password or re-assign you a new one and advice to remake a new password
 
 		// FOR EDITING A ROW 
 		

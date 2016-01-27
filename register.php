@@ -37,9 +37,9 @@
           <tr>
             <td>Gender</td>
             <td><select name="u_gender" id="u_gender">
-                  <option value="0">Male</option>
-                  <option value="1">Female</option>
-                  <option value="2">Other</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                  <option value="3">Other</option>
                   <!-- It's better to have Other aswell. I don't know why but all the websites do it lol -->
                 </select>
             </td>
