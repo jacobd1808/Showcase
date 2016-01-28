@@ -1,6 +1,8 @@
 <?php
-  session_start();
+
+  include_once "app/config/checkLogged.php";
   include_once "app/config/conn.php";
+  include "app/controller/loginController.php";
 
   if(isset($_SESSION['username'])) { 
     header("Location: index.php");
@@ -13,23 +15,6 @@
 		"jsIncludes"	 	=>	"",
 	);
 
-  if (isset($_POST["login"])) { 
-    $username = $_POST["username"]; 
-    $password = md5($_POST["password"]);
-    if ($username == '') { 
-      $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must enter a username</em>' ); 
-    } else if ($password == ''){ 
-      $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must enter a password</em>' ); 
-    } else { 
-      $validUser = $profiles->validateUser($username, $password);
-      if (!$validUser) { 
-      $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>Username or password incorrect </em>' ); 
-      } else { 
-        header("Location: index.php"); 
-      }
-    }
-  } 
-
 ?>
 <!DOCTYPE html>
     <head>
@@ -37,7 +22,18 @@
     </head>
     <body id='pre-login'>
       <div class='view'> 
-        <!-- --> 
+          <h1> Login </h1>
+          <fieldset>
+            <form action='' method='post' name='login' id='login-form' class="pure-form pure-form-stacked modulated-box">
+              <label for="u_username">Username </label>
+              <input type='text' name='u_username' id='u_username' />
+              <!-- -->
+              <label for="u_password">Username </label>
+              <input type='password' name='u_password' id='u_password' />
+              <!-- -->
+              <input type='submit' name='login' id='login' value='Login'/>
+            </form>
+          </fieldset>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
     </body>

@@ -52,28 +52,25 @@
 
 		// Function to login will be there
 		public function loginUser($data){
+
 			// SQL Statement
-			$sql = "SELECT * FROM db_user WHERE username = :username && password = :password";
+			$sql = "SELECT id FROM db_user WHERE username = :username && password = :password";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
 			$stmt->bindParam(":username", $data['username'], PDO::PARAM_STR);
 			$stmt->bindParam(":password", $data['password'], PDO::PARAM_STR);
 			// Execute SQL
-			if ($stmt->execute()){
+			$stmt->execute();
+			$result = $stmt->fetchColumn();
+
+			if ($result){
 				// User has logged in
-				$_SESSION['id'] = $data['id'];
+				$_SESSION['ifitness_id'] = $result;
 				return true;
 			} else {
 				return false;
 			}
 		}
-
-		// Lost Password Function
-		public function recoverPass($data){
-				// Fill
-		}
-
-
 	}
 ?>

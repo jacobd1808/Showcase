@@ -1,0 +1,11 @@
+CHANGE LOG 
+
+27th January 2016
+
+	- Login now completely works, up to you to make a styling.
+	- Added a db_rel table that is basically the relationship between 2 users ( blocked/friend ).
+	- Added a db_friend_req table that manages friend requests
+	- Relation model created ( for blocked, friends, friendlists and adding friend / blocing people feature)
+	- Made a change for $_SESSION['username'] to $_SESSION['ifitness_id'].
+	- Added a default null function for Gender in Register to avoid people not filling it up.
+	- Many fixes in the USER Model, All the functions in there were tested and work properly now.
