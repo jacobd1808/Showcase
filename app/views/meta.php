@@ -5,7 +5,7 @@
 		<meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <title><?php echo $pageOpt['title']; ?></title>
-        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/grids-responsive-min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Page Specfic Files-->
         <?php if($pageOpt['cssIncludes']) { echo $pageOpt['cssIncludes']; } ?> 

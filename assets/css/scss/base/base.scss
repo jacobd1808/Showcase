@@ -2,11 +2,12 @@
 $body-font: 		'Roboto', sans-serif;
 $condensed-font: 	'Roboto Condensed', sans-serif;
 
-$body-col: #00092D;
-$body-lighten: lighten($body-col, 10%);
-$body-darken:  darken($body-col, 10%);
+$body-col: #1C1525;
+$body-lighten: lighten($body-col, 5%);
+$body-darken:  darken($body-col, 5%);
 
 $brand-dark-col: #EB1C00;
+	$brand-dark-darken: darken($brand-dark-col, 10%);
 $brand-light-col: #FC6E00;
 
 * { @include border-box;}
@@ -51,14 +52,17 @@ a:link, a:active, a:visited {
 }
 
 h1, h2, h3, h4, h5 { 
-	font-family: $condensed-font; 
+	
 	text-transform: uppercase;
 }
 h1 { 
 	background-color: $brand-dark-col;
 	padding: 15px;
 	color: white;
-	font-size: 1.3em;
+	margin: 0;
+	font-weight: 300;
+	font-size: 1.4em;
+	letter-spacing: 1px;
 }
 
 html, body { 

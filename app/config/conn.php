@@ -4,14 +4,14 @@
 // CHANGE TO YOUR DATABASE DETAILS 
 
 define( "DB_DATA_SOURCE", "mysql:host=localhost;dbname=ifitness_db" );
-define( "DB_USERNAME", "william" );
-define( "DB_PASSWORD", "password" );
+define( "DB_USERNAME", "" );
+define( "DB_PASSWORD", "root" );
 
 // Class Configure 
 
 function __autoload($class) {
 	// rename $folder to where ever your working folder is 
-	$folder = '/ifitness';
+	$folder = '/Showcase';
 	require_once($_SERVER['DOCUMENT_ROOT'].$folder."/app/models/$class.php");
 }
 

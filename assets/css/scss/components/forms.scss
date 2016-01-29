@@ -10,15 +10,16 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
 	-webkit-appearance: none;
 	font-family: $condensed-font;
 	font-weight: 400;
-	margin: 10px 0;
 	width: 100%;
+	background-color: $body-darken;
+	color: white;
 } 
 
 input[type=submit], .custom-btn { 
 	border: 0;
 	color: white;
 	text-align: center;
-	margin: 5px auto 0 auto;
+	margin: 20px auto 0 auto;
 	padding: 15px 0;
 	font-weight: 700;
 	width: 100%;
@@ -29,6 +30,10 @@ input[type=submit], .custom-btn {
 	background-color: $brand-dark-col;
 	font-family: $condensed-font;
 	text-transform: uppercase;
+	@include animate(150ms);
+	&:hover { 
+		color: $brand-light-col;
+	}
 }
 
 select {
@@ -58,9 +63,33 @@ input::-webkit-inner-spin-button {
 
 fieldset { 
 	border: 0;
+	padding: 0 10px 10px 10px;
+	margin: 0;
 }
 label { 
 	color: white;
 	text-transform: uppercase;
-	font-family: $condensed-font;	
+	font-family: $condensed-font;
+	margin: 20px 0 10px 0;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	span { 
+		height: 1px;
+		display: inline-block;
+		background-color: white;
+		width: 100%;
+		position: absolute;
+		margin: 10px 0 0 10px;
+		opacity: 0.1;
+	}
+}
+legend { 
+	@include gradient-horizontal($brand-light-col, $brand-dark-col);
+	width: 100%;
+	padding: 10px;
+	text-transform: uppercase;
+	color: white;
+	font-weight: bold;
+	font-family: $condensed-font; 
 }
