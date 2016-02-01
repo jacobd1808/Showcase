@@ -19,19 +19,19 @@
     <head>
 		<?php include_once "app/views/meta.php"; ?>
     </head>
-    <body id='pre-login'>
+    <body id='particle-background'>
       <div class='view'> 
         <form action='' method='post' name='register' id='register-form' class="pure-form pure-form-stacked modulated-box">
-          <h1> Register </h1>
+          <h1> Register an account </h1>
           <fieldset>
             <div class="pure-g">
               <div class="pure-u-1 pure-u-md-1-2 l-cell">
                 <label for="u_name">First Name <span></span></label>
-                <input type='text' name='u_name' id='u_name' class="pure-u-23-24"/>
+                <input type='text' name='u_name' id='u_name'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 r-cell">
                 <label for="u_surname">Surname <span></span></label>
-                <input type='text' name='u_surname' id='u_surname' class="pure-u-23-24"/>
+                <input type='text' name='u_surname' id='u_surname'/>
               </div>
               <!-- -->
               <div class="pure-u-1 pure-u-md-1-1" style='display: none'>
@@ -62,6 +62,7 @@
               <input type='submit' name='register' id='register' />
             </div>
           </fieldset>
+          <a href='login.php' class='small-button custom-btn pre-login'> Return to Login </a>
         </form>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>

@@ -11,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <!-- F7 --> 
         <script type="text/javascript" src="lib/sidr/jquery.sidr.min.js"></script>
+        <script type="text/javascript" src="lib/particles/particles.js"></script>
         <!-- Page Specfic Files-->
         <?php if($pageOpt['jsIncludes']) { echo $pageOpt['jsIncludes']; } ?>  
         <!-- Main-->    

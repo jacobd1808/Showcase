@@ -2,9 +2,19 @@
 	background-color: $body-lighten;
 	border: 0;
 }
-#register-form {
+#register-form, #login-form {
 	width: 500px;
 	margin: 20px auto;
+	text-align: center;
+	fieldset { 
+		position: relative;
+		z-index: 10;
+		text-align: left;
+	}
+	.pre-login { 
+		color: $brand-light-col;
+		margin-top: 5px;
+	}
 }
 
 .pure-u-md-1-2.l-cell { 
@@ -12,4 +22,10 @@
 }
 .pure-u-md-1-2.r-cell { 
 	padding-left: 10px;
+}
+
+body canvas { 
+	position: absolute;
+	top: 0;
+	left: 0;
 }

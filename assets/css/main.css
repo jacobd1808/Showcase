@@ -101,9 +101,9 @@ h1 {
   padding: 15px;
   color: white;
   margin: 0;
-  font-weight: 300;
   font-size: 1.4em;
-  letter-spacing: 1px; }
+  font-weight: 300;
+  text-align: left; }
 
 html, body {
   font-family: "Roboto", sans-serif;
@@ -147,10 +147,10 @@ input[type=submit], .custom-btn {
   border: 0;
   color: white;
   text-align: center;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 10px auto;
   padding: 15px 0;
   font-weight: 700;
-  width: 100%;
+  width: 90%;
   text-decoration: none;
   display: inline-block;
   -webkit-appearance: none;
@@ -160,9 +160,17 @@ input[type=submit], .custom-btn {
   -webkit-transition: all 150ms ease-in-out;
   -moz-transition: all 150ms ease-in-out;
   -o-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out; }
+  transition: all 150ms ease-in-out;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  background-clip: padding-box; }
   input[type=submit]:hover, .custom-btn:hover {
     color: #FC6E00; }
+  input[type=submit].small-button, .custom-btn.small-button {
+    padding: 10px;
+    background-color: #281e35;
+    width: 300px;
+    font-weight: 300; }
 
 select {
   display: inline-block;
@@ -356,12 +364,25 @@ legend {
   background-color: #281e35;
   border: 0; }
 
-#register-form {
+#register-form, #login-form {
   width: 500px;
-  margin: 20px auto; }
+  margin: 20px auto;
+  text-align: center; }
+  #register-form fieldset, #login-form fieldset {
+    position: relative;
+    z-index: 10;
+    text-align: left; }
+  #register-form .pre-login, #login-form .pre-login {
+    color: #FC6E00;
+    margin-top: 5px; }
 
 .pure-u-md-1-2.l-cell {
   padding-right: 10px; }
 
 .pure-u-md-1-2.r-cell {
   padding-left: 10px; }
+
+body canvas {
+  position: absolute;
+  top: 0;
+  left: 0; }
