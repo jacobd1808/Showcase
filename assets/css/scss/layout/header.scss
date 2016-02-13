@@ -1,7 +1,48 @@
 
 header { 
-
+	background-color: $body-lighten;
+	color: white;	
+	ul.navigation-menu { 
+		margin: 0;
+		float: left;
+		border-right: 1px solid $body-lighten-2;
+		li { 
+			display: inline-block;
+			list-style-type: none;
+		}
+	}
+	.user-profile-tab { 
+		float: right;
+		margin-right: 40px;
+		border-right: 1px solid $body-lighten-2;
+	}
+	a { 
+		font-weight: 700;
+		text-transform: uppercase;
+		padding: 25px;
+		display: inline-block;
+		color: white;
+		font-size: 0.9em;
+		text-decoration: none;
+		border-left: 1px solid $body-lighten-2;
+		i { 
+			margin-right: 10px;
+			margin-top: -3px;
+			float: left;
+		}
+		&.de-emphasis { 
+			color: #999;
+		}
+		&:hover { 
+			color: $brand-dark-col;
+		}
+	}
 } 
+.information-menu { 
+	background-color: $body-darken;
+	color: white;
+	padding: 20px 40px;
+}
 
 
 

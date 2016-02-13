@@ -4,7 +4,10 @@ $condensed-font: 	'Roboto Condensed', sans-serif;
 
 $body-col: #1C1525;
 $body-lighten: lighten($body-col, 5%);
-$body-darken:  darken($body-col, 5%);
+$body-lighten-2: lighten($body-col, 10%);
+$body-darken:  darken($body-col, 3%);
+$body-darken-2:  darken($body-col, 8%);
+
 
 $brand-dark-col: #EB1C00;
 	$brand-dark-darken: darken($brand-dark-col, 10%);
