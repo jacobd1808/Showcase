@@ -12,6 +12,7 @@ $body-darken-2:  darken($body-col, 8%);
 $brand-dark-col: #EB1C00;
 	$brand-dark-darken: darken($brand-dark-col, 10%);
 $brand-light-col: #FC6E00;
+	$brand-light-lighten: lighten($brand-light-col, 10%);
 
 * { @include border-box;}
 
@@ -52,6 +53,12 @@ $brand-light-col: #FC6E00;
 
 a:link, a:active, a:visited { 
 	@include animate(100ms);
+	color: white;
+	font-weight: 300;
+	text-decoration: none;
+}
+a:hover { 
+	color: $brand-light-lighten;
 }
 
 h1, h2, h3, h4, h5 { 

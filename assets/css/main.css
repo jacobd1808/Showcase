@@ -91,7 +91,13 @@ a:link, a:active, a:visited {
   -webkit-transition: all 100ms ease-in-out;
   -moz-transition: all 100ms ease-in-out;
   -o-transition: all 100ms ease-in-out;
-  transition: all 100ms ease-in-out; }
+  transition: all 100ms ease-in-out;
+  color: white;
+  font-weight: 300;
+  text-decoration: none; }
+
+a:hover {
+  color: #ff8a30; }
 
 h1, h2, h3, h4, h5 {
   text-transform: uppercase; }
@@ -362,7 +368,8 @@ legend {
 
 header {
   background-color: #281e35;
-  color: white; }
+  color: white;
+  border-bottom: 5px solid #EB1C00; }
   header ul.navigation-menu {
     margin: 0;
     float: left;
@@ -373,24 +380,54 @@ header {
   header .user-profile-tab {
     float: right;
     margin-right: 40px;
-    border-right: 1px solid #352746; }
-  header a {
+    background-color: #352746;
+    border-right: 1px solid #352746;
+    width: 250px;
+    text-align: right; }
+  header .user-menu {
+    position: absolute;
+    padding: 0 10px;
+    border-top: 5px solid #FC6E00;
+    background-color: #281e35;
+    width: 250px;
+    margin-top: 0;
+    border-bottom: 1px solid #352746; }
+    header .user-menu li {
+      list-style-type: none;
+      border-top: 1px solid #352746;
+      font-size: 0.9em; }
+      header .user-menu li a {
+        text-transform: uppercase;
+        padding: 20px 15px;
+        text-align: right;
+        font-weight: 500;
+        display: inline-block; }
+        header .user-menu li a i {
+          margin-left: 18px;
+          float: right;
+          font-size: 1.3em;
+          -webkit-border-radius: 20px;
+          border-radius: 20px;
+          background-clip: padding-box;
+          background-color: #352746;
+          padding: 5px;
+          margin-top: -5px; }
+      header .user-menu li:first-child {
+        border-top: 0; }
+  header a.main-link {
     font-weight: 700;
     text-transform: uppercase;
     padding: 25px;
     display: inline-block;
-    color: white;
     font-size: 0.9em;
     text-decoration: none;
     border-left: 1px solid #352746; }
-    header a i {
+    header a.main-link i {
       margin-right: 10px;
       margin-top: -3px;
       float: left; }
-    header a.de-emphasis {
-      color: #999; }
-    header a:hover {
-      color: #EB1C00; }
+    header a.main-link.active {
+      color: #ff8a30; }
 
 .information-menu {
   background-color: #150f1b;

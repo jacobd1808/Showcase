@@ -2,6 +2,7 @@
 header { 
 	background-color: $body-lighten;
 	color: white;	
+	border-bottom: 5px solid $brand-dark-col;
 	ul.navigation-menu { 
 		margin: 0;
 		float: left;
@@ -14,15 +15,50 @@ header {
 	.user-profile-tab { 
 		float: right;
 		margin-right: 40px;
+		background-color: $body-lighten-2;
 		border-right: 1px solid $body-lighten-2;
+		width: 250px;
+		text-align: right;
 	}
-	a { 
+	.user-menu { 
+		position: absolute;
+		padding: 0 10px;
+		border-top: 5px solid $brand-light-col;
+		background-color: $body-lighten;
+		width: 250px;
+		margin-top: 0;
+		border-bottom: 1px solid $body-lighten-2;
+		li { 
+			list-style-type: none;
+			border-top: 1px solid $body-lighten-2;
+			font-size: 0.9em; 
+			a { 
+				text-transform: uppercase;
+				padding: 20px 15px;
+				text-align: right;
+				font-weight: 500;
+				display: inline-block;
+				i { 
+					margin-left: 18px;
+					float: right;
+					font-size: 1.3em;
+					@include rounded(20px);
+					background-color: $body-lighten-2;
+					padding: 5px;
+					margin-top: -5px;
+				}
+			}
+			&:first-child { 
+				border-top: 0;
+			}
+		}
+	}
+	a.main-link { 
 		font-weight: 700;
 		text-transform: uppercase;
 		padding: 25px;
 		display: inline-block;
-		color: white;
-		font-size: 0.9em;
+		font-size: 0.9em; 
 		text-decoration: none;
 		border-left: 1px solid $body-lighten-2;
 		i { 
@@ -30,11 +66,8 @@ header {
 			margin-top: -3px;
 			float: left;
 		}
-		&.de-emphasis { 
-			color: #999;
-		}
-		&:hover { 
-			color: $brand-dark-col;
+		&.active { 
+			color: $brand-light-lighten;
 		}
 	}
 } 
