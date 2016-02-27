@@ -20,8 +20,11 @@
     <head>
 		<?php include_once "app/views/meta.php"; ?>
     </head>
-    <body id='particle-background'>
+    <body class='image-background'>
       <div class='view'> 
+        <div class='c-align'>
+          <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
+        </div>
         <form action='' method='post' name='login' id='login-form' class="pure-form pure-form-stacked modulated-box">
           <h1> Login </h1>
           <fieldset>
@@ -38,6 +41,7 @@
             </div>
           </fieldset>
         </form>
+          <a href='register.php'> Register an Account </a>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
     </body>

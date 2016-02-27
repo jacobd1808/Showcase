@@ -2,17 +2,17 @@
 input[type=text], input[type=number], input[type=password], input[type=email], textarea, select { 
 	outline: 0;
 	border: 0;
-	font-weight: 300;
+	font-weight: 200;
 	box-shadow: none;
-	font-size: 0.9em;
-	padding: 15px;
+	font-size: 1.1em;
+	padding: 10px;
+	font-family: $body-font;
 	//@include shadow;
 	-webkit-appearance: none;
-	font-family: $condensed-font;
-	font-weight: 400;
 	width: 100%;
 	background-color: $body-darken;
 	color: white;
+	letter-spacing: 1px;
 } 
 
 input[type=submit], .custom-btn { 
@@ -21,25 +21,28 @@ input[type=submit], .custom-btn {
 	text-align: center;
 	margin: 20px auto 10px auto;
 	padding: 15px 0;
-	font-weight: 700;
+	font-weight: 300;
 	width: 90%;
-	//@include shadow;
 	text-decoration: none;
 	display: inline-block;
-	-webkit-appearance: none;
-	background-color: $brand-dark-col;
+	//-webkit-appearance: none;
 	font-family: $condensed-font;
+	background-color: red;
+	@include gradient-vertical($brand-light-col, $brand-dark-col);
 	text-transform: uppercase;
 	@include animate(150ms);
-	@include rounded(30px);
+	@include rounded(40px);
 	&:hover { 
 		color: $brand-light-col;
 	}
 	&.small-button { 
-		padding: 10px;
+		padding: 15px;
 		background-color: $body-lighten;
 		width: 300px;
 		font-weight: 300;
+	}
+	&.dark-color { 
+		@include gradient-vertical($body-lighten, $body-darken); 
 	}
 }
 
@@ -80,6 +83,7 @@ label {
 	margin: 20px 0 10px 0;
 	display: block;
 	position: relative;
+	font-size: 0.9em;
 	overflow: hidden;
 	span { 
 		height: 1px;
@@ -87,7 +91,7 @@ label {
 		background-color: white;
 		width: 100%;
 		position: absolute;
-		margin: 10px 0 0 10px;
+		margin: 8px 0 0 10px;
 		opacity: 0.1;
 	}
 }

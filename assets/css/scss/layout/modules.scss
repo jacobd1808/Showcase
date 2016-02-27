@@ -2,10 +2,12 @@
 	background-color: $body-lighten;
 	border: 0;
 }
-#register-form, #login-form {
-	width: 500px;
-	margin: 20px auto;
+
+#register-form {
+	width: 400px;
 	text-align: center;
+	float: right;
+	margin-right: 10%;
 	fieldset { 
 		position: relative;
 		z-index: 10;
@@ -24,8 +26,6 @@
 	padding-left: 10px;
 }
 
-body canvas { 
-	position: absolute;
-	top: 0;
-	left: 0;
+.view { 
+	color: white;
 }
