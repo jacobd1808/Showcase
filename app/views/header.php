@@ -20,11 +20,19 @@
           <li><a href="groups.php" class='main-link <?= setActive('groups', $pageOpt['navName']); ?>'><i class="material-icons">group</i>Groups</a></li>
       </ul>
       <div class='user-profile-tab'> 
-        <a href='profile.php' class='main-link <?= setActive('profile', $pageOpt['navName']); ?>'> Jacob Dickinson <i class="material-icons">account_circle</i> </a>
+        <a href='profile.php' class='main-link tab-heading <?= setActive('profile', $pageOpt['navName']); ?>'> Jacob Dickinson <i class="material-icons">account_circle</i> </a>
         <ul class='user-menu'> 
-            <li> <a href='message_center.php' class='<?= setActive('messages', $pageOpt['navName']); ?>'> Messages <i class="material-icons">message</i> </a></li>
-            <li> <a href='notification_center' class='<?= setActive('notifications', $pageOpt['navName']); ?>'> Notifications <i class="material-icons">notifications</i> </a></li>
-            <li> <a href='edit_profile.php' class='<?= setActive('edit_profile', $pageOpt['navName']); ?>'> Edit Account <i class="material-icons">edit</i></a></li>
+            <li> <a href='#' class='model-popup <?= setActive('messages', $pageOpt['navName']); ?>' data-content='message-center' data-title='Messaging Center'> 
+              Messages 
+              <i class="material-icons">message</i> 
+              <span class='count-circle'> 1 </span>
+            </a></li>
+            <li> <a href='#' class='model-popup <?= setActive('notifications', $pageOpt['navName']); ?>' data-content='notification' data-title='Notification Center'>   
+              Notifications 
+              <i class="material-icons">notifications</i> 
+              <span class='count-circle'> 2 </span>
+            </a></li>
+            <li class='<?= setActive('edit_profile', $pageOpt['navName']); ?>'> <a href='edit_profile.php'> Edit Profile <i class="material-icons">edit</i></a></li>
             <li> <a href='logout.php'> Logout </a></li>
         </ul>
         <!--                   <li><a href="#" class='de-emphasis'><i class="material-icons">play_for_work</i>Logout</a></li> -->

@@ -19,12 +19,13 @@
     <head>
 		<?php include_once "app/views/meta.php"; ?>
     </head>
-    <body class='image-background'>
+    <body>
       <div class='view'> 
         <div class='homepage-info vert-center'> 
             <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
             <br /> <big> Find, Connect, Train! </big> <br />
-            <a href='' class='custom-btn small-button dark-color'> Find Out More </a>
+            <a href='#' class='custom-btn small-button dark-color model-popup' 
+               data-content='about' data-title='About FitConnect'> Find Out More </a>
         </div>
         <form action='' method='post' name='register' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
           <h1> Register an account </h1>
@@ -48,25 +49,17 @@
                   <option value="3">Other</option>
               </select>
               </div>
-              <!--
+              <!-- -->
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_username">Username <span></span> </label>
                 <input type='text' name='u_username' id='u_username' />
               </div>
-              <!--
+              <!-- -->
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_password">Password <span></span></label>
                 <input type='password' name='u_password' id='u_password' />
               </div>
               <!-- -->
-              <div class="pure-u-1 pure-u-md-1-1">
-                <label for="u_email">Email <span></span></label>
-                <input type='text' name='u_email' id='u_email' />
-              </div>
-              <div class="pure-u-1 pure-u-md-1-1">
-                <label for="u_email">Email <span></span></label>
-                <input type='text' name='u_email' id='u_email' />
-              </div>
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_email">Email <span></span></label>
                 <input type='text' name='u_email' id='u_email' />

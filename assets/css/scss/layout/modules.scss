@@ -1,21 +1,41 @@
+
+.view { 
+	margin-right: 310px;
+}
 .modulated-box { 
 	background-color: $body-lighten;
 	border: 0;
+	color: white;
 }
 
-#register-form {
-	width: 400px;
+.model-bg { 
+	background-color:rgba(0,0,0,0.9);
+	position: absolute;
+	z-index: 100;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	display: none;
 	text-align: center;
-	float: right;
-	margin-right: 10%;
-	fieldset { 
-		position: relative;
-		z-index: 10;
-		text-align: left;
+	#popup-content { 
+		max-height: 90%;
+		max-width: 80%;
+		margin: auto;
 	}
-	.pre-login { 
-		color: $brand-light-col;
-		margin-top: 5px;
+	.close-model { 
+		color: white;
+		float: right;
+		margin-top: -5px;
+		@include animate(100ms);
+		cursor: pointer;
+		i { 
+			font-size: 1.8em;
+		}
+		&:hover { 
+			color: $body-darken;
+		}
 	}
 }
 
@@ -24,8 +44,4 @@
 }
 .pure-u-md-1-2.r-cell { 
 	padding-left: 10px;
-}
-
-.view { 
-	color: white;
 }

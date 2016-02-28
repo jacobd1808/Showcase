@@ -28,7 +28,7 @@ input[type=submit], .custom-btn {
 	//-webkit-appearance: none;
 	font-family: $condensed-font;
 	background-color: red;
-	@include gradient-vertical($brand-light-col, $brand-dark-col);
+	@extend .grad; 
 	text-transform: uppercase;
 	@include animate(150ms);
 	@include rounded(40px);
@@ -42,7 +42,7 @@ input[type=submit], .custom-btn {
 		font-weight: 300;
 	}
 	&.dark-color { 
-		@include gradient-vertical($body-lighten, $body-darken); 
+		@extend .dark-grad;
 	}
 }
 
