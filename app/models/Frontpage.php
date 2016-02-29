@@ -17,7 +17,7 @@
 
 			// Assign the inserted values
 			$stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
-			$stmt->bindParam(':name', $data['username'], PDO::PARAM_STR);
+			$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
 			$stmt->bindParam(':surname', $data['surname'], PDO::PARAM_STR);
 			$stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
 			$stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);

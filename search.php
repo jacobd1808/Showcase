@@ -1,8 +1,8 @@
 <?php 
 
-  //include_once "app/config/checkSession.php";
-  //include_once "app/config/conn.php";
-  //include "app/controller/indexController.php";
+  include_once "app/config/checkSession.php";
+  include_once "app/config/conn.php";
+  include "app/controller/searchController.php";
   
   $pageOpt = array(
     "title"         =>  "FitConnect", 

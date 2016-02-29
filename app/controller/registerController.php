@@ -30,10 +30,11 @@
         $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>Something went wrong</em>' ); 
       } else { 
         // In Works (Need icon changing)
-        $feedback = array( "type" => 'confirm', "message" => '<i class="material-icons">error</i><em>Successfully Registered, <a href="login.php"> Log in</a></em>' );  
+        $frontPage->loginUser($data);
+        header("Location: index.php");
       }
     }
     
   } 
-
+  // AIzaSyAtWI7CUtECvJEr5xHn-h7cT0JEQXc93zc thats my google maps API key 
 ?>

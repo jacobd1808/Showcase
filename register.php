@@ -1,7 +1,7 @@
 <?php
   session_start();
-  //include_once "app/config/conn.php";
-  //include "app/controller/registerController.php";
+  include_once "app/config/conn.php";
+  include "app/controller/registerController.php";
 
   if(isset($_SESSION['username'])) { 
     header("Location: index.php");
@@ -40,7 +40,7 @@
                 <input type='text' name='u_surname' id='u_surname'/>
               </div>
               <!-- -->
-              <div class="pure-u-1 pure-u-md-1-1" style='display: none'>
+              <div class="pure-u-1 pure-u-md-1-1" >
               <label for="u_surname">Gender </label>
               <select name="u_gender" id="u_gender">
               	  <option value="">---</option>
