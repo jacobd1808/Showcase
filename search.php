@@ -42,7 +42,7 @@
               <label class='reduce-top-padding'> Goals <span> </span></label>
               <ul class='basic-list c-align'> 
                 <? foreach($goals as $goal) {?>
-                  <li class='click-tile medium-tile img-tile tooltip top-tooltip' 
+                  <li class='click-tile medium-tile img-tile tooltip bottom-tooltip' 
                       style="background-image:url('assets/img/icons/hw.png')"
                       data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
                       title='<?= $goal[0] ?>'>
@@ -53,7 +53,7 @@
               <label> Training Experience <span> </span></label>
               <ul class='basic-list c-align'> 
                 <? foreach($experience as $length) {?>
-                   <li class='click-tile img-tile tooltip top-tooltip' 
+                   <li class='click-tile img-tile tooltip bottom-tooltip' 
                       style="background-image:url('assets/img/icons/hw.png')"
                       data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
                       title='<?= $length[0] ?>'>
