@@ -24,6 +24,7 @@ function __autoload($class) {
 include_once "functions.php";
 $conn = ConnectionFactory::connect();
 
+$imgFld = 'assets/img/';
 /*
 if(isset($_SESSION['username'])) {
 	$userData = $profiles->checkProfiles($_SESSION['username']);

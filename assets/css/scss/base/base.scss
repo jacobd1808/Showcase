@@ -16,7 +16,7 @@ $brand-dark-col: #EB1C00;
 $brand-light-col: #FC6E00;
 	$brand-light-lighten: lighten($brand-light-col, 10%);
 
-	
+
 
 .grad { @include gradient-vertical($brand-light-col, $brand-dark-col) }
 .dark-grad { @include gradient-vertical($body-lighten, $body-darken) } 
@@ -84,4 +84,22 @@ h2 {
 	@extend .grad; 
 	padding: 10px;
 	font-size: 1.2em;
+}
+h3 { 
+	@extend .dark-grad; 
+	font-size: 1.2em;
+	padding: 10px;
+}
+
+.pure-u-md-1-2.l-cell { 
+	padding-right: 10px;
+}
+.pure-u-md-1-2.r-cell { 
+	padding-left: 10px;
+}
+
+.vertical-align {
+	position: relative;
+ 	top: 50%;
+  	transform: translateY(-50%);
 }

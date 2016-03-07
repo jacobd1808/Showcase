@@ -7,8 +7,9 @@
   $pageOpt = array(
     "title"         =>  "FitConnect", 
     'navName'         =>  "search", 
-    'cssIncludes'     =>  " ", 
-    "jsIncludes"    =>  " ",
+    'cssIncludes'     =>  "<link rel='stylesheet' href='lib/tooltipster-master/css/tooltipster.css' />", 
+    "jsIncludes"    =>  "
+      <script type='text/javascript' src='lib/tooltipster-master/js/jquery.tooltipster.js' /></script>",
   );
 
   $goals = array(
@@ -35,30 +36,75 @@
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
           <div class='filter-options m-25 modulated-box'> 
-          <h2> Narrow your search </h2>
-            <ul> 
-              <? foreach($goals as $goal) {?>
-                <li> <?= $goal[0]; ?> </li>
-              <? } ?>
-            </ul>
-
-            <ul> 
-              <? foreach($experience as $length) {?>
-                <li> <?= $length[0]; ?> </li>
-              <? } ?>
-            </ul>
-
-            <ul> 
-              <? for($d = 1; $d <= 7; $d++) { ?>
-                <li> <?= $d ?> Day<? if ($d != 1 ) { echo 's'; } ?> </li>
-              <? } ?>
-            </ul>
-
-            <div class='location'> 
-              Location 
+            <h2> Narrow your search </h2>
+            <div class='p-10'>
+              <!-- --> 
+              <label class='reduce-top-padding'> Goals <span> </span></label>
+              <ul class='basic-list c-align'> 
+                <? foreach($goals as $goal) {?>
+                  <li class='click-tile medium-tile img-tile tooltip top-tooltip' 
+                      style="background-image:url('assets/img/icons/hw.png')"
+                      data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
+                      title='<?= $goal[0] ?>'>
+                  </li>
+                <? } ?>
+              </ul>
+              <!-- --> 
+              <label> Training Experience <span> </span></label>
+              <ul class='basic-list c-align'> 
+                <? foreach($experience as $length) {?>
+                   <li class='click-tile img-tile tooltip top-tooltip' 
+                      style="background-image:url('assets/img/icons/hw.png')"
+                      data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
+                      title='<?= $length[0] ?>'>
+                  </li>
+                <? } ?>
+              </ul>
+              <!-- --> 
+              <label> Location <span> </span></label>
+              <input type='text' name='user_location' id='user_location' placeholder='Your Postcode'/>
             </div>
           </div>
+          <div class='search-results m-25'> 
+            <!-- --> 
+            <div class='profile-card'> 
+              <h3> Some Name </h3>
+              addfsd f
+            </div>
+
+            <div class='profile-card'> 
+              <h3> Some Name </h3>
+              fsdf ds
+            </div>
+            <!-- --> 
+
+          </div>
+
       </div>
       <?php include_once "app/views/scripts.php"; ?>
+      <script> 
+      $( document ).ready(function() { 
+
+        // Tooltip Init 
+        $('.tooltip.bottom-tooltip').tooltipster({
+           speed: 100,
+           delay: 50,
+           position: 'bottom',
+           theme: 'cust-tooltip'
+        });
+
+        // Click event function 
+        $('.click-tile').click(function() { 
+          
+          if($(this).data('type') == 'goal') { 
+            console.log('goal tile clicked');       // When goal tile is clicked 
+          } else if ($(this).data('type') == 'length') { 
+            console.log('length tile clicked');     // When length tile is clicked 
+          }
+
+        })
+
+      });
+      </script>
     </body>
 </html>

@@ -11,7 +11,7 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFC6E00', endColorstr='#FFEB1C00', GradientType=0); }
 
-.dark-grad, input[type=submit].dark-color, .custom-btn.dark-color {
+.dark-grad, h3, input[type=submit].dark-color, .custom-btn.dark-color {
   background-image: -webkit-linear-gradient(top, #281e35 0%, #150f1b 100%);
   background-image: -o-linear-gradient(top, #281e35 0%, #150f1b 100%);
   background-image: linear-gradient(to bottom, #281e35 0%, #150f1b 100%);
@@ -128,6 +128,21 @@ h2 {
   padding: 10px;
   font-size: 1.2em; }
 
+h3 {
+  font-size: 1.2em;
+  padding: 10px; }
+
+.pure-u-md-1-2.l-cell {
+  padding-right: 10px; }
+
+.pure-u-md-1-2.r-cell {
+  padding-left: 10px; }
+
+.vertical-align, .click-tile i, .click-tile i:before {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
 /* For Tablet Only */
 /* For Desktop Only */
 /*						*/
@@ -232,6 +247,8 @@ label {
     opacity: 0.1; }
   label.error, label.error span {
     color: red; }
+  label.reduce-top-padding {
+    margin-top: 5px; }
 
 legend {
   background-image: -webkit-linear-gradient(left, #FC6E00 0%, #EB1C00 100%);
@@ -478,7 +495,7 @@ header {
 .view {
   margin-right: 310px; }
 
-.modulated-box {
+.modulated-box, .search-results .profile-card {
   background-color: #281e35;
   border: 0;
   color: white; }
@@ -524,16 +541,14 @@ header {
   .feedback-msg.successful {
     background-color: #71c100; }
 
-.pure-u-md-1-2.l-cell {
-  padding-right: 10px; }
-
-.pure-u-md-1-2.r-cell {
-  padding-left: 10px; }
-
-.vertical-align, .click-tile i, .click-tile i:before {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%); }
+.basic-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  .basic-list li {
+    padding: 0;
+    margin: 0;
+    display: inline-block; }
 
 .click-tile {
   min-width: 50px;
@@ -557,6 +572,13 @@ header {
   .click-tile:hover, .click-tile.active {
     color: #FC6E00;
     border: 1px dotted #FC6E00; }
+  .click-tile.medium-tile {
+    width: 60px;
+    height: 60px; }
+  .click-tile.img-tile {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 60%; }
 
 html, body {
   font-family: "Roboto", sans-serif;
@@ -607,4 +629,14 @@ html, body {
 / =================== */
 .filter-options {
   width: 20%;
-  min-width: 250px; }
+  min-width: 250px;
+  float: left; }
+
+.search-results {
+  float: left;
+  width: 66%; }
+  .search-results .profile-card {
+    width: 48%;
+    float: left;
+    margin: 10px 1%;
+    border: 1px solid #FC6E00; }

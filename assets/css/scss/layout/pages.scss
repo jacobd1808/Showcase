@@ -59,4 +59,16 @@ html, body {
 .filter-options { 
 	width: 20%;
 	min-width: 250px;
+	float: left;
+}
+.search-results { 
+	float: left;
+	width: 66%;
+	.profile-card { 
+		width: 48%;
+		float: left;
+		margin: 10px 1%;
+		@extend .modulated-box;
+		border: 1px solid $brand-light-col;
+	}
 }

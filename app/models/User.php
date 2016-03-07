@@ -9,7 +9,7 @@
 		// Fetch ALL information on the user
 		public function fetchAllRows($id){
 			// SQL Statement
-			$sql = "SELECT * FROM db_user WHERE id = $id";
+			$sql = "SELECT * FROM sc_user WHERE id = $id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -23,7 +23,7 @@
 		// Fetch SPECIFIC information on the user
 		public function fetchOneRow($id, $row){
 			// SQL Statement
-			$sql = "SELECT $row FROM db_user WHERE id = $id";
+			$sql = "SELECT $row FROM sc_user WHERE id = $id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -37,7 +37,7 @@
 		// Update profile information
 		public function updateProfile( $data){
 			// Write SQL Statement
-			$sql = "UPDATE db_user
+			$sql = "UPDATE sc_user
 					SET name = :name, surname = :surname, gender = :gender, email = :email 
 					WHERE id = :id";
 

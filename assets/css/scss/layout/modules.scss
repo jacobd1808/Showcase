@@ -54,17 +54,15 @@
 	}
 }
 
-.pure-u-md-1-2.l-cell { 
-	padding-right: 10px;
-}
-.pure-u-md-1-2.r-cell { 
-	padding-left: 10px;
-}
-
-.vertical-align {
-	position: relative;
- 	top: 50%;
-  	transform: translateY(-50%);
+.basic-list { 
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	li { 
+		padding: 0;
+		margin: 0;
+		display: inline-block;
+	}
 }
 
 .click-tile { 
@@ -90,5 +88,14 @@
 	&:hover, &.active { 
 		color: $brand-light-col;
 		border: 1px dotted $brand-light-col;
+	}
+	&.medium-tile { 
+		width: 60px;
+		height: 60px;
+	}
+	&.img-tile {
+		background-repeat: no-repeat;
+		background-position: 50%;
+		background-size: 60%;
 	}
 }

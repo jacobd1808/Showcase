@@ -19,7 +19,7 @@
     <body>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
-          <!-- POPUP DEFAULT TESTER <div class='popup-tester' data-content='message-center'> Test Popup </div> -->
+          <!-- <div class='popup-tester' data-content='message-center'> Test Popup </div> -->
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
     </body>

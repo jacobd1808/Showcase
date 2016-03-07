@@ -26,7 +26,7 @@
 		// CHECK IF FRIEND REQUEST EXISTS
 		public function checkFriendRequest($id, $person_id){
 			// SQL Statement
-			$sql = "SELECT id FROM db_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
+			$sql = "SELECT id FROM sc_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -46,7 +46,7 @@
 		// WHEN USER IS REQUESTING FRIEND
 		public function requestFriend($id, $person_id){
 			// SQL Statement
-			$sql = "INSERT INTO db_friend_req (user_1, user_2) 
+			$sql = "INSERT INTO sc_friend_req (user_1, user_2) 
 			        VALUES (:user_1, :user_2)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
@@ -67,7 +67,7 @@
 		public function acceptFriendRequest($id, $person_id){
 			$rel_status = 1;
 			// SQL Statement
-			$sql = "INSERT INTO db_rel (user_1, user_2, rel_status) 
+			$sql = "INSERT INTO sc_rel (user_1, user_2, rel_status) 
 			        VALUES (:user_1, :user_2, :rel_status)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
@@ -91,7 +91,7 @@
 		// REMOVING FRIEND REQUEST
 		public function deleteFriendRequest($id, $person_id){
 			// SQL Statement
-			$sql = "DELETE FROM db_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
+			$sql = "DELETE FROM sc_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -108,7 +108,7 @@
 		// Check Relation between 2 users
 		public function checkRelation($id, $person_id){
 			// SQL Statement
-			$sql = "SELECT rel_status FROM db_rel WHERE user_1 = :user_1 && user_2 = :user_2";
+			$sql = "SELECT rel_status FROM sc_rel WHERE user_1 = :user_1 && user_2 = :user_2";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -133,7 +133,7 @@
 		// Change Relation between 2 users ( ONLY FROM ONE QUERY, PLEASE CALL TWICE IF BLOCKING/UNFRIENDING )
 		public function changeRelation($id, $person_id, $new_rel){
 			// SQL Statement
-			$sql = "UPDATE db_rel
+			$sql = "UPDATE sc_rel
 					SET rel_status = :rel_status
 					WHERE user_1 = :user_1 && user_2 = :user_2";
 

@@ -9,7 +9,7 @@
 		// Function to register the user.
 		public function registerUser($data){
 			// Write the SQL Insert Query
-			$sql = "INSERT INTO db_user (username, name, surname, password, email, gender, register_date)
+			$sql = "INSERT INTO sc_user (username, name, surname, password, email, gender, register_date)
 					VALUES (:username, :name, :surname, :password, :email, :gender, :register_date)";
 
 			// Prepare the SQL Query
@@ -39,7 +39,7 @@
 		// Function to delete user
 		public function deleteUser($id){
 			// SQL Statement
-			$sql = "DELETE FROM db_user WHERE id = $id";
+			$sql = "DELETE FROM sc_user WHERE id = $id";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Execute SQL
@@ -54,7 +54,7 @@
 		public function loginUser($data){
 
 			// SQL Statement
-			$sql = "SELECT id FROM db_user WHERE username = :username && password = :password";
+			$sql = "SELECT id FROM sc_user WHERE username = :username && password = :password";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
