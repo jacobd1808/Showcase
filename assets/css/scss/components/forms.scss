@@ -2,7 +2,7 @@
 input[type=text], input[type=number], input[type=password], input[type=email], textarea, select { 
 	outline: 0;
 	border: 0;
-	font-weight: 200;
+	font-weight: 300;
 	box-shadow: none;
 	font-size: 1.1em;
 	padding: 10px;
@@ -17,7 +17,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
 
 input[type=submit], .custom-btn { 
 	border: 0;
-	color: white;
+	color: #fff;
 	text-align: center;
 	margin: 20px auto 10px auto;
 	padding: 15px 0;
@@ -27,13 +27,13 @@ input[type=submit], .custom-btn {
 	display: inline-block;
 	//-webkit-appearance: none;
 	font-family: $condensed-font;
-	background-color: red;
 	@extend .grad; 
 	text-transform: uppercase;
 	@include animate(150ms);
 	@include rounded(40px);
 	&:hover { 
-		color: $brand-light-col;
+		color: $body-darken;
+		font-weight: 400;
 	}
 	&.small-button { 
 		padding: 15px;
@@ -43,6 +43,9 @@ input[type=submit], .custom-btn {
 	}
 	&.dark-color { 
 		@extend .dark-grad;
+		&:hover { 
+			color: $brand-light-col;
+		}
 	}
 }
 
@@ -93,6 +96,9 @@ label {
 		position: absolute;
 		margin: 8px 0 0 10px;
 		opacity: 0.1;
+	}
+	&.error, &.error span { 
+		color: red;
 	}
 }
 legend { 

@@ -12,7 +12,7 @@
       'surname' => $_POST["u_surname"],
       'email' => $_POST["u_email"],
       'password' => md5($_POST["u_password"]),
-      'gender' => $_POST["u_email"],
+      'gender' => $_POST["u_gender"],
       'register_date' => $register_date
     );
 
@@ -21,13 +21,13 @@
 
     // Validation 
     if (empty($_POST['u_username']) || empty($data['name']) || empty($data['email']) || empty($_POST['u_password']) || empty($data['surname']) || empty($data['email']) || empty($data['gender']) ) { 
-      $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must fill in all the fields</em>' ); 
+      $feedback = array( "type" => 'error', "message" => 'You must fill in all the fields' ); 
     } else { 
       // If Validation passes, send data to model
       $register_user = $frontPage->registerUser($data);
       if (!$register_user) { 
         // If Something goes wrong 
-        $feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>Something went wrong</em>' ); 
+        $feedback = array( "type" => 'error', "message" => 'Something went wrong' ); 
       } else { 
         // In Works (Need icon changing)
         $frontPage->loginUser($data);

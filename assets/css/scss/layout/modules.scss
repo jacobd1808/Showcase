@@ -39,9 +39,56 @@
 	}
 }
 
+.feedback-msg { 
+	font-size: 0.8em;
+	text-transform: uppercase;
+	padding: 10px;
+	text-align: center;
+	margin-top: 10px;
+	color: white;
+	&.error { 
+		background-color: $error-red;
+	}
+	&.successful { 
+		background-color: $valid-green;
+	}
+}
+
 .pure-u-md-1-2.l-cell { 
 	padding-right: 10px;
 }
 .pure-u-md-1-2.r-cell { 
 	padding-left: 10px;
+}
+
+.vertical-align {
+	position: relative;
+ 	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.click-tile { 
+	min-width: 50px;
+	height: 50px;
+	display: inline-block;
+	text-align: center;
+	background-color: $body-darken;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	border: 1px dotted transparent;
+	@include animate(150ms);
+	i { 
+		@extend .vertical-align;
+		display: inline-block;
+		&:before { 
+			height: 20px;
+			width: 20px;
+			@extend .vertical-align;
+		}
+	}
+	&:hover, &.active { 
+		color: $brand-light-col;
+		border: 1px dotted $brand-light-col;
+	}
 }

@@ -7,6 +7,7 @@
         <title><?php echo $pageOpt['title']; ?></title>
         <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/grids-responsive-min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Page Specfic Files-->
         <?php if($pageOpt['cssIncludes']) { echo $pageOpt['cssIncludes']; } ?> 
         <!-- -->
