@@ -32,7 +32,7 @@
         <form action='' method='post' name='register' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
           <h1> Register an account </h1>
           <fieldset>
-          <? if($feedback) { 
+          <? if(isset($feedback)) { 
             echo "<div class='feedback-msg ".$feedback['type']."'>".$feedback['message']."</div>"; 
           } ?>
             <div class="pure-g">
