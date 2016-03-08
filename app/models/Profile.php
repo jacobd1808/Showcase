@@ -6,10 +6,10 @@
 			$this->conn = $conn;
 		}
 
-		public function returnGoalChar($goal){
+		public function returnExpChar($goal){
 			switch($goal){
 				case 0:
-					return "No Goal";
+					return "No Experience";
 					break;
 				case 1:
 					return "Less than 6 months";
@@ -22,6 +22,29 @@
 					break;
 				case 4:
 					return "More than 2 years";
+					break;
+			}
+		}
+
+		public function returnGoalChar($goal){
+			switch($goal){
+				case 0:
+					return "No Goal";
+					break;
+				case 1:
+					return "Build Muscle";
+					break;
+				case 2:
+					return "Loose Fat";
+					break;
+				case 3:
+					return "Increase Strength";
+					break;
+				case 4:
+					return "Improve Performance";
+					break;
+				case 5:
+					return "General Health And Wellbeight";
 					break;
 			}
 		}
@@ -73,6 +96,19 @@
 			}
 		}
 
+		// Fetch ALL profiles
+		public function fetchAllRows(){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_profile";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			$stmt->execute();
+			// Fetch Query
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
+		}
 		// Add a goal for a user
 		public function addGoal($id, $goal){
 			// SQL Statement
@@ -105,5 +141,18 @@
 			}			
 		}
 
+		// Fetch All Goals
+		public function fetchAllGoals($id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_goals WHERE user_id = $id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			$stmt->execute();
+			// Fetch Query
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
+		}		
 	}
 ?>
