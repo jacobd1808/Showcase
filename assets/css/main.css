@@ -397,8 +397,7 @@ legend {
 /* TOOLTIPS */
 .cust-tooltip {
   border-radius: 5px;
-  background: #150f1b;
-  border: 1px solid #352746;
+  background: #FC6E00;
   color: #fff; }
 
 /* Use this next selector to style things like font-size and line-height: */
@@ -574,7 +573,8 @@ header {
     border: 1px dotted #FC6E00; }
   .click-tile.medium-tile {
     width: 60px;
-    height: 60px; }
+    height: 60px;
+    margin: 5px; }
   .click-tile.img-tile {
     background-repeat: no-repeat;
     background-position: 50%;
@@ -631,6 +631,15 @@ html, body {
   width: 20%;
   min-width: 250px;
   float: left; }
+  .filter-options .location-selector input[type=text] {
+    width: 75%;
+    float: left;
+    font-size: 0.9em;
+    padding: 15px; }
+  .filter-options .location-selector .click-tile {
+    width: 40px;
+    height: 48px;
+    float: right; }
 
 .search-results {
   float: left;

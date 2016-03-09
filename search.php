@@ -43,7 +43,7 @@
               <ul class='basic-list c-align'> 
                 <? foreach($goals as $goal) {?>
                   <li class='click-tile medium-tile img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/hw.png')"
+                      style="background-image:url('assets/img/icons/goals/<?= $goal[1] ?>.png')"
                       data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
                       title='<?= $goal[0] ?>'
                       id='goal_<?= $goal[1] ?>'>
@@ -56,7 +56,7 @@
               <ul class='basic-list c-align'> 
                 <? foreach($experience as $length) {?>
                    <li class='click-tile img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/hw.png')"
+                      style="background-image:url('assets/img/icons/length/<?= $length[1] ?>.png')"
                       data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
                       title='<?= $length[0] ?>'
                       id='exp_<?= $length[1] ?>'>
@@ -65,7 +65,15 @@
               </ul>
               <!-- --> 
               <label> Location <span> </span></label>
-              <input type='text' name='user_location' id='user_location' placeholder='Your Postcode'/>
+              <div class='location-selector'>
+                <input type='text' name='user_location' id='user_location' placeholder='Your Postcode'/>
+                <div class='click-tile tooltip right-tooltip' title='Get Current Location'> 
+                  <i class="fa fa-map-marker"></i> 
+                </div>
+                <div class='clear'> </div>
+                <label for="weight">Distance</label>
+                <input type="range" id="weight" min="10" value="10" max="2000" step="100">
+              </div>
             </div>
           </div>
           <div class='search-results m-25'> 
@@ -99,14 +107,6 @@
 
         var goal_activated = 0;
         var exp_activated = 0;
-
-        // Tooltip Init 
-        $('.tooltip.bottom-tooltip').tooltipster({
-           speed: 100,
-           delay: 50,
-           position: 'bottom',
-           theme: 'cust-tooltip'
-        });
 
         // Click event function 
         $('.click-tile').click(function() { 

@@ -64,6 +64,38 @@ $(function() {
 		ele.css({'marginTop': applyMargin});
 	}
 
+
+	/* ====================================
+		Tooltips 
+	===================================== */ 
+
+    $('.tooltip.left-tooltip').tooltipster({
+       speed: 100,
+       delay: 50,
+       position: 'left',
+       theme: 'cust-tooltip'
+    });
+
+    $('.tooltip.right-tooltip').tooltipster({
+       speed: 100,
+       delay: 50,
+       position: 'right',
+       theme: 'cust-tooltip'
+    });
+
+  	$('.tooltip.bottom-tooltip').tooltipster({
+	   speed: 100,
+	   delay: 50,
+	   position: 'bottom',
+	   theme: 'cust-tooltip'
+	});
+
+  	$('.tooltip.top-tooltip').tooltipster({
+	   speed: 100,
+	   delay: 50,
+	   position: 'top',
+	   theme: 'cust-tooltip'
+	});
 	/* ====================================
 		Responsive Navigation 
 	===================================== */ 

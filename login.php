@@ -4,10 +4,6 @@
   include_once "app/config/conn.php";
   include "app/controller/loginController.php";
 
-  if(isset($_SESSION['username'])) { 
-    header("Location: index.php");
-  }
-
 	$pageOpt = array(
 		"title"			    =>	"Login", 
 		'navName' 		  	=> 	"", 
@@ -21,11 +17,13 @@
 		<?php include_once "app/views/meta.php"; ?>
     </head>
     <body class='image-background'>
-      <div class='view'> 
-        <div class='c-align'>
-          <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
+      <div class='view' style='margin-right: 0'> 
+        <div class='homepage-info vert-center'> 
+            <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
+            <br /> <big> No Account? Register </big> <br />
+            <a href='register.php' class='custom-btn small-button dark-color model-popup'> Register </a>
         </div>
-        <form action='' method='post' name='login' id='login-form' class="pure-form pure-form-stacked modulated-box">
+        <form action='' method='post' name='login' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
           <h1> Login </h1>
           <fieldset>
             <div class="pure-g">
@@ -41,7 +39,6 @@
             </div>
           </fieldset>
         </form>
-          <a href='register.php'> Register an Account </a>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
     </body>

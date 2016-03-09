@@ -1,19 +1,19 @@
 <?php
   session_start();
-  include_once "app/config/conn.php";
-  include "app/controller/registerController.php";
 
-  if(isset($_SESSION['username'])) { 
+  if(isset($_SESSION['ifitness_id'])) { 
     header("Location: index.php");
   }
+
+  include_once "app/config/conn.php";
+  include "app/controller/registerController.php";
 
 	$pageOpt = array(
 		"title"			    =>	"Register", 
 		'navName' 		  	=> 	"", 
-		'cssIncludes'	  	=>	"<link rel='stylesheet' href='lib/tooltipster-master/css/tooltipster.css' />", 
+		'cssIncludes'	  	=>	"", 
 		"jsIncludes"	 	=>	"
-      <script type='text/javascript' src='lib/jquery-validation/dist/jquery.validate.min.js' /></script>
-      <script type='text/javascript' src='lib/tooltipster-master/js/jquery.tooltipster.js' /></script>",
+      <script type='text/javascript' src='lib/jquery-validation/dist/jquery.validate.min.js' /></script>",
 	);
 
 ?>
@@ -26,7 +26,7 @@
         <div class='homepage-info vert-center'> 
             <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
             <br /> <big> Find, Connect, Train! </big> <br />
-            <a href='#' class='custom-btn small-button dark-color model-popup' 
+            <a href='login.php' class='custom-btn small-button dark-color model-popup' 
                data-content='about' data-title='About FitConnect'> Find Out More </a>
         </div>
         <form action='' method='post' name='register' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
@@ -92,20 +92,6 @@
           unhighlight: function (element, errorClass, validClass) {
               $(element).parent().find('label').removeClass("error");
           }
-        });
-
-        $('.tooltip.left-tooltip').tooltipster({
-           speed: 100,
-           delay: 50,
-           position: 'left',
-           theme: 'cust-tooltip'
-        });
-
-        $('.tooltip.right-tooltip').tooltipster({
-           speed: 100,
-           delay: 50,
-           position: 'right',
-           theme: 'cust-tooltip'
         });
 
         $('.click-tile.gender-tile').click(function(){ 
