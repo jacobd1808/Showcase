@@ -90,3 +90,18 @@
 	line-height: 16px;
 	padding: 10px 13px;
 }
+
+/* JQUERY SLIDER */
+
+#prefix-suffix-slider .ui-slider-label {
+  margin-left: -1.75em; 
+}
+
+/* We also use a media query so the pips do not crowd-over each other
+    when we get to a small screen size */
+                    
+@media screen and (max-width: 1040px) {
+    #prefix-suffix-slider .ui-slider-pip:nth-of-type(2n+1) .ui-slider-label {
+        display: none; 
+    } 
+}

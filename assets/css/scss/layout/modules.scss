@@ -85,18 +85,30 @@
 			@extend .vertical-align;
 		}
 	}
-	&:hover, &.active { 
-		color: $brand-light-col;
-		border: 1px dotted $brand-light-col;
-	}
 	&.medium-tile { 
 		width: 60px;
 		height: 60px;
 		margin: 5px;
 	}
+	&.full-width-tile { 
+		width: 100%!important;
+		span { 
+			@extend .vertical-align;
+			display: inline-block;
+			margin-right: 10px;
+		}
+	}
+	&.action-btn { 
+		background-color: $body-lighten-2;
+		border: 1px solid $body-darken;
+	}
 	&.img-tile {
 		background-repeat: no-repeat;
 		background-position: 50%;
 		background-size: 60%;
+	}
+	&:hover, &.active { 
+		//color: $brand-light-col;
+		border: 1px dotted $brand-light-col;
 	}
 }

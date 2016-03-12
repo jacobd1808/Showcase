@@ -60,6 +60,14 @@ html, body {
 	width: 20%;
 	min-width: 250px;
 	float: left;
+	span.distance-from { 
+		padding: 10px;
+		font-size: 0.8em;
+		text-transform: uppercase;
+		margin-bottom: 20px;
+		display: block;
+		background-color: $body-darken;
+	}
 	.location-selector { 
 		input[type=text] { 
 			width: 75%;
@@ -72,6 +80,15 @@ html, body {
 			width: 40px;
 			height: 48px;
 			float: right;
+		}
+		span.divider { 
+			display: block;
+			text-align: center;
+			color: $brand-light-col;
+			font-weight: 300;
+			text-transform: uppercase;
+			padding: 10px;
+			clear: both;
 		}
 	}
 }

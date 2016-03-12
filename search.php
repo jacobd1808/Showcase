@@ -7,9 +7,9 @@
   $pageOpt = array(
     "title"         =>  "FitConnect", 
     'navName'         =>  "search", 
-    'cssIncludes'     =>  "<link rel='stylesheet' href='lib/tooltipster-master/css/tooltipster.css' />", 
-    "jsIncludes"    =>  "
-      <script type='text/javascript' src='lib/tooltipster-master/js/jquery.tooltipster.js' /></script>",
+    'cssIncludes'     =>  "<link rel='stylesheet' href='lib/jquery-slider/jquery-slider.css' />", 
+    "jsIncludes"    =>  "<script src='https://code.jquery.com/ui/1.11.1/jquery-ui.js'></script>
+      <script type='text/javascript' src='lib/jquery-slider/jquery-slider.js' /></script>",
   );
 
   $goals = array(
@@ -64,15 +64,28 @@
                 <? } ?>
               </ul>
               <!-- --> 
-              <label> Location <span> </span></label>
-              <div class='location-selector'>
-                <input type='text' name='user_location' id='user_location' placeholder='Your Postcode'/>
-                <div class='click-tile tooltip right-tooltip' title='Get Current Location'> 
+              <label id='location-label'></label>
+              <span class='distance-from'> From .. WF13 1PB <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
+              <div class='location-selector' id='location-selector'>
+                <input type='text' name='user_location' id='user_location' placeholder='Enter Postcode'/>
+                <div class='click-tile action-btn'> 
+                  <i class="fa fa-angle-right"></i>
+                </div>
+
+                <span class='divider'> - or - </span> 
+
+                <div class='click-tile tooltip right-tooltip full-width-tile action-btn' title='Gets your devices current location'> 
+                  <span> Get current location</span>
                   <i class="fa fa-map-marker"></i> 
                 </div>
+                <input type='text' value='1' data-lat='' data-long='' id='location-check'/> 
                 <div class='clear'> </div>
-                <label for="weight">Distance</label>
-                <input type="range" id="weight" min="10" value="10" max="2000" step="100">
+              </div>
+              <!-- -->
+              <div class='distance-selector' id='distance-selector' style='display: none'>              
+                <div class='p-10'>
+                  <div class="slider" id='distance-slider'></div>
+                </div>
               </div>
             </div>
           </div>
@@ -104,6 +117,73 @@
       <?php include_once "app/views/scripts.php"; ?>
       <script> 
       $( document ).ready(function() { 
+        
+        //  ======================
+        //  Slider Plugin 
+        //  ======================
+
+        $(".slider")
+          .slider({ 
+              min: 2, 
+              max: 10, 
+              value: 6, 
+              step: 2 
+          })
+          .slider("pips", {
+              rest: "label",
+          });
+
+        //  ======================
+        //  Location check function 
+        //  ======================
+
+        // This gets the slider value 
+        var val = $('#slider').slider("option", "value");
+
+        var locationStatus = 'location';
+
+        locationInit(); 
+
+        function locationInit() {
+          var location = $('#location-check').val(); 
+          var lat = $(this).data('lat');
+          var lat = $(this).data('lat');
+          if (location == 1) { 
+            locationStatus = 'location';
+          } else {  
+            locationStatus = 'distance';
+          }
+          locationDisplay(locationStatus);
+        }
+
+        $('#toggle-location-display').click(function(){ 
+          //console.log(locationStatus);
+          if (locationStatus === 'location') {
+            console.log('a');
+             locationStatus = 'distance';
+          } else if (locationStatus === 'distance') { 
+            console.log('b');
+             locationStatus = 'location';
+          }
+          locationDisplay(locationStatus);
+        })
+
+        function locationDisplay(status) { 
+          if (status === 'location') {
+            $('#location-selector').slideDown();
+            $('#distance-selector').slideUp();
+            $('#location-label').html('Set Location<span> </span>')
+          } else if (status === 'distance') {
+            $('#location-selector').slideUp();
+            $('#distance-selector').slideDown();
+            $('#location-label').html('Set Distance (Miles)<span> </span>');
+          }
+        }
+
+
+        //  ======================
+        //  Filter Function
+        //  ======================
 
         var goal_activated = 0;
         var exp_activated = 0;

@@ -25,7 +25,7 @@
 }
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
-	content: "";
+	content: ""; 
 	display: table;
 	border-collapse: collapse;
 }
@@ -160,7 +160,7 @@
 	top: 2px;
 	width: 2.8em;
 	height: 2.8em;
-	background-color: $orange;
+	background-color: red; 
 }
 .ui-datepicker .ui-datepicker-prev {
 	left: 2px;
@@ -444,15 +444,15 @@ body .ui-tooltip {
 	font-size: 1em;
 }
 .ui-widget-content {
-	border: 1px solid #eeeeee;
-	background: #ffffff;
+	border: 1px solid $body-darken;
+	background: $body-darken;
 	color: #333333;
 }
 .ui-widget-content a {
 	color: #333333;
 }
 .ui-widget-header {
-	background: $adminSec;
+	background: $brand-dark-col;
 	color: #ffffff; 
 	font-weight: bold;
 }
@@ -465,9 +465,10 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	background: #ddd;
+	background: $brand-light-col;
 	font-weight: bold;
 	color: #004276;
+	cursor: pointer;
 }
 .ui-state-default a,
 .ui-state-default a:link,
@@ -481,7 +482,7 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	background: $adminPri;
+	background: $brand-light-lighten;
 	font-weight: bold;
 	color: white;
 }
@@ -499,7 +500,7 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	background: $orange;
+	background: $brand-light-lighten;
 	color: #ffffff;
 }
 .ui-state-active a,
@@ -516,7 +517,7 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-highlight {
 	background: #eee;
 	font-weight: bold;
-	color: $orange;
+	color: white;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
@@ -818,3 +819,74 @@ body .ui-tooltip {
 	filter: Alpha(Opacity=10); /* support: IE8 */
 	border-radius: 8px;
 }
+
+
+
+
+
+.ui-slider {
+	position: relative;
+	text-align: left;
+}
+.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 1.2em;
+	@include rounded(3px);
+	height: 1.2em;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.ui-slider .ui-slider-range {
+	position: absolute;
+	z-index: 1;
+	font-size: .7em;
+	display: block;
+	border: 0;
+	background-position: 0 0;
+}
+
+/* support: IE8 - See #6727 */
+.ui-slider.ui-state-disabled .ui-slider-handle,
+.ui-slider.ui-state-disabled .ui-slider-range {
+	filter: inherit;
+}
+
+.ui-slider-horizontal {
+	height: .8em;
+}
+.ui-slider-horizontal .ui-slider-handle {
+	top: -.3em;
+	margin-left: -.6em;
+}
+.ui-slider-horizontal .ui-slider-range {
+	top: 0;
+	height: 100%;
+}
+.ui-slider-horizontal .ui-slider-range-min {
+	left: 0;
+}
+.ui-slider-horizontal .ui-slider-range-max {
+	right: 0;
+}
+
+.ui-slider-vertical {
+	width: .8em;
+	height: 100px;
+}
+.ui-slider-vertical .ui-slider-handle {
+	left: -.3em;
+	margin-left: 0;
+	margin-bottom: -.6em;
+}
+.ui-slider-vertical .ui-slider-range {
+	left: 0;
+	width: 100%;
+}
+.ui-slider-vertical .ui-slider-range-min {
+	bottom: 0;
+}
+.ui-slider-vertical .ui-slider-range-max {
+	top: 0;
+} 
+

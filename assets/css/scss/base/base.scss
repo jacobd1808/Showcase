@@ -19,7 +19,7 @@ $brand-light-col: #FC6E00;
 
 
 .grad { @include gradient-vertical($brand-light-col, $brand-dark-col) }
-.dark-grad { @include gradient-vertical($body-lighten, $body-darken) } 
+.dark-grad { @include gradient-vertical($body-lighten-2, $body-darken-2) } 
 
 * { @include border-box;}
 
@@ -58,13 +58,14 @@ $brand-light-col: #FC6E00;
 
 .invisible { visibility: hidden; }
 
-a:link, a:active, a:visited { 
+a:link, a:active, a:visited, .hover { 
 	@include animate(100ms);
 	color: white;
 	font-weight: 300;
 	text-decoration: none;
+	cursor: pointer;
 }
-a:hover { 
+a:hover, .hover:hover { 
 	color: $brand-light-col;
 }
 
