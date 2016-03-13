@@ -104,8 +104,9 @@
 .invisible {
   visibility: hidden; }
 
-.header-font, .click-tile.action-btn {
-  font-family: "Roboto Condensed", sans-serif; }
+.header-font, .click-tile.action-btn, #profile .main-info-col ul li strong {
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase; }
 
 a:link, a:active, a:visited, .hover {
   -webkit-transition: all 100ms ease-in-out;
@@ -1742,6 +1743,18 @@ header {
     max-height: 90%;
     max-width: 80%;
     margin: auto; }
+  .model-bg .heading {
+    color: white;
+    display: block;
+    background-color: #150f1b;
+    padding: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: 300;
+    border-right: 1px solid #281e35; }
+    .model-bg .heading.no-border {
+      border: 0; }
   .model-bg .close-model {
     color: white;
     float: right;
@@ -1881,16 +1894,6 @@ html, body {
 /* =================== /
 		Search
 / =================== */
-.searchPref .heading {
-  color: white;
-  display: block;
-  background-color: #150f1b;
-  padding: 20px 0;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  font-weight: 300;
-  border-right: 1px solid #281e35; }
 .searchPref ul {
   padding: 10px 0;
   margin: 0; }
@@ -1945,3 +1948,34 @@ html, body {
     float: left;
     margin: 10px 1%;
     border: 1px solid #FC6E00; }
+
+/* =================== /
+		Profile
+/ =================== */
+#profile .main-info-col {
+  background-color: #150f1b;
+  height: 100%;
+  padding: 10px; }
+  #profile .main-info-col .avatar {
+    height: 200px;
+    width: 100%;
+    background-color: #FC6E00;
+    margin-bottom: 10px; }
+  #profile .main-info-col ul li {
+    width: 50%;
+    float: left; }
+    #profile .main-info-col ul li strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.8em;
+      font-weight: 300; }
+    #profile .main-info-col ul li.first-tile {
+      border-right: 1px dotted #281e35;
+      border-bottom: 1px dotted #281e35; }
+    #profile .main-info-col ul li.second-tile {
+      border-bottom: 1px dotted #281e35; }
+    #profile .main-info-col ul li.third-tile {
+      border-right: 1px dotted #281e35; }
+    #profile .main-info-col ul li .click-tile {
+      margin: 10px 0;
+      border: 1px dotted #FC6E00; }

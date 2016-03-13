@@ -62,6 +62,7 @@ $brand-light-col: #FC6E00;
 
 .header-font { 
 	font-family: $condensed-font;
+	text-transform: uppercase;
 }
 a:link, a:active, a:visited, .hover { 
 	@include animate(100ms);

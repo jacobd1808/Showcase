@@ -44,7 +44,7 @@
 			</ul>
 		</div>
 		<div class='pure-u-1-3'>
-			<div class='heading header-font'>
+			<div class='heading header-font no-border'>
 				Set Location 
 			</div>
 			<div class='feedback-container'>
