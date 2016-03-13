@@ -28,20 +28,21 @@ $(function() {
 	});
 
 	// Give something a class of 'popup-tester' and valid popup file name (as a data-content)
-	function popupTesting(){
-		if ($('.popup-tester').length != 0) {
-			var content = $('.popup-tester').data('content');
+	function defaultPopup(){
+		if ($('.default-popup').length != 0) {
+			var content = $('.default-popup').data('content');
+			var title = $('.default-popup').data('title');
 			$('body').append('<div class="model-bg" id="model"> </div>');
 			$('#model').load( "app/views/popups/"+content+".php", function() {
 				$('#model').fadeIn(250);
-				$('#popup-content').prepend('<h1> Messaging Center <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+				$('#popup-content').prepend('<h1>'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
 				var alignElem = $('.vert-center-popup');
 				alignToVerticalCenter(alignElem); 
 			});
 		}
 	}
 
-	popupTesting();
+	defaultPopup();
 
 	$('body').on('click', '#closeModel', function(){
 	    $('#model').fadeOut(250, function(){ 
@@ -69,6 +70,7 @@ $(function() {
 		Tooltips 
 	===================================== */ 
 
+ $('body').on('mouseover mouseout', '.tooltip', function(e) {
     $('.tooltip.left-tooltip').tooltipster({
        speed: 100,
        delay: 50,
@@ -96,6 +98,7 @@ $(function() {
 	   position: 'top',
 	   theme: 'cust-tooltip'
 	});
+});
 	/* ====================================
 		Responsive Navigation 
 	===================================== */ 

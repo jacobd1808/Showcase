@@ -1,7 +1,7 @@
 <?php 
 
-  include_once "app/config/checkSession.php";
-  include_once "app/config/conn.php";
+  include "app/config/checkSession.php";
+  include "app/config/conn.php";
   include "app/controller/indexController.php";
 	
 	$pageOpt = array(
@@ -19,7 +19,9 @@
     <body>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
-          <!-- <div class='popup-tester' data-content='message-center'> Test Popup </div> -->
+          <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please set your search preferences'>  
+       
+          </div>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
     </body>

@@ -1,7 +1,7 @@
 <?php 
 
-  include_once "app/config/checkSession.php";
-  include_once "app/config/conn.php";
+  include "app/config/checkSession.php";
+  include "app/config/conn.php";
   include "app/controller/searchController.php";
   
   $pageOpt = array(
@@ -10,21 +10,6 @@
     'cssIncludes'     =>  "<link rel='stylesheet' href='lib/jquery-slider/jquery-slider.css' />", 
     "jsIncludes"    =>  "<script src='https://code.jquery.com/ui/1.11.1/jquery-ui.js'></script>
       <script type='text/javascript' src='lib/jquery-slider/jquery-slider.js' /></script>",
-  );
-
-  $goals = array(
-    array("Build Muscle", '1'),
-    array("Loose Fat", "2"),
-    array("Increase Strength", "3"), 
-    array("Improve Performance", "4"),
-    array("General Health and Wellbeight", "5"),
-  );
-
-  $experience = array(
-    array("Less than 6 month", '1'),
-    array("6 - 12 month", "2"),
-    array("1 - 2 years", "3"), 
-    array("2 years or more", "4"),
   );
 
 ?>

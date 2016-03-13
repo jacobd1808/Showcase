@@ -27,6 +27,7 @@ $brand-light-col: #FC6E00;
 .n-size { font-size: 1.0em; }
 .l-size { font-size: 1.2em; }
 .xl-size { font-size: 1.4em; } 
+.xll-size { font-size: 2.0em; }
 
 .uc { text-transform: uppercase } 
 .lc { text-transform: lowercase }
@@ -58,6 +59,10 @@ $brand-light-col: #FC6E00;
 
 .invisible { visibility: hidden; }
 
+
+.header-font { 
+	font-family: $condensed-font;
+}
 a:link, a:active, a:visited, .hover { 
 	@include animate(100ms);
 	color: white;
@@ -97,6 +102,10 @@ h3 {
 }
 .pure-u-md-1-2.r-cell { 
 	padding-left: 10px;
+}
+// Overiding Pure
+.pure-g [class *="pure-u"], .pure-g { 
+	font-family: $body-font;
 }
 
 .vertical-align {
