@@ -5,4 +5,5 @@
 
 	$profiles = $Profile->fetchAllRows();
 
+	$adress = $Profile->returnCoordinates(45.480272799999995, -73.55874);
 ?>

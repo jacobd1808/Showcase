@@ -65,7 +65,7 @@
               </ul>
               <!-- --> 
               <label id='location-label'></label>
-              <span class='distance-from'> From .. WF13 1PB <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
+              <span class='distance-from'> From .. <?= $adress[1] ?>, <?= $adress[3] ?> <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
               <div class='location-selector' id='location-selector'>
                 <input type='text' name='user_location' id='user_location' placeholder='Enter Postcode'/>
                 <div class='click-tile action-btn'> 
