@@ -29,18 +29,27 @@
                 		</div> 
 					</li>
 				</ul>
-				<div class='click-tile full-width-tile'> 
-                  	<span> Add Friend</span>
-                </div>
+                <input type='submit' name='addFriend' id='addFriend' value='Add Friend'/>
 			</div>
 		</div>
-		<div class='pure-u-14-24'>
-			<!--<div class='heading'> About </div>-->
+		<div class='pure-u-13-24'>
+			<div class='heading left-border l-align'> About </div>
+			<div class='pure-g'>
+				<div class='pure-u-1-2'>
+					<div> <strong> Joined: </strong> 19 . 02 . 16</div>
+				</div>
+				<div class='pure-u-1-2'> 
+					<div> <strong> From: </strong> Huddersfield, United Kingdom </div>
+				</div>
+			</div>
 		</div>
-		<div class='pure-u-5-24'>
-			<div class='heading no-border'> Friends </div>
+		<div class='pure-u-6-24'>
+			<div class='heading no-border l-align'> Friends </div>
 			<ul> 
-				<!-- <li> Some Body</li> -->
+				<li> Someone</li>
+				<li> Someone</li>
+				<li> Someone</li>
+				<li> Someone</li>
 			</ul>
 		</div>
 	</div>

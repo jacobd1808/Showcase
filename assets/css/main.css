@@ -4,7 +4,7 @@
 /* CENTER BLOCK ELEMENTS */
 /* ANIMATION */
 /* VERTICAL ALIGN */
-.grad, h1, h2, input[type=submit], .custom-btn {
+.grad, h1, h2, input[type=submit], .custom-btn, .click-tile.action-btn.orange-btn {
   background-image: -webkit-linear-gradient(top, #FC6E00 0%, #EB1C00 100%);
   background-image: -o-linear-gradient(top, #FC6E00 0%, #EB1C00 100%);
   background-image: linear-gradient(to bottom, #FC6E00 0%, #EB1C00 100%);
@@ -1395,6 +1395,7 @@ input[type=submit], .custom-btn {
   border: 0;
   color: #fff;
   text-align: center;
+  background-color: red;
   margin: 20px auto 10px auto;
   padding: 15px 0;
   font-weight: 300;
@@ -1409,7 +1410,9 @@ input[type=submit], .custom-btn {
   transition: all 150ms ease-in-out;
   -webkit-border-radius: 40px;
   border-radius: 40px;
-  background-clip: padding-box; }
+  background-clip: padding-box;
+  cursor: pointer;
+  font-size: 1.0em; }
   input[type=submit]:hover, .custom-btn:hover {
     color: #150f1b;
     font-weight: 400; }
@@ -1747,14 +1750,15 @@ header {
     color: white;
     display: block;
     background-color: #150f1b;
-    padding: 20px 0;
-    text-align: center;
+    padding: 20px;
     text-transform: uppercase;
     font-size: 1.2em;
     font-weight: 300;
     border-right: 1px solid #281e35; }
     .model-bg .heading.no-border {
       border: 0; }
+    .model-bg .heading.left-border {
+      border-left: 1px solid #281e35; }
   .model-bg .close-model {
     color: white;
     float: right;
@@ -1827,6 +1831,8 @@ header {
     border: 1px solid #150f1b;
     text-transform: uppercase;
     font-weight: 300; }
+    .click-tile.action-btn.orange-btn {
+      display: block; }
   .click-tile.img-tile {
     background-repeat: no-repeat;
     background-position: 50%;
@@ -1955,10 +1961,11 @@ html, body {
 #profile .main-info-col {
   background-color: #150f1b;
   height: 100%;
-  padding: 10px; }
+  padding: 5px 5px 5px 5px; }
   #profile .main-info-col .avatar {
-    height: 200px;
+    height: 220px;
     width: 100%;
+    display: block;
     background-color: #FC6E00;
     margin-bottom: 10px; }
   #profile .main-info-col ul li {
@@ -1979,3 +1986,7 @@ html, body {
     #profile .main-info-col ul li .click-tile {
       margin: 10px 0;
       border: 1px dotted #FC6E00; }
+  #profile .main-info-col .action-btn {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    float: left; }
