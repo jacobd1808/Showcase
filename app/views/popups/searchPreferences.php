@@ -3,7 +3,7 @@
 <div class='modulated-box vert-center-popup' id='popup-content'> 
 	<div class='pure-g searchPref'> 
 		<div class='pure-u-1-3'>
-			<div class='heading header-font'> 
+			<div class='heading header-font c-align'> 
 				Set Goal
 			</div>
 			<div class='feedback-container'>
@@ -24,7 +24,7 @@
             </ul>
 		</div>
 		<div class='pure-u-1-3'>
-			<div class='heading header-font'>
+			<div class='heading header-font c-align'>
 				Set Experience Level
 			</div>
 			<div class='feedback-container'>
@@ -44,7 +44,7 @@
 			</ul>
 		</div>
 		<div class='pure-u-1-3'>
-			<div class='heading header-font no-border'>
+			<div class='heading header-font no-border c-align'>
 				Set Location 
 			</div>
 			<div class='feedback-container'>

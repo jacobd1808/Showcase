@@ -19,6 +19,7 @@ input[type=submit], .custom-btn {
 	border: 0;
 	color: #fff;
 	text-align: center;
+	background-color: red;
 	margin: 20px auto 10px auto;
 	padding: 15px 0;
 	font-weight: 300;
@@ -31,6 +32,8 @@ input[type=submit], .custom-btn {
 	text-transform: uppercase;
 	@include animate(150ms);
 	@include rounded(40px);
+	cursor: pointer;
+	font-size: 1.0em;
 	&:hover { 
 		color: $body-darken;
 		font-weight: 400;
