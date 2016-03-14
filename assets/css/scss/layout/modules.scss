@@ -24,6 +24,20 @@
 		max-width: 80%;
 		margin: auto;
 	}
+	.heading { 
+		color: white;
+		display: block;
+		background-color: $body-darken; 
+		padding: 20px 0;
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 1.2em;
+		font-weight: 300;
+		border-right: 1px solid $body-lighten;
+		&.no-border { 
+			border: 0;
+		}
+	}
 	.close-model { 
 		color: white;
 		float: right;
@@ -90,6 +104,11 @@
 		height: 60px;
 		margin: 5px;
 	}
+	&.large-tile { 
+		width: 90px;
+		height: 90px;
+		margin: 5px;
+	}
 	&.full-width-tile { 
 		width: 100%!important;
 		span { 
@@ -101,6 +120,9 @@
 	&.action-btn { 
 		background-color: $body-lighten-2;
 		border: 1px solid $body-darken;
+		text-transform: uppercase;
+		font-weight: 300;
+		@extend .header-font;
 	}
 	&.img-tile {
 		background-repeat: no-repeat;
@@ -110,5 +132,22 @@
 	&:hover, &.active { 
 		//color: $brand-light-col;
 		border: 1px dotted $brand-light-col;
+	}
+}
+
+.feedback-container {
+	display: none;
+	.feedback-msg { 
+		@include rounded(50px);
+		background-color: $body-darken;
+		display: inline-block;
+		width: 60px;
+		height: 60px;
+		&.success { 
+			background-color: $valid-green;
+		}
+		i { 
+			@extend .vertical-align;
+		}
 	}
 }
