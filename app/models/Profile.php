@@ -61,18 +61,17 @@
 		// Create a profile for the user with the form
 		public function createProfile($data){
 			// SQL Statement
-			$sql = "INSERT into db_profile(id, name, surname, workout_exp, weight, height, location)
-					VALUES(:id, :name, :surname, :workout_exp, :weight, :height, :location)";
+			$sql = "INSERT into sc_profile(id, workout_exp, goal, latitude, longitude)
+					VALUES(:id, :workout_exp, :goal, :latitude, :longitude)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':id', $data[id], PDO::PARAM_STR);
-			$stmt->bindParam(':name', $data[name], PDO::PARAM_STR);
-			$stmt->bindParam(':surname', $data[surname], PDO::PARAM_STR);
-			$stmt->bindParam(':workout_exp', $data[workout_exp], PDO::PARAM_STR);
-			$stmt->bindParam(':weight', $data[weight], PDO::PARAM_STR);
-			$stmt->bindParam(':height', $data[height], PDO::PARAM_STR);
-			$stmt->bindParam(':location', $data[location], PDO::PARAM_STR);
+			$stmt->bindParam(':id', $data['id'], PDO::PARAM_STR);
+			$stmt->bindParam(':workout_exp', $data['workout_exp'], PDO::PARAM_STR);
+			$stmt->bindParam(':goal', $data['goal'], PDO::PARAM_STR);			
+			$stmt->bindParam(':latitude', $data['latitude'], PDO::PARAM_STR);
+			$stmt->bindParam(':longitude', $data['longitude'], PDO::PARAM_STR);
+		
 			// Execute Query
 			if ( $stmt->execute() ){
 				return true;

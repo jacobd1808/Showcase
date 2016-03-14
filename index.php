@@ -24,5 +24,9 @@
           </div>
       </div>
     	<?php include_once "app/views/scripts.php"; ?>
+      <script>
+                // Click event function 
+
+      </script>
     </body>
 </html>

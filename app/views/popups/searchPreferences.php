@@ -1,4 +1,7 @@
-<? include "../../../app/config/conn.php"; ?>
+<?php 
+  	include "../../../app/config/checkSession.php";
+	include "../../../app/config/conn.php"; 
+?>
 
 <div class='modulated-box vert-center-popup' id='popup-content'> 
 	<div class='pure-g searchPref'> 
@@ -36,7 +39,7 @@
                 <? foreach($experience as $length) {?>
                    <li class='click-tile medium-tile img-tile tooltip bottom-tooltip' 
                       style="background-image:url('assets/img/icons/length/<?= $length[1] ?>.png')"
-                      data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
+                      data-text-exp='<?= $length[0] ?>' data-code-exp='<?= $length[1] ?>' data-type='length'
                       title='<?= $length[0] ?>'
                       id='exp_<?= $length[1] ?>'>
                   </li>
@@ -48,7 +51,7 @@
 				Set Location 
 			</div>
 			<div class='feedback-container'>
-				<div class='feedback-msg success' style='display: none'>
+				<div class='feedback-msg success'>
 	        		<i class="fa fa-check"></i>
 	        	</div>
 	        </div>
@@ -60,7 +63,7 @@
 
                 <span class='divider'> - or - </span> 
 
-                <div class='click-tile full-width-tile action-btn' title='Gets your devices current location'> 
+                <div class='click-tile full-width-tile action-btn' id='geo_location' title='Gets your devices current location' onClick='checkGeolocation()'> 
                   <span> Get current location</span>
                   <i class="fa fa-map-marker"></i> 
                 </div>
@@ -71,53 +74,116 @@
 </div>
 
 <script> 
+	var x = $("#location-selector");
+	var id = <?php echo json_encode($_SESSION['ifitness_id']) ?>;
+	var goalCheck = false;
+	var expCheck = false;
+	var geoCheck = false;
+	var choice;
+	var exp;
+	var latitude;
+	var longitude;
 
-	// Helper Function 
-	function classToggle(el, parent) {
+	console.log(id);
+	// Event Listeners 
+	$('#goal-list li').click(function() { 
+		checkCompleted($(this), 'goal');
+		choice = $(this).data('code-goal');
+		checkAll2();
+
+	});
+
+	$('#experience-list li').click(function() { 
+		checkCompleted($(this), 'experience');
+		exp = $(this).data('code-exp');
+		checkAll2();
+	});
+
+	$('#geo_location').click(function(){
+		checkGeolocation();
+		checkCompleted($(this), 'geolocation');
+	});
+
+	// Functions 
+	function checkCompleted(el, type) {
+
+		if ( type == 'geolocation'){
+			var parent = $('#user_location');
+		} else {
+			var parent = $('#'+ type + '-list li');
+		}
+
 		if(el.hasClass('active')) { 
 			parent.removeClass('active');
 		} else { 
 			parent.removeClass('active');
 			el.addClass('active');
 		}
-	}
 
-	// Event Listeners 
-	$('#goal-list li').click(function() { 
-		checkGoalCompleted($(this));
-	});
-
-	$('#experience-list li').click(function() { 
-		checkExperienceCompleted($(this));
-	});
-
-	// Functions 
-	function checkGoalCompleted(el) {
-		var parent = $('#goal-list li');
-		classToggle(el, parent) 
 		if (el.parent().find('.active').length != 0) {
 			el.parent().parent().find('.feedback-container').slideDown(); 
+
+			switch(type){
+				case 'goal':  goalCheck = true;
+				break;
+				case 'experience': expCheck = true;
+				break;
+				case 'geolocation': geoCheck = true;
+				break;
+			}
+
 		} else { 
 			el.parent().parent().find('.feedback-container').slideUp(); 
+
+			switch(type){
+				case 'goal':  goalCheck = false;
+				break;
+				case 'experience': expCheck = false;
+				break;
+				case 'geolocation': geoCheck = false;
+				break;
+			}
 		}
 	}
 
-	function checkExperienceCompleted(el) { 
-		var parent = $('#experience-list li');
-		classToggle(el, parent) 
-		if (el.parent().find('.active').length != 0) {
-			el.parent().parent().find('.feedback-container').slideDown(); 
-		} else { 
-			el.parent().parent().find('.feedback-container').slideUp(); 
-		}
+	function checkGeolocation() {
+	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function(position){
+				latitude = position.coords.latitude;
+				longitude = position.coords.longitude;
+			    x.html(" Latitude: " + position.coords.latitude + 
+			    " <br> Longitude: " + position.coords.longitude); 	 
+			    checkAll2();       	
+	        });
+	    } else {
+	        x.innerHTML = "Geolocation is not supported by this browser.";
+	    }
 	}
 
-	function checkLocationCompleted() { 
-		// You need to fill this out 
+	function checkAll2(){
+		if ( goalCheck && expCheck && geoCheck){
+		$.ajax({
+			url : "app/controller/ajaxController.php", 
+			data : { action: 'create_profile', id: id, workout_exp: exp, goal: choice, latitude: latitude, longitude: longitude },
+			method : 'POST', 
+			success : function(data){
+				console.log(data);
+			}
+		});	
+		}
 	}
 
 	function checkAll() { 
+		action = 'edit_profile';
 
+		$.ajax({
+			url : "app/controller/ajaxController.php", 
+			data : { action: action, profile_id: profile_id, user_id: user_id },
+			method : 'POST', 
+			success : function(data){
+				location.reload();
+			}
+		});
 	}
 
 </script>
