@@ -19,7 +19,10 @@
     <body>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
-          <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please set your search preferences'>  
+      <?php   if (!$check_exist['id']){ ?>
+         <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please set your search preferences'>  
+      <?php   }  ?>
+       
        
           </div>
       </div>

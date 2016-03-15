@@ -15,6 +15,26 @@
     		return explode(",",$a->formatted_address);
 		}
 
+		public function returnLocation($lat,$long){
+			$coords = $this->returnCoordinates($lat, $long);
+
+			return "$coords[1], $coords[3]";
+		}
+
+		public function returnGender($gender){
+			switch($gender){
+				case 1:
+					return "Male";
+					break;
+				case 2:
+					return "Female";
+					break;
+				case 3:
+					return "Other";
+					break;
+			}
+		}
+
 		public function returnExpChar($goal){
 			switch($goal){
 				case 0:
@@ -55,6 +75,19 @@
 				case 5:
 					return "General Health And Wellbeight";
 					break;
+			}
+		}
+
+		public function checkProfile($id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_profile WHERE id='$id'";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
 			}
 		}
 
@@ -104,6 +137,19 @@
 			}
 		}
 
+		public function fetchProfile($id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_profile WHERE id = $id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			$stmt->execute();
+			// Fetch Query
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
+		}
+
 		// Fetch ALL profiles
 		public function fetchAllRows(){
 			// SQL Statement
@@ -117,6 +163,8 @@
 			// Return results to nest variable
 			return $result;
 		}
+
+
 		// Add a goal for a user
 		public function addGoal($id, $goal){
 			// SQL Statement

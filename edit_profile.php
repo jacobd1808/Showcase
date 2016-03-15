@@ -4,6 +4,12 @@
   include_once "app/config/conn.php";
   include "app/controller/indexController.php";
 	
+  if ( isset($_GET['id'])){
+    $profile_id = $_GET['id'];
+  } else {
+    $profile_id = $_SESSION['ifitness_id'];
+  }
+
 	$pageOpt = array(
 		"title"			    =>	"FitConnect", 
 		'navName' 		  	=> 	"edit_profile", 

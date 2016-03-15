@@ -23,6 +23,7 @@
 			}
 		}
 
+
 		// CHECK IF FRIEND REQUEST EXISTS
 		public function checkFriendRequest($id, $person_id){
 			// SQL Statement
@@ -158,7 +159,16 @@
 		}
 
 		public function fetchFriendList($id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_rel WHERE user_1='$id'";
 
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+
+			// Results
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			
+			return $result;
 		}
 
 		public function fetchBlockList($id){

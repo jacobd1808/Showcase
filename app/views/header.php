@@ -37,7 +37,7 @@
               <i class="material-icons">notifications</i> 
               <span class='count-circle'> 2 </span>
             </a></li>
-            <li class='<?= setActive('edit_profile', $pageOpt['navName']); ?>'> <a href='edit_profile.php'> Edit Profile <i class="material-icons">edit</i></a></li>
+            <li class='<?= setActive('edit_profile', $pageOpt['navName']); ?>'> <a href='edit_profile.php?id=<?= $_SESSION['ifitness_id'] ?>''> Edit Profile <i class="material-icons">edit</i></a></li>
             <li> <a href='logout.php'> Logout </a></li>
         </ul>
         <!--                   <li><a href="#" class='de-emphasis'><i class="material-icons">play_for_work</i>Logout</a></li> -->
