@@ -54,23 +54,31 @@
 			</div>
 		</div>
 		<div class='pure-u-13-24'>
-			<div class='heading left-border l-align'> About </div>
-			<div class='pure-g'>
-				<div class='pure-u-1-2'>
+			<div class='heading left-border l-align removeHeader'> About </div>
+			<div class='pure-g about-row'>
+				<div class='pure-u-1-3'>
 					<div> <strong> Joined: </strong> 19 . 02 . 16</div>
 				</div>
-				<div class='pure-u-1-2'> 
-					<div> <strong> From: </strong> <?= $Profile->returnLocation($info['latitude'], $info['longitude']) ?> </div>
+				<div class='pure-u-2-3'> 
+					<div> <strong> Lives: </strong> 
+						<?= $Profile->returnLocation($info['latitude'], $info['longitude']) ?> 
+					</div>
 				</div>
 			</div>
+			<div class=''> 
+			<strong> Welcome ..  </strong>
 		</div>
-		<div class='pure-u-6-24'>
-			<div class='heading no-border l-align'> Friends </div>
-			<ul> 
-				<li> Someone</li>
-				<li> Someone</li>
-				<li> Someone</li>
-				<li> Someone</li>
+		<div class='pure-u-6-24' id='friendList'>
+			<div class='heading no-border l-align' id='friendHeader'> Friends </div>
+			<ul class='basic-list vert-list profile-member-list scriptHeight' 
+				data-parent-ele='friendList' data-remove-ele='removeHeader'> 
+				<?php for($i = 0; $i < 10; $i++ ) { ?>
+				<li> 
+					<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar'/> 
+					<strong> Jacob Dickinson </strong>
+					<span> Friend since xx xx xx </span>
+				</li>
+				<? } ?>
 			</ul>
 		</div>
 	</div>

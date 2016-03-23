@@ -137,7 +137,7 @@ html, body {
 #profile { 
 	.main-info-col {
 		background-color: $body-darken;
-		height: 100%; 
+		height: auto;
 		padding: 5px 5px 5px 5px;
 		.avatar { 
 			height: 220px;
@@ -175,6 +175,49 @@ html, body {
 			margin-top: 10px;
 			margin-bottom: 5px;
 			float: left;
+		}
+	}
+	.about-row { 
+		background-color: $body-col;
+		padding: 10px;
+		text-align: left;
+		strong { 
+			@extend .header-font; 
+			padding-left: 10px;
+			font-weight: 500;
+			//margin-right: 10px;
+		}
+	} 
+	.profile-member-list { 
+		background-color: $body-darken;
+		height: 400px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		li { 
+			clear: both;
+			text-align: left;
+			border-top: 1px solid $body-lighten;
+			img { 
+				float: left;
+				background-color: $brand-light-col;
+				width: 50px;
+				margin: 15px;
+				height: 50px;
+				@include rounded(50px);
+			}
+			strong, span { 
+				display: inline-block;
+			}
+			strong { 
+				text-transform: uppercase;
+				font-weight: 300;
+				margin-top: 20px;
+			}
+			span { 
+				font-size: 0.9em;
+				margin-top: 5px;
+				color: #999;
+			}
 		}
 	}
 }

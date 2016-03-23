@@ -12,6 +12,29 @@ $(function() {
 	})
 
 	/* ====================================
+		Set Element Height
+	===================================== */ 
+
+	function setEleHeight() {
+		$('.scriptHeight').each(function() {
+			var removeHeightSum = 0;
+			var removeEle = $(this).data('remove-ele'); 
+			var parentEle = $(this).data('parent-ele'); 
+
+			$('.'+removeEle).each(function() {
+				removeHeightSum += $(this).height(); 
+			}); 
+
+			console.log(removeHeightSum)
+
+			var calcHeight = $('#'+parentEle).height() - removeHeightSum;
+
+			console.log(parentEle, removeEle);
+			$(this).height(calcHeight);
+		})
+	} 
+
+	/* ====================================
 		Model Popup Functions
 	===================================== */ 
 
@@ -35,9 +58,10 @@ $(function() {
 			$('body').append('<div class="model-bg" id="model"> </div>');
 			$('#model').load( "app/views/popups/"+content+".php", function() {
 				$('#model').fadeIn(250);
-				$('#popup-content').prepend('<h1>'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+				$('#popup-content').prepend('<h1 class="removeHeader">'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
 				var alignElem = $('.vert-center-popup');
 				alignToVerticalCenter(alignElem); 
+				setEleHeight();
 			});
 		}
 	}
@@ -101,7 +125,7 @@ $(function() {
 });
 	/* ====================================
 		Responsive Navigation 
-	===================================== */ 
+	===================================== */  
 
     /*$('#nav-button').sidr({
       name: 'responsive-nav',
