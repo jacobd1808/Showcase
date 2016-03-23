@@ -67,6 +67,7 @@
 			</div>
 			<div class=''> 
 			<strong> Welcome ..  </strong>
+			</div>
 		</div>
 		<div class='pure-u-6-24' id='friendList'>
 			<div class='heading no-border l-align' id='friendHeader'> Friends </div>
