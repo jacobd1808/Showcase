@@ -12,17 +12,45 @@ $(function() {
 	})
 
 	/* ====================================
+		Set Element Height
+	===================================== */ 
+
+	function setEleHeight() {
+		$('.scriptHeight').each(function() {
+			var removeHeightSum = 0;
+			var removeEle = $(this).data('remove-ele'); 
+			var parentEle = $(this).data('parent-ele'); 
+
+			//console.log($('#'+parentEle).height())
+
+			$('.'+removeEle).each(function() {
+				removeHeightSum += $(this).outerHeight(); 
+			}); 
+
+			var calcHeight = $('#'+parentEle).height() - removeHeightSum;
+
+			$(this).height(calcHeight);
+
+		})
+	} 
+
+	/* ====================================
 		Model Popup Functions
 	===================================== */ 
 
 	$('body').on('click', '.model-popup', function(){
 		var content = $(this).data('content');
 		var title = $(this).data('title');
+		if($(this).attr('data-profile-id')) { 
+			loadProfileData($(this).data('profile-id'));
+		}
 		$('body').append('<div class="model-bg" id="model"> </div>');
 		$('#model').load( "app/views/popups/"+content+".php", function() {
 			$('#model').fadeIn(250);
-			$('#popup-content').prepend('<h1> '+title+'<span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+			$('#popup-content').prepend('<h1 class="removeHeader"> '+title+'<span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
 			var alignElem = $('.vert-center-popup');
+			setEleHeight();
+			setImageHeight()
 			alignToVerticalCenter(alignElem); 
 		});
 	});
@@ -34,12 +62,21 @@ $(function() {
 			var title = $('.default-popup').data('title');
 			$('body').append('<div class="model-bg" id="model"> </div>');
 			$('#model').load( "app/views/popups/"+content+".php", function() {
-				$('#model').fadeIn(250);
-				$('#popup-content').prepend('<h1>'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+				$('#model').fadeIn(250, function(){ 
+					setImageHeight()
+				});
+				$('#popup-content').prepend('<h1 class="removeHeader">'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
 				var alignElem = $('.vert-center-popup');
 				alignToVerticalCenter(alignElem); 
+				setImageHeight()
+				setEleHeight();
 			});
 		}
+	}
+
+	function loadProfileData(id) { 
+		// NEED AJAX FUNCTION TO FETCH USERNAME BY ID 
+		// Will need to populate using JS .. 
 	}
 
 	defaultPopup();
@@ -70,38 +107,51 @@ $(function() {
 		Tooltips 
 	===================================== */ 
 
- $('body').on('mouseover mouseout', '.tooltip', function(e) {
-    $('.tooltip.left-tooltip').tooltipster({
-       speed: 100,
-       delay: 50,
-       position: 'left',
-       theme: 'cust-tooltip'
-    });
+	 $('body').on('mouseover mouseout', '.tooltip', function(e) {
+	    $('.tooltip.left-tooltip').tooltipster({
+	       speed: 100,
+	       delay: 50,
+	       position: 'left',
+	       theme: 'cust-tooltip'
+	    });
 
-    $('.tooltip.right-tooltip').tooltipster({
-       speed: 100,
-       delay: 50,
-       position: 'right',
-       theme: 'cust-tooltip'
-    });
+	    $('.tooltip.right-tooltip').tooltipster({
+	       speed: 100,
+	       delay: 50,
+	       position: 'right',
+	       theme: 'cust-tooltip'
+	    });
 
-  	$('.tooltip.bottom-tooltip').tooltipster({
-	   speed: 100,
-	   delay: 50,
-	   position: 'bottom',
-	   theme: 'cust-tooltip'
+	  	$('.tooltip.bottom-tooltip').tooltipster({
+		   speed: 100,
+		   delay: 50,
+		   position: 'bottom',
+		   theme: 'cust-tooltip'
+		});
+
+	  	$('.tooltip.top-tooltip').tooltipster({
+		   speed: 100,
+		   delay: 50,
+		   position: 'top',
+		   theme: 'cust-tooltip'
+		});
 	});
-
-  	$('.tooltip.top-tooltip').tooltipster({
-	   speed: 100,
-	   delay: 50,
-	   position: 'top',
-	   theme: 'cust-tooltip'
-	});
-});
 	/* ====================================
-		Responsive Navigation 
-	===================================== */ 
+		Fancy Box Gallery 
+	===================================== */  
+
+	$('body').on('click', '.fancybox', function(e) {
+		$(".fancybox").fancybox();
+	});
+
+	function setImageHeight() {
+		$( '.image-ratio' ).each(function() {
+			var imageWidth = $('.image-ratio').width(); 
+			$('.image-ratio').height(imageWidth); 
+		}); 
+	}	
+
+	setImageHeight();
 
     /*$('#nav-button').sidr({
       name: 'responsive-nav',

@@ -23,6 +23,8 @@
 		max-height: 90%;
 		max-width: 80%;
 		margin: auto;
+		position: relative;
+		overflow: hidden;
 	}
 	.heading { 
 		color: white;
@@ -79,6 +81,11 @@
 		margin: 0;
 		display: inline-block;
 	}
+	&.vert-list { 
+		li { 
+			display: block; 
+		}
+	}
 }
 
 .click-tile { 
@@ -130,10 +137,23 @@
 			display: block;
 		}
 	}
+	&.tile-text-center { 
+		span {
+			display: inline-block;
+			@extend .vertical-align;
+		}
+	}
 	&.img-tile {
 		background-repeat: no-repeat;
 		background-position: 50%;
 		background-size: 60%;
+	}
+	&.input-btn { 
+		position: absolute!important;
+		top: 48px;
+		height: 39px;
+		min-width: 49px;
+		right: 10px;
 	}
 	&:hover, &.active { 
 		//color: $brand-light-col;

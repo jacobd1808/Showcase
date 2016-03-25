@@ -90,8 +90,10 @@ header {
 			}
 		}
 		&.active, &:hover { 
-			color: $brand-light-col;
 			background-color: $body-lighten;
+			a { 
+				color: $brand-light-col;
+			}
 		}
 		&:first-child { 
 			border-top: 0;
