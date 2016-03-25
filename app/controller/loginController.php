@@ -12,6 +12,7 @@
     		'loginDate' => $loginStamp
     	);
 
+
     	// Validation
     	if (empty($data['username'])) {
     		// No username entered

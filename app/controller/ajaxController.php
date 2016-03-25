@@ -15,14 +15,18 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		    $data = array(
 		    	'id' => $_POST['id'],
 				'workout_exp' => $_POST['workout_exp'],
-				'goal' => $_POST['workout_exp'],
+				'goal' => $_POST['goal'],
 				'latitude' => $_POST['latitude'],
 				'longitude' => $_POST['longitude']
 		    );
 
-		    echo $data['id'];
-			return $Profile->createProfile($data);
-
+		    echo $data[id];
+			return $Profile->setPreferences($data);
+		break;
+		case 'check_postcode':
+			$postal_code = $_POST['postal_code'];
+			$coords = $Profile->returnPostalCode($postal_code);
+			return $coords;
 		break;
 	}
 }

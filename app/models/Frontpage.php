@@ -9,26 +9,23 @@
 		// Function to register the user.
 		public function registerUser($data){
 			// Write the SQL Insert Query
-			$sql = "INSERT INTO sc_user (username, name, surname, password, email, gender, register_date)
-					VALUES (:username, :name, :surname, :password, :email, :gender, :register_date)";
+			$sql = "INSERT INTO sc_user (username, password, email, register_date)
+					VALUES (:username, :password, :email, :register_date)";
 
 			// Prepare the SQL Query
 			$stmt = $this->conn->prepare($sql);
 
 			// Assign the inserted values
 			$stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
-			$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
-			$stmt->bindParam(':surname', $data['surname'], PDO::PARAM_STR);
 			$stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
 			$stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
-			$stmt->bindParam(':gender', $data['gender'], PDO::PARAM_STR);
 			$stmt->bindParam(':register_date', $data['register_date'], PDO::PARAM_STR);
 
 			// Execute the query and IF it works
 			if ($stmt->execute()){
 
 				// Eventually include AUTO Login or something
-				return true;
+				return $this->conn->lastInsertId();;
 			} else {
 
 				// Shit went wrong dawg
@@ -36,23 +33,7 @@
 			}
 		}
 
-		// Function to delete user
-		public function deleteUser($id){
-			// SQL Statement
-			$sql = "DELETE FROM sc_user WHERE id = $id";
-			// Prepare SQL
-			$stmt = $this->conn->prepare($sql);
-			// Execute SQL
-			if ( $stmt->execute()){
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		// Function to login will be there
 		public function loginUser($data){
-
 			// SQL Statement
 			$sql = "SELECT id FROM sc_user WHERE username = :username && password = :password";
 			// Prepare SQL
@@ -67,6 +48,44 @@
 			if ($result){
 				// User has logged in
 				$_SESSION['ifitness_id'] = $result;
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Function to create profile
+		public function createProfile($data, $user_id){
+			// Write the SQL Insert Query
+			$sql = "INSERT INTO sc_profile (id, name, surname, gender, register_date)
+					VALUES (:id, :name, :surname, :gender, :register_date)";
+
+			// Prepare the SQL Query
+			$stmt = $this->conn->prepare($sql);
+
+			// Assign the inserted values
+			$stmt->bindParam(':id', $user_id, PDO::PARAM_STR);
+			$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
+			$stmt->bindParam(':surname', $data['surname'], PDO::PARAM_STR);
+			$stmt->bindParam(':gender', $data['gender'], PDO::PARAM_STR);
+			$stmt->bindParam(':register_date', $data['register_date'], PDO::PARAM_STR);
+
+			// Execute the query and IF it works
+			if ($stmt->execute()){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Function to delete user
+		public function deleteUser($id){
+			// SQL Statement
+			$sql = "DELETE FROM sc_user WHERE id = $id";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Execute SQL
+			if ( $stmt->execute()){
 				return true;
 			} else {
 				return false;

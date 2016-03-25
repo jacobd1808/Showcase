@@ -9,10 +9,19 @@
 		// Return GPS Coordinates Location
 		public function returnCoordinates($lat,$long){
 			$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";
-   			$curlData=file_get_contents(    $url);
+   			$curlData = file_get_contents($url);
     		$address = json_decode($curlData);
-    		$a=$address->results[0];
+    		$a = $address->results[0];
     		return explode(",",$a->formatted_address);
+		}
+
+		public function returnPostalCode($postal_code){
+			$postal_code = explode(" ", $postal_code);
+			$url = "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:$postal_code[0]+$postal_code[1]&api=AIzaSyAtWI7CUtECvJEr5xHn-h7cT0JEQXc93zc";
+			$curlData = file_get_contents( $url);
+			$address = json_decode($curlData);
+			$a = $address->results[0];
+			return $a->geometry->viewport->northeast;
 		}
 
 		public function returnLocation($lat,$long){
@@ -78,19 +87,6 @@
 			}
 		}
 
-		public function checkProfile($id){
-			// SQL Statement
-			$sql = "SELECT * FROM sc_profile WHERE id='$id'";
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-
-			if ( $stmt->execute() ){
-				return true;
-			} else {
-				return false;
-			}
-		}
-
 		// Create a profile for the user with the form
 		public function createProfile($data){
 			// SQL Statement
@@ -105,6 +101,27 @@
 			$stmt->bindParam(':latitude', $data['latitude'], PDO::PARAM_STR);
 			$stmt->bindParam(':longitude', $data['longitude'], PDO::PARAM_STR);
 		
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public function setPreferences($data){
+			// SQL Statement
+			$sql = "UPDATE sc_profile
+					SET goal = :goal, workout_exp = :workout_exp, latitude = :latitude, longitude = :longitude
+					WHERE id = :id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(':id', $data[id], PDO::PARAM_STR);
+			$stmt->bindParam(':goal', $data[goal], PDO::PARAM_STR);
+			$stmt->bindParam(':workout_exp', $data[workout_exp], PDO::PARAM_STR);
+			$stmt->bindParam(':latitude', $data[latitude], PDO::PARAM_STR);
+			$stmt->bindParam(':longitude', $data[longitude], PDO::PARAM_STR);
 			// Execute Query
 			if ( $stmt->execute() ){
 				return true;

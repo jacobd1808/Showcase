@@ -83,6 +83,7 @@
 	var exp;
 	var latitude;
 	var longitude;
+	var postal_code;
 
 	console.log(id);
 	// Event Listeners 
@@ -101,6 +102,11 @@
 
 	$('#geo_location').click(function(){
 		checkGeolocation();
+		checkCompleted($(this), 'geolocation');
+	});
+
+	$('#check-postcode').click(function(){
+		checkPostalCode();
 		checkCompleted($(this), 'geolocation');
 	});
 
@@ -144,6 +150,18 @@
 				break;
 			}
 		}
+	}
+
+	function checkPostalCode(){
+		postal_code = $("#user_location").val();
+		$.ajax({
+			url : "app/controller/ajaxController.php",
+			data : { action: 'check_postcode', postal_code: postal_code },
+			method : 'POST',
+			success : function(data){
+				x.html("Postal Code: <b>" + postal_code + "</b>");
+			}
+		});
 	}
 
 	function checkGeolocation() {

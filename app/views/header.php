@@ -1,10 +1,10 @@
 <?php 
   include_once "app/config/conn.php";
 
-  $User = new User($conn);
+  $Profile = new Profile($conn);
+  $profile_info = $Profile->fetchProfile($_SESSION["ifitness_id"]);
 
-  $name = $User->fetchOneRow( $_SESSION['ifitness_id'], 'name');
-  $surname = $User->fetchOneRow( $_SESSION['ifitness_id'], 'surname');
+
   // This just sets active menu 
   function setActive($nav, $page){ 
     if ($nav == $page) { 
@@ -25,7 +25,7 @@
           <li><a href="groups.php" class='main-link <?= setActive('groups', $pageOpt['navName']); ?>'><i class="material-icons">group</i>Groups</a></li>
       </ul>
       <div class='user-profile-tab'> 
-        <a href='profile.php' class='main-link tab-heading <?= setActive('profile', $pageOpt['navName']); ?>'><?= $name ?> <?= $surname ?><i class="material-icons">account_circle</i> </a>
+        <a href='profile.php' class='main-link tab-heading <?= setActive('profile', $pageOpt['navName']); ?>'><?= $profile_info['name'] ?> <?= $profile_info['surname'] ?><i class="material-icons">account_circle</i> </a>
         <ul class='user-menu'> 
             <li> <a href='#' class='model-popup <?= setActive('messages', $pageOpt['navName']); ?>' data-content='message-center' data-title='Messaging Center'> 
               Messages 
