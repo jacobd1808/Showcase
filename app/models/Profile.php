@@ -180,52 +180,5 @@
 			// Return results to nest variable
 			return $result;
 		}
-
-
-		// Add a goal for a user
-		public function addGoal($id, $goal){
-			// SQL Statement
-			$sql = "INSERT INTO db_goal(user_id, goal)
-					VALUES(:user_id, :goal)";
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-			// Bind Parameters
-			$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
-			$stmt->bindParam(':goal', $goal, PDO::PARAM_STR);
-			// Execute Query
-			if ( $stmt->execute() ){
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		// Remove a goal for a user
-		public function removeGoal($id, $goal){
-			// SQL Statement
-			$sql = "DELETE FROM db_goal WHERE id = $id AND goal = $goal";
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-			// Execute Query
-			if ( $stmt->execute() ){
-				return true;
-			} else {
-				return false;
-			}			
-		}
-
-		// Fetch All Goals
-		public function fetchAllGoals($id){
-			// SQL Statement
-			$sql = "SELECT * FROM sc_goals WHERE user_id = $id";
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-			// Execute Query
-			$stmt->execute();
-			// Fetch Query
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			// Return results to nest variable
-			return $result;
-		}		
 	}
 ?>
