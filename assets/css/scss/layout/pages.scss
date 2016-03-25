@@ -384,19 +384,6 @@ img.user-avatar {
 		padding: 20px 0;
 		//margin-bottom: 20px;
 		border-bottom: 1px solid $body-lighten-2;
-		.message-user { 
-			background-color: $body-col;
-			min-height: 140px;
-			text-align: center;
-			float: left;
-			img { 
-				float: none;
-			}
-			a { 
-				width: 90%;
-				display: inline-block;
-			}
-		}
 		.message-text { 
 			padding-left: 10px;
 			em { 
@@ -411,5 +398,23 @@ img.user-avatar {
 				border: 1px dotted $brand-light-col;
 			} 
 		}
+	}
+}
+
+.avatar-tile { 
+	background-color: $body-col;
+	text-align: center;
+	float: left;
+	padding-bottom: 12px;
+	&.friend-list { 
+		width: 14.6%;
+		margin: 1%;
+	}
+	img { 
+		float: none;
+	}
+	a { 
+		width: 90%;
+		display: inline-block;
 	}
 }

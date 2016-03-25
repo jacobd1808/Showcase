@@ -36,7 +36,7 @@
 							<!-- --> 
 							<div class='message-list received-msg'> 
 								<div class='message-content pure-g'> 
-									<div class='pure-u-4-24 message-user'>
+									<div class='pure-u-4-24 avatar-tile'>
 										<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
 										<a href=''> Jacob Dickinson </a>
 									</div>
@@ -50,7 +50,7 @@
 							<!-- --> 
 							<div class='message-list sent-msg'> <!-- CHANGE CLASS -->  
 								<div class='message-content pure-g'> 
-									<div class='pure-u-4-24 message-user'>
+									<div class='pure-u-4-24 avatar-tile'>
 										<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
 										<a href=''> Jacob Dickinson </a>
 									</div>
