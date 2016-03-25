@@ -40,6 +40,16 @@ $brand-light-col: #FC6E00;
 .p-20 { padding: 20px; }
 .p-25 { padding: 25px; }
 
+.p-v-10 { padding: 10px 0; }
+.p-v-15 { padding: 15px 0; }
+.p-v-20 { padding: 20px 0; }
+.p-v-25 { padding: 25px 0; }
+
+.p-h-10 { padding: 0 10px; }
+.p-h-15 { padding: 0 15px; }
+.p-h-20 { padding: 0 20px; }
+.p-h-25 { padding: 0 25px; }
+
 .m-10 { margin: 10px; }
 .m-15 { margin: 15px; }
 .m-20 { margin: 20px; }
@@ -61,6 +71,7 @@ $brand-light-col: #FC6E00;
 
 .relative { position: relative }
 
+.scriptHeight { overflow: auto; }
 .header-font { 
 	font-family: $condensed-font;
 	text-transform: uppercase;

@@ -75,7 +75,7 @@
                 <label for="u_location">Location <span></span></label>
                 <div class='pure-g'>
                   <div class="pure-u-1 pure-u-md-10-24">
-                    <input type='text' name='u_location' id='u_gym' class='location-height-input' />
+                    <input type='text' name='u_location' id='u_gym' class='location-height-input' placeholder='Postcode'/>
                   </div>
                   <div class='pure-u-1 pure-u-md-4-24'> 
                     <div class='c-align align-or'> - OR - </div>

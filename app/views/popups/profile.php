@@ -119,7 +119,7 @@
 				data-parent-ele='popup-content' data-remove-ele='removeHeader'> 
 				<?php for($i = 0; $i < 10; $i++ ) { ?>
 				<li> 
-					<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar'/> 
+					<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/> 
 					<strong> Jacob Dickinson </strong>
 					<span> Friend since xx xx xx </span>
 				</li>
