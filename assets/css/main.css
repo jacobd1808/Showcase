@@ -104,7 +104,10 @@
 .invisible {
   visibility: hidden; }
 
-.header-font, .click-tile.action-btn, #profile .main-info-col ul li strong, #profile .about-row strong {
+.relative {
+  position: relative; }
+
+.header-font, .click-tile.action-btn, #profile .main-info-col ul li strong, #profile .about-container .profile-section strong, #profile .about-container .profile-section .main-info-section li span {
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase; }
 
@@ -149,7 +152,7 @@ h3 {
 .pure-g [class*="pure-u"], .pure-g {
   font-family: "Roboto", sans-serif; }
 
-.vertical-align, .click-tile i, .click-tile i:before, .click-tile.full-width-tile span, .feedback-container .feedback-msg i, .searchPref .location-selector #check-postcode span {
+.vertical-align, .click-tile i, .click-tile i:before, .click-tile.full-width-tile span, .click-tile.tile-text-center span, .feedback-container .feedback-msg i, .searchPref .location-selector #check-postcode span {
   position: relative;
   top: 50%;
   transform: translateY(-50%); }
@@ -1382,7 +1385,7 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
   border: 0;
   font-weight: 300;
   box-shadow: none;
-  font-size: 1.1em;
+  font-size: 1.0em;
   padding: 10px;
   font-family: "Roboto", sans-serif;
   -webkit-appearance: none;
@@ -1390,6 +1393,8 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
   background-color: #150f1b;
   color: white;
   letter-spacing: 1px; }
+  input[type=text].small-input, input[type=number].small-input, input[type=password].small-input, input[type=email].small-input, textarea.small-input, select.small-input {
+    width: 70px; }
 
 input[type=submit], .custom-btn {
   border: 0;
@@ -1434,10 +1439,8 @@ select {
 
 textarea {
   padding: 10px;
-  width: 90%;
-  margin: 10px auto;
-  font-size: 0.9em;
-  font-weight: 400;
+  font-weight: 300;
+  width: 100%;
   height: 150px;
   outline: 0; }
 
@@ -1718,8 +1721,9 @@ header {
         border-radius: 20px;
         background-clip: padding-box; }
     .user-menu li.active, .user-menu li:hover {
-      color: #FC6E00;
       background-color: #281e35; }
+      .user-menu li.active a, .user-menu li:hover a {
+        color: #FC6E00; }
     .user-menu li:first-child {
       border-top: 0; }
 
@@ -1837,10 +1841,18 @@ header {
     font-weight: 300; }
     .click-tile.action-btn.orange-btn {
       display: block; }
+  .click-tile.tile-text-center span {
+    display: inline-block; }
   .click-tile.img-tile {
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: 60%; }
+  .click-tile.input-btn {
+    position: absolute !important;
+    top: 48px;
+    height: 39px;
+    min-width: 49px;
+    right: 10px; }
   .click-tile:hover, .click-tile.active {
     border: 1px dotted #FC6E00; }
 
@@ -1994,17 +2006,55 @@ html, body {
     margin-top: 10px;
     margin-bottom: 5px;
     float: left; }
-#profile .about-row {
-  background-color: #1C1525;
-  padding: 10px;
-  text-align: left; }
-  #profile .about-row strong {
-    padding-left: 10px;
-    font-weight: 500; }
+#profile .about-container {
+  overflow: auto;
+  height: 400px; }
+  #profile .about-container .profile-section {
+    padding: 0 10px 0 10px;
+    text-align: left;
+    clear: both; }
+    #profile .about-container .profile-section strong {
+      font-weight: 500;
+      clear: both;
+      text-align: left;
+      display: block;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      font-weight: 300;
+      text-transform: uppercase;
+      background-color: #150f1b; }
+      #profile .about-container .profile-section strong:first-child {
+        margin-top: 10px; }
+    #profile .about-container .profile-section .main-info-section {
+      float: left;
+      margin: 10px 0;
+      padding: 0;
+      width: 100%; }
+      #profile .about-container .profile-section .main-info-section li {
+        width: 100%;
+        float: left;
+        margin: 4px 0;
+        list-style-type: none;
+        padding: 0;
+        font-weight: 300;
+        font-size: 0.9em; }
+        #profile .about-container .profile-section .main-info-section li span {
+          border-right: 1px solid #FC6E00;
+          padding: 5px 10px;
+          color: white;
+          margin-right: 10px;
+          background-color: #1C1525;
+          width: 30%;
+          text-align: right;
+          display: inline-block; }
+    #profile .about-container .profile-section .bio-section {
+      padding: 0 10px;
+      font-size: 0.9em; }
 #profile .profile-member-list {
   background-color: #150f1b;
   height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden; }
   #profile .profile-member-list li {
     clear: both;
@@ -2029,3 +2079,48 @@ html, body {
       font-size: 0.9em;
       margin-top: 5px;
       color: #999; }
+
+/* ======================== /
+		Edit Profile 
+/ ======================== */
+.edit-profile-main {
+  width: 58%;
+  float: left; }
+
+.edit-profile-images {
+  width: 40%;
+  float: right;
+  margin-left: 2%; }
+
+.align-or {
+  margin-top: 16px; }
+
+.location-height-input {
+  padding: 15px !important; }
+
+.image-gallery {
+  padding: 10px; }
+  .image-gallery a {
+    width: 18.4%;
+    margin: 3px 2% 3px 0;
+    float: left;
+    display: inline-block;
+    background-color: #150f1b;
+    overflow: hidden; }
+    .image-gallery a:nth-child(5n-5) {
+      margin: 3px 0; }
+    .image-gallery a.edit-profile {
+      width: 32%; }
+      .image-gallery a.edit-profile:nth-child(5n-5) {
+        margin: 3px 2% 3px 0; }
+      .image-gallery a.edit-profile:nth-child(3n-3) {
+        margin: 3px 0; }
+    .image-gallery a img {
+      height: 100%;
+      width: auto; }
+
+.pure-m-r-10 {
+  padding-right: 10px; }
+
+.pure-m-l-10 {
+  padding-left: 10px; }

@@ -87,7 +87,11 @@
                   profiles.push("<?= $x['id'] ?>");
                 </script>
                 <div class='profile-card' id='profile_<?= $x['id'] ?>' data-goal='<?= $x['goal'] ?>' data-exp='<?= $x['workout_exp'] ?>'>
-                  <h3><?= $x['name'] ?> <?= $x['surname'] ?></h3>
+                  <h3 class='model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='3'>
+                    <?= $x['name'] ?> <?= $x['surname'] ?>
+                  </h3>
+
+
                   &nbsp;Workout Experience: <b><?= $Profile->returnExpChar($x['workout_exp']) ?></b><br />
                   &nbsp;Goals: <b><?= $Profile->returnGoalChar($x['goal']) ?></b><br />
                 </div>
