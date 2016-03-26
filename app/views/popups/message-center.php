@@ -36,10 +36,10 @@
 							<!-- --> 
 							<div class='message-list received-msg'> 
 								<div class='message-content pure-g'> 
-									<div class='pure-u-4-24 avatar-tile'>
+									<a href='#' class='pure-u-4-24 avatar-tile'>
 										<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
-										<a href=''> Jacob Dickinson </a>
-									</div>
+										<span> Jacob Dickinson </span>
+									</a>
 									<div class='pure-u-20-24 message-text'>
 									Some Message 
 									<em> Sent on xx . xx . xx </em>

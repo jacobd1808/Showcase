@@ -23,12 +23,12 @@
       <div class='user-profile-tab'> 
         <a href='#' class='main-link tab-heading model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='3'><?= $user_profile['name'] ?> <?= $user_profile['surname'] ?><i class="material-icons">account_circle</i> </a>
         <ul class='user-menu'> 
-            <li> <a href='#' class='model-popup <?= setActive('messages', $pageOpt['navName']); ?>' data-content='message-center' data-title='Messaging Center'> 
+            <li> <a href='#' class='model-popup' data-content='message-center' data-title='Messaging Center'> 
               Messages 
               <i class="material-icons">message</i> 
               <span class='count-circle'> 1 </span>
             </a></li>
-            <li> <a href='#' class='model-popup <?= setActive('notifications', $pageOpt['navName']); ?>' data-content='notification' data-title='Notification Center'>   
+            <li> <a href='#' class='model-popup' data-content='notifications' data-title='Notification Center'>   
               Notifications 
               <i class="material-icons">notifications</i> 
               <span class='count-circle'> 2 </span>

@@ -1755,7 +1755,7 @@ header {
       border-top: 0; }
 
 .view {
-  margin-right: 310px; }
+  margin-right: 290px; }
 
 .modulated-box, .search-results .profile-card {
   background-color: #281e35;
@@ -1895,6 +1895,37 @@ header {
     height: 60px; }
     .feedback-container .feedback-msg.success {
       background-color: #71c100; }
+
+img.user-avatar {
+  float: left;
+  background-color: #FC6E00;
+  width: 50px;
+  margin: 15px;
+  height: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-clip: padding-box; }
+
+.avatar-tile {
+  background-color: #1C1525;
+  text-align: center;
+  float: left;
+  border: 1px dotted transparent;
+  padding-bottom: 12px; }
+  .avatar-tile.friend-list {
+    width: 14.6%;
+    margin: 1%; }
+  .avatar-tile img.user-avatar {
+    float: none;
+    width: 70px;
+    height: 70px; }
+  .avatar-tile span {
+    width: 80%;
+    display: inline-block; }
+  .avatar-tile:hover {
+    border: 1px dotted #FC6E00; }
+    .avatar-tile:hover img {
+      border: 2px dotted #FC6E00; }
 
 html, body {
   font-family: "Roboto", sans-serif;
@@ -2098,16 +2129,6 @@ html, body {
       margin-top: 5px;
       color: #999; }
 
-img.user-avatar {
-  float: left;
-  background-color: #FC6E00;
-  width: 50px;
-  margin: 15px;
-  height: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  background-clip: padding-box; }
-
 /* ======================== /
 		Edit Profile 
 / ======================== */
@@ -2153,9 +2174,9 @@ img.user-avatar {
 .pure-m-l-10 {
   padding-left: 10px; }
 
-/* ======================== /
-		Edit Profile 
-/ ======================== */
+/* =========================== /
+		Messaging Centers 
+/ ============================ */
 .inbox-list {
   margin-top: 1px;
   overflow: auto; }
@@ -2207,16 +2228,13 @@ img.user-avatar {
   #reply-message .message-list.sent-msg .message-user {
     border: 1px dotted #FC6E00; }
 
-.avatar-tile {
-  background-color: #1C1525;
-  text-align: center;
-  float: left;
-  padding-bottom: 12px; }
-  .avatar-tile.friend-list {
-    width: 14.6%;
-    margin: 1%; }
-  .avatar-tile img {
-    float: none; }
-  .avatar-tile a {
-    width: 90%;
-    display: inline-block; }
+.notification-list li {
+  padding: 25px 20px 25px 15px;
+  text-align: left;
+  font-weight: 300;
+  border-bottom: 1px solid #352746; }
+  .notification-list li .notification-date {
+    float: right;
+    width: 15%;
+    text-align: right;
+    color: #999; }
