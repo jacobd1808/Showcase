@@ -242,14 +242,6 @@ html, body {
 			clear: both;
 			text-align: left;
 			border-top: 1px solid $body-lighten;
-			img { 
-				float: left;
-				background-color: $brand-light-col;
-				width: 50px;
-				margin: 15px;
-				height: 50px;
-				@include rounded(50px);
-			}
 			strong, span { 
 				display: inline-block;
 			}
@@ -322,4 +314,96 @@ html, body {
 }
 .pure-m-l-10 { 
 	padding-left: 10px;
+}
+
+/* =========================== /
+		Messaging Centers 
+/ ============================ */ 
+
+.inbox-list { 
+	margin-top: 1px;
+	overflow: auto;
+	li { 
+		background-color: $body-col;
+		text-align: left;
+		border-bottom: 6px solid $body-darken;
+		padding: 10px 10px 10px 30px;
+		position: relative;
+		&.new .type-col { 
+			@extend .grad;
+		}
+		.type-col { 
+			background-color: $body-lighten;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			span { 
+				@extend .vertical-align;
+				display: inline-block;
+				width: 20px;
+				text-align: center;
+				font-size: 0.8em;
+			}
+		}
+		big, strong, em { 
+			display: block;
+		}
+		big { 
+			color: $brand-light-col;
+			padding-bottom: 10px;
+			border-bottom: 1px solid $body-lighten;
+			font-weight: bold;
+			font-weight: 300;
+		}
+		strong { 
+			padding: 10px 0 5px 0;
+			font-size: 0.8em;
+		}
+		em { 
+			font-size: 0.8em;
+		}
+	}
+}
+#reply-message { 
+	h4 { 
+		color: $brand-light-col;
+		border-bottom: 1px solid $body-lighten-2;
+		padding-bottom: 10px;
+	}
+	.message-list { 
+		padding: 20px 0;
+		//margin-bottom: 20px;
+		border-bottom: 1px solid $body-lighten-2;
+		.message-text { 
+			padding-left: 10px;
+			em { 
+				opacity: 0.2;
+				font-size: 0.8em;
+				display: block;
+				margin-top: 10px;
+			}
+		}
+		&.sent-msg { 
+			.message-user { 
+				border: 1px dotted $brand-light-col;
+			} 
+		}
+	}
+}
+
+
+.notification-list { 
+	li {
+		padding: 25px 20px 25px 15px;
+		text-align: left;
+		font-weight: 300;
+		border-bottom: 1px solid $body-lighten-2;
+		.notification-date { 
+			float: right;
+			width: 15%;
+			text-align: right;
+			color: #999;
+		}
+	}
 }
