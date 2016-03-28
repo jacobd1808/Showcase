@@ -133,24 +133,28 @@
 		// Edit a user profile
 		public function editProfile($data){
 			// SQL Statement
-			$sql = "UPDATE db_profile
-					SET name = :name, surname = :surname, workout_exp = :workout_exp, weight = :weight, height = :height, location = :location
+			$sql = "UPDATE sc_profile
+					SET dob = :dob, goal = :goal, workout_exp = :workout_exp, latitude = :latitude, longitude = :longitude, gym = :gym, body_fat = :body_fat, weight = :weight, bio = :bio 
 					WHERE id = :id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':id', $data[id], PDO::PARAM_STR);
-			$stmt->bindParam(':name', $data[name], PDO::PARAM_STR);
-			$stmt->bindParam(':surname', $data[surname], PDO::PARAM_STR);
-			$stmt->bindParam(':workout_exp', $data[workout_exp], PDO::PARAM_STR);
-			$stmt->bindParam(':weight', $data[weight], PDO::PARAM_STR);
-			$stmt->bindParam(':height', $data[height], PDO::PARAM_STR);
-			$stmt->bindParam(':location', $data[location], PDO::PARAM_STR);
+			$stmt->bindParam(':id', $data['id'], PDO::PARAM_STR);
+			$stmt->bindParam(':dob', $data['dob'], PDO::PARAM_STR);
+			$stmt->bindParam(':goal', $data['goal'], PDO::PARAM_STR);
+			$stmt->bindParam(':workout_exp', $data['workout_exp'], PDO::PARAM_STR);
+			$stmt->bindParam(':latitude', $data['latitude'], PDO::PARAM_STR);
+			$stmt->bindParam(':longitude', $data['longitude'], PDO::PARAM_STR);
+			$stmt->bindParam(':gym', $data['gym'], PDO::PARAM_STR);
+			$stmt->bindParam(':body_fat', $data['body_fat'], PDO::PARAM_STR);
+			$stmt->bindParam(':weight', $data['weight'], PDO::PARAM_STR);
+			$stmt->bindParam(':bio', $data['bio'], PDO::PARAM_STR);
 			// Execute Query
 			if ( $stmt->execute() ){
-				return true;
+				return "yes";
 			} else {
-				return false;
+				$arr = $stmt->errorInfo();
+				print_r($arr);
 			}
 		}
 

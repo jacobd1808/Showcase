@@ -135,8 +135,6 @@
 
         function locationInit() {
           var location = $('#location-check').val(); 
-          var lat = $(this).data('lat');
-          var lat = $(this).data('lat');
           if (location == 1) { 
             locationStatus = 'location';
           } else {  

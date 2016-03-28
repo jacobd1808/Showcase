@@ -23,10 +23,34 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		    echo $data[id];
 			return $Profile->setPreferences($data);
 		break;
+		case 'edit_profile':
+			$data = array(
+				'id' => $_POST['id'],
+				'dob' => $_POST['dob'],
+				'goal' => $_POST['goal'],
+				'workout_exp' => $_POST['workout_exp'],
+				'latitude' => $_POST['latitude'],
+				'longitude' => $_POST['longitude'],
+				'gym' => $_POST['gym'],
+				'body_fat' => $_POST['body_fat'],
+				'weight' => $_POST['weight'],
+				'bio' => $_POST['bio']
+			);
+
+			echo $Profile->editProfile($data);
+		break;
 		case 'check_postcode':
 			$postal_code = $_POST['postal_code'];
 			$coords = $Profile->returnPostalCode($postal_code);
-			return $coords;
+		break;
+		case 'return_address':
+			$latitude = $_POST['latitude'];
+			$longitude = $_POST['longitude'];
+
+			echo json_encode($Profile->returnCoordinates($latitude, $longitude));
+		break;
+		default: 
+			return "bloop";
 		break;
 	}
 }
