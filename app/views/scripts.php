@@ -10,6 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <!-- F7 --> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>       
         <script type="text/javascript" src="lib/sidr/jquery.sidr.min.js"></script>
         <script type='text/javascript' src='lib/tooltipster-master/js/jquery.tooltipster.js' /></script>
         <script type="text/javascript" src="lib/gallery/source/jquery.fancybox.pack.js?v=2.1.5"></script>

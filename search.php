@@ -81,7 +81,6 @@
             <!-- --> 
             <?php 
               foreach($profiles as $x){
-                $x['goals'] =  $Profile->fetchAllGoals($x['id']);
             ?>
                 <script>
                   profiles.push("<?= $x['id'] ?>");
@@ -166,78 +165,64 @@
             $('#location-label').html('Set Distance (Miles)<span> </span>');
           }
         }
+      });
+      
+      var currentGoal = 0;
+      var currentExp = 0;
 
+      var $grid = $('.search-results').isotope({
+         // options
+        itemSelector: '.profile-card',
+        layoutMode: 'fitRows'
+      });
 
-        //  ======================
-        //  Filter Function
-        //  ======================
+      $(".click-tile").click(function(){
 
-        var goal_activated = 0;
-        var exp_activated = 0;
+        var type = $(this).data('type');
+        var goal = $(this).data('code-goal');
 
-        // Click event function 
-        $('.click-tile').click(function() { 
-
-          // Reset the search
-          for( var i = 0; i < profiles.length; i++){
-            $("#profile_" + profiles[i]).show();
-          }
-
-          if($(this).data('type') == 'goal') { 
-
-            var goal_type = $(this).data('code-goal');    
-
-            if ( goal_activated != 0){
-              $("#goal_" + goal_activated).removeClass('active');
-            }
-
-            if ( goal_activated == goal_type ){
-              goal_activated = 0;
-            } else {
-              $(this).addClass('active');
-              goal_activated = goal_type;
-            }
-
-          } else if ($(this).data('type') == 'length') { 
-
-            var exp_type = $(this).data('code-goal');
-
-            if ( exp_activated != 0){
-              $("#exp_" + exp_activated).removeClass('active');
-            }
-
-            if ( exp_activated == exp_type){
-              exp_activated = 0;
-            } else {
-              $(this).addClass('active');
-              exp_activated = exp_type;
-            }
-
-          }
-          filterSearch(goal_activated, exp_activated, profiles);
-
-        });
-
-        function filterSearch(goal, exp, profiles){
-          for( var i = 0; i < profiles.length; i++){
-
-            var person_goal = $("#profile_" + profiles[i]).data('goal');
-            var person_exp = $("#profile_" + profiles[i]).data('exp');
-
-            if ( goal != 0 ){
-              if ( person_goal != goal ){
-                $("#profile_"+ profiles[i]).hide();
-              }
-            }
-            
-            if ( exp != 0 ){
-              if ( person_exp != exp ){
-                $("#profile_" + profiles[i]).hide();
-              }
-            }
-
+        if ( type == 'goal' ){
+          if ( currentGoal == goal ){
+            $("#goal_" + currentGoal).removeClass('active');
+            currentGoal = null;
+          } else {
+            $("#goal_" + currentGoal).removeClass('active');
+            $("#goal_" + goal).addClass('active');
+            currentGoal = goal;
           }
         }
+
+        if ( type == 'length' ){
+          if ( currentExp == goal ){
+            $("#exp_" + currentExp).removeClass('active');
+            currentExp = null;
+          } else {
+            $("#exp_" + currentExp).removeClass('active');
+            $("#exp_" + goal).addClass('active');
+            currentExp = goal;
+          }
+        }
+
+        if ( !currentExp && !currentGoal){
+          $grid.isotope({
+            filter: '*'
+          });
+        } else {
+          $grid.isotope({
+            filter: function(){
+              var r_goal = $(this).data('goal');
+              var r_exp = $(this).data('exp');
+
+              if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp){
+                return true;
+              } else {
+                return false;
+              }
+            }
+          });
+        }
+
+        console.log("Goal:" + currentGoal + " Exp:" + currentExp);
       });
       </script>
     </body>
