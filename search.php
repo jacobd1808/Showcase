@@ -81,21 +81,23 @@
             <!-- --> 
             <?php 
               foreach($profiles as $x){
+                if ( $x['id'] != $profile_info['id']){
             ?>
                 <script>
                   profiles.push("<?= $x['id'] ?>");
                 </script>
                 <div class='profile-card' id='profile_<?= $x['id'] ?>' data-goal='<?= $x['goal'] ?>' data-exp='<?= $x['workout_exp'] ?>'>
-                  <h3 class='model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='3'>
+                  <h3 class='model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='3' data-distance='<? echo $Profile->returnDistance($profile_info['latitude'], $profile_info['longitude'], $x['latitude'], $x['longitude']) ?>'>
                     <?= $x['name'] ?> <?= $x['surname'] ?>
                   </h3>
 
 
                   &nbsp;Workout Experience: <b><?= $Profile->returnExpChar($x['workout_exp']) ?></b><br />
                   &nbsp;Goals: <b><?= $Profile->returnGoalChar($x['goal']) ?></b><br />
+                  &nbsp;Distance: <b><? echo $Profile->returnDistance($profile_info['latitude'], $profile_info['longitude'], $x['latitude'], $x['longitude']) ?></b>
                 </div>
             <?php
-              }
+              } }
             ?>
             <!-- --> 
 
@@ -172,9 +174,12 @@
 
       var $grid = $('.search-results').isotope({
          // options
+        getSortData: { distance: '[data-distance]' },
         itemSelector: '.profile-card',
         layoutMode: 'fitRows'
       });
+
+      $grid.isotope({ sortBy: 'distance', sortAscending: true})
 
       $(".click-tile").click(function(){
 

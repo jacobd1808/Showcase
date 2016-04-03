@@ -5,8 +5,8 @@
 
 
 define( "DB_DATA_SOURCE", "mysql:host=localhost;dbname=ifitness_db" );
-define( "DB_USERNAME", "william" );
-define( "DB_PASSWORD", "password" );
+define( "DB_USERNAME", "root" );
+define( "DB_PASSWORD", "" );
 
 /*
 define( "DB_DATA_SOURCE", "mysql:host=localhost;dbname=ifitness_db" );

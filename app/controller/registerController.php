@@ -32,11 +32,11 @@
         $register_user = $frontPage->registerUser($user_data);
       if (!$register_user) { 
         // If Something goes wrong 
-        $feedback = array( "type" => 'error', "message" => 'Something went wrong' ); 
+        $feedback = array( "type" => 'error', "message" => 'Something went wrong #1' ); 
       } else { 
         $create_profile = $frontPage->createProfile($profile_data, $register_user);
         if (!$create_profile ){
-          $feedback = array( "type" => 'error', "message" => 'Something went wrong' ); 
+          $feedback = array( "type" => 'error', "message" => 'Something went wrong #2' ); 
         } else {
           $_SESSION['ifitness_id'] = $register_user;
           header("Location: index.php");
