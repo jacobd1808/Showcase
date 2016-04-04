@@ -2238,3 +2238,32 @@ html, body {
     width: 15%;
     text-align: right;
     color: #999; }
+
+/* =========================== /
+		Feed 
+/ ============================ */
+.feed {
+  width: 68%;
+  float: left;
+  padding: 15px; }
+  .feed .feed-post {
+    float: left;
+    width: 100%;
+    background-color: #150f1b;
+    margin: 10px 0; }
+    .feed .feed-post .feed-post-title {
+      float: left;
+      width: 100%; }
+      .feed .feed-post .feed-post-title .feed-avatar {
+        width: 30px;
+        height: 30px;
+        float: left;
+        margin: 8px; }
+      .feed .feed-post .feed-post-title span {
+        margin: 13px 7px;
+        display: inline-block; }
+
+.feed-notices {
+  width: 30%;
+  float: right;
+  margin-left: 2%; }
