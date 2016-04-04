@@ -278,7 +278,6 @@
 
       function refreshFilter(that){
 
-        console.log("yes");
         distanceSlider = $("#distance-slider").slider("value");
         var type = $(that).data('type');
         var goal = $(that).data('code-goal');
@@ -310,7 +309,7 @@
             filter: function(){
               var r_distance = $(this).data('distance');
 
-              if ( r_distance <= distanceSlider / 10){
+              if ( r_distance <= distanceSlider){
                 return true;
               } else {
                 return false;
@@ -324,10 +323,8 @@
               var r_exp = $(this).data('exp');
               var r_distance = $(this).data('distance');
 
-              console.log(r_distance);
-
               if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
-                if ( r_distance <= distanceSlider / 10){
+                if ( r_distance <= distanceSlider){
                   return true;
                 } else {
                   return false;
