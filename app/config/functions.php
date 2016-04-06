@@ -7,7 +7,7 @@ $goals = array(
     array("Loose Fat", "2"),
     array("Increase Strength", "3"), 
     array("Improve Performance", "4"),
-    array("General Health and Wellbeight", "5"),
+    array("General Health and Wellbeing", "5"),
 );
 
 $experience = array(

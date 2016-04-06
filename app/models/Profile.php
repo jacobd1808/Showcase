@@ -15,13 +15,23 @@
     		return explode(",",$a->formatted_address);
 		}
 
+		// Return Distance from Location
+		public function returnDistance($lat_1, $long_1, $lat_2, $long_2){
+			$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=$lat_1,$long_1&destinations=$lat_2,$long_2&mode=driving&key=AIzaSyBpnDemMPmCFjpy-AqKtlrSpQo7QNgqAKk";
+   			$curlData = file_get_contents($url);
+    		$address = json_decode($curlData);
+			$a = $address->rows[0];
+			$b = $a->elements[0];
+			return json_encode($b->distance->value);
+		}
+
 		public function returnPostalCode($postal_code){
 			$postal_code = explode(" ", $postal_code);
 			$url = "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:$postal_code[0]+$postal_code[1]&api=AIzaSyAtWI7CUtECvJEr5xHn-h7cT0JEQXc93zc";
 			$curlData = file_get_contents( $url);
 			$address = json_decode($curlData);
 			$a = $address->results[0];
-			return $a->geometry->viewport->northeast;
+			return json_encode($a->geometry->viewport->northeast);
 		}
 
 		public function returnLocation($lat,$long){

@@ -17,6 +17,8 @@
     <?php include_once "app/views/meta.php";?>
     </head>
     <body>
+      <div id='fixed-bg'> </div>
+      <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
           <div class='friends-list m-25 modulated-box'> 
@@ -31,7 +33,7 @@
               <div class='clear'> </div>
             </div>
           </div>
-
+        </div>
       </div>
       <?php include_once "app/views/scripts.php"; ?>
       <script> 

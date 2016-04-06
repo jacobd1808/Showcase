@@ -160,6 +160,11 @@
 			method : 'POST',
 			success : function(data){
 				x.html("Postal Code: <b>" + postal_code + "</b>");
+				var results = jQuery.parseJSON(data);
+				x.html(results['lat'] +", "+ results['lng']);
+				latitude = results['lat'];
+				longitude = results['lng'];
+				checkAll2();
 			}
 		});
 	}
@@ -179,6 +184,7 @@
 	}
 
 	function checkAll2(){
+
 		if ( goalCheck && expCheck && geoCheck){
 		$.ajax({
 			url : "app/controller/ajaxController.php", 

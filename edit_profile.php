@@ -17,6 +17,8 @@
 		<?php include_once "app/views/meta.php";?>
     </head>
     <body>
+      <div id='fixed-bg'> </div>
+      <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
         <div class='m-25'>
@@ -135,6 +137,7 @@
         </div>
         <div class='clear'> </div>
       </div>
+    </div>
     	<?php include_once "app/views/scripts.php"; ?>
       <script>
         var id = <?= $profile_info['id'] ?>;

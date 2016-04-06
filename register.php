@@ -21,7 +21,8 @@
     <head>
 		<?php include_once "app/views/meta.php"; ?>
     </head>
-    <body>
+      <div id='fixed-bg'> </div>
+      <div id='main-content'>
       <div class='view' style='margin: 0'> 
         <div class='homepage-info vert-center'> 
             <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
@@ -78,6 +79,7 @@
           </fieldset>
         </form>
       </div>
+    </div>
     	<?php include_once "app/views/scripts.php"; ?>
       <script> 
       $( document ).ready(function() {

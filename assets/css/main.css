@@ -1934,10 +1934,20 @@ html, body {
   color: black;
   font-size: 100%;
   height: 100%;
-  font-weight: 300;
+  font-weight: 300; }
+
+#fixed-bg {
   background-image: url("../img/backgrounds/02.jpeg");
   background-size: 100%;
-  background-color: #1C1525; }
+  background-color: #1C1525;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  height: 100%; }
+
+#main-content {
+  position: relative;
+  z-index: 10; }
 
 /* =================== /
 		Register
@@ -2025,9 +2035,50 @@ html, body {
   width: 66%; }
   .search-results .profile-card {
     width: 48%;
+    cursor: pointer;
     float: left;
     margin: 10px 1%;
-    border: 1px solid #FC6E00; }
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+    border: 1px dotted #FC6E00; }
+    .search-results .profile-card h3 {
+      -webkit-transition: all 100ms ease-in-out;
+      -moz-transition: all 100ms ease-in-out;
+      -o-transition: all 100ms ease-in-out;
+      transition: all 100ms ease-in-out; }
+    .search-results .profile-card .card-info {
+      text-align: center;
+      background-color: #150f1b; }
+      .search-results .profile-card .card-info strong {
+        display: block;
+        font-size: 0.8em;
+        margin: 10px 0; }
+      .search-results .profile-card .card-info .click-tile {
+        border: 1px dotted #352746; }
+      .search-results .profile-card .card-info .location-row {
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        display: block; }
+    .search-results .profile-card .card-avatar {
+      text-align: center; }
+      .search-results .profile-card .card-avatar img {
+        float: none; }
+      .search-results .profile-card .card-avatar em {
+        font-size: 0.7em;
+        color: #999;
+        display: block; }
+        .search-results .profile-card .card-avatar em span {
+          display: block;
+          font-size: 1.2em;
+          margin-top: 5px; }
+    .search-results .profile-card:hover {
+      -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75); }
+      .search-results .profile-card:hover h3 {
+        color: #FC6E00; }
 
 /* =================== /
 		Profile
@@ -2267,3 +2318,15 @@ html, body {
   width: 30%;
   float: right;
   margin-left: 2%; }
+  .feed-notices .mini-tile {
+    margin: 10px;
+    border: 1px dotted #FC6E00;
+    text-align: center; }
+    .feed-notices .mini-tile strong {
+      font-size: 0.8em;
+      display: block;
+      margin: 5px; }
+    .feed-notices .mini-tile img {
+      float: none; }
+    .feed-notices .mini-tile .rec-tile {
+      background-color: #1C1525; }
