@@ -22,6 +22,12 @@
 ?>
 
 <div class='modulated-box vert-center-popup' id='popup-content'> 
+	<div id='profile-container'> 
+	<!-- POPULATE --> Hello
+	</div>
+</div>
+
+<script id="profile-template" type="text/x-handlebars-template">
 	<div class='pure-g' id='profile'>
 		<div class='pure-u-5-24 main-info-col'>
 			<div class='main-info-col'>
@@ -60,7 +66,9 @@
 				<div class='profile-section'> 
 					<strong> Main Information </strong>
 					<ul class='main-info-section'> 
-						<li> <span> Date Joined </span> 19 . 02 . 16 </li>
+						<!-- LIKE THIS --> 
+						<li> <span> Date Joined </span> {{ type }} </li>
+						<!-- --> 
 						<li> <span> Hometown </span> <?= $Profile->returnLocation($info['latitude'], $info['longitude']) ?>  </li>
 						<li> <span> Current Gym </span>  Huddersfield Leisure Center </li>
 						<li> <span> Current Weight </span>  170 Lb / 77kg </li>
@@ -127,4 +135,4 @@
 			</ul>
 		</div>
 	</div>
-</div>
+</script>

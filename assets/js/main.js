@@ -41,13 +41,15 @@ $(function() {
 	$('body').on('click', '.model-popup', function(){
 		var content = $(this).data('content');
 		var title = $(this).data('title');
-		if($(this).attr('data-profile-id')) { 
-			loadProfileData($(this).data('profile-id'));
-		}
+		var id = $(this).data('profile-id');
 		$('body').append('<div class="model-bg" id="model"> </div>');
 		$('#model').load( "app/views/popups/"+content+".php", function() {
 			$('#model').fadeIn(250);
 			$('#popup-content').prepend('<h1 class="removeHeader"> '+title+'<span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+			// Load Content if Profile 
+			if(id) { 
+				loadProfileData(id);
+			}
 			var alignElem = $('.vert-center-popup');
 			setEleHeight();
 			setImageHeight()
@@ -75,8 +77,31 @@ $(function() {
 	}
 
 	function loadProfileData(id) { 
-		// NEED AJAX FUNCTION TO FETCH USERNAME BY ID 
-		// Will need to populate using JS .. 
+
+		var data = {type:"Fiat", model:"500", color:"white"};
+
+
+		$('#profile-container').empty();
+	    var source   = $("#profile-template").html();
+		var template = Handlebars.compile(source);
+		$('#profile-container').append(template(data));
+		
+		/*$.ajax({
+			method: 'GET', 
+			url : "http://api.nytimes.com/svc/search/v2/articlesearch",
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+				$('#standings-table').empty();
+			    var source   = $("#standings-template").html();
+				var template = Handlebars.compile(source);
+				$('#standings-table').append(template(data[key]));
+			},
+			error: function() { 
+				console.log('error loading data');
+			}
+		});
+		*/
 	}
 
 	defaultPopup();
@@ -106,7 +131,7 @@ $(function() {
 	/* ====================================
 		Tooltips 
 	===================================== */ 
-
+	/*
 	 $('body').on('mouseover mouseout', '.tooltip', function(e) {
 	    $('.tooltip.left-tooltip').tooltipster({
 	       speed: 100,
@@ -136,6 +161,7 @@ $(function() {
 		   theme: 'cust-tooltip'
 		});
 	});
+	*/
 	/* ====================================
 		Fancy Box Gallery 
 	===================================== */  
