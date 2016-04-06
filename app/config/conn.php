@@ -17,8 +17,8 @@ define( "DB_PASSWORD", "" );
 
 function __autoload($class) {
 	// rename $folder to where ever your working folder is 
-	//$folder = '/ifitness';
-	$folder = '/showcase';
+	$folder = '/ifitness';
+	//$folder = '/showcase';
 	require_once($_SERVER['DOCUMENT_ROOT'].$folder."/app/models/$class.php");
 }
 

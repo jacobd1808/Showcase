@@ -89,7 +89,7 @@
                   profiles.push("<?= $x['id'] ?>");
                 </script>
 
-                <div class='profile-card pure-g model-popup ' id='profile_<?= $x['id'] ?>' 
+                <div class='profile-card pure-g model-popup ' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
                      data-distance='0' 
                      data-goal='<?= $x['goal'] ?>' 
                      data-exp='<?= $x['workout_exp'] ?>' 

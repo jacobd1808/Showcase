@@ -158,6 +158,19 @@
 			// Fill
 		}
 
+		public function fetchSimpleFriendsList($id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_rel WHERE user_id=$id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			} else{
+				return "test";
+			}
+		}
+
 		public function fetchFriendList($id){
 			// SQL Statement
 			$sql = "SELECT * FROM sc_rel WHERE user_1='$id'";

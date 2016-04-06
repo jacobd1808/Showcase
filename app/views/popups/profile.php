@@ -7,18 +7,6 @@
 	$Rel = new Relation($conn);
 
 	$info = $Profile->fetchProfile($_SESSION['ifitness_id']);
-
-	switch($info['gender']){
-		case 1:
-			$info['gender'] = "male";
-			break;
-		case 2:
-			$info['gender'] = "female";
-			break;
-		case 3:
-			$info['gender'] = "other";
-			break;
-	}
 ?>
 
 <div class='modulated-box vert-center-popup' id='popup-content'> 
@@ -35,14 +23,14 @@
 				<ul class='basic-list'> 
 					<li class='first-tile'> 
 						<strong> Age </strong> 
-						<div class='click-tile gender-tile tooltip bottom-tooltip' title="<?= $info['age'] ?> Years Old"> 
-                  			<div class='vertical-align'><?= $info['age'] ?></div>
+						<div class='click-tile gender-tile tooltip bottom-tooltip' title="{{ age }} Years Old"> 
+                  			<div class='vertical-align'>{{ age }}</div>
                 		</div> 
 					</li>
 					<li class='second-tile'> 
 						<strong> Gender </strong> 
-						<div class='click-tile gender-tile tooltip bottom-tooltip' title="<?= $info['gender'] ?>"> 
-                  			<i class="fa fa-<?= $info['gender'] ?>"></i>
+						<div class='click-tile gender-tile tooltip bottom-tooltip' title="{{ d_gender }}"> 
+                  			<i class="fa fa-{{ gender }}"></i>
                 		</div> 
 					</li>
 					<li class='third-tile'> 
@@ -66,36 +54,17 @@
 				<div class='profile-section'> 
 					<strong> Main Information </strong>
 					<ul class='main-info-section'> 
-						<!-- LIKE THIS --> 
-						<li> <span> Date Joined </span> {{ type }} </li>
-						<!-- --> 
-						<li> <span> Hometown </span> <?= $Profile->returnLocation($info['latitude'], $info['longitude']) ?>  </li>
-						<li> <span> Current Gym </span>  Huddersfield Leisure Center </li>
-						<li> <span> Current Weight </span>  170 Lb / 77kg </li>
-						<li> <span> Current Body Fat %</span>  15% </li>
+						<li> <span> Date Joined </span> {{ register_date }} </li>
+						<li> <span> Hometown </span> {{ location }} </li>
+						<li> <span> Current Gym </span>  {{ gym }} </li>
+						<li> <span> Current Weight </span>  {{ weight_lb }} Lb / {{ weight_kg }}kg </li>
+						<li> <span> Current Body Fat %</span>  {{ body_fat }}% </li>
 					</ul>
 				</div>
 				<div class='profile-section'> 
 					<strong> Personal Bio </strong>
 					<div class='bio-section'> 
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
-						<p> Some Test Paragraph</p>
+						{{{ bio }}}
 					</div>
 				</div>
 				<div class='profile-section'> 
@@ -125,13 +94,13 @@
 			<div class='heading no-border l-align removeHeader' id='friendHeader'> Friends </div>
 			<ul class='basic-list vert-list profile-member-list scriptHeight' 
 				data-parent-ele='popup-content' data-remove-ele='removeHeader'> 
-				<?php for($i = 0; $i < 10; $i++ ) { ?>
+				{{#each friends}}
 				<li> 
 					<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/> 
-					<strong> Jacob Dickinson </strong>
-					<span> Friend since xx xx xx </span>
+					<strong> {{ friend_name }} {{ friend_lastname }} </strong>
+					<span> Friend since {{ friend_date }} </span>
 				</li>
-				<? } ?>
+				{{/each}}
 			</ul>
 		</div>
 	</div>

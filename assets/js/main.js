@@ -53,7 +53,7 @@ $(function() {
 			var alignElem = $('.vert-center-popup');
 			setEleHeight();
 			setImageHeight()
-			alignToVerticalCenter(alignElem); 
+			// alignToVerticalCenter(alignElem); 
 		});
 	});
 
@@ -79,29 +79,42 @@ $(function() {
 	function loadProfileData(id) { 
 
 		var data = {type:"Fiat", model:"500", color:"white"};
-
-
-		$('#profile-container').empty();
-	    var source   = $("#profile-template").html();
-		var template = Handlebars.compile(source);
-		$('#profile-container').append(template(data));
 		
-		/*$.ajax({
-			method: 'GET', 
-			url : "http://api.nytimes.com/svc/search/v2/articlesearch",
-			dataType: 'json',
+		$.ajax({
+			method: 'POST', 
+			url : "app/controller/ajaxController.php",
+         	 data : { action: 'fetch_profile', user_id: id },
 			success: function(data) {
-				console.log(data);
-				$('#standings-table').empty();
-			    var source   = $("#standings-template").html();
+   		        var results = jQuery.parseJSON(data);
+
+   		        // Adjust weigh in KG
+   		        results['weight_kg'] = results['weight'] / 2.2046;
+   		        // Adjust gender
+   		        if ( results['gender'] == 1){
+   		        	results['gender'] = "male";
+   		        	results['d_gender'] = "Male";
+   		        } else if( results['gender'] == 2){
+   		        	results['gender'] = "female";
+   		        	results['d_gender'] = "Female";
+   		        }
+
+   		        if (!results['friends'][1]){
+   		        	results['friends'] = { 1: { friend_name: 'This user has no friends, send him a friend request!' } };
+   		        }
+
+   		        console.log(results['friends']);
+
+   		        var data = { age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'] };
+
+				$('#profile-container').empty();
+			    var source   = $("#profile-template").html();
 				var template = Handlebars.compile(source);
-				$('#standings-table').append(template(data[key]));
+				$('#profile-container').append(template(data));
 			},
 			error: function() { 
 				console.log('error loading data');
 			}
 		});
-		*/
 	}
 
 	defaultPopup();

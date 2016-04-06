@@ -1,29 +1,14 @@
+<?php 
+  	include "../../../app/config/checkSession.php";
+	include "../../../app/config/conn.php"; 
+?>
+
 <div class='modulated-box vert-center-popup' id='popup-content'> 
 	<div class='pure-g'>
 		<div class='pure-u-7-24'> 
 			<div class='heading left-border l-align removeHeader'> Inbox </div>
-			<ul class='inbox-list basic-list vert-list scriptHeight'
+			<ul class='inbox-list basic-list vert-list scriptHeight' id='inbox-list'
 				data-parent-ele='popup-content' data-remove-ele='removeHeader'>
-			<?php for($i = 0; $i < 2; $i++ ) { ?> 
-				<li class='new'> 
-					<div class='type-col tooltip left-tooltip' title='Sent Message'> 
-						<span> S </span>
-					</div>
-					<big> Hi and Welcome to FitConnect </big> 
-					<strong> Jacob Dickinson </strong>
-					<em> 2 Hours Ago </em>
-				</li>
-			<? } ?>
-			<?php for($i = 0; $i < 5; $i++ ) { ?> 
-				<li> 
-					<div class='type-col tooltip left-tooltip' title='Sent Message'> 
-						<span> S </span>
-					</div>
-					<big> Hi and Welcome to FitConnect </big> 
-					<strong> Jacob Dickinson </strong>
-					<em> 2 Hours Ago </em>
-				</li>
-			<? } ?>
 			</ul>
 		</div>
 		<div class='pure-u-17-24'> 
@@ -90,3 +75,48 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$( document ).ready(function() { 
+		var user_id = <?= $_SESSION['ifitness_id'] ?>;
+
+		getInbox(user_id);
+
+	});
+
+	function getInbox(user_id){
+		$.ajax({
+			url : "app/controller/inboxController.php", 
+			data : { action: 'get_inbox', user_id: user_id},
+			method : 'POST', 
+			success : function(data){
+				var results = jQuery.parseJSON(data);
+				results.forEach(function(x){
+					var name = getName(x['last_sender']);	
+					$("#inbox-list").append(" \
+					<li> \
+						<div class='type-col tooltip left-tooltip' title='"+ x['title'] +"'> \
+							<span> S </span> \
+						</div> \
+						<big> " + x['title'] +" </big> \
+						<strong> " + name + "</strong> \
+						<em> 2 Hours Ago </em> \
+					</li>");
+				});
+			}
+		});			
+	};
+
+	function getName(user_id){
+		$.ajax({
+			url : "app/controller/inboxController.php",
+			data: { action: 'get_name', user_id: user_id},
+			method: 'POST',
+			success: function(data){
+				var results = jQuery.parseJSON(data);
+				console.log(results['name']);
+			}
+		});
+	}
+
+</script>

@@ -3,6 +3,7 @@
 	include "../config/conn.php";
 
 	$Profile = new Profile($conn);
+	$Relation = new Relation($conn);
 	$User = new User($conn);
 
 if(isset($_POST['action']) && !empty($_POST['action'])) {
@@ -49,6 +50,12 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
 			echo json_encode($Profile->returnCoordinates($latitude, $longitude));
 		break;
+		case 'fetch_profile':
+			$user_id = $_POST['user_id'];
+			$results = $Profile->fetchProfile($user_id);
+			$results['location'] = $Profile->returnLocation($results['latitude'], $results['longitude']);
+			$results['friends'] = $Relation->fetchSimpleFriendsList($user_id);
+			echo json_encode($results);
 		default: 
 			return "bloop";
 		break;

@@ -25,7 +25,7 @@
 			if ($stmt->execute()){
 
 				// Eventually include AUTO Login or something
-				return $this->conn->lastInsertId();;
+				return $this->conn->lastInsertId();
 			} else {
 
 				// Shit went wrong dawg
