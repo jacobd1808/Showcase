@@ -132,59 +132,6 @@ html, body {
 .search-results { 
 	float: left;
 	width: 66%;
-	.profile-card { 
-		width: 48%;
-		cursor: pointer;
-		float: left;
-		margin: 10px 1%;
-		@extend .modulated-box;
-		@include animate(100ms);
-		border: 1px dotted $brand-light-col;
-		h3 { 
-			@include animate(100ms);
-		}
-		.card-info {
-			text-align: center;
-			background-color: $body-darken; 
-			strong  {
-				display: block;
-				font-size: 0.8em;
-				margin: 10px 0;
-			}
-			.click-tile { 
-				border: 1px dotted $body-lighten-2;
-			}
-			.location-row { 
-				margin-bottom: 10px;
-				font-size: 0.9em;
-				display: block;
-			}
-		}
-		.card-avatar { 
-			text-align: center;
-			img { 
-				float: none;
-			}
-			em { 
-				font-size: 0.7em;
-				color: #999;
-				display: block;
-				span { 
-					display: block;
-					font-size: 1.2em;
-					margin-top: 5px;
-				}
-			}
-		}
-		&:hover { 
-			-webkit-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			-moz-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			h3 { 
-				color: $brand-light-col;
-			}
-		}
-	}
 }
 
 /* =================== /
@@ -471,25 +418,57 @@ html, body {
 .feed { 
 	width: 68%;
 	float: left;
-	padding: 15px;
 	.feed-post { 
 		float: left;
 		width: 100%;
-		background-color: $body-darken;
 		margin: 10px 0;
+		padding: 5px;
+		background-color: $body-darken;
 		.feed-post-title { 
 			float: left;
 			width: 100%;
 			.feed-avatar { 
-				width: 30px;
-				height: 30px;
+				width: 50px;
+				height: 50px;
 				float: left;
 				margin: 8px;
 			}
-			span { 
-				margin: 13px 7px;
+			span.feed-name { 
+				margin: 12px 7px;
 				display: inline-block;
+				color: white;
+				font-size: 1.2em;
+				@extend .header-font;
+				small { 
+					display: block;
+					font-size: 0.6em;
+					opacity: 0.8;
+					@extend .base-font;
+				}
 			}
+			span.feed-like { 
+				float: right;
+				color: white;
+				padding: 13px; 
+				cursor: pointer;
+				i { 
+					margin-left: 4px;
+				}
+				&:hover, &.liked { 
+					color: $brand-light-col;
+				}
+			}
+			hr { 
+				height: 1px;
+				margin: 0;
+				border: 1px solid $body-lighten;
+			}
+		}
+		.feed-post-content { 
+			color: white;
+			float: left;
+			width: 100%;
+			margin: 15px 15px 15px 70px;
 		}
 	}
 }
@@ -512,5 +491,23 @@ html, body {
 		.rec-tile { 
 			background-color: $body-col;
 		}
+	}
+}
+
+.feed-add { 
+	background-color: $body-lighten;
+	border: 1px dotted $brand-light-col;
+	img { 
+		float: left;
+		clear: none;
+	}
+	button, textarea { 
+		width: 86.8%;
+		float: right;
+		margin: 10px 10px 10px 0;
+		display: inline-block;
+	}
+	button { 
+		margin-top: 0;
 	}
 }

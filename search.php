@@ -100,7 +100,8 @@
                      data-profile-id='<?= $x['id'] ?>'
                 >
                   <h3 class='pure-u-1-1'>
-                    <?= $x['name'] ?> <?= $x['surname'] ?>
+                    <span class='title-text'><?= $x['name'] ?> <?= $x['surname'] ?></span>
+                    <div class='add-friend-btn'> <span> Add </span><i class="fa fa-plus-circle"></i></div>
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
                     <img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>

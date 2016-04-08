@@ -76,6 +76,10 @@ $brand-light-col: #FC6E00;
 	font-family: $condensed-font;
 	text-transform: uppercase;
 }
+.base-font { 
+	font-family: $body-font; 
+	text-transform: none;
+}
 a:link, a:active, a:visited, .hover { 
 	@include animate(100ms);
 	color: white;
@@ -94,6 +98,7 @@ h1, h2, h3, h4, h5 {
 	font-size: 1.4em;
 	font-weight: 300;
 	text-align: left;
+	position: relative;
 }
 h1 { 
 	@extend .grad;

@@ -134,9 +134,13 @@
 .scriptHeight {
   overflow: auto; }
 
-.header-font, .click-tile.action-btn, #profile .main-info-col ul li strong, #profile .about-container .profile-section strong, #profile .about-container .profile-section .main-info-section li span {
+.header-font, .click-tile.action-btn, #profile .main-info-col ul li strong, #profile .about-container .profile-section strong, #profile .about-container .profile-section .main-info-section li span, .feed .feed-post .feed-post-title span.feed-name {
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase; }
+
+.base-font, .feed .feed-post .feed-post-title span.feed-name small {
+  font-family: "Roboto", sans-serif;
+  text-transform: none; }
 
 a:link, a:active, a:visited, .hover {
   -webkit-transition: all 100ms ease-in-out;
@@ -157,7 +161,8 @@ h1, h2, h3, h4, h5 {
   margin: 0;
   font-size: 1.4em;
   font-weight: 300;
-  text-align: left; }
+  text-align: left;
+  position: relative; }
 
 h1 {
   padding: 15px; }
@@ -1757,7 +1762,7 @@ header {
 .view {
   margin-right: 290px; }
 
-.modulated-box, .search-results .profile-card {
+.modulated-box, .profile-card {
   background-color: #281e35;
   border: 0;
   color: white; }
@@ -1927,6 +1932,77 @@ img.user-avatar {
     .avatar-tile:hover img {
       border: 2px dotted #FC6E00; }
 
+.profile-card {
+  width: 48%;
+  cursor: pointer;
+  float: left;
+  margin: 10px 1%;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+  border: 1px dotted #FC6E00; }
+  .profile-card h3 {
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out; }
+  .profile-card .card-info {
+    text-align: center;
+    background-color: #150f1b; }
+    .profile-card .card-info strong {
+      display: block;
+      font-size: 0.8em;
+      margin: 10px 0; }
+    .profile-card .card-info .click-tile {
+      border: 1px dotted #352746; }
+    .profile-card .card-info .location-row {
+      margin-bottom: 10px;
+      font-size: 0.9em;
+      display: block; }
+  .profile-card .card-avatar {
+    text-align: center; }
+    .profile-card .card-avatar img {
+      float: none; }
+    .profile-card .card-avatar em {
+      font-size: 0.7em;
+      color: #999;
+      display: block; }
+      .profile-card .card-avatar em span {
+        display: block;
+        font-size: 1.2em;
+        margin-top: 5px; }
+  .profile-card:hover {
+    -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75); }
+    .profile-card:hover h3 span.title-text {
+      color: #FC6E00; }
+
+.add-friend-btn {
+  float: right;
+  font-size: 0.7em;
+  margin-top: 3px;
+  cursor: pointer;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  position: absolute;
+  right: 0;
+  top: -3px; }
+  .add-friend-btn span {
+    display: inline-block;
+    margin: 0px 7px 0 0;
+    float: left; }
+  .add-friend-btn i {
+    font-size: 1.4em; }
+  .add-friend-btn:hover {
+    color: #FC6E00;
+    background-color: rgba(0, 0, 0, 0.8); }
+
 html, body {
   font-family: "Roboto", sans-serif;
   padding: 0;
@@ -2033,52 +2109,6 @@ html, body {
 .search-results {
   float: left;
   width: 66%; }
-  .search-results .profile-card {
-    width: 48%;
-    cursor: pointer;
-    float: left;
-    margin: 10px 1%;
-    -webkit-transition: all 100ms ease-in-out;
-    -moz-transition: all 100ms ease-in-out;
-    -o-transition: all 100ms ease-in-out;
-    transition: all 100ms ease-in-out;
-    border: 1px dotted #FC6E00; }
-    .search-results .profile-card h3 {
-      -webkit-transition: all 100ms ease-in-out;
-      -moz-transition: all 100ms ease-in-out;
-      -o-transition: all 100ms ease-in-out;
-      transition: all 100ms ease-in-out; }
-    .search-results .profile-card .card-info {
-      text-align: center;
-      background-color: #150f1b; }
-      .search-results .profile-card .card-info strong {
-        display: block;
-        font-size: 0.8em;
-        margin: 10px 0; }
-      .search-results .profile-card .card-info .click-tile {
-        border: 1px dotted #352746; }
-      .search-results .profile-card .card-info .location-row {
-        margin-bottom: 10px;
-        font-size: 0.9em;
-        display: block; }
-    .search-results .profile-card .card-avatar {
-      text-align: center; }
-      .search-results .profile-card .card-avatar img {
-        float: none; }
-      .search-results .profile-card .card-avatar em {
-        font-size: 0.7em;
-        color: #999;
-        display: block; }
-        .search-results .profile-card .card-avatar em span {
-          display: block;
-          font-size: 1.2em;
-          margin-top: 5px; }
-    .search-results .profile-card:hover {
-      -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-      box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75); }
-      .search-results .profile-card:hover h3 {
-        color: #FC6E00; }
 
 /* =================== /
 		Profile
@@ -2295,24 +2325,48 @@ html, body {
 / ============================ */
 .feed {
   width: 68%;
-  float: left;
-  padding: 15px; }
+  float: left; }
   .feed .feed-post {
     float: left;
     width: 100%;
-    background-color: #150f1b;
-    margin: 10px 0; }
+    margin: 10px 0;
+    padding: 5px;
+    background-color: #150f1b; }
     .feed .feed-post .feed-post-title {
       float: left;
       width: 100%; }
       .feed .feed-post .feed-post-title .feed-avatar {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         float: left;
         margin: 8px; }
-      .feed .feed-post .feed-post-title span {
-        margin: 13px 7px;
-        display: inline-block; }
+      .feed .feed-post .feed-post-title span.feed-name {
+        margin: 12px 7px;
+        display: inline-block;
+        color: white;
+        font-size: 1.2em; }
+        .feed .feed-post .feed-post-title span.feed-name small {
+          display: block;
+          font-size: 0.6em;
+          opacity: 0.8; }
+      .feed .feed-post .feed-post-title span.feed-like {
+        float: right;
+        color: white;
+        padding: 13px;
+        cursor: pointer; }
+        .feed .feed-post .feed-post-title span.feed-like i {
+          margin-left: 4px; }
+        .feed .feed-post .feed-post-title span.feed-like:hover, .feed .feed-post .feed-post-title span.feed-like.liked {
+          color: #FC6E00; }
+      .feed .feed-post .feed-post-title hr {
+        height: 1px;
+        margin: 0;
+        border: 1px solid #281e35; }
+    .feed .feed-post .feed-post-content {
+      color: white;
+      float: left;
+      width: 100%;
+      margin: 15px 15px 15px 70px; }
 
 .feed-notices {
   width: 30%;
@@ -2330,3 +2384,17 @@ html, body {
       float: none; }
     .feed-notices .mini-tile .rec-tile {
       background-color: #1C1525; }
+
+.feed-add {
+  background-color: #281e35;
+  border: 1px dotted #FC6E00; }
+  .feed-add img {
+    float: left;
+    clear: none; }
+  .feed-add button, .feed-add textarea {
+    width: 86.8%;
+    float: right;
+    margin: 10px 10px 10px 0;
+    display: inline-block; }
+  .feed-add button {
+    margin-top: 0; }
