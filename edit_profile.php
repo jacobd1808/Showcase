@@ -6,8 +6,8 @@
 	$pageOpt = array(
 		"title"			    =>	"FitConnect", 
 		'navName' 		  	=> 	"edit_profile", 
-		'cssIncludes'	  	=>	" ", 
-		"jsIncludes"	 	=>	" ",
+		'cssIncludes'	  	=>	'<link rel="stylesheet" href="lib/dropzone/basic.css" type="text/css" /><link rel="stylesheet" href="lib/croppic/assets/css/croppic.css">', 
+		"jsIncludes"	 	=>	"<script type='text/javascript' src='lib/dropzone/dropzone.js' /></script><script src='lib/croppic/croppic.min.js'></script>",
 	);
 
 
@@ -24,18 +24,23 @@
         <div class='m-25'>
           <div class='edit-profile-main modulated-box'> 
             <h2> Profile Content </h2>
+            <!-- --> 
+            <div class='outcome' id='outcomeMsg'></div>
+            <!-- --> 
             <form action='' method='POST' class='pure-g p-10'>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_dd">Date of Birth <span></span></label>
-                <input type='text' name='u_dd' id='u_dd' class='small-input' placeholder='<?= $dob[2] ?>'/>
-                <input type='text' name='u_mm' id='u_mm' class='small-input' placeholder='<?= $dob[1] ?>'/>
-                <input type='text' name='u_yy' id='u_yy' class='small-input' placeholder='<?= $dob[0] ?>'/>
+                <input type='text' name='u_dd' id='u_dd' class='small-input' placeholder='DD' value='<?= $dob[2] ?>'/>
+                <input type='text' name='u_mm' id='u_mm' class='small-input' placeholder='MM' value='<?= $dob[1] ?>'/>
+                <input type='text' name='u_yy' id='u_yy' class='small-input' placeholder='YYYY' value='<?= $dob[0] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
-                 <label for="u_dd">Upload Profile Picture <span></span></label>
-                 <div class='click-tile tooltip right-tooltip full-width-tile action-btn' title='Gets your devices current location' style='width: auto'> 
-                      <span> Upload</span>
-                 </div>
+                  <label for="u_dd">Upload Profile Picture <span></span></label>
+                  <div class='avatar-upload-area'> 
+                    <img src='assets/img/avatars/cropped/<?= $profile_info['avatar_url'] ?>' alt='user avatar' class='user-avatar displayAvatar'/>
+                    <div id="avatarCrop"></div>
+                  </div>
+                  <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?= $profile_info['avatar_url'] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_location">Goals <span></span></label>
@@ -89,16 +94,16 @@
               </div>
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_gym">Current Gym <span></span></label>
-                <input type='text' name='u_gym' id='u_gym' placeholder='<?= $profile_info['gym'] ?>'/>
+                <input type='text' name='u_gym' id='u_gym' placeholder='Name of gym' value='<?= $profile_info['gym'] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10 relative">
                 <label for="u_weight">Current Weight <span></span></label>
-                <input type='text' name='u_weight' id='u_weight' placeholder='<?= $profile_info['weight'] ?>'/>
+                <input type='text' name='u_weight' id='u_weight' placeholder='' value='<?= $profile_info['weight'] ?>'/>
                 <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='weight-type' title='Click to change to Pounds' data-type='KG'> <span>KG</span> </div>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                 <label for="u_bodyfat">Current Body Fat % <span></span></label>
-                <input type='text' name='u_bodyfat' id='u_bodyfat' placeholder='<?= $profile_info['body_fat']?>%'/>
+                <input type='text' name='u_bodyfat' id='u_bodyfat' placeholder='%' value='<?= $profile_info['body_fat']?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_bodyfat"> Personal Bio <span></span></label>
@@ -110,27 +115,16 @@
             </form>
           </div>
           <div class='edit-profile-images modulated-box'>
-            <h2> Gallery Manager </h2>
-            <div class='p-10'>
-              <div class='click-tile tooltip bottom-tooltip full-width-tile action-btn' title='Uploads to your profile'> 
-                  <span> Upload New Image</span>
-            </div>
+            <h2> Photo Gallery </h2>
+            <!-- --> 
+            <div class='outcome' id='outcomeMsgPicture'></div>
+            <!-- --> 
+            <div>
               <div class='image-gallery'> 
-              <a class="fancybox image-ratio edit-profile" rel="group" href="assets/img/upload_images/example_img.jpg">
-                <img src="assets/img/upload_images/example_img.jpg" alt="" />
-              </a>
-              <a class="fancybox image-ratio edit-profile" rel="group" href="assets/img/upload_images/example_img.jpg">
-                <img src="assets/img/upload_images/example_img.jpg" alt="" />
-              </a>
-              <a class="fancybox image-ratio edit-profile" rel="group" href="assets/img/upload_images/example_img.jpg">
-                <img src="assets/img/upload_images/example_img.jpg" alt="" />
-              </a>
-              <a class="fancybox image-ratio edit-profile" rel="group" href="assets/img/upload_images/example_img.jpg">
-                <img src="assets/img/upload_images/example_img.jpg" alt="" />
-              </a>
-              <a class="fancybox image-ratio edit-profile" rel="group" href="assets/img/upload_images/example_img.jpg">
-                <img src="assets/img/upload_images/example_img.jpg" alt="" />
-              </a>
+              <form action="app/controller/uploadScript.php" class="dropzone" id="gallery-dropzone">
+                <input type="hidden" name="fileName" id='image_name' 
+                  value="<?= $profile_info['name'] ?>_<?= $profile_info['surname'] ?>_<?= $_SESSION['ifitness_id'] ?>" />
+              </form>
               <div class='clear'> </div>
             </div>
           </div>
@@ -139,7 +133,14 @@
       </div>
     </div>
     	<?php include_once "app/views/scripts.php"; ?>
-      <script>
+      <script type='text/javascript'>
+
+      $(function() {
+
+        /* ==============================
+          Set Variables 
+        ============================== */
+
         var id = <?= $profile_info['id'] ?>;
         var currentGoal = <?= $profile_info['goal'] ?>;
         var currentExp = <?= $profile_info['workout_exp'] ?>;  
@@ -150,6 +151,11 @@
         var gym;
         var weight = <?= $profile_info['weight'] ?>;
         var body_fat;
+        var avatar; 
+
+        /* ==============================
+          Helper Functions 
+        ============================== */
 
         function checkVal(name, def_val){
           if ( $("#u_" + name).val() ){
@@ -171,6 +177,10 @@
 
         $("#goal_" + currentGoal).addClass('active');
         $("#length_" + currentExp).addClass('active');
+
+        /* ==============================
+          Click Tile Handler 
+        ============================== */
 
         $(".click-tile").click(function(){
             var active;
@@ -209,6 +219,10 @@
 
         });
 
+        /* ==============================
+          Get Location (Geo Location)
+        ============================== */
+
         $("#get-location").click(function(){
             if (navigator.geolocation) {
                navigator.geolocation.getCurrentPosition(function(position){
@@ -233,40 +247,20 @@
             }        
         });
 
+        /* ==============================
+          Update Profile 
+        ============================== */
+
         $("#update").click(function(e){
           e.preventDefault();
 
-          if ( $("#u_dd").val() ){
-            day = $("#u_dd").val();
-          } else {
-            day = <?= $dob[2] ?>;
-          }
+          day = $("#u_dd").val();
+          month = $("#u_mm").val();
+          year = $("#u_yy").val();
 
-          if ( $("#u_mm").val() ){
-            month = $("#u_mm").val();
-          } else {
-            month = <?= $dob[1] ?>;
-          }
+          gym = $("#u_gym").val();
 
-          if ( $("#u_yy").val() ){
-            year = $("#u_yy").val();
-          } else {
-            year = <?= $dob[0] ?>;
-          }
-
-          
-
-          if ( $("#u_gym").val() ){
-            gym = $("#u_gym").val();
-          } else {
-            gym = "<?= $profile_info['gym'] ?>";
-          }
-
-          if ( $("#u_bodyfat").val() ){
-            body_fat = $("#u_bodyfat").val();
-          } else {
-            body_fat = <?= $profile_info['body_fat'] ?>;
-          }
+          body_fat = $("#u_bodyfat").val();
 
           if ($("#u_weight").val()){
             weight = $("#u_weight").val();
@@ -277,25 +271,120 @@
           } else {
             weight = <?= $profile_info['body_fat'] ?>
           }
-
-          if ( $("#u_bio").val() ){
             bio = $("#u_bio").val();
-          } else {
-            bio = "No Profile Yet.";
-          }
+
+            avatar = $('#avatarUrl').val(); 
 
             dob = year + "-" + month + "-" + day;
             latitude = $("#c_location").data('lat');
             longitude = $("#c_location").data('long');
             $.ajax({
               url : "app/controller/ajaxController.php",
-              data : { action: 'edit_profile', id: id, dob: dob, goal: currentGoal, workout_exp: currentExp, latitude: latitude, longitude: longitude, gym: gym, body_fat: body_fat, weight: weight, bio: bio},
+              data : { action: 'edit_profile', id: id, dob: dob, goal: currentGoal, workout_exp: currentExp, latitude: latitude, longitude: longitude, gym: gym, body_fat: body_fat, weight: weight, bio: bio, avatar: avatar},
               method : 'POST',
               success : function(data){
-                 console.log(data);
+                 displayOutcome('Profile Successfully Updated', 'valid', 'outcomeMsg'); 
+              },
+              error : function() { 
+                displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsg'); 
               }
             });            
         });
+
+        /* ==============================
+          Avatar Uploader  
+        ============================== */
+
+        var cropperOptions = {
+          uploadUrl:'lib/croppic/img_save_to_file.php',
+          cropUrl:'lib/croppic/img_crop_to_file.php',
+          outputUrlId:'avatarUrl',
+          rotateControls:false, 
+          doubleZoomControls:true,
+          loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+          modal: true,
+          onAfterImgUpload:   function(){ 
+              $.ajax({
+                method: 'POST', 
+                url : "app/controller/editAvatarLink.php",
+                dataType: "json",
+                data : { avatarURL: avatarURL },
+                success: function(data) {
+                  console.log(data);
+                },
+                error: function() { 
+                  displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
+                }
+            });
+          }
+        };
+        var cropperHeader = new Croppic('avatarCrop', cropperOptions);
+
+        /* ==============================
+          Dropzone Multi File Uploader 
+        ============================== */
+
+        Dropzone.options.galleryDropzone = {
+          maxFilesize: 20,
+          addRemoveLinks: true,
+          dictRemoveFile: '<i class="fa fa-times"></i>',
+          init: function() {
+            var myDropzone = this;
+            var user_name = $('#image_name').val();
+            $.ajax({
+              method: 'GET', 
+              url : "app/controller/fetchImages.php",
+              dataType: "json",
+              data : { user_id: user_name },
+              success: function(data) {
+                $('.dropzone').prepend('<div class="gallery-btn"> Upload a Picture </div>');
+                $.each(data, function(key, value){
+                    var mockFile = { name: value, size: null };
+                    myDropzone.files.push(mockFile);
+                    myDropzone.options.addedfile.call(myDropzone, mockFile);
+                    myDropzone.createThumbnailFromUrl(mockFile, "assets/img/gallery_uploads/" + value);
+                    mockFile.previewElement.classList.add('dz-complete');
+                });
+              },
+              error: function() { 
+                displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
+              }
+            });
+            myDropzone.on("complete", function(file) { 
+              $('.dz-remove').html('<i class="fa fa-times"></i>'); 
+              displayOutcome('Picture successfully uploaded', 'valid', 'outcomeMsgPicture'); 
+            });
+          },
+          removedfile: function(file) {
+            var _ref;
+            $.ajax({
+              method: 'POST', 
+              url : "app/controller/deleteImage.php",
+              data : { name: file.name },
+              success: function(data) {
+                displayOutcome('Picture deleted', 'valid', 'outcomeMsgPicture'); 
+              },
+              error: function() { 
+                displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
+              }
+            });
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+          },
+      };
+
+      $("body").on('click', '.gallery-btn', function(){
+          $(".dropzone").trigger("click");
+      });
+
+      function displayOutcome(msg, type, ele) { 
+        $('html, body').animate({ scrollTop: 0 }, 'fast', function(){ 
+          $('#'+ele).addClass(type);
+          $('#'+ele).html(msg);
+          $('#'+ele).slideDown(); 
+        });
+      }
+
+    }); 
       </script>      
     </body>
 </html>

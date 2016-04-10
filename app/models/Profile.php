@@ -144,7 +144,7 @@
 		public function editProfile($data){
 			// SQL Statement
 			$sql = "UPDATE sc_profile
-					SET dob = :dob, goal = :goal, workout_exp = :workout_exp, latitude = :latitude, longitude = :longitude, gym = :gym, body_fat = :body_fat, weight = :weight, bio = :bio 
+					SET dob = :dob, goal = :goal, workout_exp = :workout_exp, latitude = :latitude, longitude = :longitude, gym = :gym, body_fat = :body_fat, weight = :weight, bio = :bio, avatar_url = :avatar
 					WHERE id = :id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
@@ -159,6 +159,7 @@
 			$stmt->bindParam(':body_fat', $data['body_fat'], PDO::PARAM_STR);
 			$stmt->bindParam(':weight', $data['weight'], PDO::PARAM_STR);
 			$stmt->bindParam(':bio', $data['bio'], PDO::PARAM_STR);
+			$stmt->bindParam(':avatar', $data['avatar'], PDO::PARAM_STR);
 			// Execute Query
 			if ( $stmt->execute() ){
 				return "yes";
