@@ -102,9 +102,9 @@ $(function() {
    		        	results['friends'] = { 1: { friend_name: 'This user has no friends, send him a friend request!' } };
    		        }
 
-   		        console.log(results['friends']);
+   		        console.log(results['relation']);
 
-   		        var data = { age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'] };
+   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'] };
 
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();

@@ -14,9 +14,8 @@
 	<!-- POPULATE --> Hello
 	</div>
 </div>
-
 <script id="profile-template" type="text/x-handlebars-template">
-	<div class='pure-g' id='profile'>
+	<div class='pure-g' id='profile' data-id='{{ id }}'>
 		<div class='pure-u-5-24 main-info-col'>
 			<div class='main-info-col'>
 				<img src='http://i.imgur.com/HQ3YU7n.gif' class='avatar' />
@@ -44,7 +43,7 @@
                 		</div> 
 					</li>
 				</ul>
-                <input type='submit' name='addFriend' id='addFriend' value='Add Friend'/>
+                <input type='submit' name='addFriend' id='friendRequest' value='Add Friend'/>
 			</div>
 		</div>
 		<div class='pure-u-13-24' id='main-portfolio'>
@@ -105,3 +104,25 @@
 		</div>
 	</div>
 </script>
+<script>
+$("body").on("click", "#friendRequest", function(){
+	var id = <?= $_SESSION['ifitness_id'] ?>;
+	var profile_id = $("#profile").data('id');
+	/*
+	$.ajax({
+    	url : "app/controller/ajaxController.php",
+        data : { action: 'friend_request', user_1: id, user_2: profile_id},
+        method : 'POST',
+        success : function(data){
+        	console.log(data);
+        	$("#friendRequest").addClass('friend-request');
+        }
+    }); */
+});
+
+/*
+	.friend-request: If you sent a friend request to the person
+	.add-friend: If the person sent you a friend request
+	.friends: if the person is your friend
+	.friend-add: To be able to send a friend request
+*/

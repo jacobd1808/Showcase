@@ -54,8 +54,16 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			$user_id = $_POST['user_id'];
 			$results = $Profile->fetchProfile($user_id);
 			$results['location'] = $Profile->returnLocation($results['latitude'], $results['longitude']);
-			$results['friends'] = $Relation->fetchSimpleFriendsList($user_id);
+			$results['friends'] = $Relation->fetchFriendList($user_id);
+			$results['relation'] = $Relation->checkRelation($_SESSION['ifitness_id'], $results['id']);
 			echo json_encode($results);
+		break;
+		case 'friend_request':
+			$user_1 = $_POST['user_1'];
+			$user_2 = $_POST['user_2'];
+
+			echo $Relation->requestFriend($user_1, $user_2);
+		break;
 		default: 
 			return "bloop";
 		break;

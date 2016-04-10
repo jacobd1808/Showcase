@@ -23,11 +23,10 @@
 			}
 		}
 
-
 		// CHECK IF FRIEND REQUEST EXISTS
 		public function checkFriendRequest($id, $person_id){
 			// SQL Statement
-			$sql = "SELECT id FROM sc_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
+			$sql = "SELECT id FROM sc_friend_requests WHERE user_1 = :user_1 AND user_2 = :user_2";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -47,7 +46,7 @@
 		// WHEN USER IS REQUESTING FRIEND
 		public function requestFriend($id, $person_id){
 			// SQL Statement
-			$sql = "INSERT INTO sc_friend_req (user_1, user_2) 
+			$sql = "INSERT INTO sc_friend_requests (user_1, user_2) 
 			        VALUES (:user_1, :user_2)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
@@ -58,9 +57,9 @@
 
 			// Execute Query
 			if ( $stmt->execute() ){
-				return true;
+				return "Hello";
 			} else {
-				return false;
+				return "Bye";
 			}
 		}
 
@@ -108,57 +107,39 @@
 
 		// Check Relation between 2 users
 		public function checkRelation($id, $person_id){
+			
+			if ( $this->checkFriendRequest($id, $person_id) ){
+				return "friend-request";
+			} else if ( $this->checkFriendRequest($person_id, $id)){
+				return "friend-add";
+			} else if ( $this->checkFriends($id, $person_id)){
+				return "friends";
+			} else {
+				return "add-friend";
+			}
+		}
+
+		public function checkFriends($id, $person_id){
+
 			// SQL Statement
-			$sql = "SELECT rel_status FROM sc_rel WHERE user_1 = :user_1 && user_2 = :user_2";
-			// Prepare SQL
+			$sql = "SELECT * FROM sc_rel WHERE user_id= :user_id AND friend_id = :friend_id";
+			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':user_1', $id, PDO::PARAM_STR);
-			$stmt->bindParam(':user_2', $person_id, PDO::PARAM_STR);
+			$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
+			$stmt->bindParam(':friend_id', $person_id, PDO::PARAM_STR);
 			// Execute SQL 
 			$stmt->execute();
 			// Fetch Result
 
 			if ( $stmt->fetchColumn() ){
-				return $this->switchRelation( $stmt->fetchColumn() );
+				return true;
 			} else {
-				if ( $this->checkFriendRequest($id, $person_id) ){
-					return "Friend Request Pending";
-				} else {
-					return "Unknown";
-				}
-			}
-
-		}
-
-		// Change Relation between 2 users ( ONLY FROM ONE QUERY, PLEASE CALL TWICE IF BLOCKING/UNFRIENDING )
-		public function changeRelation($id, $person_id, $new_rel){
-			// SQL Statement
-			$sql = "UPDATE sc_rel
-					SET rel_status = :rel_status
-					WHERE user_1 = :user_1 && user_2 = :user_2";
-
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-
-			// Bind Parameters
-			$stmt->bindParam(':user_1', $id, PDO::PARAM_STR);
-			$stmt->bindParam(':user_2', $person_id, PDO::PARAM_STR);
-			$stmt->bindParam(':rel_status', $new_rel, PDO::PARAM_STR);
-
-			// Execute Query
-			if ( $stmt->execute() ){
-				return $new_rel;
-			} else{
-				return $person_id;
+				return false;
 			}
 		}
 
-		public function blockPerson($id){
-			// Fill
-		}
-
-		public function fetchSimpleFriendsList($id){
+		public function fetchFriendList($id){
 			// SQL Statement
 			$sql = "SELECT * FROM sc_rel WHERE user_id=$id";
 			// Prepare Query
@@ -169,22 +150,5 @@
 			} else{
 				return "test";
 			}
-		}
-
-		public function fetchFriendList($id){
-			// SQL Statement
-			$sql = "SELECT * FROM sc_rel WHERE user_1='$id'";
-
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-
-			// Results
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-			return $result;
-		}
-
-		public function fetchBlockList($id){
-
 		}
 	}
