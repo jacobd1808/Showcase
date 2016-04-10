@@ -105,3 +105,13 @@
         display: none; 
     } 
 }
+
+#avatarCrop {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  /* or fixed or absolute */
+  background-color: $body-darken;
+  border: 1px dotted $brand-light-col;
+  @include rounded(100px);
+ } 

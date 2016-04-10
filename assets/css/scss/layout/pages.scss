@@ -272,6 +272,26 @@ html, body {
 	float: left;
 }
 
+.avatar-upload-area { 
+	div#avatarCrop { 
+		display: inline-block;
+		float: left;
+		.croppedImg { 
+			@include rounded(100px);
+		}
+	}
+	img.displayAvatar { 
+		display: inline-block;
+		width: 100px;
+		margin: 0 0 0 30px;
+		float: none;
+		height: 100px;
+	}
+	.avatarCrop_imgUploadForm { 
+		position: absolute;
+	}
+}
+
 .edit-profile-images { 
 	width: 40%;
 	float: right;

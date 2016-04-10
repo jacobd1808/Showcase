@@ -117,3 +117,33 @@ legend {
 	font-weight: bold;
 	font-family: $condensed-font; 
 }
+
+.gallery-btn { 
+	display: block;
+	width: 100%;
+	background-color: transparent;
+	padding: 10px 0 15px 0;
+	@extend .header-font;
+	text-align: center;
+	cursor: pointer!important;
+	&:hover { 
+		color: $brand-light-col;
+	}
+}
+
+.outcome { 
+	width: 100%;
+	@extend .header-font;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	display: none;
+	&.valid { 
+		background-color: green;
+		display: block;
+	}
+	&.error { 
+		background-color: red;
+		display: block;
+	}
+}

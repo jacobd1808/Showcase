@@ -11,6 +11,9 @@ $(function() {
 		e.preventDefault();
 	})
 
+	var userName = 
+	localStorage.setItem("userName", "Jacob");
+
 	/* ====================================
 		Set Element Height
 	===================================== */ 
@@ -139,7 +142,6 @@ $(function() {
 		var applyMargin = (pageHeight - eleHeight) / 2; 
 		ele.css({'marginTop': applyMargin});
 	}
-
 
 	/* ====================================
 		Tooltips 
