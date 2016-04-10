@@ -35,7 +35,8 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 				'gym' => $_POST['gym'],
 				'body_fat' => $_POST['body_fat'],
 				'weight' => $_POST['weight'],
-				'bio' => $_POST['bio']
+				'bio' => $_POST['bio'],
+				'avatar' => basename($_POST['avatar'])
 			);
 
 			echo $Profile->editProfile($data);
