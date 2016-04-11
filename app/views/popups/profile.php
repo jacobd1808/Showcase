@@ -43,7 +43,7 @@
                 		</div> 
 					</li>
 				</ul>
-                <input type='submit' name='addFriend' id='friendRequest' value='Add Friend'/>
+                <input type='submit' name='addFriend' id='friendRequest' value='{{ relation_t }}' data-relation='{{ relation }}'/>
 			</div>
 		</div>
 		<div class='pure-u-13-24' id='main-portfolio'>
@@ -66,27 +66,6 @@
 						{{{ bio }}}
 					</div>
 				</div>
-				<div class='profile-section'> 
-					<strong> Images </strong>
-					<div class='image-gallery'> 
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<div class='clear'> </div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class='pure-u-6-24' id='friendList'>
@@ -107,22 +86,95 @@
 <script>
 $("body").on("click", "#friendRequest", function(){
 	var id = <?= $_SESSION['ifitness_id'] ?>;
+
 	var profile_id = $("#profile").data('id');
-	/*
-	$.ajax({
-    	url : "app/controller/ajaxController.php",
-        data : { action: 'friend_request', user_1: id, user_2: profile_id},
-        method : 'POST',
-        success : function(data){
-        	console.log(data);
-        	$("#friendRequest").addClass('friend-request');
-        }
-    }); */
+	var relation = $("#friendRequest").data('relation');
+	if (relation == "add-friend"){
+		$.ajax({
+	    	url : "app/controller/ajaxController.php",
+	        data : { action: 'friend_request', user_1: id, user_2: profile_id},
+	        method : 'POST',
+	        success : function(data){
+	        	console.log("Request Sent");
+	        	$("#friendRequest").removeClass('add-friend');
+	        	$("#friendRequest").addClass('friend-request');
+	        	$("#friendRequest").val("Request Pending");
+	        	$("#friendRequest").data('relation', 'friend-request');
+
+	        	relation = "friend-request";
+	        }
+	    }); 
+	} else if (relation == "friend-request"){
+		$.ajax({
+			url: "app/controller/ajaxController.php", 
+			data: { action: 'remove_request', user_1: id, user_2: profile_id},
+			method: 'POST', 
+			success : function(data){
+				$("#friendRequest").removeClass('friend-request');
+				$("#friendRequest").addClass('friend-add');
+				$("#friendRequest").val("Add Friend");
+				$("#friendRequest").data('relation', 'add-friend');
+
+				relation = "add-friend";
+			}
+		});
+	} else if ( relation == "friends" ){
+		$.ajax({
+			url: "app/controller/ajaxController.php", 
+			data: { action: 'unfriend_person', user_1: id, user_2: profile_id},
+			method: 'POST', 
+			success : function(data){
+				$("#friendRequest").removeClass('friends');
+				$("#friendRequest").addClass('friend-add');
+				$("#friendRequest").val("Add Friend");
+				$("#friendRequest").data('relation', 'add-friend');
+
+				relation = "add-friend";
+			}
+		});		
+	} else if ( relation == "friend-add" ){
+		$.ajax({
+			url: "app/controller/ajaxController.php", 
+			data: { action: 'accept_request', user_1: id, user_2: profile_id},
+			method: 'POST', 
+			success : function(data){
+				console.log(data);
+				$("#friendRequest").removeClass('friend-add');
+				$("#friendRequest").addClass('friends');
+				$("#friendRequest").val("Unfriend");
+				$("#friendRequest").data('relation', 'friends');
+
+				relation = "friends";
+			}
+		});				
+	}
 });
 
 /*
 	.friend-request: If you sent a friend request to the person
-	.add-friend: If the person sent you a friend request
+	.friend-add: If the person sent you a friend request
 	.friends: if the person is your friend
-	.friend-add: To be able to send a friend request
+	.add-friend: To be able to send a friend request
 */
+
+				/* <div class='profile-section'> 
+					<strong> Images </strong>
+					<div class='image-gallery'> 
+						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
+							<img src="assets/img/upload_images/example_img.jpg" alt="" />
+						</a>
+						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
+							<img src="assets/img/upload_images/example_img.jpg" alt="" />
+						</a>
+						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
+							<img src="assets/img/upload_images/example_img.jpg" alt="" />
+						</a>
+						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
+							<img src="assets/img/upload_images/example_img.jpg" alt="" />
+						</a>
+						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
+							<img src="assets/img/upload_images/example_img.jpg" alt="" />
+						</a>
+						<div class='clear'> </div>
+					</div> 
+				</div> */

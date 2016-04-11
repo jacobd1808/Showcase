@@ -57,13 +57,48 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			$results['location'] = $Profile->returnLocation($results['latitude'], $results['longitude']);
 			$results['friends'] = $Relation->fetchFriendList($user_id);
 			$results['relation'] = $Relation->checkRelation($_SESSION['ifitness_id'], $results['id']);
+			$results['relation_t'] = $Relation->checkText($results['relation']);
 			echo json_encode($results);
 		break;
 		case 'friend_request':
 			$user_1 = $_POST['user_1'];
 			$user_2 = $_POST['user_2'];
 
+			$info = $Profile->fetchProfile($user_1);
+
+			$data = array(
+				'user_id' => $user_2,
+				'other_id' => $user_1,
+				'person_name' => $info['name'],
+				'person_lastname' => $info['surname'],
+				'type' => 1
+			);
+
 			echo $Relation->requestFriend($user_1, $user_2);
+			echo $Relation->createNotification($data);
+		break;
+		case 'remove_request':
+			$user_1 = $_POST['user_1'];
+			$user_2 = $_POST['user_2'];
+
+			echo $Relation->removeRequest($user_1, $user_2);
+		break;
+		case 'unfriend_person':
+			$user_1 = $_POST['user_1'];
+			$user_2 = $_POST['user_2'];
+
+			echo $Relation->unfriendPerson($user_1, $user_2);
+			echo $Relation->unfriendPerson($user_2, $user_1);
+		break;
+		case 'accept_request':
+
+			$user_1 = $_POST['user_1'];
+			$user_2 = $_POST['user_2'];
+			$info_1 = $Profile->fetchProfile($user_1);
+			$info_2 = $Profile->fetchProfile($user_2);
+
+			echo $Relation->acceptRequest($user_1, $user_2, $info_2['name'], $info_2['surname']);
+			echo $Relation->acceptRequest($user_2, $user_1, $info_1['name'], $info_1['surname']);
 		break;
 		default: 
 			return "bloop";

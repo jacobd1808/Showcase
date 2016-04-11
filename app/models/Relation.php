@@ -64,21 +64,22 @@
 		}
 
 		// WHEN USER IS ACCEPTING FRIEND REQUEST
-		public function acceptFriendRequest($id, $person_id){
+		public function acceptRequest($id, $person_id, $first_name, $last_name){
 			$rel_status = 1;
 			// SQL Statement
-			$sql = "INSERT INTO sc_rel (user_1, user_2, rel_status) 
-			        VALUES (:user_1, :user_2, :rel_status)";
+			$sql = "INSERT INTO sc_rel (user_id, friend_id, friend_name, friend_lastname) 
+			        VALUES (:user_id, :friend_id, :friend_name, :friend_lastname)";;
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':user_1', $id, PDO::PARAM_STR);
-			$stmt->bindParam(':user_2', $person_id, PDO::PARAM_STR);
-			$stmt->bindParam(':rel_status', $rel_status, PDO::PARAM_STR);			
+			$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
+			$stmt->bindParam(':friend_id', $person_id, PDO::PARAM_STR);
+			$stmt->bindParam(':friend_name', $first_name, PDO::PARAM_STR);		
+			$stmt->bindParam(':friend_lastname', $last_name, PDO::PARAM_STR);	
 
 			// Execute Query
 			if ( $stmt->execute() ){
-				if ( $this->deleteFriendRequest($person_id, $id) ){
+				if ( $this->removeRequest($person_id, $id) ){
 					return true;
 				} else {
 					return false;
@@ -88,10 +89,26 @@
 			}
 		}
 
-		// REMOVING FRIEND REQUEST
-		public function deleteFriendRequest($id, $person_id){
+		public function unfriendPerson($id, $person_id){
 			// SQL Statement
-			$sql = "DELETE FROM sc_friend_req WHERE user_1 = :user_1 && user_2 = :user_2";
+			$sql = "DELETE FROM sc_rel WHERE user_id= :user_id && friend_id= :friend_id";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
+			$stmt->bindParam(':friend_id', $person_id, PDO::PARAM_STR);
+			// Execute SQL
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// REMOVING FRIEND REQUEST
+		public function removeRequest($id, $person_id){
+			// SQL Statement
+			$sql = "DELETE FROM sc_friend_requests WHERE user_1 = :user_1 && user_2 = :user_2";
 			// Prepare SQL
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -116,6 +133,23 @@
 				return "friends";
 			} else {
 				return "add-friend";
+			}
+		}
+
+		public function checkText($relation){
+			switch($relation){
+				case "friend-request":
+					return "request pending";
+					break;
+				case "friend-add":
+					return "accept request";
+					break;
+				case "friends":
+					return "unfriend";
+					break;
+				case "add-friend":
+					return "add friend";
+					break;
 			}
 		}
 
@@ -149,6 +183,60 @@
 				return $stmt->fetchAll(PDO::FETCH_ASSOC);
 			} else{
 				return "test";
+			}
+		}
+
+		public function fetchNotifications($user_id){
+			// SQL Statement
+			$sql = " SELECT * FROM sc_notifications WHERE user_id= $user_id && viewed=0";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			} else{
+				return "test";
+			}
+		}
+
+		public function printNotification($data){
+			if ( $data['type'] == 1){
+				return "$data[person_name] $data[person_lastname] has sent you a friend request";
+			} else {
+				return "Error";
+			}
+		}
+
+		public function createNotification($data){
+			// SQL Statement
+			$sql = "INSERT INTO sc_notifications(type, user_id, other_id, person_name, person_lastname)
+					VALUES(:type, :user_id, :other_id, :person_name, :person_lastname)";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(':type', $data['type'], PDO::PARAM_STR);
+			$stmt->bindParam(':user_id', $data['user_id'], PDO::PARAM_STR);
+			$stmt->bindParam(':other_id', $data['other_id'], PDO::PARAM_STR);
+			$stmt->bindParam(':person_name', $data['person_name'], PDO::PARAM_STR);
+			$stmt->bindParam('person_lastname', $data['person_lastname'], PDO::PARAM_STR);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public function deleteNotification($id){
+			// SQL Statement
+			$sql = "DELETE FROM sc_notifications WHERE id=$id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
 			}
 		}
 	}
