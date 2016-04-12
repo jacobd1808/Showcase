@@ -188,7 +188,7 @@
 
 		public function fetchNotifications($user_id){
 			// SQL Statement
-			$sql = " SELECT * FROM sc_notifications WHERE user_id= $user_id && viewed=0";
+			$sql = " SELECT * FROM sc_notifications WHERE user_id= $user_id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -239,4 +239,72 @@
 				return false;
 			}
 		}
+
+
+		public function postStatus($data){
+			// SQL Statement
+			$sql = "INSERT INTO sc_feed(user_id, message, post_time)
+					VALUES(:user_id, :message, :post_time)";
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam('user_id', $data['user_id'], PDO::PARAM_STR);
+			$stmt->bindParam('message', $data['message'], PDO::PARAM_STR);
+			$stmt->bindParam('post_time', $data['post_time'], PDO::PARAM_STR);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public function fetchNewsFeed($id){
+			// SQL
+			$sql = "SELECT * FROM sc_feed INNER JOIN sc_rel  ON sc_feed.user_id = sc_rel.friend_id WHERE sc_rel.user_id=$id  ORDER BY sc_feed.post_time";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			} else{
+				return "test";
+			}			
+		}
+
+		public function fetchLikes($feed_id){
+			// SQL 
+			$sql = "SELECT * FROM sc_likes WHERE feed_id=$feed_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+			} else{
+				return "test";
+			}	
+		}
+
+		public function ago($time)
+		{
+		   $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+		   $lengths = array("60","60","24","7","4.35","12","10");
+
+		   $now = time();
+
+		       $difference     = $now - $time;
+		       $tense         = "ago";
+
+		   for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+		       $difference /= $lengths[$j];
+		   }
+
+		   $difference = round($difference);
+
+		   if($difference != 1) {
+		       $periods[$j].= "s";
+		   }
+
+		   return "$difference $periods[$j] ago ";
+		}
 	}
+?>

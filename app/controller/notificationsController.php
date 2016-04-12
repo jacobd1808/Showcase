@@ -4,5 +4,6 @@
 
 	$Relation = new Relation($conn);
 
-	$notifications = $Relation->fetchNotifications($_SESSION['ifitness_id']);;
+	$notifications = $Relation->fetchNotifications($_SESSION['ifitness_id']);
+	
 ?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 06 Avril 2016 à 06:07
+-- Généré le :  Mar 12 Avril 2016 à 06:25
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -23,23 +23,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `db_friend_req`
+-- Structure de la table `sc_feed`
 --
 
-CREATE TABLE IF NOT EXISTS `db_friend_req` (
+CREATE TABLE IF NOT EXISTS `sc_feed` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `user_id` int(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `post_time` int(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Contenu de la table `sc_feed`
+--
+
+INSERT INTO `sc_feed` (`id`, `user_id`, `message`, `post_time`) VALUES
+(5, 20, 'I''m a cool guy.', 1460432707),
+(6, 29, 'My feet are really itchy :)', 1460432721),
+(7, 30, 'Damn you daredevil!\r\n\r\nI''ll get you someday.', 1460432736);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sc_friend_requests`
+--
+
+CREATE TABLE IF NOT EXISTS `sc_friend_requests` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `user_1` int(255) NOT NULL,
   `user_2` int(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
--- Contenu de la table `db_friend_req`
+-- Contenu de la table `sc_friend_requests`
 --
 
-INSERT INTO `db_friend_req` (`id`, `user_1`, `user_2`) VALUES
-(1, 11, 12);
+INSERT INTO `sc_friend_requests` (`id`, `user_1`, `user_2`) VALUES
+(19, 29, 26),
+(20, 29, 26),
+(21, 20, 28),
+(22, 20, 26);
 
 -- --------------------------------------------------------
 
@@ -69,6 +96,20 @@ INSERT INTO `sc_inbox` (`id`, `title`, `first_user`, `second_user`, `last_sender
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `sc_likes`
+--
+
+CREATE TABLE IF NOT EXISTS `sc_likes` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `user_id` int(255) NOT NULL,
+  `feed_id` int(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `sc_messages`
 --
 
@@ -80,6 +121,36 @@ CREATE TABLE IF NOT EXISTS `sc_messages` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sc_notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `sc_notifications` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `type` int(255) NOT NULL,
+  `user_id` int(255) NOT NULL,
+  `other_id` int(255) NOT NULL,
+  `person_name` varchar(255) NOT NULL,
+  `person_lastname` varchar(255) NOT NULL,
+  `viewed` int(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `sc_notifications`
+--
+
+INSERT INTO `sc_notifications` (`id`, `type`, `user_id`, `other_id`, `person_name`, `person_lastname`, `viewed`) VALUES
+(1, 1, 30, 20, 'Jacob', 'Dickinson', 0),
+(2, 1, 29, 20, 'Jacob', 'Dickinson', 0),
+(3, 1, 26, 29, 'Rob', 'Wright', 0),
+(4, 1, 26, 29, 'Rob', 'Wright', 0),
+(5, 1, 28, 20, 'Jacob', 'Dickinson', 0),
+(6, 1, 26, 20, 'Jacob', 'Dickinson', 0);
 
 -- --------------------------------------------------------
 
@@ -136,15 +207,17 @@ CREATE TABLE IF NOT EXISTS `sc_rel` (
   `friend_date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `sc_rel`
 --
 
 INSERT INTO `sc_rel` (`id`, `user_id`, `friend_id`, `friend_name`, `friend_lastname`, `rel_status`, `friend_date`) VALUES
-(8, 20, 30, 'Wilson', 'Fisk', 2, '2016-04-05'),
-(9, 20, 26, 'George', 'Macfly', 2, '2016-04-04');
+(15, 29, 20, 'Jacob', 'Dickinson', 0, '0000-00-00'),
+(16, 20, 29, 'Rob', 'Wright', 0, '0000-00-00'),
+(17, 30, 20, 'Jacob', 'Dickinson', 0, '0000-00-00'),
+(18, 20, 30, 'Wilson', 'Fisk', 0, '0000-00-00');
 
 -- --------------------------------------------------------
 

@@ -6,9 +6,19 @@
 	<ul class='basic-list vert-list notification-list'> 
 <?php 
 	foreach ( $notifications as $x){
-		echo "<li>". $Relation->printNotification($x);
-		echo "<span class='notification-date'> xx - xx - xx</span></li>";
+		if ( $x['viewed'] == 0){
+			$notification_class = "new_notification";
+		} else {
+			$notification_class = "notification";
+		}
+
+		echo "<li class='". $notification_class ."'>". $Relation->printNotification($x);
+		echo "<span class='notification-date' id > xx - xx - xx</span></li>";
 	}
+
+	/* if new notification, class new_notification added */
 ?>
 	</ul>
 </div>
+
+

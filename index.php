@@ -29,25 +29,28 @@
           <div class='feed-add'> 
             <img src='http://i.imgur.com/HQ3YU7n.gif' alt='avatar' class='user-avatar feed-avatar' />
             <div> 
-              <textarea name='feed-post' id='feed-post' placeholder='Make a post'></textarea>
-              <button class='custom-btn'> Post </button>
+              <form action='' method='POST' name='post-status'>
+                <textarea name='feed-post' id='feed-post' placeholder='Make a post'></textarea>
+                <button class='custom-btn' name='submit_post'> Post </button>
+              </form>
             </div>
             <div class='clear'> </div>
           </div>
           <!-- --> 
-          <?php for($i = 0; $i < 17; $i++ ) { ?>
+          <?php foreach($feed as $x) { ?>
           <div class='feed-post'> 
+
             <div class='feed-post-title'>
               <img src='http://i.imgur.com/HQ3YU7n.gif' alt='avatar' class='user-avatar feed-avatar' />
-              <span class='feed-name'> Jacob Dickinson <small> Posted 8hr ago </small></span>
+              <span class='feed-name'> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> <small> Posted <?= $Relation->ago($x['post_time']) ?> </small></span>
               <span class='feed-like'> 
-                6 <i class="fa fa-thumbs-up"></i>
+                <?= $Relation->fetchLikes($x['id']) ?> <i class="fa fa-thumbs-up"></i>
               </span>
               <hr /> 
 
             </div>
             <div class='feed-post-content'>
-              Some text text text text 
+              <?= nl2br($x["message"]) ?>
             </div>
           </div>
           <? } ?>
