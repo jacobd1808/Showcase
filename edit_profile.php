@@ -265,8 +265,9 @@
           if ($("#u_weight").val()){
             weight = $("#u_weight").val();
 
-            if ( $("#weight-type").data("type") == "KG" ){
-              weight = convertWeight("LB", weight);
+            if ( $("#weight-type").data("type") == "LB" ){
+              weight = convertWeight("KG", weight);
+              console.log(weight);
             }          
           } else {
             weight = <?= $profile_info['body_fat'] ?>

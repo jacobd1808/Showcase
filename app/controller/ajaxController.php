@@ -51,6 +51,11 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
 			echo json_encode($Profile->returnCoordinates($latitude, $longitude));
 		break;
+		case 'update_slider':
+			$user_id = $_POST['id'];
+			$slider = $_POST['slider'];
+			$Profile->updateSlider($user_id, $slider);
+		break;
 		case 'fetch_profile':
 			$user_id = $_POST['user_id'];
 			$results = $Profile->fetchProfile($user_id);
@@ -113,6 +118,30 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
 			$results = $Profile->fetchProfileByGym($term);
 			echo json_encode($results);
+		break;
+		case 'like_feed':
+			$user_id = $_POST['user_id'];
+			$feed_id = $_POST['feed_id'];
+			$friend_id = $_POST['friend_id'];
+
+			$info = $Profile->fetchProfile($user_id);
+
+			$data = array(
+				'user_id' => $friend_id,
+				'other_id' => $user_id,
+				'person_name' => $info['name'],
+				'person_lastname' => $info['surname'],
+				'type' => 2
+			);				
+
+			echo $Relation->likeFeed($user_id, $feed_id);
+			echo $Relation->createNotification($data);
+		break;
+		case 'unlike_feed':
+			$user_id = $_POST['user_id'];
+			$feed_id = $_POST['feed_id'];		
+
+			echo $Relation->unlikeFeed($user_id, $feed_id);
 		break;
 		default: 
 			return "bloop";

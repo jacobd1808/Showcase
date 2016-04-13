@@ -10,10 +10,10 @@
 		'post_time' => time(),
 		);
 
-		$Relation->postStatus($data);
+		echo $Relation->postStatus($data);
 	}
 
 	$profile_info = $Profile->fetchProfile($_SESSION['ifitness_id']);
 	$feed = $Relation->fetchNewsFeed($_SESSION['ifitness_id']);
-	
+
 ?>
