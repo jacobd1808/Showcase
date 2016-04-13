@@ -182,6 +182,36 @@
 			return $result;
 		}
 
+		public function fetchProfileByName($term){
+			$term = "%$term%";
+			// SQL Statement
+			$sql = "SELECT * FROM sc_profile WHERE name LIKE :term OR surname LIKE :term ";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bindParam(":term", $term);
+			// Execute Query
+			$stmt->execute();
+			// Fetch Query
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
+		}
+
+		public function fetchProfileByGym($term){
+			$term = "%$term%";
+			// SQL Statement
+			$sql = "SELECT * FROM sc_profile WHERE gym LIKE :term";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bindParam(":term", $term);
+			// Execute Query
+			$stmt->execute();
+			// Fetch Query
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Return results to nest variable
+			return $result;
+		}
+
 		// Fetch ALL profiles
 		public function fetchAllRows(){
 			// SQL Statement

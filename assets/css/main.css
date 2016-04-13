@@ -2593,9 +2593,20 @@ html, body {
   padding: 10px;
   clear: both; }
 
-.search-results {
+.search-results, .search-by {
   float: left;
   width: 66%; }
+
+.search-by {
+  background-color: #281e35;
+  border: 2px dotted #FC6E00;
+  margin-left: 3%;
+  width: 64.7%;
+  margin-top: 25px; }
+  .search-by div {
+    padding: 15px; }
+    .search-by div input {
+      padding: 15px; }
 
 /* =================== /
 		Profile

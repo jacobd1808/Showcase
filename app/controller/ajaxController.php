@@ -100,6 +100,20 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			echo $Relation->acceptRequest($user_1, $user_2, $info_2['name'], $info_2['surname']);
 			echo $Relation->acceptRequest($user_2, $user_1, $info_1['name'], $info_1['surname']);
 		break;
+		case 'search_by_user':
+
+			$term = $_POST['term'];
+
+			$results = $Profile->fetchProfileByName($term);
+			echo json_encode($results);
+		break;
+		case 'search_by_gym':
+
+			$term = $_POST['term'];
+
+			$results = $Profile->fetchProfileByGym($term);
+			echo json_encode($results);
+		break;
 		default: 
 			return "bloop";
 		break;

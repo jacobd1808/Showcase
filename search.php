@@ -75,7 +75,15 @@
               </div>
             </div>
           </div>
-          <div class='search-results m-25'> 
+          <div class='pure-g search-by'> 
+              <div class='pure-u-1-2'> 
+                <input type='text' placeholder='Search By Name' id='search-by-name'/>
+              </div>
+              <div class='pure-u-1-2'> 
+                <input type='text' placeholder='Search By Gym' id='search-by-gym'/>
+              </div>
+          </div> 
+          <div class='search-results m-25'>
           <script>
             var profiles = [];
           </script>
@@ -370,6 +378,29 @@
 
         console.log("Goal:" + currentGoal + " Exp:" + currentExp + " Distance: " +  distanceSlider);        
       }
+
+
+      $('#search-by-name, #search-by-gym').keyup(function(e){
+        var term = $(this).val(); 
+        var id = $(this).attr('id');
+        if (id == 'search-by-name') { 
+          action = 'search_by_user';
+          $('#search-by-gym').val(''); 
+        } else {
+          action = 'search_by_gym';
+          $('#search-by-name').val(''); 
+        }
+        //console.log(term);
+        $.ajax({
+          url : "app/controller/ajaxController.php",
+          data : { action: action, term: term },
+          method : 'POST',
+          success : function(data){
+             var results = jQuery.parseJSON(data);
+             console.log(results);
+          }
+        });     
+      })
       </script>
     </body>
 </html>

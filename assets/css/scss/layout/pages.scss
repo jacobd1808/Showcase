@@ -129,9 +129,23 @@ html, body {
 	}
 }
 
-.search-results { 
+.search-results, .search-by { 
 	float: left;
 	width: 66%;
+}
+
+.search-by { 
+	background-color: $body-lighten;
+	border: 2px dotted $brand-light-col;
+	margin-left: 3%;
+	width: 64.7%;
+	margin-top: 25px;
+	div { 
+		padding: 15px;
+		input { 
+			padding: 15px;
+		}
+	}
 }
 
 /* =================== /
