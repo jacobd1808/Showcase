@@ -23,7 +23,6 @@
     // Validation 
     if (empty($_POST['u_username']) || 
         empty($profile_data['name']) || 
-        empty($user_data['email']) || 
         empty($_POST['u_password']) || 
         empty($profile_data['gender']) 
       ) { 

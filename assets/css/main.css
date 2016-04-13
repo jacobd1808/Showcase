@@ -1543,6 +1543,8 @@ legend {
   .outcome.error {
     background-color: red;
     display: block; }
+  .outcome.notify {
+    font-size: 0.8em; }
 
 @-webkit-keyframes passing-through {
   0% {
@@ -2417,6 +2419,9 @@ img.user-avatar {
   -o-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
   border: 1px dotted #FC6E00; }
+  .profile-card.full-width {
+    width: 94%;
+    margin: 10px 3% 0 3%; }
   .profile-card h3 {
     -webkit-transition: all 100ms ease-in-out;
     -moz-transition: all 100ms ease-in-out;
@@ -2453,6 +2458,13 @@ img.user-avatar {
     box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75); }
     .profile-card:hover h3 span.title-text {
       color: #FC6E00; }
+  .profile-card .same-gym-notify {
+    background-color: #EB1C00;
+    padding: 5px;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    text-align: center;
+    display: block; }
 
 .add-friend-btn {
   float: right;

@@ -27,6 +27,9 @@
           </div>
           <form action='' method='post' name='login' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
             <h1> Login </h1>
+            <? if(isset($feedback)) { 
+              echo "<div class='feedback-msg ".$feedback['type']."'>".$feedback['message']."</div>"; 
+            } ?>
             <fieldset>
               <div class="pure-g">
                 <div class="pure-u-1 pure-u-md-1-1">

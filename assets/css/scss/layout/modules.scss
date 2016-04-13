@@ -223,6 +223,10 @@ img.user-avatar {
 		@extend .modulated-box;
 		@include animate(100ms);
 		border: 1px dotted $brand-light-col;
+		&.full-width { 
+			width: 94%;
+			margin: 10px 3% 0 3%;
+		}
 		h3 { 
 			@include animate(100ms);
 		}
@@ -266,6 +270,14 @@ img.user-avatar {
 			h3 span.title-text { 
 				color: $brand-light-col;
 			}
+		}
+		.same-gym-notify { 
+			background-color: $brand-dark-col;
+			padding: 5px;
+			text-transform: uppercase;
+			font-size: 0.7em;
+			text-align: center;
+			display: block;
 		}
 	}
 

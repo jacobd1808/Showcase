@@ -16,17 +16,17 @@
     	// Validation
     	if (empty($data['username'])) {
     		// No username entered
-      		$feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must enter a username</em>' ); 
+      		$feedback = array( "type" => 'error', "message" => '<em>You must enter a username</em>' ); 
       		echo "no user";
     	} else if (empty($_POST['u_password'])){
     		// No password entered
-      		$feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>You must enter a password</em>' ); 
+      		$feedback = array( "type" => 'error', "message" => '<em>You must enter a password</em>' ); 
     	} else { 
       		$loginCheck = $frontPage->loginUser($data);
 
       		if (!$loginCheck) { 
       			// Invalid Username/Password
-      			$feedback = array( "type" => 'error', "message" => '<i class="material-icons">error</i><em>Username or password incorrect </em>' ); 
+      			$feedback = array( "type" => 'error', "message" => '<em>Username or password incorrect </em>' ); 
       		} else { 
         	header("Location: index.php"); 
       		}

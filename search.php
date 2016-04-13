@@ -104,7 +104,7 @@
                     <div class='add-friend-btn'> <span> Add </span><i class="fa fa-plus-circle"></i></div>
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
-                    <img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
+                    <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
                     <em> Member since <span> 23rd Sep 2016 </span></em>
                   </div>
                   <div class='pure-u-3-5 pure-g card-info'>
