@@ -17,7 +17,7 @@
     <head>
     <?php include_once "app/views/meta.php";?>
     </head>
-    <body>
+    <body style='overflow-y: scroll; overflow-x: hidden'>
       <div id='fixed-bg'> </div>
       <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
@@ -316,11 +316,46 @@
         }
       });
 
+      $('#search-by-name, #search-by-gym').keyup(function(e){
+        refreshFilter(this);
+        //var term = $(this).val(); 
+        //var id = $(this).attr('id');
+        /*if (id == 'search-by-name') { 
+          action = 'search_by_user';
+          $('#search-by-gym').val(''); 
+        } else {
+          action = 'search_by_gym';
+          $('#search-by-name').val(''); 
+        }*/
+        //console.log(term);
+        /*$.ajax({
+          url : "app/controller/ajaxController.php",
+          data : { action: action, term: term },
+          method : 'POST',
+          success : function(data){
+             var results = jQuery.parseJSON(data);
+
+             $grid.isotope({ filter: filterValue });
+          }
+        });  */   
+      })
+
+
       function refreshFilter(that){
 
         distanceSlider = $("#distance-slider").slider("value");
         var type = $(that).data('type');
         var goal = $(that).data('code-goal');
+        var name = $('#search-by-name').val(); 
+        var gym = $("#search-by-gym").val(); 
+
+        if (name == '') { 
+          name = null; 
+        }
+
+        if (gym == '') { 
+          gym = null; 
+        }
 
         if ( type == 'goal' ){
           if ( currentGoal == goal ){
@@ -363,6 +398,8 @@
               var r_exp = $(this).data('exp');
               var r_distance = $(this).data('distance');
 
+              console.log(r_exp);
+
               if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
                 if ( r_distance <= distanceSlider){
                   return true;
@@ -374,33 +411,8 @@
               }
             }
           });
-        }
-
-        console.log("Goal:" + currentGoal + " Exp:" + currentExp + " Distance: " +  distanceSlider);        
+        }       
       }
-
-
-      $('#search-by-name, #search-by-gym').keyup(function(e){
-        var term = $(this).val(); 
-        var id = $(this).attr('id');
-        if (id == 'search-by-name') { 
-          action = 'search_by_user';
-          $('#search-by-gym').val(''); 
-        } else {
-          action = 'search_by_gym';
-          $('#search-by-name').val(''); 
-        }
-        //console.log(term);
-        $.ajax({
-          url : "app/controller/ajaxController.php",
-          data : { action: action, term: term },
-          method : 'POST',
-          success : function(data){
-             var results = jQuery.parseJSON(data);
-             console.log(results);
-          }
-        });     
-      })
       </script>
     </body>
 </html>

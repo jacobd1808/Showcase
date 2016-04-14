@@ -56,7 +56,7 @@ $(function() {
 			var alignElem = $('.vert-center-popup');
 			setEleHeight();
 			setImageHeight()
-			// alignToVerticalCenter(alignElem); 
+			alignToVerticalCenter(alignElem); 
 		});
 	});
 
@@ -111,6 +111,7 @@ $(function() {
 			    var source   = $("#profile-template").html();
 				var template = Handlebars.compile(source);
 				$('#profile-container').append(template(data));
+				alignToVerticalCenter($('.vert-center-popup')); 
 			},
 			error: function() { 
 				console.log('error loading data');
@@ -144,37 +145,11 @@ $(function() {
 	/* ====================================
 		Tooltips 
 	===================================== */ 
-	/*
-	 $('body').on('mouseover mouseout', '.tooltip', function(e) {
-	    $('.tooltip.left-tooltip').tooltipster({
-	       speed: 100,
-	       delay: 50,
-	       position: 'left',
-	       theme: 'cust-tooltip'
-	    });
 
-	    $('.tooltip.right-tooltip').tooltipster({
-	       speed: 100,
-	       delay: 50,
-	       position: 'right',
-	       theme: 'cust-tooltip'
-	    });
-
-	  	$('.tooltip.bottom-tooltip').tooltipster({
-		   speed: 100,
-		   delay: 50,
-		   position: 'bottom',
-		   theme: 'cust-tooltip'
-		});
-
-	  	$('.tooltip.top-tooltip').tooltipster({
-		   speed: 100,
-		   delay: 50,
-		   position: 'top',
-		   theme: 'cust-tooltip'
-		});
+	$('body').on('mouseover mouseout', '.tooltip', function(e) {
+	 	initTooltips();
 	});
-	*/
+
 	/* ====================================
 		Fancy Box Gallery 
 	===================================== */  
@@ -190,16 +165,27 @@ $(function() {
 		}); 
 	}	
 
-	setImageHeight();
-
-    /*$('#nav-button').sidr({
-      name: 'responsive-nav',
-      source: '#main-side-bar',
-      renaming: false
-    });*/
-
 	/* ====================================
 		Init
 	===================================== */ 
 
+	initTooltips(); 
+	setImageHeight();
+
 });
+
+	function initTooltips() { 
+		// Position Array
+	 	var pos = ["top", "left", "bottom", "right"];
+	 	// Init Tooltip for all directions 
+		for (i = 0; i < pos.length; i++) { 
+			if (!$('.tooltip.'+pos[i]+'-tooltip').hasClass('tooltipstered')) {
+			 	$('.tooltip.'+pos[i]+'-tooltip').tooltipster({
+			       speed: 100,
+			       delay: 50,
+			       position: pos[i],
+			       theme: 'cust-tooltip'
+		    	});
+		 	}
+		}
+	}

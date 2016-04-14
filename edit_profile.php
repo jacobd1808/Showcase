@@ -149,7 +149,7 @@
         var month;
         var year;
         var gym;
-        var weight = <?= $profile_info['weight'] ?>;
+        var weight = $('#u_weight').val(); 
         var body_fat;
         var avatar; 
 
@@ -198,7 +198,7 @@
               $(this).data("type", "LB");
               $(this).children().html("LB");
               
-             weight = checkVal('weight', <?= $profile_info['weight'] ?>);
+             weight = checkVal('weight', $('#u_weight').val());
              weight = convertWeight("LB", weight);
 
              $("#u_weight").val(weight);
@@ -208,7 +208,7 @@
               $(this).data("type", "KG");
               $(this).children().html("KG");
 
-              weight = checkVal('weight', <?= $profile_info['weight'] ?>);
+              weight = checkVal('weight', $('#u_weight').val());
               weight = convertWeight("KG", weight);
 
               $("#u_weight").val(weight);
@@ -269,7 +269,7 @@
               weight = convertWeight("LB", weight);
             }          
           } else {
-            weight = <?= $profile_info['body_fat'] ?>
+            weight = $('#u_weight').val(); 
           }
             bio = $("#u_bio").val();
 
