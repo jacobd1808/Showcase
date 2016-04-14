@@ -97,6 +97,21 @@
 			}
 		}
 
+		public function updateSlider($id, $slider){
+			// SQL STATEMENT
+			$sql = "UPDATE sc_profile SET distance_slider=$slider WHERE id=$id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}			
+		}
+
+
+
 		// Create a profile for the user with the form
 		public function createProfile($data){
 			// SQL Statement

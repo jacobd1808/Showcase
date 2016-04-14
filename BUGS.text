@@ -1,20 +1,16 @@
-BUGS 
-	- KG / Lb Bug 
-	- Change Avatar DB link
-	- Auto Select Goal and Length of time on search 
-	- Save Distance 
-	- Bug when you first log in on the feed
-	- feed doesn't work for me for some reason 
-	- Does profile popup display all the correct content ?? 
-	- Hiding / Showing the search page location thing on click
+dBUGS 
+	- LB KG bug fixed
+	- GOAL and EXP now loadup on search start
+	- Your feeds show aswell
+	- News feed post works now
+	- Fixed bug where news feed was showing in the wrong order ( inverted )
+	- Search slider now saves.
+	- Hiding / Showing the search page location thing on click works.
+	- Weird first login bug fixed.
+	- Fixed bug where if a user hadn't set his profile yet it would screw the search page.
+	- Likes and unlikes work and count, and liking sends a notification
+	- Fixed a bug where notifications were showed in the wrong order.
 
+	///// 
 
-	- This bug on search (On Load)
-
-	<font size='1'><table class='xdebug-error xe-notice' dir='ltr' border='1' cellspacing='0' cellpadding='1'>
-<tr><th align='left' bgcolor='#f57900' colspan="5"><span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Notice: Trying to get property of non-object in C:\wamp\www\Showcase\app\models\Profile.php on line <i>15</i></th></tr>
-<tr><th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th></tr>
-<tr><th align='center' bgcolor='#eeeeec'>#</th><th align='left' bgcolor='#eeeeec'>Time</th><th align='left' bgcolor='#eeeeec'>Memory</th><th align='left' bgcolor='#eeeeec'>Function</th><th align='left' bgcolor='#eeeeec'>Location</th></tr>
-<tr><td bgcolor='#eeeeec' align='center'>1</td><td bgcolor='#eeeeec' align='center'>0.0028</td><td bgcolor='#eeeeec' align='right'>274504</td><td bgcolor='#eeeeec'>{main}(  )</td><td title='C:\wamp\www\Showcase\search.php' bgcolor='#eeeeec'>..\search.php<b>:</b>0</td></tr>
-<tr><td bgcolor='#eeeeec' align='center'>2</td><td bgcolor='#eeeeec' align='center'>1.4454</td><td bgcolor='#eeeeec' align='right'>425272</td><td bgcolor='#eeeeec'>Profile->returnCoordinates(  )</td><td title='C:\wamp\www\Showcase\search.php' bgcolor='#eeeeec'>..\search.php<b>:</b>86</td></tr>
-</table></font>
+	- Gym search has to work

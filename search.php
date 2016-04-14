@@ -91,7 +91,19 @@
             <?php 
               foreach($profiles as $x){
                 if ( $x['id'] != $profile_info['id']){
-                  $x_adress = $Profile->returnCoordinates($x['latitude'], $x['longitude']);
+                  if ( $x['latitude'] != 0 && $x['longitude'] != 0){
+                    $x_adress = $Profile->returnCoordinates($x['latitude'], $x['longitude']);
+                  } else {
+                    $x_adress = array('No', '', 'Location');
+                  }
+
+                if ( $x['goal'] == 0){
+                  $x['goal'] = 1;
+                }
+
+                if ( $x['workout_exp'] == 0 ){
+                  $x['workout_exp'] = 1;
+                }
             ?>
                 <script>
                   profiles.push("<?= $x['id'] ?>");
@@ -156,7 +168,7 @@
           .slider({ 
               min: 2, 
               max: 10, 
-              value: 6, 
+              value: <?= $profile_info['distance_slider'] ?>, 
               step: 2 
           })
           .slider("pips", {
@@ -193,23 +205,32 @@
           }
           locationDisplay(locationStatus);
         })
-
-        function locationDisplay(status) { 
-          if (status === 'location') {
-            $('#location-selector').slideDown();
-            $('#distance-selector').slideUp();
-            $('#location-label').html('Set Location<span> </span>')
-          } else if (status === 'distance') {
-            $('#location-selector').slideUp();
-            $('#distance-selector').slideDown();
-            $('#location-label').html('Set Distance (Miles)<span> </span>');
-          }
-        }
       });
+
+      function locationDisplay(status) { 
+        if (status === 'location') {
+          $('#location-selector').slideDown();
+          $('#distance-selector').slideUp();
+          $('#location-label').html('Set Location<span> </span>')
+        } else if (status === 'distance') {
+          $('#location-selector').slideUp();
+          $('#distance-selector').slideDown();
+          $('#location-label').html('Set Distance (Miles)<span> </span>');
+        }
+      }
 
       // Current Latitude & Longitude
       var latitude = <?= $profile_info['latitude'] ?>;
       var longitude = <?= $profile_info['longitude'] ?>;
+      var currentGoal = <?= $profile_info['goal'] ?>;
+      var currentExp = <?= $profile_info['workout_exp'] ?>;
+      var id = <?= $profile_info['id'] ?>;
+
+      $(".search-results").data('goal', currentGoal);
+      $(".search-reults").data('exp', currentExp);
+
+      $("#goal_" + currentGoal).addClass('active');
+      $("#exp_" + currentExp).addClass('active');
 
       // Function to Calculate distance from user to user
       function calculateDistance(lat1, long1, lat2, long2){
@@ -286,6 +307,7 @@
             $("#location").data('longitude', longitude);
 
             updateDistance();
+            locationDisplay('distance');
           }
         });      
       });
@@ -298,13 +320,12 @@
               $("#location").text("Current Location");  
               updateDistance();  
               });
+
+              locationDisplay('distance');
           } else {
               alert("The browser is not compatible with geolocation");
           }
       });
-
-      var currentGoal = 0;
-      var currentExp = 0;
 
       $(".click-goal").click(function(){
         refreshFilter(this);
@@ -312,6 +333,15 @@
 
       $("#distance-slider").slider({
         change: function( event, ui ) {
+          var slider = $("#distance-slider").slider("value");
+          $.ajax({
+            url : "app/controller/ajaxController.php",
+            data : { action: 'update_slider', id: id, slider: slider },
+            method : 'POST',
+            success : function(data){
+              console.log("it updated");
+            }
+          });  
           refreshFilter(this);
         }
       });

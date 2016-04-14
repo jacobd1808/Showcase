@@ -188,7 +188,7 @@
 
 		public function fetchNotifications($user_id){
 			// SQL Statement
-			$sql = " SELECT * FROM sc_notifications WHERE user_id= $user_id";
+			$sql = " SELECT * FROM sc_notifications WHERE user_id= $user_id ORDER BY id DESC";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -202,8 +202,10 @@
 		public function printNotification($data){
 			if ( $data['type'] == 1){
 				return "$data[person_name] $data[person_lastname] has sent you a friend request";
+			} else if ( $data['type'] == 2) {
+				return "$data[person_name] $data[person_lastname] has liked your status";
 			} else {
-				return "Error";
+				return false;
 			}
 		}
 
@@ -260,7 +262,7 @@
 
 		public function fetchNewsFeed($id){
 			// SQL
-			$sql = "SELECT * FROM sc_feed INNER JOIN sc_rel  ON sc_feed.user_id = sc_rel.friend_id WHERE sc_rel.user_id=$id  ORDER BY sc_feed.post_time";
+			$sql = "SELECT sc_feed.id, sc_feed.message, sc_feed.post_time, sc_rel.friend_id, sc_rel.friend_name, sc_rel.friend_lastname  FROM sc_feed INNER JOIN sc_rel  ON sc_feed.user_id = sc_rel.friend_id WHERE sc_rel.user_id=$id OR sc_feed.user_id = $id GROUP BY sc_feed.id ORDER BY sc_feed.post_time DESC";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -269,6 +271,36 @@
 			} else{
 				return "test";
 			}			
+		}
+
+		public function likeFeed($user_id, $feed_id){
+			// SQL
+			$sql = "INSERT INTO sc_likes(feed_id, user_id)
+					VALUES(:feed_id, :user_id)";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Bind parameters
+			$stmt->bindParam('feed_id', $feed_id, PDO::PARAM_STR);
+			$stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public function unlikeFeed($user_id, $feed_id){
+			// SQL
+			$sql = "DELETE FROM sc_likes WHERE feed_id=$feed_id AND user_id=$user_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public function fetchLikes($feed_id){
@@ -282,6 +314,19 @@
 			} else{
 				return "test";
 			}	
+		}
+
+		public function checkLike($feed_id, $user_id){
+			// SQL
+			$sql = "SELECT * FROM sc_likes WHERE feed_id=$feed_id AND user_id=$user_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+			} else{
+				return "test";
+			}		
 		}
 
 		public function ago($time)
