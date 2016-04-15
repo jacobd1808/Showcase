@@ -19,7 +19,7 @@
     </head>
     <body style='overflow-y: scroll; overflow-x: hidden'>
       <div id='fixed-bg'> </div>
-      <div id='main-content'>
+      <div id='main-content' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>' data-current-goal='<?= $profile_info['goal'] ?>' data-current-exp='<?= $profile_info['workout_exp'] ?>'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
           <div class='filter-options m-25 modulated-box'> 
@@ -105,9 +105,6 @@
                   $x['workout_exp'] = 1;
                 }
             ?>
-                <script>
-                  profiles.push("<?= $x['id'] ?>");
-                </script>
 
                 <div class='profile-card pure-g model-popup ' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
                      data-distance='0' 
@@ -220,11 +217,11 @@
       }
 
       // Current Latitude & Longitude
-      var latitude = <?= $profile_info['latitude'] ?>;
-      var longitude = <?= $profile_info['longitude'] ?>;
-      var currentGoal = <?= $profile_info['goal'] ?>;
-      var currentExp = <?= $profile_info['workout_exp'] ?>;
-      var id = <?= $profile_info['id'] ?>;
+      var latitude = $("#main-content").data('latitude');
+      var longitude = $("#main-content").data('longitude');
+      var currentGoal = $("#main-content").data('current-goal');
+      var currentExp = $("#main-content").data('current-exp');
+      var id = localStorage.getItem("userName");
 
       $(".search-results").data('goal', currentGoal);
       $(".search-reults").data('exp', currentExp);
