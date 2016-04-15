@@ -19,7 +19,7 @@
     </head>
     <body style='overflow-y: scroll; overflow-x: hidden'>
       <div id='fixed-bg'> </div>
-      <div id='main-content' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>' data-current-goal='<?= $profile_info['goal'] ?>' data-current-exp='<?= $profile_info['workout_exp'] ?>'>
+      <div id='main-content' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>' data-current-goal='<?= $profile_info['goal'] ?>' data-current-exp='<?= $profile_info['workout_exp'] ?>' data-slider='<?= $profile_info['distance_slider'] ?>'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
           <div class='filter-options m-25 modulated-box'> 
@@ -165,7 +165,7 @@
           .slider({ 
               min: 2, 
               max: 10, 
-              value: <?= $profile_info['distance_slider'] ?>, 
+              value: $("#main-content").data('slider'), 
               step: 2 
           })
           .slider("pips", {
