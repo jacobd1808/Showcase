@@ -124,11 +124,12 @@ $(function() {
    		        	results['d_gender'] = "Female";
    		        }
 
-   		        if (!results['friends'][1]){
-   		        	results['friends'] = { 1: { friend_name: 'This user has no friends, send him a friend request!' } };
+   		        if (!results['friends'][0]){
+   		        	results['friends'] = { 0: { friend_name: 'This user has no friends, send him a friend request!' } };
    		        }
-   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'] };
+   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'], avatar_url: results['avatar_url'] };
 
+   		        console.log(data);
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();
 				var template = Handlebars.compile(source);
@@ -197,7 +198,15 @@ $(function() {
 	===================================== */  
 
 	Handlebars.registerHelper('formatDate', function(date) {
-  		return new moment(date).format('D MMM YYYY');
+  		return new moment(date).format('D MMMM YYYY');
+	});
+
+	Handlebars.registerHelper('checkAvatar', function(avt) {
+		if (avt != '') {
+        	return 'assets/img/avatars/cropped/'+avt; 
+    	} else {
+        	return 'assets/img/avatars/cropped/no_avatar.gif';
+    	}
 	});
 
 	/* ====================================

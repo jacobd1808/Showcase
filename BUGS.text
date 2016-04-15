@@ -1,16 +1,29 @@
-dBUGS 
-	- LB KG bug fixed
-	- GOAL and EXP now loadup on search start
-	- Your feeds show aswell
-	- News feed post works now
-	- Fixed bug where news feed was showing in the wrong order ( inverted )
-	- Search slider now saves.
-	- Hiding / Showing the search page location thing on click works.
-	- Weird first login bug fixed.
-	- Fixed bug where if a user hadn't set his profile yet it would screw the search page.
-	- Likes and unlikes work and count, and liking sends a notification
-	- Fixed a bug where notifications were showed in the wrong order.
 
-	///// 
+To Do 
+	- Feed 
+		- Reply Message *
+		- Like Post 
+		- Delete Post * 
+		- Clickable Name *
+	- Search 
+		- Fix PHP / JS bug 
+		- Search by Name / Gym * 
+		- Fix multi-line location bug *
+		- Remove quick add button *
+	- Friends 
+		- Amend Styling *
+	- Profile 
+		- Format timestamp * 
+	- Inbox 
+		- Who the fuck knows ?? 
+	- Notification 
+		- Populate 
+	- Edit Profile 
+		- Make current location bolder * 
+		- Change uploader size *
+	- General 
+		- Display correct number on inbox and notifcations 
+		- Add proper logo * 
+		- UX on the initial enter preference popup * 
 
-	- Gym search has to work
+	// William ( 5 Things )

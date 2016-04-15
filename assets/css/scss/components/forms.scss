@@ -53,6 +53,15 @@ input[type=submit], .custom-btn {
 			color: $brand-light-col;
 		}
 	}
+	&.friend-request, &[value='request pending'] { 
+		@include gradient-vertical(#ffdf00, #ff8900);
+	}
+	&.friends, &[value='unfriend'] { 
+		@include gradient-vertical(#e90800, #ab0200);
+	}
+	&.friend-request { 
+		@extend .dark-grad;
+	}
 }
 
 select {

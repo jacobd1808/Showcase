@@ -11,7 +11,7 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFC6E00', endColorstr='#FFEB1C00', GradientType=0); }
 
-.dark-grad, h3, input[type=submit].dark-color, .custom-btn.dark-color {
+.dark-grad, h3, input[type=submit].dark-color, .custom-btn.dark-color, input[type=submit].friend-request, .custom-btn.friend-request {
   background-image: -webkit-linear-gradient(top, #352746 0%, #08060b 100%);
   background-image: -o-linear-gradient(top, #352746 0%, #08060b 100%);
   background-image: linear-gradient(to bottom, #352746 0%, #08060b 100%);
@@ -1460,6 +1460,18 @@ input[type=submit], .custom-btn {
     font-weight: 300; }
   input[type=submit].dark-color:hover, .custom-btn.dark-color:hover {
     color: #FC6E00; }
+  input[type=submit].friend-request, input[type=submit][value='request pending'], .custom-btn.friend-request, .custom-btn[value='request pending'] {
+    background-image: -webkit-linear-gradient(top, #ffdf00 0%, #ff8900 100%);
+    background-image: -o-linear-gradient(top, #ffdf00 0%, #ff8900 100%);
+    background-image: linear-gradient(to bottom, #ffdf00 0%, #ff8900 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFDF00', endColorstr='#FFFF8900', GradientType=0); }
+  input[type=submit].friends, input[type=submit][value='unfriend'], .custom-btn.friends, .custom-btn[value='unfriend'] {
+    background-image: -webkit-linear-gradient(top, #e90800 0%, #ab0200 100%);
+    background-image: -o-linear-gradient(top, #e90800 0%, #ab0200 100%);
+    background-image: linear-gradient(to bottom, #e90800 0%, #ab0200 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFE90800', endColorstr='#FFAB0200', GradientType=0); }
 
 select {
   display: inline-block;

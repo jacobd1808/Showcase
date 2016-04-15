@@ -26,7 +26,7 @@
             <div class='p-10'>
               <?php foreach($friends as $x) { ?>
               <a href='#' class='avatar-tile friend-list model-popup' data-profile-id='<?= $x['friend_id'] ?>' data-content='profile' data-title="<?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?>s Profile"> 
-                <img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
+                <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
                 <span> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> </span>
               </a>
               <? } ?>

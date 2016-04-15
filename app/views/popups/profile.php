@@ -21,7 +21,7 @@
 	<div class='pure-g' id='profile' data-id='{{ id }}'>
 		<div class='pure-u-5-24 main-info-col'>
 			<div class='main-info-col'>
-				<img src='http://i.imgur.com/HQ3YU7n.gif' class='avatar' />
+				<img src='{{ checkAvatar avatar_url }}' class='avatar' />
 				<ul class='basic-list'> 
 					<li class='first-tile'> 
 						<strong> Age </strong> 
@@ -56,7 +56,7 @@
 				<div class='profile-section'> 
 					<strong> Main Information </strong>
 					<ul class='main-info-section'> 
-						<li> <span> Date Joined </span> {{ register_date }} </li>
+						<li> <span> Date Joined </span> {{ formatDate register_date }} </li>
 						<li> <span> Hometown </span> {{ location }} </li>
 						<li> <span> Current Gym </span> {{ gym }} </li>
 						{{#if weight_kg}}

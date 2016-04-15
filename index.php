@@ -90,7 +90,7 @@
           <div class='feed-post'> 
 
             <div class='feed-post-title'>
-              <img src='http://i.imgur.com/HQ3YU7n.gif' alt='avatar' class='user-avatar feed-avatar' />
+              <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar' />
               <span class='feed-name'> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> <small> Posted <?= $Relation->ago($x['post_time']) ?> </small></span>
               <span class='feed-like'> 
                 <span id='count_<?= $x['id'] ?>'><?= $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"  data-user-id='<?= $x['friend_id'] ?>' data-id='<?= $x['id'] ?>' data-count='<?= $Relation->fetchLikes($x['id']) ?>' data-liked='<?= $data_liked ?>'></i>

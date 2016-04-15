@@ -175,7 +175,10 @@
 
 		public function fetchFriendList($id){
 			// SQL Statement
-			$sql = "SELECT * FROM sc_rel WHERE user_id=$id";
+			$sql = "SELECT * FROM sc_rel 
+					INNER JOIN sc_profile 
+						ON sc_rel.friend_id = sc_profile.id 
+					WHERE sc_rel.user_id = $id";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -262,7 +265,15 @@
 
 		public function fetchNewsFeed($id){
 			// SQL
-			$sql = "SELECT sc_feed.id, sc_feed.message, sc_feed.post_time, sc_rel.friend_id, sc_rel.friend_name, sc_rel.friend_lastname  FROM sc_feed INNER JOIN sc_rel  ON sc_feed.user_id = sc_rel.friend_id WHERE sc_rel.user_id=$id OR sc_feed.user_id = $id GROUP BY sc_feed.id ORDER BY sc_feed.post_time DESC";
+			$sql = "SELECT sc_feed.id, sc_feed.message, sc_feed.post_time, sc_rel.friend_id, sc_rel.friend_name, sc_rel.friend_lastname, sc_profile.avatar_url
+					FROM sc_feed 
+					INNER JOIN sc_rel 
+						ON sc_feed.user_id = sc_rel.friend_id 
+					INNER JOIN sc_profile 
+						ON sc_feed.user_id = sc_profile.id 
+					WHERE sc_rel.user_id=$id OR sc_feed.user_id = $id 
+					GROUP BY sc_feed.id 
+					ORDER BY sc_feed.post_time DESC";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query

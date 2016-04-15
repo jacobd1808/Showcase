@@ -21,7 +21,7 @@
           <li><a href="friends.php" class='main-link <?= setActive('friends', $pageOpt['navName']); ?>'><i class="material-icons">sentiment_very_satisfied</i> Friends </a> </li>
       </ul>
       <div class='user-profile-tab'> 
-        <a href='#' class='main-link tab-heading model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='3'><?= $user_profile['name'] ?> <?= $user_profile['surname'] ?><i class="material-icons">account_circle</i> </a>
+        <a href='#' class='main-link tab-heading model-popup' data-content='profile' data-title='Someones Profile' data-profile-id='<?= $user_profile['id'] ?>'><?= $user_profile['name'] ?> <?= $user_profile['surname'] ?><i class="material-icons">account_circle</i> </a>
         <ul class='user-menu'> 
             <li> <a href='#' class='model-popup' data-content='message-center' data-title='Messaging Center'> 
               Messages 

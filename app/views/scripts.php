@@ -17,7 +17,8 @@
         <script type="text/javascript" src="lib/gallery/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
         <script type="text/javascript" src="lib/gallery/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
         <script type="text/javascript" src="lib/gallery/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js' /> </script> 
+         <script type="text/javascript" src="lib/moment/moment.js"> </script>
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js' /> </script>
         <!-- Page Specfic Files-->
         <?php if($pageOpt['jsIncludes']) { echo $pageOpt['jsIncludes']; } ?>  
         <!-- Main-->    
