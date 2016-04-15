@@ -80,8 +80,6 @@ $(function() {
 	}
 
 	function loadProfileData(id) { 
-
-		var data = {type:"Fiat", model:"500", color:"white"};
 		
 		$.ajax({
 			method: 'POST', 
@@ -92,6 +90,15 @@ $(function() {
 
    		        // Adjust weigh in KG
    		        results['weight_kg'] = results['weight'] / 2.2046;
+
+   		        if (results['weight_kg'] == 0) { 
+   		        	results['weight_kg'] = false;
+   		        }
+
+   		        if (results['body_fat'] == 0) { 
+   		        	results['body_fat'] = false;
+   		        }
+   		        
    		        // Adjust gender
    		        if ( results['gender'] == 1){
    		        	results['gender'] = "male";
@@ -104,13 +111,14 @@ $(function() {
    		        if (!results['friends'][1]){
    		        	results['friends'] = { 1: { friend_name: 'This user has no friends, send him a friend request!' } };
    		        }
-
-   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'] };
+   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'] };
 
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();
 				var template = Handlebars.compile(source);
 				$('#profile-container').append(template(data));
+				setEleHeight();
+				setImageHeight()
 				alignToVerticalCenter($('.vert-center-popup')); 
 			},
 			error: function() { 
@@ -155,7 +163,10 @@ $(function() {
 	===================================== */  
 
 	$('body').on('click', '.fancybox', function(e) {
-		$(".fancybox").fancybox();
+		$(".fancybox").fancybox({
+			maxWidth: '80%',
+			maxHeight: '80%'
+		});
 	});
 
 	function setImageHeight() {

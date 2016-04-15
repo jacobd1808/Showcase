@@ -45,7 +45,6 @@
     $recArray = 0;
   }
 
-
   $pageOpt = array(
     "title"         =>  "Welcome", 
     'navName'         =>  "feed", 

@@ -7,11 +7,14 @@
 	$Rel = new Relation($conn);
 
 	$info = $Profile->fetchProfile($_SESSION['ifitness_id']);
+
 ?>
 
 <div class='modulated-box vert-center-popup' id='popup-content'> 
 	<div id='profile-container'> 
-	<!-- POPULATE --> Hello
+		<div class='c-align'>
+			<div class='uil-ring-css' style='transform:scale(0.6);'><div></div></div>
+		</div>
 	</div>
 </div>
 <script id="profile-template" type="text/x-handlebars-template">
@@ -55,9 +58,13 @@
 					<ul class='main-info-section'> 
 						<li> <span> Date Joined </span> {{ register_date }} </li>
 						<li> <span> Hometown </span> {{ location }} </li>
-						<li> <span> Current Gym </span>  {{ gym }} </li>
-						<li> <span> Current Weight </span>  {{ weight_lb }} Lb / {{ weight_kg }}kg </li>
+						<li> <span> Current Gym </span> {{ gym }} </li>
+						{{#if weight_kg}}
+						<li> <span> Current Weight </span> {{ weight_lb }} Lb / {{ weight_kg }}kg </li>
+						{{/if}}
+						{{#if body_fat}}
 						<li> <span> Current Body Fat %</span>  {{ body_fat }}% </li>
+						{{/if}}
 					</ul>
 				</div>
 				<div class='profile-section'> 
@@ -65,6 +72,17 @@
 					<div class='bio-section'> 
 						{{{ bio }}}
 					</div>
+				</div>
+				<div class='profile-section'> 
+					<strong> Images </strong>
+					<div class='image-gallery'>
+						{{#each images}} 
+						<a class="fancybox image-ratio" rel="group" href="assets/img/gallery_uploads/{{ this }}">
+							<img src="assets/img/gallery_uploads/{{ this }}" alt="" />
+						</a>
+						{{/each}}
+						<div class='clear'> </div>
+					</div> 
 				</div>
 			</div>
 		</div>
@@ -156,25 +174,3 @@ $("body").on("click", "#friendRequest", function(){
 	.friends: if the person is your friend
 	.add-friend: To be able to send a friend request
 */
-
-				/* <div class='profile-section'> 
-					<strong> Images </strong>
-					<div class='image-gallery'> 
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<a class="fancybox image-ratio" rel="group" href="assets/img/upload_images/example_img.jpg">
-							<img src="assets/img/upload_images/example_img.jpg" alt="" />
-						</a>
-						<div class='clear'> </div>
-					</div> 
-				</div> */

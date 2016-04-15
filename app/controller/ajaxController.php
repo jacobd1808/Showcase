@@ -59,6 +59,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'fetch_profile':
 			$user_id = $_POST['user_id'];
 			$results = $Profile->fetchProfile($user_id);
+			$results['images'] = $Profile->fetchImages($results['name'], $results['surname'], $results['id']);
 			$results['location'] = $Profile->returnLocation($results['latitude'], $results['longitude']);
 			$results['friends'] = $Relation->fetchFriendList($user_id);
 			$results['relation'] = $Relation->checkRelation($_SESSION['ifitness_id'], $results['id']);

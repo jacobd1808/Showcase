@@ -113,5 +113,5 @@
   /* or fixed or absolute */
   background-color: $body-darken;
   border: 1px dotted $brand-light-col;
-  @include rounded(100px);
+  @include rounded(100px); 
  } 

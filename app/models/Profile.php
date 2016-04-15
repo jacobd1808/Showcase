@@ -240,5 +240,19 @@
 			// Return results to nest variable
 			return $result;
 		}
+
+		public function fetchImages($fname, $sname, $id) { 
+		    $directory = "../../assets/img/gallery_uploads/";
+		    $images = glob($directory . "*");
+		    $imageStore = array(); 
+
+		    foreach($images as $image) {
+		      if (strpos($image, $fname.'_'.$sname.'_'.$id) !== false) {
+		      	  $image = basename($image); 
+		          array_push($imageStore, $image);
+		      }
+		    }
+		    return $imageStore;
+		}
 	}
 ?>
