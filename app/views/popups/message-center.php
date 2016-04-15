@@ -3,7 +3,7 @@
 	include "../../../app/config/conn.php"; 
 ?>
 
-<div class='modulated-box vert-center-popup' id='popup-content'> 
+<div class='modulated-box vert-center-popup' id='popup-content' data-user-id='<?= $_SESSION['ifitness_id'] ?>'> 
 	<div class='pure-g'>
 		<div class='pure-u-7-24'> 
 			<div class='heading left-border l-align removeHeader'> Inbox </div>
@@ -13,42 +13,18 @@
 		</div>
 		<div class='pure-u-17-24'> 
 			<div id='reply-message'>
-				<div class='heading left-border l-align'> Message from ..  </div>
-					<div class='scriptHeight' data-parent-ele='popup-content' data-remove-ele='removeHeader'>
+				<div class='heading left-border l-align'> Message from .. <span id='message_from'></span> </div>
+					<div class='scriptHeight' id='message-form' data-parent-ele='popup-content' data-remove-ele='removeHeader'>
 					<form action='' method='POST' class='p-h-20 pure-g l-align'> 
 						<div class='pure-u-1-1 p-v-20'>
-							<h4> Title of Message </h4>
+							<h4 id='message_title'> Title of Message </h4>
 							<!-- --> 
-							<div class='message-list received-msg'> 
-								<div class='message-content pure-g'> 
-									<a href='#' class='pure-u-4-24 avatar-tile'>
-										<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
-										<span> Jacob Dickinson </span>
-									</a>
-									<div class='pure-u-20-24 message-text'>
-									Some Message 
-									<em> Sent on xx . xx . xx </em>
-									</div>
-								</div>
+							<div id='conversation' data-inbox-id='0'>
 							</div>
 							<!-- --> 
-							<!-- --> 
-							<div class='message-list sent-msg'> <!-- CHANGE CLASS -->  
-								<div class='message-content pure-g'> 
-									<div class='pure-u-4-24 avatar-tile'>
-										<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/>
-										<a href=''> Jacob Dickinson </a>
-									</div>
-									<div class='pure-u-20-24 message-text'>
-									Some Message 
-									<em> Sent on xx . xx . xx </em>
-									</div>
-								</div>
-							</div>
-							<!-- --> 
-			                <textarea placeholder='Message' style='margin-top: 20px'></textarea>
+			                <textarea id='message-text' placeholder='Message' style='margin-top: 20px'></textarea>
 			                <div class='c-align'>
-		                		<input type='submit' name='reply' id='reply' value='Reply'/>
+		                		<input type='submit' name='reply' id='message-reply' value='Reply'/>
 		                	</div>
 		              	</div>
 					</form>
@@ -67,7 +43,7 @@
 			                <textarea placeholder='Message'></textarea>
 						</div>
 						<div class="pure-u-1 pure-u-md-1-1 c-align">
-		                	<input type='submit' name='update' id='update' value='Send Message'/>
+		                	<input type='submit' name='update' id='send-message' value='Send Message'/>
 		              	</div>
 					</form>
 				</div>
@@ -78,11 +54,49 @@
 
 <script>
 	$( document ).ready(function() { 
-		var user_id = <?= $_SESSION['ifitness_id'] ?>;
-
+		// Get User ID
+		var user_id = localStorage.getItem("userName") 
+		// Get User Inbox
 		getInbox(user_id);
 
+
+		$("body").on('click', '.message_header', function(){
+			var message_id = $(this).data('message-id');
+			getConversation(message_id);
+		});	
+
+		$("body").on('click', '#message-reply', function(e){
+			e.preventDefault();
+			sendMessage();
+		});
 	});
+
+	function sendMessage(){
+		var message = $("#message-text").val();
+		var inbox_id = $("#conversation").data('inbox-id');
+		$.ajax({
+			url : "app/controller/inboxController.php",
+			data : { action: 'send_message', message: message, user_id: user_id, inbox_id: inbox_id },
+			method : 'POST', 
+			success : function(data){
+				var results = jQuery.parseJSON(data);
+
+				$("#conversation").append(" \
+				<div class='message-list received-msg'>   \
+					<div class='message-content pure-g'>  \
+						<div class='pure-u-4-24 avatar-tile'> \
+							<img src='assets/img/avatars/cropped/"+ results['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
+							<a href=''> "+ results['name'] + " " + results['surname'] + "</a> \
+						</div> \
+						<div class='pure-u-20-24 message-text'> \
+							"+ results['message'] +"  \
+							<em> Sent on "+ results['date_sent'] +" </em> \
+						</div> \
+					</div> \
+				</div>");
+			}
+		});	
+	}
 
 	function getInbox(user_id){
 		$.ajax({
@@ -92,9 +106,9 @@
 			success : function(data){
 				var results = jQuery.parseJSON(data);
 				results.forEach(function(x){
-					var name = getName(x['last_sender']);	
+					var name = x['name'] + " " + x['surname'];
 					$("#inbox-list").append(" \
-					<li> \
+					<li class='message_header' data-message-id='"+ x['id'] +"''> \
 						<div class='type-col tooltip left-tooltip' title='"+ x['title'] +"'> \
 							<span> S </span> \
 						</div> \
@@ -107,16 +121,39 @@
 		});			
 	};
 
-	function getName(user_id){
-		$.ajax({
-			url : "app/controller/inboxController.php",
-			data: { action: 'get_name', user_id: user_id},
-			method: 'POST',
-			success: function(data){
-				var results = jQuery.parseJSON(data);
-				console.log(results['name']);
-			}
-		});
-	}
-
+	function getConversation(inbox_id){
+		$("#conversation").slideUp(function(){
+			$("#conversation").html("");
+			$.ajax({
+				url : "app/controller/inboxController.php",
+				data : { action: 'get_convo', inbox_id: inbox_id },
+				method : 'POST',
+				success : function(data){
+					var results = jQuery.parseJSON(data);
+					console.log(results);
+					results.forEach(function(x){
+						var name = x['name'] + " " + x['surname'];
+						$("#message_from").html(name);
+						$("#conversation").data('inbox-id', inbox_id);
+						$("#conversation").append(" \
+						<div class='message-list received-msg'>   \
+							<div class='message-content pure-g'>  \
+								<div class='pure-u-4-24 avatar-tile'> \
+									<img src='assets/img/avatars/cropped/"+ x['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
+									<a href=''> "+ name +"</a> \
+								</div> \
+								<div class='pure-u-20-24 message-text'> \
+									"+ x['message'] +"  \
+									<em> Sent on "+ x['date_sent'] +" </em> \
+								</div> \
+							</div> \
+						</div>");
+					});	
+					
+					$("#conversation").slideDown();	
+					$("#message-form").slideDown();
+				}
+			});
+		});			
+	};
 </script>

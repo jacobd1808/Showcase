@@ -2,7 +2,6 @@
 To Do 
 	- Feed 
 		- Reply Message *
-		- Like Post 
 		- Delete Post * 
 		- Clickable Name *
 	- Search 
@@ -17,7 +16,7 @@ To Do
 	- Inbox 
 		- Who the fuck knows ?? 
 	- Notification 
-		- Populate 
+		- Make friend requests work
 	- Edit Profile 
 		- Make current location bolder * 
 		- Change uploader size *
@@ -27,3 +26,8 @@ To Do
 		- UX on the initial enter preference popup * 
 
 	// William ( 5 Things )
+
+	-- Fix Search PHP/JS Bugs
+	-- Make notification friend requests work
+	-- INBOX
+	-- Display correct number on inbox and notifications
