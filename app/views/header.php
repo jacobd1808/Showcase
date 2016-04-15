@@ -39,5 +39,5 @@
         <!--                   <li><a href="#" class='de-emphasis'><i class="material-icons">play_for_work</i>Logout</a></li> -->
       </div>
   </nav>
-  <div class='clear'></div>
+  <div class='clear' id='storage-id' data-user-id='<?= $_SESSION['ifitness_id'] ?>'></div>
 </header>

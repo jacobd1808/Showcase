@@ -2810,8 +2810,8 @@ html, body {
           width: 30%;
           text-align: right;
           display: inline-block; }
-    #profile .about-container .profile-section .bio-section {
-      padding: 0 10px;
+    #profile .about-container .profile-section .text-section {
+      padding: 20px 10px 10px 10px;
       font-size: 0.9em; }
 #profile .profile-member-list {
   background-color: #150f1b;

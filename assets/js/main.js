@@ -11,8 +11,11 @@ $(function() {
 		e.preventDefault();
 	})
 
-	var userName = 
-	localStorage.setItem("userName", "Jacob");
+	function setSession() {
+		var userName = $('#storage-id').data('user-id'); 
+		localStorage.setItem("userName", userName);
+		console.log(localStorage.getItem("userName"))
+	} 
 
 	/* ====================================
 		Set Element Height
@@ -80,26 +83,39 @@ $(function() {
 	}
 
 	function loadProfileData(id) { 
-		
+		// Fetch Profile via AJAX based on user ID 
 		$.ajax({
 			method: 'POST', 
 			url : "app/controller/ajaxController.php",
-         	 data : { action: 'fetch_profile', user_id: id },
+         	data : { action: 'fetch_profile', user_id: id },
 			success: function(data) {
+				// Store Results 
    		        var results = jQuery.parseJSON(data);
-
    		        // Adjust weigh in KG
    		        results['weight_kg'] = results['weight'] / 2.2046;
 
+   		        // Mark as FALSE if no weight specified 
    		        if (results['weight_kg'] == 0) { 
    		        	results['weight_kg'] = false;
    		        }
-
+   		        // Mark as FALSE if no BF specified 
    		        if (results['body_fat'] == 0) { 
    		        	results['body_fat'] = false;
    		        }
-   		        
-   		        // Adjust gender
+   		        // Rename if no gym Specified 
+   		       	if (results['gym'] == 'No Gym') { 
+   		        	results['gym'] = 'No Gym Specified';
+   		        }
+   		        // Rename if no user has no bio 
+   		       	if (results['bio'] == '') { 
+   		        	results['bio'] = 'This user currently has no bio';
+   		        }
+   		        if (results['images'].length == 0) { 
+   		        	results['image-reply'] = 'This user currently has no pictures';
+   		        } else { 
+					results['image-reply'] = false;
+   		        }
+   		        // Set text name for gender 
    		        if ( results['gender'] == 1){
    		        	results['gender'] = "male";
    		        	results['d_gender'] = "Male";
@@ -111,7 +127,7 @@ $(function() {
    		        if (!results['friends'][1]){
    		        	results['friends'] = { 1: { friend_name: 'This user has no friends, send him a friend request!' } };
    		        }
-   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'] };
+   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'] };
 
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();
@@ -177,11 +193,20 @@ $(function() {
 	}	
 
 	/* ====================================
+		Handlebar Helper Functions 
+	===================================== */  
+
+	Handlebars.registerHelper('formatDate', function(date) {
+  		return new moment(date).format('D MMM YYYY');
+	});
+
+	/* ====================================
 		Init
 	===================================== */ 
 
 	initTooltips(); 
 	setImageHeight();
+	setSession()
 
 });
 

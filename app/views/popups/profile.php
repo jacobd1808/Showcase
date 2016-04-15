@@ -69,12 +69,15 @@
 				</div>
 				<div class='profile-section'> 
 					<strong> Personal Bio </strong>
-					<div class='bio-section'> 
+					<div class='text-section'> 
 						{{{ bio }}}
 					</div>
 				</div>
 				<div class='profile-section'> 
 					<strong> Images </strong>
+					{{#if image_reply}}
+					<div class='text-section'>{{ image_reply }}</div>
+					{{/if}}
 					<div class='image-gallery'>
 						{{#each images}} 
 						<a class="fancybox image-ratio" rel="group" href="assets/img/gallery_uploads/{{ this }}">
