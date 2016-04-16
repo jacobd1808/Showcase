@@ -118,7 +118,6 @@
                 >
                   <h3 class='pure-u-1-1'>
                     <span class='title-text'><?= $x['name'] ?> <?= $x['surname'] ?></span>
-                    <div class='add-friend-btn'> <span> Add </span><i class="fa fa-plus-circle"></i></div>
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
                     <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>

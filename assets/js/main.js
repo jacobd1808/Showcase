@@ -97,6 +97,7 @@ $(function() {
    		        var results = jQuery.parseJSON(data);
    		        // Adjust weigh in KG
    		        results['weight_kg'] = results['weight'] / 2.2046;
+   		        results['weight_kg'] = results['weight_kg'].toFixed(2);
 
    		        // Mark as FALSE if no weight specified 
    		        if (results['weight_kg'] == 0) { 
