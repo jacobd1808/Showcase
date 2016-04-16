@@ -165,7 +165,7 @@
 			success : function(data){
 				x.html("Postal Code: <b>" + postal_code + "</b>");
 				var results = jQuery.parseJSON(data);
-				x.html(results['lat'] +", "+ results['lng']);
+				x.html(results['address'][1] +", "+ results['address'][3]);
 				latitude = results['lat'];
 				longitude = results['lng'];
 				checkAll2();
@@ -178,8 +178,15 @@
 	        navigator.geolocation.getCurrentPosition(function(position){
 				latitude = position.coords.latitude;
 				longitude = position.coords.longitude;
-			    x.html(" Latitude: " + position.coords.latitude + 
-			    " <br> Longitude: " + position.coords.longitude); 	 
+				$.ajax({
+					url : "app/controller/ajaxController.php", 
+					data : { action: 'return_address', latitude: latitude, longitude: longitude},
+					method : 'POST', 
+					success : function(data){
+						var results = jQuery.parseJSON(data);
+						x.html(results[1] + ", " + results[3]);	 
+					}
+				});
 			    checkAll2();       	
 	        });
 	    } else {

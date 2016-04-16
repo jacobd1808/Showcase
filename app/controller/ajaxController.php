@@ -43,7 +43,10 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		break;
 		case 'check_postcode':
 			$postal_code = $_POST['postal_code'];
-			echo $coords = $Profile->returnPostalCode($postal_code);
+			$coords = $Profile->returnPostalCode($postal_code);
+			$coords = json_decode($coords);
+			$coords->address = $Profile->returnCoordinates($coords->lat, $coords->lng);
+			echo json_encode($coords);
 		break;
 		case 'return_address':
 			$latitude = $_POST['latitude'];
