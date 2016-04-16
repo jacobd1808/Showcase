@@ -1,13 +1,16 @@
 <?php
   session_start();
 
+  // Check if Session Exists 
   if(isset($_SESSION['ifitness_id'])) { 
     header("Location: index.php");
   }
 
+  // Config and Register Controller 
   include_once "app/config/conn.php";
   include "app/controller/registerController.php";
 
+  // Page Options 
 	$pageOpt = array(
 		"title"			    =>	"Register", 
 		'navName' 		  	=> 	"", 
@@ -22,14 +25,17 @@
 		<?php include_once "app/views/meta.php"; ?>
     </head>
       <div id='fixed-bg'> </div>
+      <!-- --> 
       <div id='main-content'>
       <div class='view' style='margin: 0'> 
+        <!-- Register Intro --> 
         <div class='homepage-info vert-center'> 
             <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
             <br /> <big> Find, Connect, Train! </big> <br />
-            <a href='login.php' class='custom-btn small-button dark-color model-popup' 
+            <a href='#' class='custom-btn small-button dark-color model-popup' 
                data-content='about' data-title='About FitConnect'> Find Out More </a>
         </div>
+        <!-- Register Form--> 
         <form action='' method='post' name='register' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
           <h1> Register an account </h1>
           <fieldset>
@@ -68,12 +74,12 @@
                 <label for="u_password">Password *<span></span></label>
                 <input type='password' name='u_password' id='u_password' required />
               </div>
-              <!-- -->
+              <!--
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_email">Email<span></span></label>
                 <input type='text' name='u_email' id='u_email'/>
               </div>
-              <!-- -->
+              -->
               <input type='submit' name='register' id='register' />
             </div>
           </fieldset>

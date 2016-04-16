@@ -73,7 +73,11 @@ $(function() {
 				$('#model').fadeIn(250, function(){ 
 					setImageHeight()
 				});
-				$('#popup-content').prepend('<h1 class="removeHeader">'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+				if (content == 'searchPreferences') {
+					$('#popup-content').prepend('<h1 class="removeHeader">'+title+'</h1>');
+				} else { 
+					$('#popup-content').prepend('<h1 class="removeHeader">'+title+' <span id="closeModel" class="close-model"> <i class="material-icons">close</i> </span> </h1>');
+				} 
 				var alignElem = $('.vert-center-popup');
 				alignToVerticalCenter(alignElem); 
 				setImageHeight()
@@ -146,7 +150,7 @@ $(function() {
 
 	defaultPopup();
 
-	$('body').on('click', '#closeModel', function(){
+	$('body').on('click', '#closeModel, #closeModelBtn', function(){
 	    $('#model').fadeOut(250, function(){ 
 			$('#model').remove();
 		})

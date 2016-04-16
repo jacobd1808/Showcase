@@ -8,7 +8,7 @@
     // Store all Data in array to pass to Model
     $user_data = array(
       'username' => $_POST["u_username"], 
-      'email' => $_POST["u_email"],
+      'email' => '',
       'password' => md5($_POST["u_password"]),
       'register_date' => $register_date
     );

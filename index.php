@@ -62,9 +62,9 @@
       <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
-      <?php if ($profile_info['latitude'] == 0 && $profile_info['longitude'] == 0){ ?>
-         <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please set your search preferences'>  
-      <?php }  ?>
+      <?php //if ($profile_info['latitude'] == 0 && $profile_info['longitude'] == 0){ ?>
+         <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please provide some basic information about yourself'>  
+      <?php //} ?>
       <div class='m-25'>
         <div class='feed'> 
           <div class='feed-add'> 

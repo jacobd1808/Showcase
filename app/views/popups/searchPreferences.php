@@ -4,8 +4,8 @@
 ?>
 
 <div class='modulated-box vert-center-popup' id='popup-content'> 
-	<div class='pure-g searchPref'> 
-		<div class='pure-u-1-3'>
+	<div class='pure-g searchPref'>
+		<div class='pure-u-1-3 set-pref'>
 			<div class='heading header-font c-align'> 
 				Set Goal
 			</div>
@@ -21,12 +21,11 @@
 					  data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
 					  title='<?= $goal[0] ?>'
 					  id='goal_<?= $goal[1] ?>'>
-
 					</li>
 	            <? } ?>
             </ul>
 		</div>
-		<div class='pure-u-1-3'>
+		<div class='pure-u-1-3 set-pref'>
 			<div class='heading header-font c-align'>
 				Set Experience Level
 			</div>
@@ -46,7 +45,7 @@
                 <? } ?>
 			</ul>
 		</div>
-		<div class='pure-u-1-3'>
+		<div class='pure-u-1-3 set-pref'>
 			<div class='heading header-font no-border c-align'>
 				Set Location 
 			</div>
@@ -69,6 +68,11 @@
                 </div>
                 <div class='clear'> </div>
             </div>
+		</div>
+		<div class='pure-u-1-1 hidden' id='continue-preferences'>
+			<br />
+			<p> Thank you for providing this information, it will help us find others with similar goals and levels of experience who live around you </p> 
+			<input type='submit' value='Continue' name='continue' id="closeModelBtn" class="small-button"/>
 		</div>
 	</div>  
 </div>
@@ -186,14 +190,19 @@
 	function checkAll2(){
 
 		if ( goalCheck && expCheck && geoCheck){
-		$.ajax({
+		setTimeout(function(){ 
+			$('.set-pref').slideUp(200, function() { 
+				$('#continue-preferences').slideDown(200);
+			});
+		/*$.ajax({
 			url : "app/controller/ajaxController.php", 
 			data : { action: 'create_profile', id: id, workout_exp: exp, goal: choice, latitude: latitude, longitude: longitude },
 			method : 'POST', 
 			success : function(data){
 				console.log(data);
 			}
-		});	
+		});	*/
+			}, 1000);
 		}
 	}
 
