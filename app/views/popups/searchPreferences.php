@@ -165,7 +165,11 @@
 			success : function(data){
 				x.html("Postal Code: <b>" + postal_code + "</b>");
 				var results = jQuery.parseJSON(data);
-				x.html(results['address'][1] +", "+ results['address'][3]);
+				if(results['address'][4] == undefined) {
+                    x.html(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
+                } else { 
+                    x.html(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
+                }	
 				latitude = results['lat'];
 				longitude = results['lng'];
 				checkAll2();
@@ -184,7 +188,13 @@
 					method : 'POST', 
 					success : function(data){
 						var results = jQuery.parseJSON(data);
-						x.html(results[1] + ", " + results[3]);	 
+						x.html(results[1] + ", " + results[3]);
+
+	                    if(results[4] == undefined) {
+	                      x.html(results[1] + ", " + results[2] + ", " + results[3]);
+	                    } else { 
+	                      x.html(results[2] + ", " + results[3] + ", " + results[4]);
+	                    }	 
 					}
 				});
 			    checkAll2();       	

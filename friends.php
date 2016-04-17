@@ -28,7 +28,7 @@
               foreach($friends as $x) { ?>
               <a href='#' class='avatar-tile friend-list model-popup glow-hover' data-profile-id='<?= $x['friend_id'] ?>' data-content='profile' data-title="<?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?>s Profile"> 
                 <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                <span> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> </span>
+                <span> <?= $x['friend_name'] ?> <br /><?= $x['friend_lastname'] ?> </span>
               </a>
               <? } } else { ?>
                 <p> You currently have no friends </p>

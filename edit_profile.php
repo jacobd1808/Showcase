@@ -73,15 +73,16 @@
               <div class="pure-u-1 pure-u-md-1-1 relative">
                 <label for="c_location">Current Location<span></span></label>
                     <div class='c-align' id='c_location' data-lat='<?= $profile_info['latitude'] ?>' data-long='<?= $profile_info['longitude'] ?>'> 
-                      <?= $location[1] ?>, <?= $location[3] ?>
+                      <span class='loc'><?= displayLocation($location) ?></span>
                     <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='changeLocation' data-type='location_change'> <span> Change </span></div>
                   </div>
               </div>
               <div class="pure-u-1 pure-u-md-1-1 hidden" id='location-set-row'>
                 <label for="u_location">Edit Location <span></span></label>
                 <div class='pure-g'>
-                  <div class="pure-u-1 pure-u-md-10-24">
+                  <div class="pure-u-1 pure-u-md-10-24 relative">
                     <input type='text' name='u_location' id='u_location' class='location-height-input' placeholder='Postcode' />
+                    <div class='click-tile tile-text-center tooltip action-btn input-btn' id='postcode_btn'> <span>Find</span> </div>
                   </div>
                   <div class='pure-u-1 pure-u-md-4-24'> 
                     <div class='c-align align-or'> - OR - </div>
@@ -222,7 +223,6 @@
               $("#" + click_type + "_" +active).removeClass('active');
               $(this).addClass("active");
             }
-
         });
 
         /* ==============================
@@ -242,7 +242,12 @@
                   method : 'POST',
                   success : function(data){
                     var results = jQuery.parseJSON(data);
-                    $("#c_location").html(results[1] + ", " + results[3]);
+                    if(results[4] == undefined) {
+                      $("#c_location").find('span.loc').text(results[1] + ", " + results[2] + ", " + results[3]);
+                    } else { 
+                      $("#c_location").find('span.loc').text(results[2] + ", " + results[3] + ", " + results[4]);
+                    }
+                    $('#location-set-row').slideToggle();
                   }
                 });   
 
@@ -252,6 +257,30 @@
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }        
         });
+
+      $("#postcode_btn").click(function(){
+        var postal_code = $("#u_location").val();
+        $.ajax({
+          url : "app/controller/ajaxController.php",
+          data : { action: 'check_postcode', postal_code: postal_code },
+          method : 'POST',
+          success : function(data){
+            var results = jQuery.parseJSON(data);
+            if(results[4] == undefined ) {
+              $("#c_location").find('span.loc').text(results.address[1] + ", " + results.address[2] + ", " + results.address[3]);
+            } else { 
+              $("#c_location").find('span.loc').text(results.address[2] + ", " + results.address[3] + ", " + results.address[4]);
+            }
+            latitude = results['lat'];
+            longitude = results['lng'];
+
+            $("#c_location").data('lat', latitude);
+            $("#c_location").data('long', longitude);  
+
+            $('#location-set-row').slideToggle();
+          }
+        });      
+      });
 
         /* ==============================
           Update Profile 

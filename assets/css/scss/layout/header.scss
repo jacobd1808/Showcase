@@ -29,7 +29,16 @@ header {
 		background-color: $body-lighten;
 		border-right: 1px solid $body-lighten-2;
 		text-align: right;
-		a.tab-heading { padding: 25px 25px 25px 60px; }
+		width: 250px;
+		a.tab-heading { 
+			padding: 25px 15px;
+			width: 100%;
+			i { 
+				float: right;
+				margin-right: 0;
+				margin-left: 15px;
+			}
+		}
 	}
 	a.main-link { 
 		font-weight: 700;

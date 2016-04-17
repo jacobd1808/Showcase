@@ -51,8 +51,10 @@
                 <? } ?>
               </ul>
               <!-- --> 
-              <label id='location-label'></label>
+              <label id=''>Current Location <span> </span></label>
               <span class='distance-from'> From ..<span id='location' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>'><?= $adress[1] ?>, <?= $adress[3] ?></span> <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
+
+              <label id='location-label'>Set Location <span> </span></label>                           
               <div class='location-selector' id='location-selector'>
                 <input type='text' name='user_location' id='postcode' placeholder='Enter Postcode'/>
                 <div class='click-tile action-btn' id='postcode_location'> 
@@ -106,7 +108,7 @@
                 }
             ?>
 
-                <div class='profile-card pure-g model-popup ' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
+                <div class='profile-card pure-g model-popup iso-glow-hover' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
                      data-distance='0' 
                      data-goal='<?= $x['goal'] ?>' 
                      data-exp='<?= $x['workout_exp'] ?>' 
@@ -254,9 +256,20 @@
       profiles.forEach(function(x){
         var profile_lat = $("#profile_" + x).data('latitude');
         var profile_long = $("#profile_" + x).data('longitude');
-        var distance = calculateDistance(latitude, longitude, profile_lat, profile_long);
-        $("#profile_" + x).data('distance', distance);
+        console.log(profile_lat, profile_long)
       });
+
+      $('.profile-card').each(function(){ 
+        // Profile Lat / Long 
+        var profile_lat = $(this).data('latitude');
+        var profile_long = $(this).data('longitude');
+        // Personal Lat / Long 
+        var latitude = $("#location").data('latitude');
+        var longitude = $("#location").data('longitude');
+
+        var distance = calculateDistance(latitude, longitude, profile_lat, profile_long);
+        $(this).data('distance', distance);
+      })
 
       // Initiate Isotope Grid
       var $grid = $('.search-results').isotope({
@@ -297,10 +310,15 @@
             $("#location").text(postal_code);
             var results = jQuery.parseJSON(data);
 
+            if(results['address'][4] == undefined) {
+                $("#location").text(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
+            } else { 
+                $("#location").text(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
+            } 
+
             latitude = results['lat'];
             longitude = results['lng'];
 
-            console.log($("#location").data('longitude'));
             $("#location").data('latitude', latitude);
             $("#location").data('longitude', longitude);
 
@@ -313,13 +331,25 @@
       $("#geolocation").click(function(){
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function(position){
-              latitude = position.coords.latitude;
-              longitude = position.coords.longitude;
-              $("#location").text("Current Location");  
-              updateDistance();  
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                $.ajax({
+                  url : "app/controller/ajaxController.php", 
+                  data : { action: 'return_address', latitude: latitude, longitude: longitude},
+                  method : 'POST', 
+                  success : function(data){
+                    var results = jQuery.parseJSON(data);
+                    if(results[4] == undefined) {
+                      $("#location").text(results[1] + ", " + results[2] + ", " + results[3]);
+                    } else { 
+                      $("#location").text(results[2] + ", " + results[3] + ", " + results[4]);
+                    }  
+                  }
+                }); 
+                updateDistance();  
               });
-
               locationDisplay('distance');
+
           } else {
               alert("The browser is not compatible with geolocation");
           }
@@ -346,32 +376,11 @@
 
       $('.text-search').keyup(function(e){
         var id = $(this).attr('id')
-        refreshFilter(id);
-        //var term = $(this).val(); 
-        //var id = $(this).attr('id');
-        /*if (id == 'search-by-name') { 
-          action = 'search_by_user';
-          $('#search-by-gym').val(''); 
-        } else {
-          action = 'search_by_gym';
-          $('#search-by-name').val(''); 
-        }*/
-        //console.log(term);
-        /*$.ajax({
-          url : "app/controller/ajaxController.php",
-          data : { action: action, term: term },
-          method : 'POST',
-          success : function(data){
-             var results = jQuery.parseJSON(data);
-
-             $grid.isotope({ filter: filterValue });
-          }
-        });  */   
+        refreshFilter(id); 
       })
 
 
       function refreshFilter(that){
-        $('.profile-card').removeClass('iso-glow-hover'); 
         distanceSlider = $("#distance-slider").slider("value");
         var type = $(that).data('type');
         var goal = $(that).data('code-goal');
@@ -456,8 +465,6 @@
                 var r_exp = $(this).data('exp');
                 var r_distance = $(this).data('distance');
 
-                console.log(r_distance);
-
                 if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
                   if ( r_distance <= distanceSlider){
                     return true;
@@ -469,8 +476,7 @@
                 }
               }
             });
-          }
-        $('.profile-card').addClass('iso-glow-hover');      
+          }      
         }  
       }
       </script>

@@ -6,29 +6,31 @@
 
   if ( $profile_info['latitude'] != 0 && $profile_info['longitude'] != 0){
     include "app/controller/recommendationsController.php";
-
     $count = 0; 
     $recArray = array(); 
-
     $sameGymCount = count($sameGym);
     $recCount = count($recommendations);
 
-
   function checkDistance($myPos, $recPos) { 
-    return $dist = getDistance( $myPos['latitude'], $myPos['longitude'], $recPos['latitude'], $recPos['longitude']);
+    $dist = returnDistance2( $myPos['latitude'], $myPos['longitude'], $recPos['latitude'], $recPos['longitude']);
+    return $dist;
   }
 
     // Builds Recommendation Array
     if ($sameGymCount < 3) { 
-      foreach ($sameGym as $gymRec) { 
-          $typeArray = array('type'=>'sameGym');
-          $gymRec = array_merge($gymRec, $typeArray);
-          array_push($recArray, $gymRec);
-          $count++; 
+
+      if ($sameGymCount != 0) {
+        echo 'samegym';
+        foreach ($sameGym as $gymRec) { 
+            $typeArray = array('type'=>'sameGym');
+            $gymRec = array_merge($gymRec, $typeArray);
+            array_push($recArray, $gymRec);
+            $count++; 
+        }
       }
       foreach($recommendations as $rec) { 
         if(!in_array($rec, $recArray)) {
-          if(checkDistance($profile_info, $rec) <= 10) {
+          if(checkDistance($profile_info, $rec) <= 10000) {
             if ($count < 3) { 
               $typeArray = array('type'=>'samePreferences');
               $rec = array_merge($rec, $typeArray);
@@ -38,7 +40,7 @@
           }
         }
       }
-    } else { 
+    } else {
       array_push($recArray, $rec);
     }    
   } else {

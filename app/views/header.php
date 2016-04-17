@@ -26,12 +26,12 @@
             <li id='messages-popup' class='checkCount'> <a href='#' class='model-popup' data-content='message-center' data-title='Messaging Center'> 
               Messages 
               <i class="material-icons">message</i> 
-              <span class='count-circle'> 1 </span>
+              <span class='count-circle'> 0 </span>
             </a></li>
             <li id='notification-popup' class='checkCount'> <a href='#' class='model-popup' data-content='notifications' data-title='Notification Center'>   
               Notifications 
               <i class="material-icons">notifications</i> 
-              <span class='count-circle'> 2 </span>
+              <span class='count-circle'> 0 </span>
             </a></li>
             <li class='<?= setActive('edit_profile', $pageOpt['navName']); ?>'> <a href='edit_profile.php'> Edit Profile <i class="material-icons">edit</i></a></li>
             <li> <a href='logout.php'> Logout </a></li>

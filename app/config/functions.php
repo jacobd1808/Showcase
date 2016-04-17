@@ -30,6 +30,24 @@ function getDistance( $latitude1, $longitude1, $latitude2, $longitude2 ) {
     return $d;  
 }
 
+function returnDistance2($lat_1, $long_1, $lat_2, $long_2){
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=$lat_1,$long_1&destinations=$lat_2,$long_2&mode=driving&key=AIzaSyBpnDemMPmCFjpy-AqKtlrSpQo7QNgqAKk";
+    $curlData = file_get_contents($url);
+    $address = json_decode($curlData);
+    $a = $address->rows[0];
+    $b = $a->elements[0];
+    return $b->distance->value;
+}
+
+function displayLocation($location) { 
+    if(count($location) != 5) { 
+        return $location[1] . ", " . $location[2] . ", " . $location[3];
+    } else { 
+        return $location[2] . ", " . $location[3] . ", " . $location[4];
+    }
+}
+
+
 function avatarExists($avt, $popup) { 
     if ($avt != '') {
         return 'assets/img/avatars/cropped/'.$avt; 
