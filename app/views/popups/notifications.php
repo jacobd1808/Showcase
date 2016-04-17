@@ -14,7 +14,7 @@
 			}
 
 			echo "<li class='". $notification_class ."'>". $Relation->printNotification($x);
-			echo "<span class='notification-date' id > xx - xx - xx</span></li>";
+			echo "<span class='notification-date format-date'>".$x['date_added']."</span></li>";
 		}
 	} else { 
 		echo '<p> No notifications to display </p>'; 

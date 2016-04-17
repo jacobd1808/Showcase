@@ -107,11 +107,12 @@
 }
 
 #avatarCrop {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  /* or fixed or absolute */
-  background-color: $body-darken;
-  border: 1px dotted $brand-light-col;
-  @include rounded(100px); 
+	width: 200px;
+	height: 200px;
+	position: relative;
+	/* or fixed or absolute */
+	background-color: $body-darken;
+	border: 1px dotted $brand-light-col;
+	display: inline-block;
+	margin: 20px 0;
  } 

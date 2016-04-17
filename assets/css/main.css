@@ -2153,15 +2153,14 @@ legend {
   #prefix-suffix-slider .ui-slider-pip:nth-of-type(2n+1) .ui-slider-label {
     display: none; } }
 #avatarCrop {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   position: relative;
   /* or fixed or absolute */
   background-color: #150f1b;
   border: 1px dotted #FC6E00;
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  background-clip: padding-box; }
+  display: inline-block;
+  margin: 20px 0; }
 
 @-webkit-keyframes uil-ring-anim {
   0% {
@@ -2302,11 +2301,12 @@ header {
       list-style-type: none;
       float: left; }
       header ul.navigation-menu li.logo-cell img {
-        height: 30px;
+        height: 50px;
         position: relative;
         float: left;
-        top: 20px;
-        margin: 0 30px; }
+        top: 10px;
+        margin: 0 30px;
+        cursor: pointer; }
   header div.user-profile-tab {
     float: right;
     margin-right: 40px;
@@ -2381,6 +2381,29 @@ header {
   background-color: #281e35;
   border: 0;
   color: white; }
+
+.glow-hover:hover {
+  -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+  cursor: pointer; }
+
+.iso-glow-hover {
+  -webkit-transition: all 120ms ease-in-out;
+  -moz-transition: all 120ms ease-in-out;
+  -o-transition: all 120ms ease-in-out;
+  transition: all 120ms ease-in-out; }
+  .iso-glow-hover:hover {
+    -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    cursor: pointer; }
+    .iso-glow-hover:hover h3 {
+      color: #FC6E00; }
+
+.outline-hover:hover {
+  border: 2px solid #FC6E00;
+  cursor: pointer; }
 
 .model-bg {
   background-color: rgba(0, 0, 0, 0.9);
@@ -2543,18 +2566,12 @@ img.user-avatar {
     display: inline-block; }
   .avatar-tile:hover {
     border: 1px dotted #FC6E00; }
-    .avatar-tile:hover img {
-      border: 2px dotted #FC6E00; }
 
 .profile-card {
   width: 48%;
   cursor: pointer;
   float: left;
   margin: 10px 1%;
-  -webkit-transition: all 100ms ease-in-out;
-  -moz-transition: all 100ms ease-in-out;
-  -o-transition: all 100ms ease-in-out;
-  transition: all 100ms ease-in-out;
   border: 1px dotted #FC6E00; }
   .profile-card.full-width {
     width: 94%;
@@ -2589,12 +2606,6 @@ img.user-avatar {
         display: block;
         font-size: 1.2em;
         margin-top: 5px; }
-  .profile-card:hover {
-    -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75); }
-    .profile-card:hover h3 span.title-text {
-      color: #FC6E00; }
   .profile-card .same-gym-notify {
     background-color: #EB1C00;
     padding: 5px;
@@ -2681,6 +2692,12 @@ html, body {
     color: #FC6E00;
     margin-top: 5px; }
 
+#about-video {
+  max-width: 100%;
+  width: 70%;
+  max-height: 100%;
+  margin: 5% 0; }
+
 /* =================== /
 		Search
 / =================== */
@@ -2753,7 +2770,7 @@ html, body {
   height: auto;
   padding: 5px 5px 5px 5px; }
   #profile .main-info-col .avatar {
-    height: 220px;
+    height: 200px;
     width: 100%;
     display: block;
     background-color: #FC6E00;
@@ -2780,6 +2797,8 @@ html, body {
     margin-top: 10px;
     margin-bottom: 5px;
     float: left; }
+  #profile .main-info-col input[type=submit] {
+    margin: 5px 0; }
 #profile .about-container {
   overflow: auto;
   height: 400px; }
@@ -2844,6 +2863,11 @@ html, body {
       font-size: 0.9em;
       margin-top: 5px;
       color: #999; }
+    #profile .profile-member-list li .no-friends {
+      font-size: 0.8em;
+      text-align: center;
+      padding: 20px;
+      display: block; }
 
 /* ======================== /
 		Edit Profile 
@@ -2852,13 +2876,6 @@ html, body {
   width: 58%;
   float: left; }
 
-.avatar-upload-area div#avatarCrop {
-  display: inline-block;
-  float: left; }
-  .avatar-upload-area div#avatarCrop .croppedImg {
-    -webkit-border-radius: 100px;
-    border-radius: 100px;
-    background-clip: padding-box; }
 .avatar-upload-area img.displayAvatar {
   display: inline-block;
   width: 100px;
@@ -2906,6 +2923,17 @@ html, body {
 
 .pure-m-l-10 {
   padding-left: 10px; }
+
+#c_location {
+  background-color: #150f1b;
+  padding: 10px;
+  display: inline-block;
+  width: 100%;
+  text-align: left; }
+
+#changeLocation {
+  padding: 0 10px;
+  right: 0; }
 
 /* =========================== /
 		Messaging Centers 
@@ -2980,6 +3008,7 @@ html, body {
   float: left; }
   .feed .feed-post {
     float: left;
+    position: relative;
     width: 100%;
     margin: 10px 0;
     padding: 5px;
@@ -3019,23 +3048,24 @@ html, body {
       float: left;
       width: 100%;
       margin: 15px 15px 15px 70px; }
+    .feed .feed-post .delete-post {
+      position: absolute;
+      bottom: 8px;
+      left: 20px;
+      color: white;
+      opacity: 0.2;
+      padding: 10px;
+      cursor: pointer; }
+      .feed .feed-post .delete-post:hover {
+        color: #FC6E00;
+        opacity: 1.0; }
 
 .feed-notices {
   width: 30%;
   float: right;
-  margin-left: 2%; }
-  .feed-notices .mini-tile {
-    margin: 10px;
-    border: 1px dotted #FC6E00;
-    text-align: center; }
-    .feed-notices .mini-tile strong {
-      font-size: 0.8em;
-      display: block;
-      margin: 5px; }
-    .feed-notices .mini-tile img {
-      float: none; }
-    .feed-notices .mini-tile .rec-tile {
-      background-color: #1C1525; }
+  margin-left: 2%;
+  padding-bottom: 10px;
+  background-color: #1C1525; }
 
 .feed-add {
   background-color: #281e35;

@@ -37,10 +37,9 @@
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                   <label for="u_dd">Upload Profile Picture <span></span></label>
                   <div class='avatar-upload-area'> 
-                    <img src='assets/img/avatars/cropped/<?= $profile_info['avatar_url'] ?>' alt='user avatar' class='user-avatar displayAvatar'/>
                     <div id="avatarCrop"></div>
                   </div>
-                  <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?= $profile_info['avatar_url'] ?>'/>
+                    <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?= $profile_info['avatar_url'] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_location">Goals <span></span></label>
@@ -71,11 +70,14 @@
                 </ul>
                 <input type='hidden' placeholder='Hidden value for expereince' />
               </div>
-              <div class="pure-u-1 pure-u-md-1-1">
+              <div class="pure-u-1 pure-u-md-1-1 relative">
                 <label for="c_location">Current Location<span></span></label>
-                  <div class='c-align align-or' id='c_location' data-lat='<?= $profile_info['latitude'] ?>' data-long='<?= $profile_info['longitude'] ?>'> <?= $location[1] ?>, <?= $location[3] ?></div>
+                    <div class='c-align' id='c_location' data-lat='<?= $profile_info['latitude'] ?>' data-long='<?= $profile_info['longitude'] ?>'> 
+                      <?= $location[1] ?>, <?= $location[3] ?>
+                    <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='changeLocation' data-type='location_change'> <span> Change </span></div>
+                  </div>
               </div>
-              <div class="pure-u-1 pure-u-md-1-1">
+              <div class="pure-u-1 pure-u-md-1-1 hidden" id='location-set-row'>
                 <label for="u_location">Edit Location <span></span></label>
                 <div class='pure-g'>
                   <div class="pure-u-1 pure-u-md-10-24">
@@ -212,10 +214,14 @@
               weight = convertWeight("KG", weight);
 
               $("#u_weight").val(weight);
+            } else if (click_type == 'location_change') { 
+               $('#location-set-row').slideToggle();
             }
 
-            $("#" + click_type + "_" +active).removeClass('active');
-            $(this).addClass("active");
+            if (click_type != 'location_change') {
+              $("#" + click_type + "_" +active).removeClass('active');
+              $(this).addClass("active");
+            }
 
         });
 
@@ -293,35 +299,6 @@
         });
 
         /* ==============================
-          Avatar Uploader  
-        ============================== */
-
-        var cropperOptions = {
-          uploadUrl:'lib/croppic/img_save_to_file.php',
-          cropUrl:'lib/croppic/img_crop_to_file.php',
-          outputUrlId:'avatarUrl',
-          rotateControls:false, 
-          doubleZoomControls:true,
-          loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
-          modal: true,
-          onAfterImgUpload:   function(){ 
-              $.ajax({
-                method: 'POST', 
-                url : "app/controller/editAvatarLink.php",
-                dataType: "json",
-                data : { avatarURL: avatarURL },
-                success: function(data) {
-                  console.log(data);
-                },
-                error: function() { 
-                  displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
-                }
-            });
-          }
-        };
-        var cropperHeader = new Croppic('avatarCrop', cropperOptions);
-
-        /* ==============================
           Dropzone Multi File Uploader 
         ============================== */
 
@@ -385,6 +362,36 @@
         });
       }
 
+
+var cropperOptions = {
+  uploadUrl:'lib/croppic/img_save_to_file.php',
+  cropUrl:'lib/croppic/img_crop_to_file.php',
+  outputUrlId:'avatarUrl',
+  rotateControls:false, 
+  doubleZoomControls:true,
+  loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+  modal: true,
+  onError: function() { 
+    displayOutcome('Please upload either a JPG, PNG or GIF image', 'error', 'outcomeMsg');
+  },
+  onAfterImgCrop:   function(){ 
+    var avatarURL = $('#avatarUrl').val();
+    var user_id = localStorage.getItem("userName") 
+      $.ajax({
+        method: 'POST', 
+        url : "app/controller/ajaxController.php",
+        dataType: "json",
+        data : { action: 'editAvatarLink', user_id: user_id, avatarURL: avatarURL },
+        success: function(data) {
+          displayOutcome('Avatar successfully uploaded', 'valid', 'outcomeMsg'); 
+        },
+        error: function() { 
+          displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
+        }
+    });
+  }
+};
+var cropperHeader = new Croppic('avatarCrop', cropperOptions);
     }); 
       </script>      
     </body>

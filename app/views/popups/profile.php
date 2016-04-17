@@ -46,7 +46,10 @@
                 		</div> 
 					</li>
 				</ul>
+				{{#if own}}
+               	<input type='submit' name='sendMessage' id='sendMessage' value='Send Message' class='model-popup' data-content='message-center' data-title='Messaging Center'/>
                 <input type='submit' name='addFriend' id='friendRequest' value='{{ relation_t }}' data-relation='{{ relation }}'/>
+               	{{/if}} 
 			</div>
 		</div>
 		<div class='pure-u-13-24' id='main-portfolio'>
@@ -92,14 +95,20 @@
 		<div class='pure-u-6-24' id='friendList'>
 			<div class='heading no-border l-align removeHeader' id='friendHeader'> Friends </div>
 			<ul class='basic-list vert-list profile-member-list scriptHeight' 
-				data-parent-ele='popup-content' data-remove-ele='removeHeader'> 
-				{{#each friends}}
-				<li> 
-					<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar'/> 
-					<strong> {{ friend_name }} {{ friend_lastname }} </strong>
-					<span> Friend since {{ friend_date }} </span>
-				</li>
-				{{/each}}
+				data-parent-ele='popup-content' data-remove-ele='removeHeader'>
+				{{#if friends}} 
+					{{#each friends}}
+					<li>
+						<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar model-popup outline-hover' data-content='profile' data-title="{{ friend_name }} {{ friend_lastname }}'s profile" data-profile-id='{{ friend_id }}'/> 
+						<strong> {{ friend_name }} {{ friend_lastname }} </strong>
+						<span> Friend since {{ formatShortDate friend_date }} </span>
+					</li>
+					{{/each}}
+				{{else}}
+					<li> 
+						<strong class='no-friends'> This user currently has no friends </strong>
+					</li>
+				{{/if}}
 			</ul>
 		</div>
 	</div>

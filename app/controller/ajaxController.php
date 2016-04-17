@@ -63,6 +63,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			$user_id = $_POST['user_id'];
 			$results = $Profile->fetchProfile($user_id);
 			$results['images'] = $Profile->fetchImages($results['name'], $results['surname'], $results['id']);
+			$results['age'] = $Profile->fetchAge($results['dob']); 
 			$results['location'] = $Profile->returnLocation($results['latitude'], $results['longitude']);
 			$results['friends'] = $Relation->fetchFriendList($user_id);
 			$results['relation'] = $Relation->checkRelation($_SESSION['ifitness_id'], $results['id']);
@@ -146,6 +147,14 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			$feed_id = $_POST['feed_id'];		
 
 			echo $Relation->unlikeFeed($user_id, $feed_id);
+		break;
+		case 'editAvatarLink': 
+			$user_id = $_POST['user_id'];
+			$avatar_url = basename($_POST['avatarURL']);		
+
+			if($Profile->editAvatarLink($user_id, $avatar_url)) { 
+				echo json_encode('updated'); 
+			}	
 		break;
 		default: 
 			return "bloop";

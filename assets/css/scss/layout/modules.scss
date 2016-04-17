@@ -8,6 +8,29 @@
 	color: white;
 }
 
+.glow-hover:hover {
+	-webkit-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+	cursor: pointer;
+}
+.iso-glow-hover {
+	@include animate(120ms);
+	&:hover {
+		-webkit-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+		cursor: pointer;
+		h3 { 
+			color: $brand-light-col;
+		}
+	}
+}
+.outline-hover:hover {
+	border: 2px solid $brand-light-col;
+	cursor: pointer;
+}
+
 .model-bg { 
 	background-color:rgba(0,0,0,0.9);
 	position: fixed;
@@ -208,9 +231,6 @@ img.user-avatar {
 	}
 	&:hover { 
 		border: 1px dotted $brand-light-col;
-		img { 
-			border: 2px dotted $brand-light-col;
-		}
 	}
 }
 
@@ -220,7 +240,6 @@ img.user-avatar {
 		float: left;
 		margin: 10px 1%;
 		@extend .modulated-box;
-		@include animate(100ms);
 		border: 1px dotted $brand-light-col;
 		&.full-width { 
 			width: 94%;
@@ -260,14 +279,6 @@ img.user-avatar {
 					font-size: 1.2em;
 					margin-top: 5px;
 				}
-			}
-		}
-		&:hover { 
-			-webkit-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			-moz-box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
-			h3 span.title-text { 
-				color: $brand-light-col;
 			}
 		}
 		.same-gym-notify { 

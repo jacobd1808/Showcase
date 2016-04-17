@@ -62,13 +62,16 @@
       <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
-      <?php //if ($profile_info['latitude'] == 0 && $profile_info['longitude'] == 0){ ?>
+      <?php if ($profile_info['latitude'] == 0 && $profile_info['longitude'] == 0){ ?>
          <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please provide some basic information about yourself'>  
-      <?php //} ?>
+      <?php } ?>
       <div class='m-25'>
         <div class='feed'> 
           <div class='feed-add'> 
-            <img src='<?= avatarExists($profile_info['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar' />
+            <? if(isset($feedback)) { 
+              echo "<div class='outcome ".$feedback['type']."'>".$feedback['message']."</div>"; 
+            } ?>
+            <img src='<?= avatarExists($profile_info['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?= $profile_info['name'] ?> <?= $profile_info['surname'] ?>'s profile" data-profile-id='<?= $profile_info['id'] ?>'/>
             <div> 
               <form action='' method='POST' name='post-status'>
                 <textarea name='feed-post' id='feed-post' placeholder='Make a post'></textarea>
@@ -90,10 +93,10 @@
           <div class='feed-post'> 
 
             <div class='feed-post-title'>
-              <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar' />
+              <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?>'s profile" data-profile-id='<?= $x['friend_id'] ?>'/>
               <span class='feed-name'> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> <small> Posted <?= $Relation->ago($x['post_time']) ?> </small></span>
-              <span class='feed-like'> 
-                <span id='count_<?= $x['id'] ?>'><?= $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"  data-user-id='<?= $x['friend_id'] ?>' data-id='<?= $x['id'] ?>' data-count='<?= $Relation->fetchLikes($x['id']) ?>' data-liked='<?= $data_liked ?>'></i>
+              <span class='feed-like' data-user-id='<?= $x['friend_id'] ?>' data-id='<?= $x['id'] ?>' data-count='<?= $Relation->fetchLikes($x['id']) ?>' data-liked='<?= $data_liked ?>'> 
+                <span id='count_<?= $x['id'] ?>'><?= $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"></i>
               </span>
               <hr /> 
 
@@ -101,6 +104,11 @@
             <div class='feed-post-content'>
               <?= nl2br($x["message"]) ?>
             </div>
+            <? if( $x['user_id'] == $_SESSION['ifitness_id'] ) { ?>
+            <a href='index.php?post_id=<?= $x['id'] ?>' class='delete-post'> 
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </a>
+            <? } ?>
           </div>
           <? } ?>
         </div>
@@ -121,11 +129,10 @@
                   >
                     <h3 class='pure-u-1-1'>
                       <span class='title-text'><?= $x['name'] ?> <?= $x['surname'] ?></span>
-                      <div class='add-friend-btn'> <span> Add </span><i class="fa fa-plus-circle"></i></div>
                     </h3>
                     <div class='pure-u-2-5 card-avatar'>
                       <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                      <em> Member since <span> 23rd Sep 2016 </span></em>
+                      <em> Member since <span class='format-date-short'> <?= $x['register_date'] ?> </span></em>
                     </div>
                     <div class='pure-u-3-5 pure-g card-info'>
                       <div class='pure-u-1-2 l-float'> 
@@ -156,7 +163,6 @@
                     <? } ?>
                   </div>
             <? } } ?>
-            <div class='clear'> </div>
           </div>
         </div>
       </div>
@@ -165,7 +171,7 @@
     <script>
       var user_id = <?= $profile_info['id'] ?>;
 
-      $(".fa-thumbs-up").click(function(){
+      $(".feed-like").click(function(){
         var like_id = $(this).data('id');
         var liked = $(this).data('liked');
         var count = $(this).data('count');

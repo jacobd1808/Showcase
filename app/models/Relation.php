@@ -263,9 +263,22 @@
 			}
 		}
 
+		public function deleteStatus($post_id, $user_id){
+			// SQL Statement
+			$sql = "DELETE FROM sc_feed WHERE id = $post_id AND user_id = $user_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		public function fetchNewsFeed($id){
 			// SQL
-			$sql = "SELECT sc_feed.id, sc_feed.message, sc_feed.post_time, sc_rel.friend_id, sc_rel.friend_name, sc_rel.friend_lastname, sc_profile.avatar_url
+			$sql = "SELECT sc_feed.id, sc_feed.message, sc_feed.post_time, sc_feed.user_id, sc_rel.friend_id, sc_rel.friend_name, sc_rel.friend_lastname, sc_profile.avatar_url
 					FROM sc_feed 
 					INNER JOIN sc_rel 
 						ON sc_feed.user_id = sc_rel.friend_id 
@@ -280,8 +293,24 @@
 			if ( $stmt->execute() ) {
 				return $stmt->fetchAll(PDO::FETCH_ASSOC);
 			} else{
-				return "test";
+				return false;
 			}			
+		}
+
+		public function fetchMyFeed($id){ 
+			$sql = "SELECT * FROM sc_feed
+					INNER JOIN sc_profile 
+						ON sc_feed.user_id = sc_profile.id 
+					WHERE sc_feed.user_id = $id 
+					ORDER BY sc_feed.post_time DESC";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			} else{
+				return false;
+			}	
 		}
 
 		public function likeFeed($user_id, $feed_id){

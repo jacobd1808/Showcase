@@ -13,11 +13,12 @@ header {
 			float: left;
 			&.logo-cell { 
 				img { 
-					height: 30px;
+					height: 50px;
 					position: relative;
 					float: left;
-					top: 20px;
+					top: 10px;
 					margin: 0 30px;
+					cursor: pointer;
 				}
 			}
 		}

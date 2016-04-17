@@ -201,14 +201,14 @@
 			$('.set-pref').slideUp(200, function() { 
 				$('#continue-preferences').slideDown(200);
 			});
-		/*$.ajax({
-			url : "app/controller/ajaxController.php", 
-			data : { action: 'create_profile', id: id, workout_exp: exp, goal: choice, latitude: latitude, longitude: longitude },
-			method : 'POST', 
-			success : function(data){
-				console.log(data);
-			}
-		});	*/
+			$.ajax({
+				url : "app/controller/ajaxController.php", 
+				data : { action: 'create_profile', id: id, workout_exp: exp, goal: choice, latitude: latitude, longitude: longitude },
+				method : 'POST', 
+				success : function(data){
+					console.log(data);
+				}
+			});
 			}, 1000);
 		}
 	}

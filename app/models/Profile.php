@@ -254,5 +254,36 @@
 		    }
 		    return $imageStore;
 		}
+
+		public function fetchAge($dob) { 
+	        $dob = explode("-",$dob); 
+	        $curMonth = date("m");
+	        $curDay = date("j");
+	        $curYear = date("Y");
+	        $age = $curYear - $dob[0]; 
+	        if($curMonth<$dob[1] || ($curMonth==$dob[1] && $curDay<$dob[2])) 
+	                $age--; 
+	        return $age; 
+		}
+
+		// Edit a user profile
+		public function editAvatarLink($user_id, $avatar_url){
+			// SQL Statement
+			$sql = "UPDATE sc_profile
+					SET avatar_url = :avatar
+					WHERE id = :id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Bind Parameters
+			$stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+			$stmt->bindParam(':avatar', $avatar_url, PDO::PARAM_STR);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				$arr = $stmt->errorInfo();
+				print_r($arr);
+			}
+		}
 	}
 ?>

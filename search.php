@@ -77,10 +77,10 @@
           </div>
           <div class='pure-g search-by'> 
               <div class='pure-u-1-2'> 
-                <input type='text' placeholder='Search By Name' id='search-by-name'/>
+                <input type='text' placeholder='Search By Name' id='search-by-name' class='text-search'/>
               </div>
               <div class='pure-u-1-2'> 
-                <input type='text' placeholder='Search By Gym' id='search-by-gym'/>
+                <input type='text' placeholder='Search By Gym' id='search-by-gym' class='text-search'/>
               </div>
           </div> 
           <div class='search-results m-25'>
@@ -112,8 +112,10 @@
                      data-exp='<?= $x['workout_exp'] ?>' 
                      data-latitude='<?= $x['latitude'] ?>' 
                      data-longitude='<?= $x['longitude'] ?>'
+                     data-name='<?= $x['name'] ?> <?= $x['surname'] ?>' 
+                     data-gym='<?= $x['gym'] ?>'
                      data-content='profile' 
-                     data-title="<?= $x['name'] ?> <?= $x['surname'] ?>s Profile"
+                     data-title="<?= $x['name'] ?> <?= $x['surname'] ?>'s Profile"
                      data-profile-id='<?= $x['id'] ?>'
                 >
                   <h3 class='pure-u-1-1'>
@@ -121,7 +123,7 @@
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
                     <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                    <em> Member since <span> 23rd Sep 2016 </span></em>
+                    <em> Member since <span class='format-date-short'> <?= $x['register_date'] ?> </span></em>
                   </div>
                   <div class='pure-u-3-5 pure-g card-info'>
                     <div class='pure-u-1-2 l-float'> 
@@ -342,8 +344,9 @@
         }
       });
 
-      $('#search-by-name, #search-by-gym').keyup(function(e){
-        refreshFilter(this);
+      $('.text-search').keyup(function(e){
+        var id = $(this).attr('id')
+        refreshFilter(id);
         //var term = $(this).val(); 
         //var id = $(this).attr('id');
         /*if (id == 'search-by-name') { 
@@ -368,7 +371,7 @@
 
 
       function refreshFilter(that){
-
+        $('.profile-card').removeClass('iso-glow-hover'); 
         distanceSlider = $("#distance-slider").slider("value");
         var type = $(that).data('type');
         var goal = $(that).data('code-goal');
@@ -405,39 +408,70 @@
           }
         }
 
-        if ( !currentExp && !currentGoal){
-          $grid.isotope({
-            filter: function(){
-              var r_distance = $(this).data('distance');
-
-              if ( r_distance <= distanceSlider){
-                return true;
-              } else {
-                return false;
+        if (name != null || gym != null) { 
+          var searchTerm = $('#'+that).val(); 
+          searchTerm = searchTerm.toLowerCase();
+          if (that == 'search-by-name') { 
+            $grid.isotope({
+              filter: function(){
+                var r_name = $(this).data('name');
+                r_name = r_name.toLowerCase();
+                if ( r_name.indexOf(searchTerm) > -1 ){
+                  return true;
+                } else {
+                  return false;
+                }
               }
-            }
-          });
+            });
+          } else if (that == 'search-by-gym') { 
+            $grid.isotope({
+              filter: function(){
+                var r_gym = $(this).data('gym');
+                r_gym = r_gym.toLowerCase();
+                if ( r_gym.indexOf(searchTerm) > -1 ){
+                  return true;
+                } else {
+                  return false;
+                }
+              }
+            });
+          }
         } else {
-          $grid.isotope({
-            filter: function(){
-              var r_goal = $(this).data('goal');
-              var r_exp = $(this).data('exp');
-              var r_distance = $(this).data('distance');
+          if ( !currentExp && !currentGoal){
+            $grid.isotope({
+              filter: function(){
+                var r_distance = $(this).data('distance');
 
-              console.log(r_exp);
-
-              if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
                 if ( r_distance <= distanceSlider){
                   return true;
                 } else {
                   return false;
                 }
-              } else {
-                return false;
               }
-            }
-          });
-        }       
+            });
+          } else {
+            $grid.isotope({
+              filter: function(){
+                var r_goal = $(this).data('goal');
+                var r_exp = $(this).data('exp');
+                var r_distance = $(this).data('distance');
+
+                console.log(r_exp);
+
+                if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
+                  if ( r_distance <= distanceSlider){
+                    return true;
+                  } else {
+                    return false;
+                  }
+                } else {
+                  return false;
+                }
+              }
+            });
+          }
+        $('.profile-card').addClass('iso-glow-hover');      
+        }  
       }
       </script>
     </body>

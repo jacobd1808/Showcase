@@ -17,6 +17,8 @@ $(function() {
 		console.log(localStorage.getItem("userName"))
 	} 
 
+	var user_id = localStorage.getItem("userName") 
+
 	/* ====================================
 		Set Element Height
 	===================================== */ 
@@ -45,6 +47,9 @@ $(function() {
 	===================================== */ 
 
 	$('body').on('click', '.model-popup', function(){
+		if ($('#model').length != 0) { 
+			$('#model').remove();
+		}
 		var content = $(this).data('content');
 		var title = $(this).data('title');
 		var id = $(this).data('profile-id');
@@ -56,10 +61,14 @@ $(function() {
 			if(id) { 
 				loadProfileData(id);
 			}
+			if (content == 'message-center') { 
+				getInbox(user_id);
+			}
 			var alignElem = $('.vert-center-popup');
 			setEleHeight();
 			setImageHeight()
 			alignToVerticalCenter(alignElem); 
+			formatDate();
 		});
 	});
 
@@ -95,9 +104,14 @@ $(function() {
 			success: function(data) {
 				// Store Results 
    		        var results = jQuery.parseJSON(data);
+
+   		        if(results['age'] == '2016') { 
+   		        	results['age'] = 'N/A';
+   		        }
+   		        console.log(results);
    		        // Adjust weigh in KG
    		        results['weight_kg'] = results['weight'] / 2.2046;
-   		        results['weight_kg'] = results['weight_kg'].toFixed(2);
+   		        results['weight_kg'] = results['weight_kg'].toFixed(1);
 
    		        // Mark as FALSE if no weight specified 
    		        if (results['weight_kg'] == 0) { 
@@ -129,12 +143,16 @@ $(function() {
    		        	results['d_gender'] = "Female";
    		        }
 
-   		        if (!results['friends'][0]){
-   		        	results['friends'] = { 0: { friend_name: 'This user has no friends, send him a friend request!' } };
+   		        if (results['id'] != localStorage.getItem("userName")) { 
+   		        	results['own'] = true; 
+   		        } else { 
+   		        	results['own'] = false;
    		        }
-   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'], avatar_url: results['avatar_url'] };
 
-   		        console.log(data);
+   		        if (!results['friends'][0]){
+   		        	results['friends'] = false;
+   		        }
+   		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'], avatar_url: results['avatar_url'], own: results['own'] };
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();
 				var template = Handlebars.compile(source);
@@ -172,6 +190,19 @@ $(function() {
 		ele.css({'marginTop': applyMargin});
 	}
 
+	function formatDate() { 
+		$( '.format-date' ).each(function() {
+			var date = $(this).text(); 
+			var formatDate = moment(date).format('MMMM Do YYYY');
+			$(this).text(formatDate);
+		});
+		$( '.format-date-short' ).each(function() {
+			var date = $(this).text(); 
+			var formatDate = moment(date).format('Do MMM YYYY');
+			$(this).text(formatDate);
+		});
+	}
+
 	/* ====================================
 		Tooltips 
 	===================================== */ 
@@ -206,6 +237,11 @@ $(function() {
   		return new moment(date).format('D MMMM YYYY');
 	});
 
+	Handlebars.registerHelper('formatShortDate', function(date) {
+  		return new moment(date).format('Do MMM YYYY');
+	});
+
+
 	Handlebars.registerHelper('checkAvatar', function(avt) {
 		if (avt != '') {
         	return 'assets/img/avatars/cropped/'+avt; 
@@ -215,12 +251,38 @@ $(function() {
 	});
 
 	/* ====================================
+		Inbox Event Listeners 
+	===================================== */  
+
+	$("body").on('click', '.message_header', function(){
+		var message_id = $(this).data('message-id');
+		getConversation(message_id);
+	});	
+
+	$("body").on('click', '#message-reply', function(e){
+		e.preventDefault();
+		sendMessage();
+	});
+
+	/* ====================================
+		Count Notifications and Messages 
+	===================================== */
+
+	window.setInterval(function(){
+		$('.checkCount').each(function(){ 
+			var ele = $(this).attr('id');
+			checkForUpdates(ele, user_id); 
+		}); 
+	}, 1000);
+
+	/* ====================================
 		Init
 	===================================== */ 
 
 	initTooltips(); 
 	setImageHeight();
-	setSession()
+	setSession();
+	formatDate()
 
 });
 
@@ -237,5 +299,113 @@ $(function() {
 			       theme: 'cust-tooltip'
 		    	});
 		 	}
+		}
+	}
+
+	function sendMessage(){
+		var message = $("#message-text").val();
+		var inbox_id = $("#conversation").data('inbox-id');
+		$.ajax({
+			url : "app/controller/inboxController.php",
+			data : { action: 'send_message', message: message, user_id: user_id, inbox_id: inbox_id },
+			method : 'POST', 
+			success : function(data){
+				var results = jQuery.parseJSON(data);
+
+				$("#conversation").append(" \
+				<div class='message-list received-msg'>   \
+					<div class='message-content pure-g'>  \
+						<div class='pure-u-4-24 avatar-tile'> \
+							<img src='assets/img/avatars/cropped/"+ results['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
+							<a href=''> "+ results['name'] + " " + results['surname'] + "</a> \
+						</div> \
+						<div class='pure-u-20-24 message-text'> \
+							"+ results['message'] +"  \
+							<em> Sent on "+ results['date_sent'] +" </em> \
+						</div> \
+					</div> \
+				</div>");
+			}
+		});	
+	}
+
+	function getInbox(user_id){
+		$.ajax({
+			url : "app/controller/inboxController.php", 
+			data : { action: 'get_inbox', user_id: user_id},
+			method : 'POST', 
+			success : function(data){
+				var results = jQuery.parseJSON(data);
+				results.forEach(function(x){
+					var name = x['name'] + " " + x['surname'];
+					$("#inbox-list").append(" \
+					<li class='message_header' data-message-id='"+ x['id'] +"''> \
+						<div class='type-col tooltip left-tooltip' title='"+ x['title'] +"'> \
+							<span> S </span> \
+						</div> \
+						<big> " + x['title'] +" </big> \
+						<strong> " + name + "</strong> \
+						<em> 2 Hours Ago </em> \
+					</li>");
+				});
+			}
+		});			
+	};
+
+	function getConversation(inbox_id){
+		$("#conversation").slideUp(function(){
+			$("#conversation").html("");
+			$.ajax({
+				url : "app/controller/inboxController.php",
+				data : { action: 'get_convo', inbox_id: inbox_id },
+				method : 'POST',
+				success : function(data){
+					var results = jQuery.parseJSON(data);
+					console.log(results);
+					results.forEach(function(x){
+						var name = x['name'] + " " + x['surname'];
+						$("#message_from").html(name);
+						$("#conversation").data('inbox-id', inbox_id);
+						$("#conversation").append(" \
+						<div class='message-list received-msg'>   \
+							<div class='message-content pure-g'>  \
+								<div class='pure-u-4-24 avatar-tile'> \
+									<img src='assets/img/avatars/cropped/"+ x['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
+									<a href=''> "+ name +"</a> \
+								</div> \
+								<div class='pure-u-20-24 message-text'> \
+									"+ x['message'] +"  \
+									<em> Sent on "+ x['date_sent'] +" </em> \
+								</div> \
+							</div> \
+						</div>");
+					});	
+					
+					$("#conversation").slideDown();	
+					$("#message-form").slideDown();
+				}
+			});
+		});	
+	}
+
+	function checkForUpdates(ele, user_id) { 
+		var counterDOM = $('#'+ele).find('span.count-circle');
+		//console.log(ele);
+		//console.log(user_id);
+		var data = 0; 
+		/*$.ajax({
+			url : "app/controller/inboxController.php", 
+			data : { action: ele, user_id: user_id},
+			method : 'POST', 
+			success : function(data){
+				// Put below code here 
+			}
+		});*/	
+		if (data === 0) {
+			counterDOM.text('0');
+			counterDOM.fadeOut();
+		} else { 
+			counterDOM.text(data);
+			counterDOM.fadeIn();
 		}
 	}
