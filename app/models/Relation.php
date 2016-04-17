@@ -153,6 +153,32 @@
 			}
 		}
 
+		public function checkNotifications($user_id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_notifications WHERE user_id=$user_id && viewed=0";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+			} else{
+				return 0;
+			}	
+		}
+
+		public function setViewed($not_id){
+			// SQL Statement
+			$sql = "UPDATE sc_notifications SET viewed=1 WHERE id=$not_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return true;
+			} else{
+				return false;
+			}
+		}
+
 		public function checkFriends($id, $person_id){
 
 			// SQL Statement
@@ -202,9 +228,22 @@
 			}
 		}
 
+		public function removeNotification($not_id){
+			// SQL Statement
+			$sql = "DELETE FROM sc_notifications WHERE id=$not_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		public function printNotification($data){
 			if ( $data['type'] == 1){
-				return "$data[person_name] $data[person_lastname] has sent you a friend request";
+				return "$data[person_name] $data[person_lastname] has sent you a friend request <a href='friends.php?accept=$data[other_id]&id=$data[id]'>accept</a>/<a href='friends.php?refuse=$data[id]'>refuse</a>";
 			} else if ( $data['type'] == 2) {
 				return "$data[person_name] $data[person_lastname] has liked your status";
 			} else {
@@ -213,9 +252,10 @@
 		}
 
 		public function createNotification($data){
+			$time = time();
 			// SQL Statement
-			$sql = "INSERT INTO sc_notifications(type, user_id, other_id, person_name, person_lastname)
-					VALUES(:type, :user_id, :other_id, :person_name, :person_lastname)";
+			$sql = "INSERT INTO sc_notifications(type, user_id, other_id, person_name, person_lastname, date_added)
+					VALUES(:type, :user_id, :other_id, :person_name, :person_lastname, :date_added)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
@@ -224,6 +264,7 @@
 			$stmt->bindParam(':other_id', $data['other_id'], PDO::PARAM_STR);
 			$stmt->bindParam(':person_name', $data['person_name'], PDO::PARAM_STR);
 			$stmt->bindParam('person_lastname', $data['person_lastname'], PDO::PARAM_STR);
+			$stmt->bindParam('date_added', $time, PDO::PARAM_STR);
 			// Execute Query
 			if ( $stmt->execute() ){
 				return true;

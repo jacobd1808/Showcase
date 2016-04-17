@@ -2,6 +2,7 @@
   include_once "app/config/conn.php";
   $Profile = new Profile($conn);
   $user_profile = $Profile->fetchProfile($_SESSION['ifitness_id']);
+  $Profile->setOnline($_SESSION['ifitness_id']);
   // This just sets active menu 
   function setActive($nav, $page){ 
     if ($nav == $page) { 

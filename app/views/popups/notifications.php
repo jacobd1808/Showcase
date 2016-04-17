@@ -7,6 +7,7 @@
 <?php 
 	if (count($notifications) != 0) {
 		foreach ( $notifications as $x){
+			$Relation->setViewed($x['id']);
 			if ( $x['viewed'] == 0){
 				$notification_class = "new_notification";
 			} else {
@@ -14,7 +15,7 @@
 			}
 
 			echo "<li class='". $notification_class ."'>". $Relation->printNotification($x);
-			echo "<span class='notification-date format-date'>".$x['date_added']."</span></li>";
+			echo "<span class='notification-date'>". $Relation->ago($x['date_added'])  ."</span></li>";
 		}
 	} else { 
 		echo '<p> No notifications to display </p>'; 

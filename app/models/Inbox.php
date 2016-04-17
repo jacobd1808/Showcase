@@ -48,6 +48,18 @@
 			}	
 		}
 
+		public function checkInbox($user_id){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_messages WHERE viewed=0 && user_id=$user_id";
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ) {
+				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+			} else{
+				return "test";
+			}		
+		}
+
 		// Fetch all Inbox
 
 		public function getInbox($user_id){
@@ -113,6 +125,19 @@
 			// Execute Query
 			if ( $stmt->execute() ){
 				return $this->getMessage($this->conn->lastInsertId());
+			} else {
+				return false;
+			}
+		}
+
+		public function setViewed($message_id){
+			// SQL Statement
+			$sql = "UPDATE sc_messages SET viewed=1 WHERE id=$message_id";
+			// Prepare Query
+			$stmt = $this->conn->prepare($sql);
+			// Execute Query
+			if ( $stmt->execute() ){
+				return true;
 			} else {
 				return false;
 			}

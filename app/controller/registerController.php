@@ -20,6 +20,8 @@
       'register_date' => $register_date
     );
 
+    $check_user = $frontPage->checkUsername($user_data['username']);
+
     // Validation 
     if (empty($_POST['u_username']) || 
         empty($profile_data['name']) || 
@@ -27,21 +29,23 @@
         empty($profile_data['gender']) 
       ) { 
         $feedback = array( "type" => 'error', "message" => 'You must fill in all the fields' ); 
-      } else { 
+    } elseif ( $check_user != 0){
+    	$feedback = array( "type" => 'error', "message" => 'This username is already taken.' );
+    } else { 
         $register_user = $frontPage->registerUser($user_data);
-      if (!$register_user) { 
-        // If Something goes wrong 
-        $feedback = array( "type" => 'error', "message" => 'Something went wrong #1' ); 
-      } else { 
-        $create_profile = $frontPage->createProfile($profile_data, $register_user);
-        if (!$create_profile ){
-          $feedback = array( "type" => 'error', "message" => 'Something went wrong #2' ); 
-        } else {
-          $_SESSION['ifitness_id'] = $register_user;
-          header("Location: index.php");
-        }
-      }
-    }
-  } 
+      	if (!$register_user) { 
+       	 	// If Something goes wrong 
+      	  	$feedback = array( "type" => 'error', "message" => 'Something went wrong #1' ); 
+      	} else { 
+        	$create_profile = $frontPage->createProfile($profile_data, $register_user);
+        	if (!$create_profile ){
+          		$feedback = array( "type" => 'error', "message" => 'Something went wrong #2' ); 
+        	} else {
+         $_SESSION['ifitness_id'] = $register_user;
+         header("Location: index.php");
+        		}
+      		}
+    	}
+  	} 
   // AIzaSyAtWI7CUtECvJEr5xHn-h7cT0JEQXc93zc thats my google maps API key 
 ?>
