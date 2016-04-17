@@ -456,7 +456,7 @@
                 var r_exp = $(this).data('exp');
                 var r_distance = $(this).data('distance');
 
-                console.log(r_exp);
+                console.log(r_distance);
 
                 if ( !currentGoal && r_exp == currentExp || !currentExp && r_goal == currentGoal || r_goal == currentGoal && r_exp == currentExp ){
                   if ( r_distance <= distanceSlider){

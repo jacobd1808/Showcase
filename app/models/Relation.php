@@ -203,10 +203,20 @@
 		}
 
 		public function printNotification($data){
+
 			if ( $data['type'] == 1){
-				return "$data[person_name] $data[person_lastname] has sent you a friend request";
+				return "<span class='model-popup' data-content='profile' data-title='".$data['person_name']." ".$data['person_lastname']."&#39;s profile' data-profile-id='".$data['other_id']."'>".$data['person_name']." ".$data['person_lastname']."</span> has sent you a friend request 	
+
+					<span class='notification-action accept glow-hover' data-reply='accept'>
+						Accept 
+					</span> 
+					
+					<span class='notification-action deny glow-hover' data-reply='deny'> 
+						Deny 
+					</span>";
+
 			} else if ( $data['type'] == 2) {
-				return "$data[person_name] $data[person_lastname] has liked your status";
+				return "<span class='model-popup' data-content='profile' data-title='".$data['person_name']." ".$data['person_lastname']."&#39;s profile' data-profile-id='".$data['other_id']."'>".$data['person_name']." ".$data['person_lastname']."</span> has liked your status";
 			} else {
 				return false;
 			}

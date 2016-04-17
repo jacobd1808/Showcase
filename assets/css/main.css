@@ -2989,16 +2989,39 @@ html, body {
   #reply-message .message-list.sent-msg .message-user {
     border: 1px dotted #FC6E00; }
 
-.notification-list li {
-  padding: 25px 20px 25px 15px;
-  text-align: left;
-  font-weight: 300;
-  border-bottom: 1px solid #352746; }
-  .notification-list li .notification-date {
-    float: right;
-    width: 15%;
-    text-align: right;
-    color: #999; }
+.notification-list {
+  overflow: auto;
+  max-height: 100%; }
+  .notification-list li {
+    padding: 25px 20px 25px 15px;
+    text-align: left;
+    font-weight: 300;
+    border-bottom: 1px solid #352746; }
+    .notification-list li .notification-date {
+      float: right;
+      width: 15%;
+      text-align: right;
+      color: #999; }
+    .notification-list li.notification {
+      background-color: #150f1b; }
+    .notification-list li .notification-action {
+      padding: 10px;
+      font-size: 0.7em;
+      color: white;
+      text-transform: uppercase;
+      margin: 0 7px;
+      background-color: #150f1b;
+      border: 1px dotted #FC6E00;
+      cursor: pointer;
+      -webkit-transition: all 150ms ease-in-out;
+      -moz-transition: all 150ms ease-in-out;
+      -o-transition: all 150ms ease-in-out;
+      transition: all 150ms ease-in-out;
+      font-weight: 500; }
+      .notification-list li .notification-action.accept:hover {
+        color: green; }
+      .notification-list li .notification-action.deny:hover {
+        color: red; }
 
 /* =========================== /
 		Feed 

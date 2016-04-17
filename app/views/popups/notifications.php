@@ -13,14 +13,16 @@
 				$notification_class = "notification";
 			}
 
-			echo "<li class='". $notification_class ."'>". $Relation->printNotification($x);
-			echo "<span class='notification-date format-date'>".$x['date_added']."</span></li>";
+			echo "<li class='". $notification_class ."'>
+					". $Relation->printNotification($x) ."
+					<span class='notification-date format-date'>
+						".$x['date_added']."
+					</span>
+				</li>";
 		}
 	} else { 
 		echo '<p> No notifications to display </p>'; 
 	}
-
-	/* if new notification, class new_notification added */
 ?>
 	</ul>
 </div>
