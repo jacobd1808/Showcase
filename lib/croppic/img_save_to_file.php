@@ -3,7 +3,7 @@
 *	!!! THIS IS JUST AN EXAMPLE !!!, PLEASE USE ImageMagick or some other quality image processing libraries
 */
     //$imagePath = __DIR__ . "/../../upload/";
-	$imagePath = $_SERVER["DOCUMENT_ROOT"] . "Showcase/assets/img/avatars/";
+	$imagePath = $_SERVER["DOCUMENT_ROOT"] . "/stud/u1153568/final/showcase/assets/img/avatars/";
 
 	$allowedExts = array("gif", "jpeg", "jpg", "png", "GIF", "JPEG", "JPG", "PNG");
 	$temp = explode(".", $_FILES["img"]["name"]);

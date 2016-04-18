@@ -70,10 +70,10 @@
       <div class='m-25'>
         <div class='feed'> 
           <div class='feed-add'> 
-            <? if(isset($feedback)) { 
+            <?php if(isset($feedback)) { 
               echo "<div class='outcome ".$feedback['type']."'>".$feedback['message']."</div>"; 
             } ?>
-            <img src='<?= avatarExists($profile_info['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?= $profile_info['name'] ?> <?= $profile_info['surname'] ?>'s profile" data-profile-id='<?= $profile_info['id'] ?>'/>
+            <img src='<?php echo avatarExists($profile_info['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?php echo $profile_info['name'] ?> <?php echo $profile_info['surname'] ?>'s profile" data-profile-id='<?php echo $profile_info['id'] ?>'/>
             <div> 
               <form action='' method='POST' name='post-status'>
                 <textarea name='feed-post' id='feed-post' placeholder='Make a post'></textarea>
@@ -95,24 +95,24 @@
           <div class='feed-post'> 
 
             <div class='feed-post-title'>
-              <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?>'s profile" data-profile-id='<?= $x['friend_id'] ?>'/>
-              <span class='feed-name'> <?= $x['friend_name'] ?> <?= $x['friend_lastname'] ?> <small> Posted <?= $Relation->ago($x['post_time']) ?> </small></span>
-              <span class='feed-like' data-user-id='<?= $x['friend_id'] ?>' data-id='<?= $x['id'] ?>' data-count='<?= $Relation->fetchLikes($x['id']) ?>' data-liked='<?= $data_liked ?>'> 
-                <span id='count_<?= $x['id'] ?>'><?= $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"></i>
+              <img src='<?php echo avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?php echo $x['friend_name'] ?> <?php echo $x['friend_lastname'] ?>'s profile" data-profile-id='<?php echo $x['friend_id'] ?>'/>
+              <span class='feed-name'> <?php echo $x['friend_name'] ?> <?php echo $x['friend_lastname'] ?> <small> Posted <?php echo $Relation->ago($x['post_time']) ?> </small></span>
+              <span class='feed-like' data-user-id='<?php echo $x['friend_id'] ?>' data-id='<?php echo $x['id'] ?>' data-count='<?php echo $Relation->fetchLikes($x['id']) ?>' data-liked='<?php echo $data_liked ?>'> 
+                <span id='count_<?php echo $x['id'] ?>'><?php echo $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"></i>
               </span>
               <hr /> 
 
             </div>
             <div class='feed-post-content'>
-              <?= nl2br($x["message"]) ?>
+              <?php echo nl2br($x["message"]) ?>
             </div>
-            <? if( $x['user_id'] == $_SESSION['ifitness_id'] ) { ?>
-            <a href='index.php?post_id=<?= $x['id'] ?>' class='delete-post'> 
+            <?php if( $x['user_id'] == $_SESSION['ifitness_id'] ) { ?>
+            <a href='index.php?post_id=<?php echo $x['id'] ?>' class='delete-post'> 
               <i class="fa fa-times-circle" aria-hidden="true"></i>
             </a>
-            <? } ?>
+            <?php } ?>
           </div>
-          <? } ?>
+          <?php } ?>
         </div>
         <div class='feed-notices'> 
           <div class='modulated-box'>
@@ -132,54 +132,54 @@
               }
 
               ?>
-              <div class='profile-card pure-g model-popup full-width' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
+              <div class='profile-card pure-g model-popup full-width' data-id='<?php echo $x['id'] ?>' id='profile_<?php echo $x['id'] ?>' 
                        data-content='profile' 
-                       data-title="<?= $x['name'] ?> <?= $x['surname'] ?>s Profile"
-                       data-profile-id='<?= $x['id'] ?>'
+                       data-title="<?php echo $x['name'] ?> <?php echo $x['surname'] ?>s Profile"
+                       data-profile-id='<?php echo $x['id'] ?>'
                   >
                     <h3 class='pure-u-1-1'>
-                      <span class='title-text'><?= $x['name'] ?> <?= $x['surname'] ?></span>
+                      <span class='title-text'><?php echo $x['name'] ?> <?php echo $x['surname'] ?></span>
                     </h3>
                     <div class='pure-u-2-5 card-avatar'>
-                      <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                      <em><?= $online ?></span></em>
+                      <img src='<?php echo avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
+                      <em><?php echo $online ?></span></em>
                     </div>
                     <div class='pure-u-3-5 pure-g card-info'>
                       <div class='pure-u-1-2 l-float'> 
                         <strong>Goal</strong>
                         <div class='click-tile click-goal img-tile tooltip bottom-tooltip' 
-                        style="background-image:url('assets/img/icons/goals/<?= $x['goal'] ?>.png')"
-                        title='<?= $Profile->returnGoalChar($x['goal']) ?>'>
+                        style="background-image:url('assets/img/icons/goals/<?php echo $x['goal'] ?>.png')"
+                        title='<?php echo $Profile->returnGoalChar($x['goal']) ?>'>
                         </div>
                       </div>
                       <div class='pure-u-1-2 l-float'> 
                         <strong>Experience</strong>      
                         <div class='click-tile click-goal img-tile tooltip bottom-tooltip' 
-                        style="background-image:url('assets/img/icons/length/<?= $x['workout_exp'] ?>.png')"
-                        title='<?= $Profile->returnExpChar($x['workout_exp']) ?>'>
+                        style="background-image:url('assets/img/icons/length/<?php echo $x['workout_exp'] ?>.png')"
+                        title='<?php echo $Profile->returnExpChar($x['workout_exp']) ?>'>
                         </div>
                       </div>
                       <div class='pure-u-1-1 l-float'> 
                         <strong>Location</strong> 
-                        <span class='location-row'><?= $address[1] ?>, <?= $address[3] ?></span>
+                        <span class='location-row'><?php echo displayLocation($address) ?></span>
                       </div>
                     </div>
-                    <? if($x['type'] == 'sameGym') { ?>
+                    <?php if($x['type'] == 'sameGym') { ?>
                       <div class='pure-u-1-1'> 
                         <span class='same-gym-notify'> 
-                        <? if($x['type'] == 'sameGym') { echo 'Members of the same Gym'; } ?>
+                        <?php if($x['type'] == 'sameGym') { echo 'Members of the same Gym'; } ?>
                         </span>
                       </div>
-                    <? } ?>
+                    <?php } ?>
                   </div>
-            <? } } ?>
+            <?php } } ?>
           </div>
         </div>
       </div>
     </div>
     	<?php include_once "app/views/scripts.php"; ?>
     <script>
-      var user_id = <?= $profile_info['id'] ?>;
+      var user_id = <?php echo $profile_info['id'] ?>;
 
       $(".feed-like").click(function(){
         var like_id = $(this).data('id');

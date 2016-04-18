@@ -1,4 +1,4 @@
-<? 
+<?php 
 	include "../config/checkSession.php";
 	include "../config/conn.php";
 

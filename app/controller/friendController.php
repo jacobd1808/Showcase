@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 	$Profile = new Profile($conn);
 	$Relation = new Relation($conn);
@@ -14,7 +14,11 @@
 
     $Relation->acceptRequest($id, $other_id, $his_profile['name'], $his_profile['surname']);
     $Relation->acceptRequest($other_id, $id, $your_profile['name'], $your_profile['surname']);
-    $Relation->removeNotification($not_id);
+    $remove = $Relation->removeNotification($not_id);
+
+    if($remove) { 
+      $feedback = array( "type" => 'valid', "message" => 'Request Accepted' );
+    }
 
   } else if (isset($_GET['refuse'])){
     $id = $_GET['refuse'];

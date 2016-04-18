@@ -1,4 +1,4 @@
-<? 
+<?php 
 	include "../config/checkSession.php";
 	include "../config/conn.php";
 
@@ -14,6 +14,18 @@
 		switch($act){	
 			case 'get_inbox':
 				echo json_encode($Inbox->getInbox($_POST['user_id']));
+			break;
+			case 'start_inbox':
+				$data = array(
+					'msg' => $_POST['msg'],
+					'to_id' => $_POST['to_id'],
+					'from_id' => $_POST['from_id'], 
+				);
+				if($Inbox->startInbox($data)) { 
+					echo 1;
+				} else { 
+					echo 0;
+				}
 			break;
 			case 'get_convo':
 				$convo = $Inbox->getConvo($_POST['inbox_id']);

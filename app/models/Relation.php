@@ -244,20 +244,9 @@
 		public function printNotification($data){
 
 			if ( $data['type'] == 1){
-<<<<<<< HEAD
-				return "<span class='model-popup' data-content='profile' data-title='".$data['person_name']." ".$data['person_lastname']."&#39;s profile' data-profile-id='".$data['other_id']."'>".$data['person_name']." ".$data['person_lastname']."</span> has sent you a friend request 	
-
-					<span class='notification-action accept glow-hover' data-reply='accept'>
-						Accept 
-					</span> 
-					
-					<span class='notification-action deny glow-hover' data-reply='deny'> 
-						Deny 
-					</span>";
-
-=======
-				return "$data[person_name] $data[person_lastname] has sent you a friend request <a href='friends.php?accept=$data[other_id]&id=$data[id]'>accept</a>/<a href='friends.php?refuse=$data[id]'>refuse</a>";
->>>>>>> cf9c5a1d650126be865fa1c877f4590f834ab783
+				return "<span class='model-popup' data-content='profile' data-title='".$data['person_name']." ".$data['person_lastname']."&#39;s profile' data-profile-id='".$data['other_id']."'>".$data['person_name']." ".$data['person_lastname']."</span> has sent you a friend request 
+					<a href='friends.php?accept=$data[other_id]&id=$data[id]' class='notification-action accept glow-hover'>accept</a>
+					<a href='friends.php?refuse=$data[id]' class='notification-action deny glow-hover'>refuse</a>";
 			} else if ( $data['type'] == 2) {
 				return "<span class='model-popup' data-content='profile' data-title='".$data['person_name']." ".$data['person_lastname']."&#39;s profile' data-profile-id='".$data['other_id']."'>".$data['person_name']." ".$data['person_lastname']."</span> has liked your status";
 			} else {

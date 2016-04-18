@@ -1,4 +1,4 @@
-<?
+<?php
 	$frontPage = new Frontpage($conn);
 	$loginStamp = Date('Y-m-d');
 

@@ -30,50 +30,50 @@
             <form action='' method='POST' class='pure-g p-10'>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_dd">Date of Birth <span></span></label>
-                <input type='text' name='u_dd' id='u_dd' class='small-input' placeholder='DD' value='<?= $dob[2] ?>'/>
-                <input type='text' name='u_mm' id='u_mm' class='small-input' placeholder='MM' value='<?= $dob[1] ?>'/>
-                <input type='text' name='u_yy' id='u_yy' class='small-input' placeholder='YYYY' value='<?= $dob[0] ?>'/>
+                <input type='text' name='u_dd' id='u_dd' class='small-input' placeholder='DD' value='<?php echo $dob[2] ?>'/>
+                <input type='text' name='u_mm' id='u_mm' class='small-input' placeholder='MM' value='<?php echo $dob[1] ?>'/>
+                <input type='text' name='u_yy' id='u_yy' class='small-input' placeholder='YYYY' value='<?php echo $dob[0] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                   <label for="u_dd">Upload Profile Picture <span></span></label>
                   <div class='avatar-upload-area'> 
                     <div id="avatarCrop"></div>
                   </div>
-                    <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?= $profile_info['avatar_url'] ?>'/>
+                    <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?php echo $profile_info['avatar_url'] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_location">Goals <span></span></label>
                 <ul class='basic-list c-align'> 
-                  <? foreach($goals as $goal) {?>
+                  <?php foreach($goals as $goal) {?>
                     <li class='click-tile img-tile tooltip bottom-tooltip' 
-                        style="background-image:url('assets/img/icons/goals/<?= $goal[1] ?>.png')"
-                        data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
-                        title='<?= $goal[0] ?>'
-                        id='goal_<?= $goal[1] ?>'>
+                        style="background-image:url('assets/img/icons/goals/<?php echo $goal[1] ?>.png')"
+                        data-text-goal='<?php echo $goal[0] ?>' data-code-goal='<?php echo $goal[1] ?>' data-type='goal'
+                        title='<?php echo $goal[0] ?>'
+                        id='goal_<?php echo $goal[1] ?>'>
 
                     </li>
-                  <? } ?>
+                  <?php } ?>
                 </ul>
                 <input type='hidden' placeholder='Hidden value for goal' />
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                 <label for="u_location">Experience <span></span></label>
                 <ul class='basic-list c-align'> 
-                  <? foreach($experience as $length) {?>
+                  <?php foreach($experience as $length) {?>
                   <li class='click-tile img-tile tooltip bottom-tooltip' 
-                    style="background-image:url('assets/img/icons/length/<?= $length[1] ?>.png')"
-                    data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
-                    title='<?= $length[0] ?>'
-                    id='length_<?= $length[1] ?>'>
+                    style="background-image:url('assets/img/icons/length/<?php echo $length[1] ?>.png')"
+                    data-text-goal='<?php echo $length[0] ?>' data-code-goal='<?php echo $length[1] ?>' data-type='length'
+                    title='<?php echo $length[0] ?>'
+                    id='length_<?php echo $length[1] ?>'>
                   </li>
-                  <? } ?>
+                  <?php } ?>
                 </ul>
                 <input type='hidden' placeholder='Hidden value for expereince' />
               </div>
               <div class="pure-u-1 pure-u-md-1-1 relative">
                 <label for="c_location">Current Location<span></span></label>
-                    <div class='c-align' id='c_location' data-lat='<?= $profile_info['latitude'] ?>' data-long='<?= $profile_info['longitude'] ?>'> 
-                      <span class='loc'><?= displayLocation($location) ?></span>
+                    <div class='c-align' id='c_location' data-lat='<?php echo $profile_info['latitude'] ?>' data-long='<?php echo $profile_info['longitude'] ?>'> 
+                      <span class='loc'><?php echo displayLocation($location) ?></span>
                     <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='changeLocation' data-type='location_change'> <span> Change </span></div>
                   </div>
               </div>
@@ -97,20 +97,20 @@
               </div>
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_gym">Current Gym <span></span></label>
-                <input type='text' name='u_gym' id='u_gym' placeholder='Name of gym' value='<?= $profile_info['gym'] ?>'/>
+                <input type='text' name='u_gym' id='u_gym' placeholder='Name of gym' value='<?php echo $profile_info['gym'] ?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10 relative">
                 <label for="u_weight">Current Weight <span></span></label>
-                <input type='text' name='u_weight' id='u_weight' placeholder='' value='<?= $profile_info['weight'] ?>'/>
+                <input type='text' name='u_weight' id='u_weight' placeholder='' value='<?php echo $profile_info['weight'] ?>'/>
                 <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='weight-type' title='Click to change to Pounds' data-type='KG'> <span>KG</span> </div>
               </div>
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                 <label for="u_bodyfat">Current Body Fat % <span></span></label>
-                <input type='text' name='u_bodyfat' id='u_bodyfat' placeholder='%' value='<?= $profile_info['body_fat']?>'/>
+                <input type='text' name='u_bodyfat' id='u_bodyfat' placeholder='%' value='<?php echo $profile_info['body_fat']?>'/>
               </div>
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_bodyfat"> Personal Bio <span></span></label>
-                <textarea id="u_bio"><?= $profile_info['bio'] ?></textarea>
+                <textarea id="u_bio"><?php echo $profile_info['bio'] ?></textarea>
               </div>
               <div class="pure-u-1 pure-u-md-1-1 c-align">
                <input type='submit' name='update' id='update' />
@@ -126,7 +126,7 @@
               <div class='image-gallery'> 
               <form action="app/controller/uploadScript.php" class="dropzone" id="gallery-dropzone">
                 <input type="hidden" name="fileName" id='image_name' 
-                  value="<?= $profile_info['name'] ?>_<?= $profile_info['surname'] ?>_<?= $_SESSION['ifitness_id'] ?>" />
+                  value="<?php echo $profile_info['name'] ?>_<?php echo $profile_info['surname'] ?>_<?php echo $_SESSION['ifitness_id'] ?>" />
               </form>
               <div class='clear'> </div>
             </div>
@@ -144,9 +144,9 @@
           Set Variables 
         ============================== */
 
-        var id = <?= $profile_info['id'] ?>;
-        var currentGoal = <?= $profile_info['goal'] ?>;
-        var currentExp = <?= $profile_info['workout_exp'] ?>;  
+        var id = <?php echo $profile_info['id'] ?>;
+        var currentGoal = <?php echo $profile_info['goal'] ?>;
+        var currentExp = <?php echo $profile_info['workout_exp'] ?>;  
         var dob;
         var day;
         var month;

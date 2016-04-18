@@ -2,7 +2,7 @@
 
 	$id = $_GET['user_id'];
 
-	$directory = $_SERVER["DOCUMENT_ROOT"] . "Showcase/assets/img/gallery_uploads/";
+	$directory = $_SERVER["DOCUMENT_ROOT"]. "/stud/u1153568/final/showcase/assets/img/gallery_uploads/";
 	$imageList = glob($directory . "*");
 	$imageNameList = array(); 
 	

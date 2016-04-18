@@ -264,6 +264,7 @@ img.user-avatar {
 			}
 			.location-row { 
 				margin-bottom: 10px;
+				padding: 0 10px;
 				font-size: 0.9em;
 				display: block;
 			}
@@ -277,6 +278,7 @@ img.user-avatar {
 				font-size: 0.7em;
 				color: #999;
 				display: block;
+				padding: 0 15px;
 				span { 
 					display: block;
 					font-size: 1.2em;
@@ -294,28 +296,3 @@ img.user-avatar {
 		}
 	}
 
-
-	.add-friend-btn { 
-		float: right;
-		font-size: 0.7em;
-		margin-top: 3px;
-		cursor: pointer;
-		@include animate(100ms);
-		background-color: rgba(0,0,0,0.5);
-		padding: 12px;
-		position: absolute;
-		right: 0;
-		top: -3px;
-		span { 
-			display: inline-block;
-			margin: 0px 7px 0 0;
-			float: left;
-		}
-		i { 
-			font-size: 1.4em;
-		}
-		&:hover { 
-			color: $brand-light-col;
-			background-color: rgba(0,0,0,0.8);
-		}
-	}

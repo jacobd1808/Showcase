@@ -15,14 +15,14 @@
 	        	</div>
         	</div>
 			<ul class='basic-list' id='goal-list'>
-				<? foreach($goals as $goal) {?>
+				<?php foreach($goals as $goal) {?>
 					<li class='click-tile medium-tile img-tile tooltip bottom-tooltip' 
-					  style="background-image:url('assets/img/icons/goals/<?= $goal[1] ?>.png')"
-					  data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
-					  title='<?= $goal[0] ?>'
-					  id='goal_<?= $goal[1] ?>'>
+					  style="background-image:url('assets/img/icons/goals/<?php echo $goal[1] ?>.png')"
+					  data-text-goal='<?php echo $goal[0] ?>' data-code-goal='<?php echo $goal[1] ?>' data-type='goal'
+					  title='<?php echo $goal[0] ?>'
+					  id='goal_<?php echo $goal[1] ?>'>
 					</li>
-	            <? } ?>
+	            <?php } ?>
             </ul>
 		</div>
 		<div class='pure-u-1-3 set-pref'>
@@ -35,14 +35,14 @@
 	        	</div>
 	        </div>
 			<ul class='basic-list' id='experience-list'>
-                <? foreach($experience as $length) {?>
+                <?php foreach($experience as $length) {?>
                    <li class='click-tile medium-tile img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/length/<?= $length[1] ?>.png')"
-                      data-text-exp='<?= $length[0] ?>' data-code-exp='<?= $length[1] ?>' data-type='length'
-                      title='<?= $length[0] ?>'
-                      id='exp_<?= $length[1] ?>'>
+                      style="background-image:url('assets/img/icons/length/<?php echo $length[1] ?>.png')"
+                      data-text-exp='<?php echo $length[0] ?>' data-code-exp='<?php echo $length[1] ?>' data-type='length'
+                      title='<?php echo $length[0] ?>'
+                      id='exp_<?php echo $length[1] ?>'>
                   </li>
-                <? } ?>
+                <?php } ?>
 			</ul>
 		</div>
 		<div class='pure-u-1-3 set-pref'>

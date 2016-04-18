@@ -94,6 +94,7 @@ header {
 				color: white;
 				background-color: $brand-light-col;
 				padding: 6px 10px;
+				display: none;
 				margin-top: -3px;
 				font-size: 0.7em;
 				@include rounded(20px);

@@ -37,17 +37,18 @@
 					</li>
 					<li class='third-tile'> 
 						<strong> Fitness Goal </strong> 
-						<div class='click-tile img-tile tooltip bottom-tooltip' style="background-image:url('assets/img/icons/goals/<?= $info['goal'] ?>.png')" title="<?= $Profile->returnGoalChar($info['goal']) ?>"> 
+						<div class='click-tile img-tile tooltip bottom-tooltip' style="background-image:url('assets/img/icons/goals/<?php echo $info['goal'] ?>.png')" title="<?php echo $Profile->returnGoalChar($info['goal']) ?>"> 
                 		</div> 
 					</li>
 					<li class='fourth-tile'> 
 						<strong> Experience </strong> 
-						<div class='click-tile img-tile gender-tile tooltip bottom-tooltip' style="background-image:url('assets/img/icons/length/<?= $info['workout_exp'] ?>.png')" title="<?= $Profile->returnExpChar($info['workout_exp']) ?>"> 
+						<div class='click-tile img-tile gender-tile tooltip bottom-tooltip' style="background-image:url('assets/img/icons/length/<?php echo $info['workout_exp'] ?>.png')" title="<?php echo $Profile->returnExpChar($info['workout_exp']) ?>"> 
                 		</div> 
 					</li>
 				</ul>
 				{{#if own}}
-               	<input type='submit' name='sendMessage' id='sendMessage' value='Send Message' class='model-popup' data-content='message-center' data-title='Messaging Center'/>
+               	<input type='submit' name='sendMessage' id='sendMessage' value='Send Message' class='model-popup dark-color' data-content='message-center' data-title='Messaging Center' data-send-id='{{ id }}'/>
+
                 <input type='submit' name='addFriend' id='friendRequest' value='{{ relation_t }}' data-relation='{{ relation }}'/>
                	{{/if}} 
 			</div>
@@ -113,76 +114,6 @@
 		</div>
 	</div>
 </script>
-<script>
-$("body").on("click", "#friendRequest", function(){
-	var id = <?= $_SESSION['ifitness_id'] ?>;
 
-	var profile_id = $("#profile").data('id');
-	var relation = $("#friendRequest").data('relation');
-	if (relation == "add-friend"){
-		$.ajax({
-	    	url : "app/controller/ajaxController.php",
-	        data : { action: 'friend_request', user_1: id, user_2: profile_id},
-	        method : 'POST',
-	        success : function(data){
-	        	console.log("Request Sent");
-	        	$("#friendRequest").removeClass('add-friend');
-	        	$("#friendRequest").addClass('friend-request');
-	        	$("#friendRequest").val("Request Pending");
-	        	$("#friendRequest").data('relation', 'friend-request');
 
-	        	relation = "friend-request";
-	        }
-	    }); 
-	} else if (relation == "friend-request"){
-		$.ajax({
-			url: "app/controller/ajaxController.php", 
-			data: { action: 'remove_request', user_1: id, user_2: profile_id},
-			method: 'POST', 
-			success : function(data){
-				$("#friendRequest").removeClass('friend-request');
-				$("#friendRequest").addClass('friend-add');
-				$("#friendRequest").val("Add Friend");
-				$("#friendRequest").data('relation', 'add-friend');
 
-				relation = "add-friend";
-			}
-		});
-	} else if ( relation == "friends" ){
-		$.ajax({
-			url: "app/controller/ajaxController.php", 
-			data: { action: 'unfriend_person', user_1: id, user_2: profile_id},
-			method: 'POST', 
-			success : function(data){
-				$("#friendRequest").removeClass('friends');
-				$("#friendRequest").addClass('friend-add');
-				$("#friendRequest").val("Add Friend");
-				$("#friendRequest").data('relation', 'add-friend');
-
-				relation = "add-friend";
-			}
-		});		
-	} else if ( relation == "friend-add" ){
-		$.ajax({
-			url: "app/controller/ajaxController.php", 
-			data: { action: 'accept_request', user_1: id, user_2: profile_id},
-			method: 'POST', 
-			success : function(data){
-				console.log(data);
-				$("#friendRequest").removeClass('friend-add');
-				$("#friendRequest").addClass('friends');
-				$("#friendRequest").val("Unfriend");
-				$("#friendRequest").data('relation', 'friends');
-
-				relation = "friends";
-			}
-		});				
-	}
-});
-
-/*
-	.friend-request: If you sent a friend request to the person
-	.friend-add: If the person sent you a friend request
-	.friends: if the person is your friend
-	.add-friend: To be able to send a friend request
-*/

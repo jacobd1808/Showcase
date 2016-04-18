@@ -1,4 +1,4 @@
-<?
+<?php
 
 	$frontPage = new Frontpage($conn);
 	$register_date = date('Y-m-d');

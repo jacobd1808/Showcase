@@ -27,20 +27,26 @@
 		// Start a conversation
 		public function startInbox($data){
 			// SQL Statement
-			$sql = "INSERT INTO sc_inbox(title, first_user, second_user, last_sender)
-					VALUES(:title, :first_user, :second_user, :last_sender)";
+			$sql = "INSERT INTO sc_inbox(first_user, second_user, last_sender)
+					VALUES(:first_user, :second_user, :last_sender)";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':title', $data['title'], PDO::PARAM_STR);
-			$stmt->bindParam(':first_user', $data['first_user'], PDO::PARAM_STR);
-			$stmt->bindParam(':second_user', $data['second_user'], PDO::PARAM_STR);
-			$stmt->bindParam(':last_sender', $data['last_sender'], PDO::PARAM_STR);
+			$stmt->bindParam(':first_user', $data['to_id'], PDO::PARAM_INT);
+			$stmt->bindParam(':second_user', $data['from_id'], PDO::PARAM_INT);
+			$stmt->bindParam(':last_sender', $data['to_id'], PDO::PARAM_INT);
 			
-			$data['id'] = $this->conn->lastInsertId();
+			$inbox_id = $this->conn->lastInsertId();
 
 			// Execute Query
 			if ( $stmt->execute() ){
+				$date = date('Y-m-d H:i:s');
+				$data = array(
+					'inbox_id' => $inbox_id,
+					'user_id' => $data['from_id'],
+					'message' => $data['msg'],
+					'date_sent' => $date
+				);
 				$this->sendMessage($data);
 				return true;
 			} else {
@@ -50,13 +56,13 @@
 
 		public function checkInbox($user_id){
 			// SQL Statement
-			$sql = "SELECT * FROM sc_messages WHERE viewed=0 && user_id=$user_id";
+			$sql = "SELECT * FROM sc_messages WHERE viewed = 0 && user_id=$user_id";
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
 			if ( $stmt->execute() ) {
 				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
 			} else{
-				return "test";
+				return false;
 			}		
 		}
 
@@ -64,7 +70,7 @@
 
 		public function getInbox($user_id){
 			// SQL Statement
-			$sql = "SELECT sc_inbox.id, sc_inbox.title, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user='$user_id'";
+			$sql = "SELECT sc_inbox.id, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user = $user_id ";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query
@@ -75,7 +81,7 @@
 			if ( $result ){
 				return $result;
 			} else {
-				return 0;
+				return $user_id;
 			}
 		}
 

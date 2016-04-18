@@ -2,7 +2,7 @@
 
 	$newFileName = $_POST['fileName'] .'_'. rand(1,1000) .'_'. time(); 
 
-    $imagePath = $_SERVER["DOCUMENT_ROOT"]. "Showcase/assets/img/gallery_uploads/";
+    $imagePath = $_SERVER["DOCUMENT_ROOT"]. "/stud/u1153568/final/showcase/assets/img/gallery_uploads/";
 
 	$allowedExts = array("gif", "jpeg", "jpg", "png", "GIF", "JPEG", "JPG", "PNG");
 	$temp = explode(".", $_FILES["file"]["name"]);

@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 	$Profile = new Profile($conn);
 	$Relation = new Relation($conn);

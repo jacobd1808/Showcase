@@ -3,9 +3,9 @@
 *	!!! THIS IS JUST AN EXAMPLE !!!, PLEASE USE ImageMagick or some other quality image processing libraries
 */
 //$imgUrl = __DIR__ . str_replace("..", "/../..", $_POST['imgUrl']);
-$imgUrl = $_SERVER["DOCUMENT_ROOT"] . "Showcase/".$_POST['imgUrl'];
+$imgUrl = $_SERVER["DOCUMENT_ROOT"] . "/stud/u1153568/final/showcase/".$_POST['imgUrl'];
 
-$project = 'Showcase/'; // REMOVE 
+$project = '/stud/u1153568/final/showcase/'; // REMOVE 
 // original sizes
 $imgInitW = $_POST['imgInitW'];
 $imgInitH = $_POST['imgInitH'];

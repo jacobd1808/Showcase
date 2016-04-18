@@ -19,7 +19,7 @@
     </head>
     <body style='overflow-y: scroll; overflow-x: hidden'>
       <div id='fixed-bg'> </div>
-      <div id='main-content' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>' data-current-goal='<?= $profile_info['goal'] ?>' data-current-exp='<?= $profile_info['workout_exp'] ?>' data-slider='<?= $profile_info['distance_slider'] ?>'>
+      <div id='main-content' data-latitude='<?php echo $profile_info['latitude'] ?>' data-longitude='<?php echo $profile_info['longitude'] ?>' data-current-goal='<?php echo $profile_info['goal'] ?>' data-current-exp='<?php echo $profile_info['workout_exp'] ?>' data-slider='<?php echo $profile_info['distance_slider'] ?>'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
           <div class='filter-options m-25 modulated-box'> 
@@ -28,31 +28,31 @@
               <!-- --> 
               <label class='reduce-top-padding'> Fitness Goal <span> </span></label>
               <ul class='basic-list c-align'> 
-                <? foreach($goals as $goal) {?>
+                <?php foreach($goals as $goal) {?>
                   <li class='click-tile click-goal medium-tile img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/goals/<?= $goal[1] ?>.png')"
-                      data-text-goal='<?= $goal[0] ?>' data-code-goal='<?= $goal[1] ?>' data-type='goal'
-                      title='<?= $goal[0] ?>'
-                      id='goal_<?= $goal[1] ?>'>
+                      style="background-image:url('assets/img/icons/goals/<?php echo $goal[1] ?>.png')"
+                      data-text-goal='<?php echo $goal[0] ?>' data-code-goal='<?php echo $goal[1] ?>' data-type='goal'
+                      title='<?php echo $goal[0] ?>'
+                      id='goal_<?php echo $goal[1] ?>'>
 
                   </li>
-                <? } ?>
+                <?php } ?>
               </ul>
               <!-- --> 
               <label> Training Experience <span> </span></label>
               <ul class='basic-list c-align'> 
-                <? foreach($experience as $length) {?>
+                <?php foreach($experience as $length) {?>
                    <li class='click-tile click-goal img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/length/<?= $length[1] ?>.png')"
-                      data-text-goal='<?= $length[0] ?>' data-code-goal='<?= $length[1] ?>' data-type='length'
-                      title='<?= $length[0] ?>'
-                      id='exp_<?= $length[1] ?>'>
+                      style="background-image:url('assets/img/icons/length/<?php echo $length[1] ?>.png')"
+                      data-text-goal='<?php echo $length[0] ?>' data-code-goal='<?php echo $length[1] ?>' data-type='length'
+                      title='<?php echo $length[0] ?>'
+                      id='exp_<?php echo $length[1] ?>'>
                   </li>
-                <? } ?>
+                <?php } ?>
               </ul>
               <!-- --> 
               <label id=''>Current Location <span> </span></label>
-              <span class='distance-from'> From ..<span id='location' data-latitude='<?= $profile_info['latitude'] ?>' data-longitude='<?= $profile_info['longitude'] ?>'><?= $adress[1] ?>, <?= $adress[3] ?></span> <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
+              <span class='distance-from'> From ..<span id='location' data-latitude='<?php echo $profile_info['latitude'] ?>' data-longitude='<?php echo $profile_info['longitude'] ?>'><?php echo $adress[1] ?>, <?php echo $adress[3] ?></span> <i class="fa fa-cog r-float hover" id='toggle-location-display' style='margin-top: 1px'></i> </span>
 
               <label id='location-label'>Set Location <span> </span></label>                           
               <div class='location-selector' id='location-selector'>
@@ -115,43 +115,43 @@
                 }
             ?>
 
-                <div class='profile-card pure-g model-popup iso-glow-hover' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
+                <div class='profile-card pure-g model-popup iso-glow-hover' data-id='<?php echo $x['id'] ?>' id='profile_<?php echo $x['id'] ?>' 
                      data-distance='0' 
-                     data-goal='<?= $x['goal'] ?>' 
-                     data-exp='<?= $x['workout_exp'] ?>' 
-                     data-latitude='<?= $x['latitude'] ?>' 
-                     data-longitude='<?= $x['longitude'] ?>'
-                     data-name='<?= $x['name'] ?> <?= $x['surname'] ?>' 
-                     data-gym='<?= $x['gym'] ?>'
+                     data-goal='<?php echo $x['goal'] ?>' 
+                     data-exp='<?php echo $x['workout_exp'] ?>' 
+                     data-latitude='<?php echo $x['latitude'] ?>' 
+                     data-longitude='<?php echo $x['longitude'] ?>'
+                     data-name='<?php echo $x['name'] ?> <?php echo $x['surname'] ?>' 
+                     data-gym='<?php echo $x['gym'] ?>'
                      data-content='profile' 
-                     data-title="<?= $x['name'] ?> <?= $x['surname'] ?>'s Profile"
-                     data-profile-id='<?= $x['id'] ?>'
+                     data-title="<?php echo $x['name'] ?> <?php echo $x['surname'] ?>'s Profile"
+                     data-profile-id='<?php echo $x['id'] ?>'
                 >
                   <h3 class='pure-u-1-1'>
-                    <span class='title-text'><?= $x['name'] ?> <?= $x['surname'] ?></span>
+                    <span class='title-text'><?php echo $x['name'] ?> <?php echo $x['surname'] ?></span>
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
-                    <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                    <em><?= $online ?></em>
+                    <img src='<?php echo avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
+                    <em><?php echo $online ?></em>
                   </div>
                   <div class='pure-u-3-5 pure-g card-info'>
                     <div class='pure-u-1-2 l-float'> 
                       <strong>Goal</strong>
                       <div class='click-tile click-goal img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/goals/<?= $x['goal'] ?>.png')"
-                      title='<?= $Profile->returnGoalChar($x['goal']) ?>'>
+                      style="background-image:url('assets/img/icons/goals/<?php echo $x['goal'] ?>.png')"
+                      title='<?php echo $Profile->returnGoalChar($x['goal']) ?>'>
                       </div>
                     </div>
                     <div class='pure-u-1-2 l-float'> 
                       <strong>Experience</strong>      
                       <div class='click-tile click-goal img-tile tooltip bottom-tooltip' 
-                      style="background-image:url('assets/img/icons/length/<?= $x['workout_exp'] ?>.png')"
-                      title='<?= $Profile->returnExpChar($x['workout_exp']) ?>'>
+                      style="background-image:url('assets/img/icons/length/<?php echo $x['workout_exp'] ?>.png')"
+                      title='<?php echo $Profile->returnExpChar($x['workout_exp']) ?>'>
                       </div>
                     </div>
                     <div class='pure-u-1-1 l-float'> 
                       <strong>Location</strong> 
-                      <span class='location-row'><?= $x_adress[1] ?>, <?= $x_adress[3] ?></span>
+                      <span class='location-row'><?php echo displayLocation($x_adress) ?></span>
                     </div>
                   </div>
                 </div>
@@ -204,7 +204,6 @@
         }
 
         $('#toggle-location-display').click(function(){ 
-          //console.log(locationStatus);
           if (locationStatus === 'location') {
              locationStatus = 'distance';
           } else if (locationStatus === 'distance') { 
@@ -263,7 +262,6 @@
       profiles.forEach(function(x){
         var profile_lat = $("#profile_" + x).data('latitude');
         var profile_long = $("#profile_" + x).data('longitude');
-        console.log(profile_lat, profile_long)
       });
 
       $('.profile-card').each(function(){ 
@@ -374,7 +372,6 @@
             data : { action: 'update_slider', id: id, slider: slider },
             method : 'POST',
             success : function(data){
-              console.log("it updated");
             }
           });  
           refreshFilter(this);

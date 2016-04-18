@@ -2372,6 +2372,7 @@ header {
         color: white;
         background-color: #FC6E00;
         padding: 6px 10px;
+        display: none;
         margin-top: -3px;
         font-size: 0.7em;
         -webkit-border-radius: 20px;
@@ -2602,6 +2603,7 @@ img.user-avatar {
       border: 1px dotted #352746; }
     .profile-card .card-info .location-row {
       margin-bottom: 10px;
+      padding: 0 10px;
       font-size: 0.9em;
       display: block; }
   .profile-card .card-avatar {
@@ -2611,7 +2613,8 @@ img.user-avatar {
     .profile-card .card-avatar em {
       font-size: 0.7em;
       color: #999;
-      display: block; }
+      display: block;
+      padding: 0 15px; }
       .profile-card .card-avatar em span {
         display: block;
         font-size: 1.2em;
@@ -2623,30 +2626,6 @@ img.user-avatar {
     font-size: 0.7em;
     text-align: center;
     display: block; }
-
-.add-friend-btn {
-  float: right;
-  font-size: 0.7em;
-  margin-top: 3px;
-  cursor: pointer;
-  -webkit-transition: all 100ms ease-in-out;
-  -moz-transition: all 100ms ease-in-out;
-  -o-transition: all 100ms ease-in-out;
-  transition: all 100ms ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 12px;
-  position: absolute;
-  right: 0;
-  top: -3px; }
-  .add-friend-btn span {
-    display: inline-block;
-    margin: 0px 7px 0 0;
-    float: left; }
-  .add-friend-btn i {
-    font-size: 1.4em; }
-  .add-friend-btn:hover {
-    color: #FC6E00;
-    background-color: rgba(0, 0, 0, 0.8); }
 
 html, body {
   font-family: "Roboto", sans-serif;
@@ -2950,9 +2929,9 @@ html, body {
 / ============================ */
 .inbox-list {
   margin-top: 1px;
-  overflow: auto; }
+  overflow: auto;
+  background-color: #1C1525; }
   .inbox-list li {
-    background-color: #1C1525;
     text-align: left;
     border-bottom: 6px solid #150f1b;
     padding: 10px 10px 10px 30px;
