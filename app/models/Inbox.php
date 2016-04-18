@@ -35,11 +35,10 @@
 			$stmt->bindParam(':first_user', $data['from_id'], PDO::PARAM_INT);
 			$stmt->bindParam(':second_user', $data['to_id'], PDO::PARAM_INT);
 			$stmt->bindParam(':last_sender', $data['to_id'], PDO::PARAM_INT);
-			
-			$inbox_id = $this->conn->lastInsertId();
 
 			// Execute Query
 			if ( $stmt->execute() ){
+				$inbox_id = $this->conn->lastInsertId();
 				$date = date('Y-m-d H:i:s');
 				$data = array(
 					'inbox_id' => $inbox_id,
@@ -70,7 +69,7 @@
 
 		public function getInbox($user_id){
 			// SQL Statement
-			$sql = "SELECT sc_inbox.id, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user = $user_id ";
+			$sql = "SELECT sc_inbox.id, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user = $user_id ORDER BY sc_inbox.id DESC";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query

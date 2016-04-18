@@ -456,7 +456,9 @@ $("body").on("click", "#friendRequest", function(){
 			url : "app/controller/inboxController.php",
          	data : { action: 'start_inbox', msg: message, to_id: to_id, from_id: from_id },
 			success: function(data) {
-				
+				$('#reply-message').slideUp();
+				$("#inbox-list").empty(); 
+				getInbox(from_id, null)
 			}
 		});   
 	})
