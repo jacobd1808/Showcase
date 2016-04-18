@@ -16,7 +16,11 @@
 				echo json_encode($Inbox->getInbox($_POST['user_id']));
 			break;
 			case 'get_convo':
-				echo json_encode($Inbox->getConvo($_POST['inbox_id']));
+				$convo = $Inbox->getConvo($_POST['inbox_id']);
+				foreach($convo as $x){
+					$Inbox->setViewed($x['id']);
+				}
+				echo json_encode($convo);
 			break;
 			case 'send_message':
 				$date = date('Y-m-d H:i:s');

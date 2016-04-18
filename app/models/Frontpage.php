@@ -33,6 +33,33 @@
 			}
 		}
 
+		public function checkUsername($username){
+			// SQL Statement
+			$sql = "SELECT * FROM sc_user WHERE username='$username'";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Execute SQL
+			if ( $stmt->execute() ) {
+				return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+			} else{
+				return 0;
+			}	
+		}
+
+		public function setOnline($id){
+			$time = time();
+			// SQL Statement
+			$sql = "UPDATE sc_profile SET online=$time WHERE id=$id";
+			// Prepare SQL
+			$stmt = $this->conn->prepare($sql);
+			// Execute SQL
+			if ( $stmt->execute() ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		public function loginUser($data){
 			// SQL Statement
 			$sql = "SELECT id FROM sc_user WHERE username = :username && password = :password";
@@ -48,17 +75,21 @@
 			if ($result){
 				// User has logged in
 				$_SESSION['ifitness_id'] = $result;
+				$this->setOnline($result);
 				return true;
 			} else {
 				return false;
 			}
 		}
 
+
+
 		// Function to create profile
 		public function createProfile($data, $user_id){
+			$time = time();
 			// Write the SQL Insert Query
-			$sql = "INSERT INTO sc_profile (id, name, surname, gender, register_date)
-					VALUES (:id, :name, :surname, :gender, :register_date)";
+			$sql = "INSERT INTO sc_profile (id, name, surname, gender, register_date, online)
+					VALUES (:id, :name, :surname, :gender, :register_date, :online)";
 
 			// Prepare the SQL Query
 			$stmt = $this->conn->prepare($sql);
@@ -69,6 +100,7 @@
 			$stmt->bindParam(':surname', $data['surname'], PDO::PARAM_STR);
 			$stmt->bindParam(':gender', $data['gender'], PDO::PARAM_STR);
 			$stmt->bindParam(':register_date', $data['register_date'], PDO::PARAM_STR);
+			$stmt->bindParam(':online', $time, PDO::PARAM_STR);
 
 			// Execute the query and IF it works
 			if ($stmt->execute()){

@@ -5,6 +5,7 @@
 	$Profile = new Profile($conn);
 	$Relation = new Relation($conn);
 	$User = new User($conn);
+	$Inbox = new Inbox($conn);
 
 if(isset($_POST['action']) && !empty($_POST['action'])) {
 	
@@ -93,13 +94,6 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
 			echo $Relation->removeRequest($user_1, $user_2);
 		break;
-		case 'unfriend_person':
-			$user_1 = $_POST['user_1'];
-			$user_2 = $_POST['user_2'];
-
-			echo $Relation->unfriendPerson($user_1, $user_2);
-			echo $Relation->unfriendPerson($user_2, $user_1);
-		break;
 		case 'accept_request':
 
 			$user_1 = $_POST['user_1'];
@@ -109,6 +103,14 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 
 			echo $Relation->acceptRequest($user_1, $user_2, $info_2['name'], $info_2['surname']);
 			echo $Relation->acceptRequest($user_2, $user_1, $info_1['name'], $info_1['surname']);
+		break;
+		case 'unfriend_person':
+
+			$id = $_POST['user_1'];
+			$other_id = $_POST['user_2'];
+
+			echo $Relation->unfriendPerson($id, $other_id);
+			echo $Relation->unfriendPerson($other_id, $id);
 		break;
 		case 'search_by_user':
 
@@ -155,6 +157,15 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 			if($Profile->editAvatarLink($user_id, $avatar_url)) { 
 				echo json_encode('updated'); 
 			}	
+		break;
+		case 'check_update':
+			$user_id = $_POST['user_id'];		
+			$type = $_POST['type'];
+			if ( $type == 'messages-popup' ){
+				echo $Inbox->checkInbox($user_id);
+			} else if ( $type == 'notification-popup' ){
+				echo $Relation->checkNotifications($user_id);
+			}
 		break;
 		default: 
 			return "bloop";

@@ -390,22 +390,18 @@ $(function() {
 
 	function checkForUpdates(ele, user_id) { 
 		var counterDOM = $('#'+ele).find('span.count-circle');
-		//console.log(ele);
-		//console.log(user_id);
-		var data = 0; 
-		/*$.ajax({
-			url : "app/controller/inboxController.php", 
-			data : { action: ele, user_id: user_id},
+		$.ajax({
+			url : "app/controller/ajaxController.php", 
+			data : { action: "check_update", user_id: user_id, type: ele},
 			method : 'POST', 
 			success : function(data){
-				// Put below code here 
+				if (data == 0) {
+					counterDOM.text('0');
+					counterDOM.fadeOut();
+				} else { 
+					counterDOM.text(data);
+					counterDOM.fadeIn();
+				}
 			}
-		});*/	
-		if (data === 0) {
-			counterDOM.text('0');
-			counterDOM.fadeOut();
-		} else { 
-			counterDOM.text(data);
-			counterDOM.fadeIn();
-		}
+		});
 	}

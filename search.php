@@ -106,6 +106,13 @@
                 if ( $x['workout_exp'] == 0 ){
                   $x['workout_exp'] = 1;
                 }
+
+                $online = $Profile->lastOnline($x['online']);
+                if ( $online == "Online"){
+                    $online = "Currently Online";
+                } else {
+                    $online = "Last Online ". $online;
+                }
             ?>
 
                 <div class='profile-card pure-g model-popup iso-glow-hover' data-id='<?= $x['id'] ?>' id='profile_<?= $x['id'] ?>' 
@@ -125,7 +132,7 @@
                   </h3>
                   <div class='pure-u-2-5 card-avatar'>
                     <img src='<?= avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
-                    <em> Member since <span class='format-date-short'> <?= $x['register_date'] ?> </span></em>
+                    <em><?= $online ?></em>
                   </div>
                   <div class='pure-u-3-5 pure-g card-info'>
                     <div class='pure-u-1-2 l-float'> 
