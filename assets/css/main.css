@@ -184,7 +184,7 @@ h3 {
 .pure-g [class*="pure-u"], .pure-g {
   font-family: "Roboto", sans-serif; }
 
-.vertical-align, .click-tile i, .click-tile i:before, .click-tile.full-width-tile span, .click-tile.tile-text-center span, .feedback-container .feedback-msg i, .searchPref .location-selector #check-postcode span, .inbox-list li .type-col span {
+.vertical-align, .click-tile i, .click-tile i:before, .click-tile.full-width-tile span, .click-tile.tile-text-center span, .feedback-container .feedback-msg i, .searchPref .location-selector #check-postcode span {
   position: relative;
   top: 50%;
   transform: translateY(-50%); }
@@ -2393,11 +2393,16 @@ header {
   border: 0;
   color: white; }
 
-.glow-hover:hover {
-  -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-  cursor: pointer; }
+.glow-hover {
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out; }
+  .glow-hover:hover {
+    -webkit-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
+    cursor: pointer; }
 
 .iso-glow-hover {
   -webkit-transition: box-shadow 150ms ease-in-out;
@@ -2935,18 +2940,12 @@ html, body {
     text-align: left;
     border-bottom: 6px solid #150f1b;
     padding: 10px 10px 10px 30px;
-    position: relative; }
-    .inbox-list li .type-col {
-      background-color: #281e35;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0; }
-      .inbox-list li .type-col span {
-        display: inline-block;
-        width: 20px;
-        text-align: center;
-        font-size: 0.8em; }
+    position: relative;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    cursor: pointer; }
     .inbox-list li big, .inbox-list li strong, .inbox-list li em {
       display: block; }
     .inbox-list li big {
@@ -2959,7 +2958,10 @@ html, body {
       padding: 10px 0 5px 0;
       font-size: 0.8em; }
     .inbox-list li em {
-      font-size: 0.8em; }
+      font-size: 0.8em;
+      margin-top: 10px; }
+    .inbox-list li:hover {
+      background-color: #352746; }
 
 #reply-message h4 {
   color: #FC6E00;
@@ -2969,7 +2971,7 @@ html, body {
   padding: 20px 0;
   border-bottom: 1px solid #352746; }
   #reply-message .message-list .message-text {
-    padding-left: 10px; }
+    padding-left: 25px; }
     #reply-message .message-list .message-text em {
       opacity: 0.2;
       font-size: 0.8em;
@@ -3092,3 +3094,7 @@ html, body {
     display: inline-block; }
   .feed-add button {
     margin-top: 0; }
+
+#init-msg {
+  padding: 15px;
+  font-weight: bold; }

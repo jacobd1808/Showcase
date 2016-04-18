@@ -69,7 +69,7 @@
 
 		public function getInbox($user_id){
 			// SQL Statement
-			$sql = "SELECT sc_inbox.id, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user = $user_id OR second_user = $user_id ORDER BY sc_inbox.id DESC";
+			$sql = "SELECT sc_inbox.id, sc_inbox.start_date, sc_profile.name, sc_profile.surname FROM sc_inbox INNER JOIN sc_profile ON sc_inbox.second_user = sc_profile.id WHERE first_user = $user_id OR second_user = $user_id ORDER BY sc_inbox.id DESC";
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Execute Query

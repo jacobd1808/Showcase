@@ -5,7 +5,7 @@
   include "app/controller/loginController.php";
 
 	$pageOpt = array(
-		"title"			    =>	"Login", 
+		"title"			    =>	"FitConnect . Login", 
 		'navName' 		  	=> 	"", 
 		'cssIncludes'	  	=>	"", 
 		"jsIncludes"	 	=>	"",
@@ -19,12 +19,15 @@
     <body>
       <div id='fixed-bg'> </div>
       <div id='main-content'>
+        <!-- Content -->
         <div class='view' style='margin-right: 0'> 
+          <!-- Not Registered Display -->
           <div class='homepage-info vert-center'> 
               <img src='assets/img/logos/fitconnect-logo-text.png' alt='logo' class='full-logo'/>
               <br /> <big> No Account? Register </big> <br />
               <a href='register.php' class='custom-btn small-button dark-color model-popup'> Register </a>
           </div>
+          <!-- Login Form -->
           <form action='' method='post' name='login' id='register-form' class="pure-form pure-form-stacked modulated-box vert-center">
             <h1> Login </h1>
             <?php if(isset($feedback)) { 

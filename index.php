@@ -4,51 +4,8 @@
   include "app/config/conn.php";
   include "app/controller/indexController.php";
 
-  if ( $profile_info['latitude'] != 0 && $profile_info['longitude'] != 0){
-    include "app/controller/recommendationsController.php";
-    $count = 0; 
-    $recArray = array(); 
-    $sameGymCount = count($sameGym);
-    $recCount = count($recommendations);
-
-  function checkDistance($myPos, $recPos) { 
-    $dist = returnDistance2( $myPos['latitude'], $myPos['longitude'], $recPos['latitude'], $recPos['longitude']);
-    return $dist;
-  }
-
-    // Builds Recommendation Array
-    if ($sameGymCount < 3) { 
-
-      if ($sameGymCount != 0) {
-        echo 'samegym';
-        foreach ($sameGym as $gymRec) { 
-            $typeArray = array('type'=>'sameGym');
-            $gymRec = array_merge($gymRec, $typeArray);
-            array_push($recArray, $gymRec);
-            $count++; 
-        }
-      }
-      foreach($recommendations as $rec) { 
-        if(!in_array($rec, $recArray)) {
-          if(checkDistance($profile_info, $rec) <= 10000) {
-            if ($count < 3) { 
-              $typeArray = array('type'=>'samePreferences');
-              $rec = array_merge($rec, $typeArray);
-              array_push($recArray, $rec);
-              $count++; 
-            }
-          }
-        }
-      }
-    } else {
-      array_push($recArray, $rec);
-    }    
-  } else {
-    $recArray = 0;
-  }
-
   $pageOpt = array(
-    "title"         =>  "Welcome", 
+    "title"         =>  "FitConnect . Feed", 
     'navName'         =>  "feed", 
     'cssIncludes'     =>  " ", 
     "jsIncludes"    =>  " ",
@@ -64,12 +21,16 @@
       <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
+      <!-- Initial popup to populate GOAL, EXP and LOCATION --> 
       <?php if ($profile_info['latitude'] == 0 && $profile_info['longitude'] == 0){ ?>
          <div class='default-popup' data-content='searchPreferences' data-title='Welcome to FitConnect .. Please provide some basic information about yourself'>  
       <?php } ?>
+      <!-- Index Body--> 
       <div class='m-25'>
+        <!-- Feed [ LEFT ] --> 
         <div class='feed'> 
           <div class='feed-add'> 
+            <!-- Feed Add --> 
             <?php if(isset($feedback)) { 
               echo "<div class='outcome ".$feedback['type']."'>".$feedback['message']."</div>"; 
             } ?>
@@ -82,7 +43,7 @@
             </div>
             <div class='clear'> </div>
           </div>
-          <!-- --> 
+          <!-- Feed Display--> 
           <?php foreach($feed as $x) { 
               
             if ( $Relation->checkLike($x['id'], $profile_info['id']) ){
@@ -90,10 +51,8 @@
             } else {
               $data_liked = 0;
             }
-
             ?>
           <div class='feed-post'> 
-
             <div class='feed-post-title'>
               <img src='<?php echo avatarExists($x['avatar_url'] , 'main') ?>' alt='avatar' class='user-avatar feed-avatar outline-hover model-popup' data-content='profile' data-title="<?php echo $x['friend_name'] ?> <?php echo $x['friend_lastname'] ?>'s profile" data-profile-id='<?php echo $x['friend_id'] ?>'/>
               <span class='feed-name'> <?php echo $x['friend_name'] ?> <?php echo $x['friend_lastname'] ?> <small> Posted <?php echo $Relation->ago($x['post_time']) ?> </small></span>
@@ -101,7 +60,6 @@
                 <span id='count_<?php echo $x['id'] ?>'><?php echo $Relation->fetchLikes($x['id']) ?></span> <i class="fa fa-thumbs-up"></i>
               </span>
               <hr /> 
-
             </div>
             <div class='feed-post-content'>
               <?php echo nl2br($x["message"]) ?>
@@ -114,6 +72,7 @@
           </div>
           <?php } ?>
         </div>
+        <!-- Reccondmenation Box [ RIGHT ]--> 
         <div class='feed-notices'> 
           <div class='modulated-box'>
             <h2>Recommendations</h2>
@@ -179,15 +138,16 @@
     </div>
     	<?php include_once "app/views/scripts.php"; ?>
     <script>
+      // Get User ID
       var user_id = <?php echo $profile_info['id'] ?>;
 
+      // Feed Like Click
       $(".feed-like").click(function(){
         var like_id = $(this).data('id');
         var liked = $(this).data('liked');
         var count = $(this).data('count');
         var friend_id = $(this).data('user-id');
 
-        console.log(count);
         if ( liked ){
           $.ajax({
             url : "app/controller/ajaxController.php",

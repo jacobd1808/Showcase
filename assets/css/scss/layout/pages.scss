@@ -389,22 +389,10 @@ html, body {
 		border-bottom: 6px solid $body-darken;
 		padding: 10px 10px 10px 30px;
 		position: relative;
+		@include animate(150ms);
+		cursor: pointer;
 		&.new .type-col { 
 			@extend .grad;
-		}
-		.type-col { 
-			background-color: $body-lighten;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			span { 
-				@extend .vertical-align;
-				display: inline-block;
-				width: 20px;
-				text-align: center;
-				font-size: 0.8em;
-			}
 		}
 		big, strong, em { 
 			display: block;
@@ -422,6 +410,10 @@ html, body {
 		}
 		em { 
 			font-size: 0.8em;
+			margin-top: 10px;
+		}
+		&:hover { 
+			background-color: $body-lighten-2;
 		}
 	}
 }
@@ -436,7 +428,7 @@ html, body {
 		//margin-bottom: 20px;
 		border-bottom: 1px solid $body-lighten-2;
 		.message-text { 
-			padding-left: 10px;
+			padding-left: 25px;
 			em { 
 				opacity: 0.2;
 				font-size: 0.8em;
@@ -589,5 +581,9 @@ html, body {
 	button { 
 		margin-top: 0;
 	}
+}
+#init-msg { 
+	padding: 15px;
+	font-weight: bold;
 }
 

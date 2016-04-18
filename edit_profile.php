@@ -3,13 +3,13 @@
   include_once "app/config/checkSession.php";
   include_once "app/config/conn.php";
   include_once "app/controller/editController.php";
+
 	$pageOpt = array(
-		"title"			    =>	"FitConnect", 
+		"title"			    =>	"FitConnect . Edit Profile", 
 		'navName' 		  	=> 	"edit_profile", 
 		'cssIncludes'	  	=>	'<link rel="stylesheet" href="lib/dropzone/basic.css" type="text/css" /><link rel="stylesheet" href="lib/croppic/assets/css/croppic.css">', 
 		"jsIncludes"	 	=>	"<script type='text/javascript' src='lib/dropzone/dropzone.js' /></script><script src='lib/croppic/croppic.min.js'></script>",
 	);
-
 
 ?>
 <!DOCTYPE html>
@@ -18,29 +18,33 @@
     </head>
     <body>
       <div id='fixed-bg'> </div>
+      <!-- Main Frame --> 
       <div id='main-content'>
       <?php include_once "app/views/header.php"; ?>
       <div class='view'> 
         <div class='m-25'>
           <div class='edit-profile-main modulated-box'> 
             <h2> Profile Content </h2>
-            <!-- --> 
+            <!-- Response Message --> 
             <div class='outcome' id='outcomeMsg'></div>
-            <!-- --> 
+            <!-- Edit Profile [ LEFT ]  --> 
             <form action='' method='POST' class='pure-g p-10'>
+              <!-- Edit DOB  --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_dd">Date of Birth <span></span></label>
                 <input type='text' name='u_dd' id='u_dd' class='small-input' placeholder='DD' value='<?php echo $dob[2] ?>'/>
                 <input type='text' name='u_mm' id='u_mm' class='small-input' placeholder='MM' value='<?php echo $dob[1] ?>'/>
                 <input type='text' name='u_yy' id='u_yy' class='small-input' placeholder='YYYY' value='<?php echo $dob[0] ?>'/>
               </div>
+              <!-- Upload Profile Picture Section --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                   <label for="u_dd">Upload Profile Picture <span></span></label>
                   <div class='avatar-upload-area'> 
                     <div id="avatarCrop"></div>
                   </div>
-                    <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?php echo $profile_info['avatar_url'] ?>'/>
+                  <input type='hidden' id='avatarUrl'  name="avatar_url" value='<?php echo $profile_info['avatar_url'] ?>'/>
               </div>
+              <!-- Goal Tile Section --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10">
                 <label for="u_location">Goals <span></span></label>
                 <ul class='basic-list c-align'> 
@@ -56,6 +60,7 @@
                 </ul>
                 <input type='hidden' placeholder='Hidden value for goal' />
               </div>
+              <!-- Experience Tile Section --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                 <label for="u_location">Experience <span></span></label>
                 <ul class='basic-list c-align'> 
@@ -70,6 +75,7 @@
                 </ul>
                 <input type='hidden' placeholder='Hidden value for expereince' />
               </div>
+              <!-- Current Location Section  --> 
               <div class="pure-u-1 pure-u-md-1-1 relative">
                 <label for="c_location">Current Location<span></span></label>
                     <div class='c-align' id='c_location' data-lat='<?php echo $profile_info['latitude'] ?>' data-long='<?php echo $profile_info['longitude'] ?>'> 
@@ -77,6 +83,7 @@
                     <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='changeLocation' data-type='location_change'> <span> Change </span></div>
                   </div>
               </div>
+              <!-- Edit Profile Section --> 
               <div class="pure-u-1 pure-u-md-1-1 hidden" id='location-set-row'>
                 <label for="u_location">Edit Location <span></span></label>
                 <div class='pure-g'>
@@ -95,33 +102,39 @@
                   </div>
                 </div>
               </div>
+              <!-- Edit Current Gym  --> 
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_gym">Current Gym <span></span></label>
                 <input type='text' name='u_gym' id='u_gym' placeholder='Name of gym' value='<?php echo $profile_info['gym'] ?>'/>
               </div>
+              <!-- Edit Current Weight --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-r-10 relative">
                 <label for="u_weight">Current Weight <span></span></label>
                 <input type='text' name='u_weight' id='u_weight' placeholder='' value='<?php echo $profile_info['weight'] ?>'/>
                 <div class='click-tile tile-text-center tooltip action-btn bottom-tooltip input-btn' id='weight-type' title='Click to change to Pounds' data-type='KG'> <span>KG</span> </div>
               </div>
+              <!-- Edit Current Bodyfat  --> 
               <div class="pure-u-1 pure-u-md-1-2 pure-m-l-10">
                 <label for="u_bodyfat">Current Body Fat % <span></span></label>
                 <input type='text' name='u_bodyfat' id='u_bodyfat' placeholder='%' value='<?php echo $profile_info['body_fat']?>'/>
               </div>
+              <!-- Edit Bio --> 
               <div class="pure-u-1 pure-u-md-1-1">
                 <label for="u_bodyfat"> Personal Bio <span></span></label>
                 <textarea id="u_bio"><?php echo $profile_info['bio'] ?></textarea>
               </div>
+              <!-- Submit --> 
               <div class="pure-u-1 pure-u-md-1-1 c-align">
                <input type='submit' name='update' id='update' />
               </div>
             </form>
           </div>
+          <!-- Image Gallery [ RIGHT ] --> 
           <div class='edit-profile-images modulated-box'>
             <h2> Photo Gallery </h2>
-            <!-- --> 
+            <!-- Response Message--> 
             <div class='outcome' id='outcomeMsgPicture'></div>
-            <!-- --> 
+            <!-- Image Gallery Container --> 
             <div>
               <div class='image-gallery'> 
               <form action="app/controller/uploadScript.php" class="dropzone" id="gallery-dropzone">
@@ -156,10 +169,14 @@
         var body_fat;
         var avatar; 
 
+        $("#goal_" + currentGoal).addClass('active');
+        $("#length_" + currentExp).addClass('active');
+
         /* ==============================
           Helper Functions 
         ============================== */
 
+        // Check val exists 
         function checkVal(name, def_val){
           if ( $("#u_" + name).val() ){
             return $("#u_" + name).val();
@@ -168,6 +185,7 @@
           }
         }
 
+        // Convert Weight Lb / Kg
         function convertWeight(weight, x){
           if ( weight == "LB" ){
             x = x * 2.2046;
@@ -178,11 +196,17 @@
           return x;
         }
 
-        $("#goal_" + currentGoal).addClass('active');
-        $("#length_" + currentExp).addClass('active');
+        // Display response message 
+        function displayOutcome(msg, type, ele) { 
+          $('html, body').animate({ scrollTop: 0 }, 'fast', function(){ 
+            $('#'+ele).addClass(type);
+            $('#'+ele).html(msg);
+            $('#'+ele).slideDown(); 
+          });
+        }
 
         /* ==============================
-          Click Tile Handler 
+          Click event on tiles (change goal, exp, weight format)
         ============================== */
 
         $(".click-tile").click(function(){
@@ -258,32 +282,36 @@
             }        
         });
 
-      $("#postcode_btn").click(function(){
-        var postal_code = $("#u_location").val();
-        $.ajax({
-          url : "app/controller/ajaxController.php",
-          data : { action: 'check_postcode', postal_code: postal_code },
-          method : 'POST',
-          success : function(data){
-            var results = jQuery.parseJSON(data);
-            if(results[4] == undefined ) {
-              $("#c_location").find('span.loc').text(results.address[1] + ", " + results.address[2] + ", " + results.address[3]);
-            } else { 
-              $("#c_location").find('span.loc').text(results.address[2] + ", " + results.address[3] + ", " + results.address[4]);
+        /* ==============================
+          Get Location (Postcode Search)
+        ============================== */
+
+        $("#postcode_btn").click(function(){
+          var postal_code = $("#u_location").val();
+          $.ajax({
+            url : "app/controller/ajaxController.php",
+            data : { action: 'check_postcode', postal_code: postal_code },
+            method : 'POST',
+            success : function(data){
+              var results = jQuery.parseJSON(data);
+              if(results[4] == undefined ) {
+                $("#c_location").find('span.loc').text(results.address[1] + ", " + results.address[2] + ", " + results.address[3]);
+              } else { 
+                $("#c_location").find('span.loc').text(results.address[2] + ", " + results.address[3] + ", " + results.address[4]);
+              }
+              latitude = results['lat'];
+              longitude = results['lng'];
+
+              $("#c_location").data('lat', latitude);
+              $("#c_location").data('long', longitude);  
+
+              $('#location-set-row').slideToggle();
             }
-            latitude = results['lat'];
-            longitude = results['lng'];
-
-            $("#c_location").data('lat', latitude);
-            $("#c_location").data('long', longitude);  
-
-            $('#location-set-row').slideToggle();
-          }
-        });      
-      });
+          });      
+        });
 
         /* ==============================
-          Update Profile 
+          Update Profile (Done Via AJAX)
         ============================== */
 
         $("#update").click(function(e){
@@ -328,7 +356,7 @@
         });
 
         /* ==============================
-          Dropzone Multi File Uploader 
+          Dropzone Multi File Uploader (Dropzone)
         ============================== */
 
         Dropzone.options.galleryDropzone = {
@@ -383,45 +411,43 @@
           $(".dropzone").trigger("click");
       });
 
-      function displayOutcome(msg, type, ele) { 
-        $('html, body').animate({ scrollTop: 0 }, 'fast', function(){ 
-          $('#'+ele).addClass(type);
-          $('#'+ele).html(msg);
-          $('#'+ele).slideDown(); 
-        });
-      }
+        /* ==============================
+          Avatar Upload and crop tool (Croppic)
+        ============================== */
 
-
-var cropperOptions = {
-  uploadUrl:'lib/croppic/img_save_to_file.php',
-  cropUrl:'lib/croppic/img_crop_to_file.php',
-  outputUrlId:'avatarUrl',
-  rotateControls:false, 
-  doubleZoomControls:true,
-  loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
-  modal: true,
-  onError: function() { 
-    displayOutcome('Please upload either a JPG, PNG or GIF image', 'error', 'outcomeMsg');
-  },
-  onAfterImgCrop:   function(){ 
-    var avatarURL = $('#avatarUrl').val();
-    var user_id = localStorage.getItem("userName") 
-      $.ajax({
-        method: 'POST', 
-        url : "app/controller/ajaxController.php",
-        dataType: "json",
-        data : { action: 'editAvatarLink', user_id: user_id, avatarURL: avatarURL },
-        success: function(data) {
-          displayOutcome('Avatar successfully uploaded', 'valid', 'outcomeMsg'); 
-        },
-        error: function() { 
-          displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
-        }
-    });
-  }
-};
-var cropperHeader = new Croppic('avatarCrop', cropperOptions);
-    }); 
+        var cropperOptions = {
+          uploadUrl:'lib/croppic/img_save_to_file.php',
+          cropUrl:'lib/croppic/img_crop_to_file.php',
+          outputUrlId:'avatarUrl',
+          rotateControls:false, 
+          doubleZoomControls:true,
+          loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+          modal: true,
+          // If image is not valid 
+          onError: function() { 
+            displayOutcome('Please upload either a JPG, PNG or GIF image', 'error', 'outcomeMsg');
+          },
+          // Save Link in database when complete 
+          onAfterImgCrop:   function(){ 
+            var avatarURL = $('#avatarUrl').val();
+            var user_id = localStorage.getItem("userName") 
+              $.ajax({
+                method: 'POST', 
+                url : "app/controller/ajaxController.php",
+                dataType: "json",
+                data : { action: 'editAvatarLink', user_id: user_id, avatarURL: avatarURL },
+                success: function(data) {
+                  displayOutcome('Avatar successfully uploaded', 'valid', 'outcomeMsg'); 
+                },
+                error: function() { 
+                  displayOutcome('Something went wrong, please try again', 'error', 'outcomeMsgPicture');
+                }
+            });
+          }
+        };
+        // Init Cropper Tool
+        var cropperHeader = new Croppic('avatarCrop', cropperOptions);
+        }); 
       </script>      
     </body>
 </html>

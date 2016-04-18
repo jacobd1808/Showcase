@@ -5,7 +5,7 @@
   include "app/controller/friendController.php";
   
   $pageOpt = array(
-    "title"         =>  "FitConnect", 
+    "title"         =>  "FitConnect . Friends", 
     'navName'         =>  "friends", 
     'cssIncludes'     =>  "", 
     "jsIncludes"    =>  "",
@@ -23,9 +23,11 @@
       <div class='view'> 
           <div class='friends-list m-25 modulated-box'> 
             <h2> Friends List </h2>
+            <!-- Response message when accepting friend request --> 
             <?php if(isset($feedback)) { 
               echo "<div class='outcome ".$feedback['type']."'>".$feedback['message']."</div>"; 
             } ?>
+            <!-- Display friends as tiles  --> 
             <div class='p-10'>
               <?php if (count($friends) != 0) { 
               foreach($friends as $x) { ?>
@@ -33,6 +35,7 @@
                 <img src='<?php echo avatarExists($x['avatar_url'] , 'main') ?>' alt='user avatar' class='user-avatar'/>
                 <span> <?php echo $x['friend_name'] ?> <br /><?php echo $x['friend_lastname'] ?> </span>
               </a>
+              <!-- If no friends -->
               <?php } } else { ?>
                 <p> You currently have no friends </p>
               <?php } ?>

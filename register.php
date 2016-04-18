@@ -12,7 +12,7 @@
 
   // Page Options 
 	$pageOpt = array(
-		"title"			    =>	"Register", 
+		"title"			    =>	"FitConnect . Register", 
 		'navName' 		  	=> 	"", 
 		'cssIncludes'	  	=>	"", 
 		"jsIncludes"	 	=>	"

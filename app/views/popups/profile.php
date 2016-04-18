@@ -100,11 +100,11 @@
 				{{#if friends}} 
 					{{#each friends}}
 					<li>
-						<img src='http://i.imgur.com/HQ3YU7n.gif' alt='user avatar' class='user-avatar model-popup outline-hover' data-content='profile' data-title="{{ friend_name }} {{ friend_lastname }}'s profile" data-profile-id='{{ friend_id }}'/> 
+						<img src='{{ checkAvatar avatar_url }}' alt='user avatar' class='user-avatar model-popup outline-hover' data-content='profile' data-title="{{ friend_name }} {{ friend_lastname }}'s profile" data-profile-id='{{ friend_id }}'/> 
 						<strong> {{ friend_name }} {{ friend_lastname }} </strong>
 						<span> Friend since {{ formatShortDate friend_date }} </span>
 					</li>
-					{{/each}}
+					{{/each}} 
 				{{else}}
 					<li> 
 						<strong class='no-friends'> This user currently has no friends </strong>

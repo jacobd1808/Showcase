@@ -4,19 +4,21 @@ $(function() {
 		Core
 	===================================== */ 
 
-	// For Quick Debugging 
+	// Debugging
 	var t = 'testing';
 
+	// Disable links 
 	$('body').on('click', '.disable', function(e) {
 		e.preventDefault();
 	})
 
+	// Set session based on Username 
 	function setSession() {
 		var userName = $('#storage-id').data('user-id'); 
 		localStorage.setItem("userName", userName);
-		//console.log(localStorage.getItem("userName"))
 	} 
 
+	// Set Session as global variable 
 	var user_id = localStorage.getItem("userName") 
 
 	/* ====================================
@@ -29,16 +31,11 @@ $(function() {
 			var removeEle = $(this).data('remove-ele'); 
 			var parentEle = $(this).data('parent-ele'); 
 
-			//console.log($('#'+parentEle).height())
-
 			$('.'+removeEle).each(function() {
 				removeHeightSum += $(this).outerHeight(); 
 			}); 
-
 			var calcHeight = $('#'+parentEle).height() - removeHeightSum;
-
 			$(this).height(calcHeight);
-
 		})
 	} 
 
@@ -153,6 +150,7 @@ $(function() {
    		        if (!results['friends'][0]){
    		        	results['friends'] = false;
    		        }
+
    		        var data = { id: results['id'], age: results['age'], gender: results['gender'], d_gender: results['d_gender'], register_date: results['register_date'], location: results['location'], gym: results['gym'], body_fat: results['body_fat'], weight_lb: results['weight'], weight_kg: results['weight_kg'], bio: results['bio'], friends: results['friends'], relation: results['relation'], relation_t: results['relation_t'], images: results['images'], image_reply: results['image-reply'], avatar_url: results['avatar_url'], own: results['own'] };
 				$('#profile-container').empty();
 			    var source   = $("#profile-template").html();
@@ -397,26 +395,29 @@ $("body").on("click", "#friendRequest", function(){
 	function sendMessage(){
 		var message = $("#message-text").val();
 		var inbox_id = $("#conversation").data('inbox-id');
+		var user_id = localStorage.getItem("userName") 
 		$.ajax({
 			url : "app/controller/inboxController.php",
 			data : { action: 'send_message', message: message, user_id: user_id, inbox_id: inbox_id },
 			method : 'POST', 
 			success : function(data){
 				var results = jQuery.parseJSON(data);
-
+				var date = results['date_sent'] = moment(results['date_sent']).format('MMMM Do YYYY');
+				$('#init-msg').hide();
 				$("#conversation").append(" \
 				<div class='message-list received-msg'>   \
 					<div class='message-content pure-g'>  \
-						<div class='pure-u-4-24 avatar-tile'> \
+						<div class='pure-u-4-24 avatar-tile model-popup glow-hover' data-content='profile' data-title='"+ results['name'] + " " + results['surname'] + "&#39;s profile' data-profile-id='"+ results['user_id'] +"'> \
 							<img src='assets/img/avatars/cropped/"+ results['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
 							<a href=''> "+ results['name'] + " " + results['surname'] + "</a> \
 						</div> \
 						<div class='pure-u-20-24 message-text'> \
 							"+ results['message'] +"  \
-							<em> Sent on "+ results['date_sent'] +" </em> \
+							<em> Sent on "+ date +" </em> \
 						</div> \
 					</div> \
 				</div>");
+				displayOutcome2('Message Sent', 'valid', 'outcomeMsg-inbox');
 			}
 		});	
 	}
@@ -429,9 +430,11 @@ $("body").on("click", "#friendRequest", function(){
          	data : { action: 'fetch_profile', user_id: send_id },
 			success: function(data) {
 				user = jQuery.parseJSON(data);
-				$("#reply-message").html(" \
+				$('#init-msg').hide();
+				$('#inbox-head').html('Send message to <span id="message_from"><strong>'+  user['name'] +'</strong></span>')
+				$('#reply_msg_form').slideUp(); 
+				$("#start_convo_form").html(" \
 					<div id='new-message' data-id='"+ user.id +"'>  \
-						<div class='heading left-border l-align'> Message to <strong>"+ user.name +" </strong></div> \
 						<div class='p-h-20 pure-g l-align'> \
 							<div class='pure-u-1-1'> \
 			                	<label for='u_bodyfat'> Message <span></span></label> \
@@ -442,7 +445,7 @@ $("body").on("click", "#friendRequest", function(){
 		              		</div>\
 						</div> \
 					</div>");
-					}
+				} 
 		}); 
 	}
 
@@ -456,7 +459,12 @@ $("body").on("click", "#friendRequest", function(){
 			url : "app/controller/inboxController.php",
          	data : { action: 'start_inbox', msg: message, to_id: to_id, from_id: from_id },
 			success: function(data) {
-				$('#reply-message').slideUp();
+				var newOutput = "<div class='outcome hidden' id='outcomeMsg2'></div>"; 
+				var header = 	"<div class='heading left-border l-align'> Click on a inbox feed </div>"; 
+				$('#start_convo_form').slideUp(function(){
+					$('#start_convo_form').empty();
+					displayOutcome2('Message Sent', 'valid', 'outcomeMsg-inbox');
+				});
 				$("#inbox-list").empty(); 
 				getInbox(from_id, null)
 			}
@@ -473,18 +481,15 @@ $("body").on("click", "#friendRequest", function(){
 			data : { action: 'get_inbox', user_id: user_id},
 			method : 'POST', 
 			success : function(data){
-				console.log(data);
 				var results = jQuery.parseJSON(data);
 				if (results) {
 					results.forEach(function(x){
 						var name = x['name'] + " " + x['surname'];
+						var date = x['start_date'] = moment(x['start_date']).format('MMMM Do YYYY');
 						$("#inbox-list").append(" \
 						<li class='message_header' data-message-id='"+ x['id'] +"''> \
-							<div class='type-col tooltip left-tooltip' title='"+ x['title'] +"'> \
-								<span> S </span> \
-							</div> \
-							<strong> " + name + "</strong> \
-							<em> 2 Hours Ago </em> \
+							<big> " + name + "</big> \
+							<em class='format-date'> " + date + " </em> \
 						</li>");
 					});
 				} else { 
@@ -495,37 +500,49 @@ $("body").on("click", "#friendRequest", function(){
 	};
 
 	function getConversation(inbox_id){
-		$("#conversation").slideUp(function(){
+		$("#reply_msg_form").slideUp(function(){
+			$('#outcomeMsg').slideUp();
 			$("#conversation").html("");
+			$('#init-msg').hide();
 			$.ajax({
 				url : "app/controller/inboxController.php",
 				data : { action: 'get_convo', inbox_id: inbox_id },
 				method : 'POST',
 				success : function(data){
 					var results = jQuery.parseJSON(data);
-					console.log(results);
 					results.forEach(function(x){
-						var name = x['name'] + " " + x['surname'];
-						$("#message_from").html(name);
+						var name = x['name'] + " <br />" + x['surname'];
+						var date = x['start_date'] = moment(x['start_date']).format('MMMM Do YYYY');
+						
+						$('#inbox-head').html('Message Feed: <span id="message_from">'+  x['name'] + " " + x['surname'] +'</span>')
+						
 						$("#conversation").data('inbox-id', inbox_id);
 						$("#conversation").append(" \
 						<div class='message-list received-msg'>   \
 							<div class='message-content pure-g'>  \
-								<div class='pure-u-4-24 avatar-tile'> \
-									<img src='assets/img/avatars/cropped/"+ x['avatar_url'] +"' alt='user avatar' class='user-avatar'/><br /> \
-									<a href=''> "+ name +"</a> \
+								<div class='pure-u-4-24 avatar-tile model-popup glow-hover' data-content='profile' data-title='" + x['name'] + " " + x['surname'] + "&#39;s profile' data-profile-id='"+ x['user_id'] +"'> \
+									<img src='assets/img/avatars/cropped/"+ x['avatar_url'] +"' alt='user avatar' class='user-avatar' ><br /> \
+									<span>"+ name +"</span> \
 								</div> \
 								<div class='pure-u-20-24 message-text'> \
 									"+ x['message'] +"  \
-									<em> Sent on "+ x['date_sent'] +" </em> \
+									<em> Sent on "+ date +" </em> \
 								</div> \
 							</div> \
 						</div>");
 					});	
 					
-					$("#conversation").slideDown();	
+					$("#reply_msg_form").slideDown();	
 					$("#message-form").slideDown();
 				}
 			});
 		});	
 	}
+
+	function displayOutcome2(msg, type, ele) { 
+        $('html, body').animate({ scrollTop: 0 }, 'fast', function(){ 
+          $('#'+ele).addClass(type);
+          $('#'+ele).html(msg);
+          $('#'+ele).slideDown(); 
+        });
+      }

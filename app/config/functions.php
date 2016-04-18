@@ -47,6 +47,11 @@ function displayLocation($location) {
     }
 }
 
+function checkDistance($myPos, $recPos) { 
+    $dist = returnDistance2( $myPos['latitude'], $myPos['longitude'], $recPos['latitude'], $recPos['longitude']);
+    return $dist;
+}
+
 
 function avatarExists($avt, $popup) { 
     if ($avt != '') {
