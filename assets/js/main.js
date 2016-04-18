@@ -462,9 +462,9 @@ $("body").on("click", "#friendRequest", function(){
 	})
 
 	function getInbox(user_id, send_id){
-		/*if (send_id != undefined) { 
+		if (send_id != undefined) { 
 			startConvo(send_id);
-		}*/
+		}
 		var user_id = localStorage.getItem("userName");
 		$.ajax({
 			url : "app/controller/inboxController.php", 

@@ -32,8 +32,8 @@
 			// Prepare Query
 			$stmt = $this->conn->prepare($sql);
 			// Bind Parameters
-			$stmt->bindParam(':first_user', $data['to_id'], PDO::PARAM_INT);
-			$stmt->bindParam(':second_user', $data['from_id'], PDO::PARAM_INT);
+			$stmt->bindParam(':first_user', $data['from_id'], PDO::PARAM_INT);
+			$stmt->bindParam(':second_user', $data['to_id'], PDO::PARAM_INT);
 			$stmt->bindParam(':last_sender', $data['to_id'], PDO::PARAM_INT);
 			
 			$inbox_id = $this->conn->lastInsertId();
