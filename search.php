@@ -293,30 +293,34 @@
       $("#postcode_location").click(function(){
         var postal_code = $("#postcode").val();
 
-        $.ajax({
-          url : "app/controller/ajaxController.php",
-          data : { action: 'check_postcode', postal_code: postal_code },
-          method : 'POST',
-          success : function(data){
-            $("#location").text(postal_code);
-            var results = jQuery.parseJSON(data);
+        if ( hasWhiteSpace(postal_code) ){
+          $.ajax({
+            url : "app/controller/ajaxController.php",
+            data : { action: 'check_postcode', postal_code: postal_code },
+            method : 'POST',
+            success : function(data){
+              $("#location").text(postal_code);
+              var results = jQuery.parseJSON(data);
 
-            if(results['address'][4] == undefined) {
-                $("#location").text(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
-            } else { 
-                $("#location").text(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
-            } 
+              if(results['address'][4] == undefined) {
+                  $("#location").text(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
+              } else { 
+                  $("#location").text(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
+              } 
 
-            latitude = results['lat'];
-            longitude = results['lng'];
+              latitude = results['lat'];
+              longitude = results['lng'];
 
-            $("#location").data('latitude', latitude);
-            $("#location").data('longitude', longitude);
+              $("#location").data('latitude', latitude);
+              $("#location").data('longitude', longitude);
 
-            updateDistance();
-            locationDisplay('distance');
-          }
-        });      
+              updateDistance();
+              locationDisplay('distance');
+            }
+          });    
+        } else {
+          alert("The Postal code needs a space!");
+        }  
       });
 
       //  ======================
@@ -518,6 +522,11 @@
           locationStatus = 'distance';
         }
         locationDisplay(locationStatus);
+      }
+      
+      // Check for a space
+      function hasWhiteSpace(s) {
+        return s.indexOf(' ') >= 0;
       }
 
       updateDistance();   

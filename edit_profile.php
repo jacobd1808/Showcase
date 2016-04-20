@@ -205,6 +205,11 @@
           });
         }
 
+        // Check for a space
+        function hasWhiteSpace(s) {
+          return s.indexOf(' ') >= 0;
+        }
+
         /* ==============================
           Click event on tiles (change goal, exp, weight format)
         ============================== */
@@ -288,26 +293,30 @@
 
         $("#postcode_btn").click(function(){
           var postal_code = $("#u_location").val();
-          $.ajax({
-            url : "app/controller/ajaxController.php",
-            data : { action: 'check_postcode', postal_code: postal_code },
-            method : 'POST',
-            success : function(data){
-              var results = jQuery.parseJSON(data);
-              if(results[4] == undefined ) {
-                $("#c_location").find('span.loc').text(results.address[1] + ", " + results.address[2] + ", " + results.address[3]);
-              } else { 
-                $("#c_location").find('span.loc').text(results.address[2] + ", " + results.address[3] + ", " + results.address[4]);
+          if ( hasWhiteSpace(postal_code)) {
+            $.ajax({
+              url : "app/controller/ajaxController.php",
+              data : { action: 'check_postcode', postal_code: postal_code },
+              method : 'POST',
+              success : function(data){
+                var results = jQuery.parseJSON(data);
+                if(results[4] == undefined ) {
+                  $("#c_location").find('span.loc').text(results.address[1] + ", " + results.address[2] + ", " + results.address[3]);
+                } else { 
+                  $("#c_location").find('span.loc').text(results.address[2] + ", " + results.address[3] + ", " + results.address[4]);
+                }
+                latitude = results['lat'];
+                longitude = results['lng'];
+
+                $("#c_location").data('lat', latitude);
+                $("#c_location").data('long', longitude);  
+
+                $('#location-set-row').slideToggle();
               }
-              latitude = results['lat'];
-              longitude = results['lng'];
-
-              $("#c_location").data('lat', latitude);
-              $("#c_location").data('long', longitude);  
-
-              $('#location-set-row').slideToggle();
-            }
-          });      
+            });  
+          } else {
+            alert("The browser is not compatible with geolocation");
+          }    
         });
 
         /* ==============================

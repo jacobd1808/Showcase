@@ -1,0 +1,7 @@
+changes 
+	- Prevent duplicate friend requests 
+	- Space in postcode 
+	- Negative values for weight and body fat allowed 
+
+	- Need instructions *
+	- Need to add fallback for when geo location only returns town / country (currently breaks) *

@@ -71,6 +71,11 @@ $(function() {
 		});
 	});
 
+    // Check for a space
+    function hasWhiteSpace(s) {
+      return s.indexOf(' ') >= 0;
+    }
+
 	// Give something a class of 'popup-tester' and valid popup file name (as a data-content)
 	function defaultPopup(){
 		if ($('.default-popup').length != 0) {

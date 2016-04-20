@@ -105,13 +105,18 @@
 	});
 
 	$('#geo_location').click(function(){
-		checkGeolocation();
+		checkGeolocation(postal_code);
 		checkCompleted($(this), 'geolocation');
 	});
 
 	$('#check-postcode').click(function(){
-		checkPostalCode();
-		checkCompleted($(this), 'geolocation');
+		postal_code = $("#user_location").val();
+		if ( hasWhiteSpace(postal_code)){		
+			checkPostalCode(postal_code);
+			checkCompleted($(this), 'geolocation');
+		} else{
+			alert("You need to input a space!");
+		}			
 	});
 
 	// Functions 
@@ -156,20 +161,20 @@
 		}
 	}
 
-	function checkPostalCode(){
-		postal_code = $("#user_location").val();
+	function checkPostalCode(postal_code){
 		$.ajax({
 			url : "app/controller/ajaxController.php",
 			data : { action: 'check_postcode', postal_code: postal_code },
 			method : 'POST',
 			success : function(data){
-				x.html("Postal Code: <b>" + postal_code + "</b>");
+					x.html("Postal Code: <b>" + postal_code + "</b>");
 				var results = jQuery.parseJSON(data);
 				if(results['address'][4] == undefined) {
-                    x.html(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
-                } else { 
-                    x.html(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
-                }	
+	                x.html(results['address'][1] + ", " + results['address'][2] + ", " + results['address'][3]);
+	            } else { 
+	                x.html(results['address'][2] + ", " + results['address'][3] + ", " + results['address'][4]);
+	            }	
+
 				latitude = results['lat'];
 				longitude = results['lng'];
 				checkAll2();
@@ -236,4 +241,8 @@
 		});
 	}
 
+    // Check for a space
+    function hasWhiteSpace(s) {
+        return s.indexOf(' ') >= 0;
+    }
 </script>

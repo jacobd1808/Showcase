@@ -65,27 +65,38 @@
 
 		// WHEN USER IS ACCEPTING FRIEND REQUEST
 		public function acceptRequest($id, $person_id, $first_name, $last_name){
-			$rel_status = 1;
-			// SQL Statement
-			$sql = "INSERT INTO sc_rel (user_id, friend_id, friend_name, friend_lastname) 
-			        VALUES (:user_id, :friend_id, :friend_name, :friend_lastname)";;
-			// Prepare Query
-			$stmt = $this->conn->prepare($sql);
-			// Bind Parameters
-			$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
-			$stmt->bindParam(':friend_id', $person_id, PDO::PARAM_STR);
-			$stmt->bindParam(':friend_name', $first_name, PDO::PARAM_STR);		
-			$stmt->bindParam(':friend_lastname', $last_name, PDO::PARAM_STR);	
 
-			// Execute Query
-			if ( $stmt->execute() ){
+			$check = $this->checkFriends($id, $person_id);
+
+			if ( $check != true){
+				$rel_status = 1;
+				// SQL Statement
+				$sql = "INSERT INTO sc_rel (user_id, friend_id, friend_name, friend_lastname) 
+				        VALUES (:user_id, :friend_id, :friend_name, :friend_lastname)";;
+				// Prepare Query
+				$stmt = $this->conn->prepare($sql);
+				// Bind Parameters
+				$stmt->bindParam(':user_id', $id, PDO::PARAM_STR);
+				$stmt->bindParam(':friend_id', $person_id, PDO::PARAM_STR);
+				$stmt->bindParam(':friend_name', $first_name, PDO::PARAM_STR);		
+				$stmt->bindParam(':friend_lastname', $last_name, PDO::PARAM_STR);	
+
+				// Execute Query
+				if ( $stmt->execute() ){
+					if ( $this->removeRequest($person_id, $id) ){
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
 				if ( $this->removeRequest($person_id, $id) ){
 					return true;
 				} else {
 					return false;
 				}
-			} else {
-				return false;
 			}
 		}
 
